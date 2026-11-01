@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore development projects and initiatives for Mbaitoli/Ikeduru Federal Constituency by Hon. Akarachi Amadi.">
-  <title>Projects & Development | Hon. Akarachi Amadi</title>
+  <meta name="description" content="Constituency projects and development updates from Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency.">
+  <title>Projects | Hon. Akarachi Amadi</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #04552d;
-      --gold: #d6a928;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d5a62e;
+      --red: #c90019;
       --light: #f5f8f5;
-      --text: #26332b;
-      --muted: #68756c;
-      --white: #ffffff;
+      --text: #27362c;
+      --muted: #68766d;
+      --white: #fff;
     }
 
     * {
@@ -34,66 +37,108 @@
       text-decoration: none;
     }
 
-    header {
+    .topbar {
       background: var(--green);
       color: white;
-      padding: 15px 7%;
+      padding: 12px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      gap: 15px;
+      border-bottom: 4px solid var(--gold);
     }
 
-    .logo {
-      font-size: 19px;
+    .brand {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .brand small {
+      display: block;
+      color: #f4d77e;
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .topbar a {
+      color: white;
       font-weight: bold;
     }
 
-    .logo span {
-      color: var(--gold);
-    }
-
     nav {
+      background: var(--dark-green);
+      padding: 14px 7%;
       display: flex;
+      justify-content: center;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 17px;
+      gap: 21px;
     }
 
     nav a {
       color: white;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
+      transition: .2s;
     }
 
     nav a:hover,
     nav a.active {
-      color: var(--gold);
+      color: #f4d77e;
+    }
+
+    .login-link {
+      background: var(--gold);
+      color: var(--dark-green) !important;
+      padding: 7px 13px;
+      border-radius: 4px;
+    }
+
+    .welcome {
+      background: var(--red);
+      color: white;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .welcome-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 27s linear infinite;
+    }
+
+    .welcome strong {
+      color: #ffdf68;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
     }
 
     .hero {
-      background: linear-gradient(
-        rgba(0, 70, 35, 0.88),
-        rgba(0, 70, 35, 0.88)
-      ),
-      url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80");
-
+      background: linear-gradient(rgba(3,67,35,.91), rgba(3,67,35,.91)),
+        url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80");
       background-size: cover;
       background-position: center;
       color: white;
       text-align: center;
-      padding: 100px 20px;
+      padding: 85px 20px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
+      font-size: clamp(30px, 5vw, 45px);
+      margin-bottom: 14px;
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 760px;
       margin: auto;
-      font-size: 17px;
+      color: #f1f4f1;
+      font-size: 16px;
     }
 
     .gold-line {
@@ -101,188 +146,272 @@
       height: 4px;
       background: var(--gold);
       margin: 20px auto;
-      border-radius: 5px;
     }
 
     .container {
-      width: 86%;
-      max-width: 1150px;
+      max-width: 1180px;
       margin: auto;
+      padding: 60px 22px;
     }
 
-    .intro {
+    .section-heading {
       text-align: center;
-      padding: 65px 0 35px;
+      margin-bottom: 35px;
     }
 
-    .intro h2 {
-      color: var(--dark-green);
+    .section-heading h2 {
+      color: var(--green);
       font-size: 30px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .intro p {
-      max-width: 750px;
+    .section-heading p {
+      max-width: 720px;
       margin: auto;
       color: var(--muted);
     }
 
-    .projects-section {
-      padding: 20px 0 75px;
+    .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
     }
 
-    .project-grid {
+    .filter-btn {
+      background: white;
+      color: var(--green);
+      border: 1px solid #cbd8ce;
+      border-radius: 25px;
+      padding: 9px 17px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
     }
 
     .project-card {
       background: white;
-      border-radius: 10px;
+      border-radius: 9px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-      transition: transform 0.3s;
+      box-shadow: 0 5px 18px rgba(0,0,0,.06);
+      transition: transform .2s;
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
     }
 
-    .project-card img {
+    .project-image {
       width: 100%;
       height: 220px;
       object-fit: cover;
       display: block;
+      background: #e7eee8;
+    }
+
+    .image-placeholder {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8efe9;
+      color: var(--green);
+      font-weight: bold;
     }
 
     .project-content {
-      padding: 22px;
+      padding: 21px;
     }
 
     .project-content h3 {
-      color: var(--dark-green);
+      color: var(--green);
+      font-size: 19px;
+      line-height: 1.4;
       margin-bottom: 10px;
     }
 
-    .project-content p {
+    .project-description {
       color: var(--muted);
       font-size: 14px;
+      margin: 13px 0;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
     }
 
     .project-meta {
       display: flex;
-      justify-content: space-between;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-top: 17px;
-      font-size: 12px;
-    }
-
-    .badge {
-      background: #e4f3e9;
-      color: var(--green);
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-weight: bold;
-    }
-
-    .empty-state {
-      background: white;
-      border: 1px dashed #b8c9bc;
-      border-radius: 12px;
-      padding: 55px 25px;
-      text-align: center;
-      max-width: 750px;
-      margin: 20px auto;
-    }
-
-    .empty-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .empty-state h3 {
-      color: var(--dark-green);
-      margin-bottom: 10px;
-      font-size: 23px;
-    }
-
-    .empty-state p {
-      color: var(--muted);
-      max-width: 550px;
-      margin: auto;
-    }
-
-    .cta {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 65px 20px;
-    }
-
-    .cta h2 {
-      font-size: 29px;
+      gap: 7px;
       margin-bottom: 12px;
     }
 
-    .cta p {
-      max-width: 650px;
-      margin: 0 auto 22px;
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      background: #edf4ee;
+      color: var(--green);
     }
 
-    .cta a {
-      display: inline-block;
-      background: var(--gold);
-      color: #183322;
-      padding: 12px 25px;
+    .status {
+      background: #fff1d7;
+      color: #805400;
+    }
+
+    .status.completed {
+      background: #e3f5e7;
+      color: #12612c;
+    }
+
+    .status.ongoing {
+      background: #e6efff;
+      color: #174b9a;
+    }
+
+    .location {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .loading,
+    .empty-state,
+    .error-state {
+      grid-column: 1 / -1;
+      background: white;
+      border-radius: 9px;
+      text-align: center;
+      padding: 45px 20px;
+      color: var(--muted);
+    }
+
+    .empty-state h3,
+    .error-state h3 {
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    .error-state button {
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: var(--green);
+      color: white;
+      border: none;
       border-radius: 5px;
-      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .commitment {
+      background: white;
+      padding: 50px 20px;
+      text-align: center;
+      border-top: 3px solid var(--gold);
+    }
+
+    .commitment h2 {
+      color: var(--green);
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+
+    .commitment p {
+      max-width: 750px;
+      margin: auto;
+      color: var(--muted);
     }
 
     footer {
-      background: #033c20;
+      background: var(--dark-green);
       color: white;
-      text-align: center;
-      padding: 25px 15px;
+      padding: 40px 7% 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    footer h3 {
+      color: #f4d77e;
+      margin-bottom: 13px;
+    }
+
+    footer p,
+    footer a {
+      color: #e2ebe4;
       font-size: 13px;
+      line-height: 1.9;
+      display: block;
     }
 
-    footer span {
-      color: var(--gold);
+    footer a:hover {
+      color: #f4d77e;
     }
 
-    @media(max-width: 850px) {
-      .project-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,.2);
+      padding-top: 17px;
+      text-align: center;
+      font-size: 12px;
+      color: #d9e2dc;
+    }
+
+    @media(max-width: 900px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
     @media(max-width: 600px) {
-      header {
-        justify-content: center;
-        text-align: center;
+      .topbar {
+        padding: 12px 5%;
       }
 
       nav {
-        justify-content: center;
-        gap: 12px;
+        gap: 13px;
+        padding: 13px 5%;
+      }
+
+      nav a {
+        font-size: 12px;
       }
 
       .hero {
-        padding: 75px 20px;
-      }
-
-      .hero h1 {
-        font-size: 31px;
-      }
-
-      .project-grid {
-        grid-template-columns: 1fr;
+        padding: 65px 18px;
       }
 
       .container {
-        width: 90%;
+        padding: 42px 15px;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -290,96 +419,303 @@
 
 <body>
 
-  <header>
-    <div class="logo">
-      HON. <span>AKARACHI AMADI</span>
+  <header class="topbar">
+    <div class="brand">
+      HON. AKARACHI AMADI
+      <small>Mbaitoli/Ikeduru Federal Constituency | Imo State</small>
     </div>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="biography.html">Biography</a>
-      <a href="projects.html" class="active">Projects</a>
-      <a href="vision.html">Vision & Mission</a>
-      <a href="news.html">News</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <a href="contact.html">Contact Us</a>
   </header>
 
-  <section class="hero">
-    <h1>Projects & Development</h1>
-    <div class="gold-line"></div>
-    <p>
-      Updates on development projects, community initiatives and
-      programmes serving the people of Mbaitoli/Ikeduru Federal
-      Constituency, Imo State.
-    </p>
-  </section>
+  <nav>
+    <a href="login.html" class="login-link">LOGIN</a>
+    <a href="index.html">Home</a>
+    <a href="biography.html">Biography</a>
+    <a href="constituency.html">Constituency</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="legislative.html">Legislative Activities</a>
+    <a href="vision.html">Vision & Mission</a>
+    <a href="news.html">News</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="press.html">Press</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-  <section class="intro container">
-    <h2>Our Development Projects</h2>
-    <div class="gold-line"></div>
-    <p>
-      This page will showcase verified projects and development
-      initiatives, including their locations, descriptions, photographs
-      and progress updates.
-    </p>
-  </section>
-
-  <section class="projects-section container">
-
-    <!--
-      FUTURE SUPABASE INTEGRATION:
-      Projects uploaded through admin.html will appear here.
-
-      Planned project fields:
-      - Project title
-      - Project description
-      - Project category
-      - Location (Mbaitoli or Ikeduru)
-      - Project date
-      - Project photograph(s)
-      - Project status (Completed, Ongoing or Proposed)
-      - Published / Unpublished
-
-      Only published projects should be displayed publicly.
-    -->
-
-    <div id="project-list" class="project-grid">
-
-      <!-- Dynamically uploaded project cards will appear here. -->
-
+  <div class="welcome">
+    <div class="welcome-track">
+      <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
     </div>
+  </div>
 
-    <div id="empty-state" class="empty-state">
-      <div class="empty-icon">🏗️</div>
-      <h3>Projects Will Be Published Here</h3>
+  <section class="hero">
+    <h1>Constituency Projects</h1>
+    <div class="gold-line"></div>
+    <p>
+      Updates on projects and development initiatives for
+      the people of Mbaitoli and Ikeduru Federal Constituency.
+    </p>
+  </section>
+
+  <main class="container">
+
+    <div class="section-heading">
+      <h2>Projects & Development Updates</h2>
       <p>
-        Project updates, photographs, locations and progress reports
-        will appear on this page as they are added and published
-        through the official website's Admin Dashboard.
+        This page displays project information officially added
+        and published through the website administration dashboard.
       </p>
     </div>
 
-  </section>
+    <div class="filters" id="projectFilters">
+      <button class="filter-btn active" data-filter="All">All Projects</button>
+      <button class="filter-btn" data-filter="Mbaitoli">Mbaitoli</button>
+      <button class="filter-btn" data-filter="Ikeduru">Ikeduru</button>
+      <button class="filter-btn" data-filter="Mbaitoli/Ikeduru">Both Areas</button>
+    </div>
 
-  <section class="cta">
-    <h2>Building Stronger Communities</h2>
+    <div class="projects-grid" id="projectsGrid">
+      <div class="loading">Loading published projects...</div>
+    </div>
+
+  </main>
+
+  <section class="commitment">
+    <h2>Our Commitment to Development</h2>
     <p>
-      Follow development updates and initiatives aimed at improving
-      opportunities, infrastructure and the quality of life across
-      Mbaitoli and Ikeduru.
+      This platform provides a place to share verified project information
+      and constituency development updates. Project details will be
+      displayed when they have been added and published by the authorised
+      website administrator.
     </p>
-    <a href="contact.html">Contact the Office</a>
   </section>
 
   <footer>
-    <p>
-      &copy; 2026 Hon. Akarachi Amadi.
+    <div class="footer-grid">
+
+      <div>
+        <h3>Hon. Akarachi Amadi</h3>
+        <p>
+          Member representing Mbaitoli/Ikeduru Federal Constituency,
+          Imo State, Nigeria.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a>
+        <a href="biography.html">Biography</a>
+        <a href="projects.html">Projects</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="vision.html">Vision & Mission</a>
+      </div>
+
+      <div>
+        <h3>More Information</h3>
+        <a href="news.html">News & Updates</a>
+        <a href="gallery.html">Photo Gallery</a>
+        <a href="press.html">Press & Media</a>
+        <a href="faq.html">FAQs</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html">LOGIN</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span> Hon. Akarachi Amadi.
       All Rights Reserved.
-    </p>
-    <p>Representing <span>Mbaitoli/Ikeduru Federal Constituency</span>, Imo State.</p>
+    </div>
   </footer>
+
+  <script>
+    const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+
+    const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const projectsGrid = document.getElementById("projectsGrid");
+
+    let allProjects = [];
+    let activeFilter = "All";
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    function addTextElement(parent, tag, className, text) {
+      const element = document.createElement(tag);
+
+      if (className) element.className = className;
+
+      element.textContent = text || "";
+      parent.appendChild(element);
+
+      return element;
+    }
+
+    function renderProjects() {
+      projectsGrid.replaceChildren();
+
+      const filtered = activeFilter === "All"
+        ? allProjects
+        : allProjects.filter(project =>
+            project.location === activeFilter
+          );
+
+      if (!filtered.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+
+        addTextElement(empty, "h3", "", "No Projects Available Yet");
+
+        addTextElement(
+          empty,
+          "p",
+          "",
+          activeFilter === "All"
+            ? "Published project updates will appear here when the website administrator adds them."
+            : "There are currently no published projects for this location."
+        );
+
+        projectsGrid.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(project => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+
+        if (project.image_url) {
+          const img = document.createElement("img");
+
+          img.className = "project-image";
+          img.src = project.image_url;
+          img.alt = project.title || "Project photograph";
+          img.loading = "lazy";
+
+          card.appendChild(img);
+        } else {
+          addTextElement(
+            card,
+            "div",
+            "image-placeholder",
+            "PROJECT UPDATE"
+          );
+        }
+
+        const content = document.createElement("div");
+        content.className = "project-content";
+
+        addTextElement(content, "h3", "", project.title);
+
+        const tags = document.createElement("div");
+        tags.className = "project-meta";
+
+        if (project.category) {
+          addTextElement(tags, "span", "tag", project.category);
+        }
+
+        if (project.status) {
+          const statusClass = project.status.toLowerCase();
+
+          const status = document.createElement("span");
+          status.className = "tag status " +
+            (["completed", "ongoing"].includes(statusClass)
+              ? statusClass
+              : "");
+
+          status.textContent = project.status;
+          tags.appendChild(status);
+        }
+
+        content.appendChild(tags);
+
+        if (project.description) {
+          addTextElement(
+            content,
+            "p",
+            "project-description",
+            project.description
+          );
+        }
+
+        if (project.location) {
+          addTextElement(
+            content,
+            "p",
+            "location",
+            "Location: " + project.location
+          );
+        }
+
+        card.appendChild(content);
+        projectsGrid.appendChild(card);
+      });
+    }
+
+    async function loadProjects() {
+      projectsGrid.innerHTML =
+        '<div class="loading">Loading published projects...</div>';
+
+      try {
+        const { data, error } = await supabaseClient
+          .from("projects")
+          .select("id,title,location,category,status,description,image_url,created_at")
+          .eq("published", true)
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        allProjects = data || [];
+        renderProjects();
+
+      } catch (error) {
+        console.error("Projects loading error:", error);
+
+        projectsGrid.replaceChildren();
+
+        const errorBox = document.createElement("div");
+        errorBox.className = "error-state";
+
+        addTextElement(errorBox, "h3", "", "Unable to Load Projects");
+
+        addTextElement(
+          errorBox,
+          "p",
+          "",
+          "Please check your internet connection or try again later."
+        );
+
+        const retry = document.createElement("button");
+        retry.textContent = "Try Again";
+        retry.addEventListener("click", loadProjects);
+
+        errorBox.appendChild(retry);
+        projectsGrid.appendChild(errorBox);
+      }
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(button => {
+      button.addEventListener("click", function () {
+        document.querySelectorAll(".filter-btn").forEach(item => {
+          item.classList.remove("active");
+        });
+
+        this.classList.add("active");
+        activeFilter = this.dataset.filter;
+
+        renderProjects();
+      });
+    });
+
+    loadProjects();
+  </script>
 
 </body>
 </html>
