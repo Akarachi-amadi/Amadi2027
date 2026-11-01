@@ -73,6 +73,7 @@ textarea{min-height:125px;resize:vertical}
 .form-note{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.5}
 .form-actions{display:flex;gap:10px;flex-wrap:wrap}
 .preview{max-width:160px;max-height:120px;display:none;margin-top:10px;border-radius:5px}
+.video-preview{display:none;width:min(100%,420px);max-height:240px;margin-top:12px;background:#111;border-radius:7px}
 .notice{display:none;padding:13px 15px;border-radius:5px;margin-bottom:18px;line-height:1.5;font-size:13px}
 .notice.success{display:block;background:#e8f7eb;color:#12612c;border:1px solid #b8dfc1}
 .notice.error{display:block;background:#fff0f0;color:#a00000;border:1px solid #efb4b4}
@@ -95,7 +96,8 @@ textarea{min-height:125px;resize:vertical}
 .form-group.full{grid-column:auto}
 }
 @media(max-width:400px){.cards{grid-template-columns:1fr 1fr;gap:9px}.stat-card{padding:15px}.stat-card strong{font-size:24px}}
-</style></head><body><header class="topbar">
+</style></head><body>
+<header class="topbar">
   <div class="brand">HON. AKARACHI AMADI<small>ADMINISTRATOR DASHBOARD</small></div>
   <div class="top-actions">
     <a href="index.html" target="_blank">View Website</a>
@@ -166,16 +168,16 @@ textarea{min-height:125px;resize:vertical}
 </section><section class="section" id="videos">
   <div class="page-heading">
     <h1>Video Management</h1>
-    <p>Add and manage YouTube videos or direct video links displayed on your public Video Gallery page.</p>
+    <p>Select videos directly from your phone and upload them to the website.</p>
   </div>
   <div class="panel">
     <div class="toolbar">
       <h2>Website Videos</h2>
-      <button class="primary-btn" onclick="openForm('videos')">+ Add Video</button>
+      <button class="primary-btn" onclick="openForm('videos')">+ Upload Video</button>
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Title</th><th>Video Link</th><th>Publication</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Title</th><th>Video</th><th>Publication</th><th>Actions</th></tr></thead>
         <tbody id="videosTable"><tr><td colspan="4" class="loading">Loading videos...</td></tr></tbody>
       </table>
     </div>
@@ -227,12 +229,12 @@ textarea{min-height:125px;resize:vertical}
       <button class="primary-btn" type="submit">Save Settings</button>
     </form>
   </div>
-</section></main>
+</section>
+</main>
 </div><dialog id="contentDialog" style="width:min(650px,94%);border:none;border-radius:10px;padding:0;margin:auto;box-shadow:0 15px 50px rgba(0,0,0,.25);max-height:90vh;overflow:auto">
 <div style="padding:24px">
   <div class="toolbar"><h2 id="formHeading" style="color:#075b32">Add Content</h2><button class="danger-btn" type="button" onclick="closeForm()">Close</button></div>
-  <div id="formNotice" class="notice"></div>
-  <form id="contentForm">
+  <div id="formNotice" class="notice"></div>  <form id="contentForm">
     <input type="hidden" id="recordId">
     <input type="hidden" id="recordType"><div class="form-group">
   <label for="itemTitle">Title / Headline *</label>
@@ -258,9 +260,11 @@ textarea{min-height:125px;resize:vertical}
 
 <div id="videoFields" style="display:none">
   <div class="form-group">
-    <label for="itemVideoUrl">YouTube URL or Direct Video URL *</label>
-    <input id="itemVideoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
-    <p class="form-note">Paste a YouTube video link or a direct link to an MP4/WebM video.</p>
+    <label for="itemVideoFile">Select Video From Your Phone *</label>
+    <input id="itemVideoFile" type="file" accept="video/mp4,video/webm,video/quicktime,video/ogg,.mp4,.webm,.mov,.ogg">
+    <p class="form-note">Choose a video from your phone gallery or files. Supported formats: MP4, WebM, MOV and OGG. Maximum upload size: 100 MB.</p>
+    <video id="videoPreview" class="video-preview" controls playsinline></video>
+    <p id="existingVideoNote" class="form-note"></p>
   </div>
 </div>
 
@@ -301,7 +305,8 @@ const BUCKETS={
   projects:"project-images",
   news:"news-images",
   gallery:"gallery-images",
-  press:"press-files"
+  press:"press-files",
+  videos:"videos"
 };
 
 async function requireAdministrator(){
@@ -312,7 +317,6 @@ async function requireAdministrator(){
   }
 
   currentUser=data.session.user;
-
   const {data:adminResult,error:adminError}=await db.rpc("is_admin");
 
   if(adminError||adminResult!==true){
@@ -427,6 +431,7 @@ async function loadProjects(){
 
     if(!rows.length){
       showEmptyRow(tbody,6,"No projects have been added yet.");
+      updateCounts();
       return;
     }
 
@@ -464,6 +469,7 @@ async function loadNews(){
 
     if(!rows.length){
       showEmptyRow(tbody,4,"No news articles have been added yet.");
+      updateCounts();
       return;
     }
 
@@ -499,6 +505,7 @@ async function loadGallery(){
 
     if(!rows.length){
       showEmptyRow(tbody,4,"No gallery photos have been uploaded yet.");
+      updateCounts();
       return;
     }
 
@@ -534,6 +541,7 @@ async function loadPress(){
 
     if(!rows.length){
       showEmptyRow(tbody,3,"No press releases have been added yet.");
+      updateCounts();
       return;
     }
 
@@ -559,7 +567,8 @@ async function loadPress(){
   updateCounts();
 }
 
-/* VIDEO MANAGEMENT */
+/* VIDEO MANAGEMENT: DIRECT PHONE UPLOADS */
+
 async function loadVideos(){
   const tbody=document.getElementById("videosTable");
 
@@ -569,7 +578,7 @@ async function loadVideos(){
     tbody.replaceChildren();
 
     if(!rows.length){
-      showEmptyRow(tbody,4,"No videos have been added yet.");
+      showEmptyRow(tbody,4,"No videos have been uploaded yet.");
       updateCounts();
       return;
     }
@@ -578,22 +587,22 @@ async function loadVideos(){
       const row=document.createElement("tr");
       row.appendChild(makeCell(record.title));
 
-      const linkCell=document.createElement("td");
+      const videoCell=document.createElement("td");
 
       if(record.video_url){
         const link=document.createElement("a");
         link.href=record.video_url;
         link.target="_blank";
         link.rel="noopener noreferrer";
-        link.textContent="Open video";
+        link.textContent="Play / Open Video";
         link.style.color="#075b32";
         link.style.fontWeight="bold";
-        linkCell.appendChild(link);
+        videoCell.appendChild(link);
       }else{
-        linkCell.textContent="No link";
+        videoCell.textContent="No video file";
       }
 
-      row.appendChild(linkCell);
+      row.appendChild(videoCell);
       row.appendChild(makePublicationBadge(record.published));
 
       const actions=document.createElement("td");
@@ -607,40 +616,32 @@ async function loadVideos(){
       tbody.appendChild(row);
     });
 
-    updateCounts();
   }catch(error){
     console.error(error);
     showEmptyRow(tbody,4,"Could not load videos: "+error.message);
   }
+
+  updateCounts();
 }
 
-/* CORRECTED CONTACT FORM MESSAGES FUNCTION */
+/* CONTACT MESSAGES */
+
 async function loadMessages(){
   const container=document.getElementById("messagesList");
   const countElement=document.getElementById("messageCount");
 
-  if(!container){
-    console.error("Messages container was not found in the dashboard.");
-    return;
-  }
+  if(!container)return;
 
   container.className="";
   container.textContent="Loading messages...";
 
   try{
-    const {data,error}=await db
-      .from("messages")
-      .select("*")
-      .order("created_at",{ascending:false});
-
+    const {data,error}=await db.from("messages").select("*").order("created_at",{ascending:false});
     if(error)throw error;
 
     const messages=data||[];
 
-    /* Safely update the message counter */
-    if(countElement){
-      countElement.textContent=messages.length;
-    }
+    if(countElement)countElement.textContent=messages.length;
 
     container.replaceChildren();
 
@@ -671,18 +672,13 @@ async function loadMessages(){
 
       const date=document.createElement("p");
       date.className="message-meta";
-      date.textContent=message.created_at
-        ?new Date(message.created_at).toLocaleString()
-        :"Date not available";
+      date.textContent=message.created_at?new Date(message.created_at).toLocaleString():"Date not available";
 
       card.append(heading,sender,email,phone,body,date);
 
       const actions=document.createElement("div");
       actions.className="action-buttons";
-
-      actions.appendChild(
-        makeButton("Delete Message","delete-btn",()=>deleteMessage(message.id))
-      );
+      actions.appendChild(makeButton("Delete Message","delete-btn",()=>deleteMessage(message.id)));
 
       card.appendChild(actions);
       container.appendChild(card);
@@ -690,11 +686,7 @@ async function loadMessages(){
 
   }catch(error){
     console.error("Message loading error:",error);
-
-    if(countElement){
-      countElement.textContent="!";
-    }
-
+    if(countElement)countElement.textContent="!";
     container.className="notice error";
     container.textContent="Could not load messages: "+error.message;
   }
@@ -707,24 +699,37 @@ function updateCounts(){
   document.getElementById("videoCount").textContent=currentRecords.videos.filter(item=>item.published).length;
 }
 
+/* CONTENT FORMS */
+
 const dialog=document.getElementById("contentDialog");
 
 function openForm(type){
   document.getElementById("contentForm").reset();
   document.getElementById("recordId").value="";
   document.getElementById("recordType").value=type;
-  document.getElementById("formHeading").textContent="Add "+type.charAt(0).toUpperCase()+type.slice(1);
+  document.getElementById("formHeading").textContent=(type==="videos"?"Upload Video":"Add "+type.charAt(0).toUpperCase()+type.slice(1));
   document.getElementById("imagePreview").style.display="none";
   document.getElementById("formNotice").className="notice";
+
+  const videoPreview=document.getElementById("videoPreview");
+  videoPreview.pause();
+  videoPreview.removeAttribute("src");
+  videoPreview.load();
+  videoPreview.style.display="none";
+  document.getElementById("existingVideoNote").textContent="";
 
   document.getElementById("projectFields").style.display=type==="projects"?"block":"none";
   document.getElementById("newsFields").style.display=type==="news"?"block":"none";
   document.getElementById("videoFields").style.display=type==="videos"?"block":"none";
-  document.getElementById("itemVideoUrl").required=type==="videos";
+  document.getElementById("itemVideoFile").required=type==="videos";
   document.getElementById("imageField").style.display=["press","videos"].includes(type)?"none":"block";
   document.getElementById("pressFileField").style.display=type==="press"?"block":"none";
   document.getElementById("descriptionField").style.display=type==="gallery"?"none":"block";
   document.getElementById("itemDescription").required=!["gallery","videos"].includes(type);
+
+  if(type==="videos"){
+    document.getElementById("itemDescription").required=false;
+  }
 
   dialog.showModal();
 }
@@ -743,7 +748,7 @@ function editRecord(type,id){
 
   openForm(type);
 
-  document.getElementById("formHeading").textContent="Edit "+type.slice(0,-1);
+  document.getElementById("formHeading").textContent="Edit "+(type==="videos"?"Video":type.slice(0,-1));
   document.getElementById("recordId").value=record.id;
   document.getElementById("itemTitle").value=record.title||"";
   document.getElementById("itemDescription").value=record.description||record.content||"";
@@ -760,7 +765,10 @@ function editRecord(type,id){
   }
 
   if(type==="videos"){
-    document.getElementById("itemVideoUrl").value=record.video_url||"";
+    document.getElementById("itemVideoFile").required=false;
+    document.getElementById("existingVideoNote").textContent=record.video_url
+      ?"A video is already uploaded. Choose another file only if you want to replace it."
+      :"No video file is currently attached.";
   }
 
   if(record.image_url){
@@ -769,6 +777,8 @@ function editRecord(type,id){
     preview.style.display="block";
   }
 }
+
+/* FILE UPLOAD HELPERS */
 
 async function uploadFile(file,bucket){
   if(!file)return null;
@@ -797,6 +807,46 @@ async function uploadFile(file,bucket){
   return publicData.publicUrl;
 }
 
+async function uploadVideoFile(file){
+  if(!file)throw new Error("Please select a video from your phone.");
+
+  const allowedTypes=[
+    "video/mp4",
+    "video/webm",
+    "video/quicktime",
+    "video/ogg"
+  ];
+
+  const extension=file.name.split(".").pop().toLowerCase();
+  const allowedExtensions=["mp4","webm","mov","ogg"];
+
+  if(!allowedTypes.includes(file.type)&&!allowedExtensions.includes(extension)){
+    throw new Error("Unsupported video format. Please select MP4, WebM, MOV or OGG.");
+  }
+
+  const maximumSize=100*1024*1024;
+
+  if(file.size>maximumSize){
+    throw new Error("This video is larger than 100 MB. Please compress it or select a smaller video.");
+  }
+
+  const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+  const path=Date.now()+"-"+crypto.randomUUID()+"-"+safeName;
+
+  const {data,error}=await db.storage.from("videos").upload(path,file,{
+    cacheControl:"3600",
+    upsert:false,
+    contentType:file.type||"video/mp4"
+  });
+
+  if(error)throw error;
+
+  const {data:publicData}=db.storage.from("videos").getPublicUrl(data.path);
+  return publicData.publicUrl;
+}
+
+/* Preview selected image */
+
 document.getElementById("itemImage").addEventListener("change",function(){
   const file=this.files[0];
   const preview=document.getElementById("imagePreview");
@@ -810,12 +860,44 @@ document.getElementById("itemImage").addEventListener("change",function(){
   preview.style.display="block";
 });
 
+/* Preview selected video */
+
+document.getElementById("itemVideoFile").addEventListener("change",function(){
+  const file=this.files[0];
+  const preview=document.getElementById("videoPreview");
+
+  if(!file){
+    preview.pause();
+    preview.removeAttribute("src");
+    preview.load();
+    preview.style.display="none";
+    return;
+  }
+
+  if(file.size>100*1024*1024){
+    this.value="";
+    formNotify("This video is larger than 100 MB. Please select a smaller video.");
+    return;
+  }
+
+  const oldUrl=preview.dataset.objectUrl;
+  if(oldUrl)URL.revokeObjectURL(oldUrl);
+
+  const objectUrl=URL.createObjectURL(file);
+  preview.dataset.objectUrl=objectUrl;
+  preview.src=objectUrl;
+  preview.style.display="block";
+  preview.load();
+});
+
+/* SAVE CONTENT */
+
 document.getElementById("contentForm").addEventListener("submit",async event=>{
   event.preventDefault();
 
   const button=document.getElementById("saveContentButton");
   button.disabled=true;
-  button.textContent="SAVING...";
+  button.textContent="UPLOADING / SAVING...";
 
   try{
     const type=document.getElementById("recordType").value;
@@ -829,9 +911,11 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
 
     let imageUrl=existing?.image_url||null;
     let fileUrl=existing?.file_url||null;
+    let videoUrl=existing?.video_url||null;
 
     const imageFile=document.getElementById("itemImage").files[0];
     const pressFile=document.getElementById("pressFile").files[0];
+    const videoFile=document.getElementById("itemVideoFile").files[0];
 
     if(imageFile&&type!=="press"){
       imageUrl=await uploadFile(imageFile,BUCKETS[type]);
@@ -872,20 +956,13 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
     }
 
     if(type==="videos"){
-      const videoUrl=document.getElementById("itemVideoUrl").value.trim();
-
-      if(!videoUrl)throw new Error("Please enter a video URL.");
-
-      let parsed;
-
-      try{
-        parsed=new URL(videoUrl);
-      }catch(e){
-        throw new Error("Please enter a valid video URL.");
+      if(videoFile){
+        formNotify("Uploading your video. Please keep this page open until the upload finishes.","success");
+        videoUrl=await uploadVideoFile(videoFile);
       }
 
-      if(!["http:","https:"].includes(parsed.protocol)){
-        throw new Error("Video URL must start with http:// or https://");
+      if(!videoUrl){
+        throw new Error("Please select a video file from your phone.");
       }
 
       payload.video_url=videoUrl;
@@ -902,7 +979,9 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
 
     closeForm();
 
-    notify(type.charAt(0).toUpperCase()+type.slice(1)+(id?" updated successfully.":" saved successfully."));
+    notify(type==="videos"
+      ?(id?"Video updated successfully.":"Video uploaded successfully.")
+      :(type.charAt(0).toUpperCase()+type.slice(1)+(id?" updated successfully.":" saved successfully.")));
 
     await reloadType(type);
 
@@ -915,6 +994,19 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
   }
 });
 
+/* Extract a video storage path from its public URL */
+
+function getVideoStoragePath(publicUrl){
+  if(!publicUrl)return null;
+
+  const marker="/storage/v1/object/public/videos/";
+  const index=publicUrl.indexOf(marker);
+
+  if(index===-1)return null;
+
+  return decodeURIComponent(publicUrl.substring(index+marker.length));
+}
+
 async function togglePublication(type,record){
   const newValue=!record.published;
 
@@ -924,7 +1016,6 @@ async function togglePublication(type,record){
 
   try{
     const {error}=await db.from(table).update({published:newValue}).eq("id",record.id);
-
     if(error)throw error;
 
     notify(newValue?"Content published.":"Content unpublished.");
@@ -937,14 +1028,28 @@ async function togglePublication(type,record){
 }
 
 async function deleteRecord(type,record){
-  if(!confirm("Permanently delete this content?"))return;
+  if(!confirm(type==="videos"?"Permanently delete this video and its uploaded file?":"Permanently delete this content?"))return;
 
   const table=type==="press"?"press_releases":type;
 
   try{
     const {error}=await db.from(table).delete().eq("id",record.id);
-
     if(error)throw error;
+
+    if(type==="videos"&&record.video_url){
+      const storagePath=getVideoStoragePath(record.video_url);
+
+      if(storagePath){
+        const {error:storageError}=await db.storage.from("videos").remove([storagePath]);
+
+        if(storageError){
+          console.error("Video record deleted, but storage file removal failed:",storageError);
+          notify("Video record deleted, but its storage file could not be removed: "+storageError.message,"error");
+          await reloadType(type);
+          return;
+        }
+      }
+    }
 
     notify("Content deleted successfully.");
     await reloadType(type);
@@ -960,7 +1065,6 @@ async function deleteMessage(id){
 
   try{
     const {error}=await db.from("messages").delete().eq("id",id);
-
     if(error)throw error;
 
     notify("Message deleted.");
@@ -980,17 +1084,16 @@ async function reloadType(type){
   if(type==="press")await loadPress();
 }
 
+/* WEBSITE CONTENT SETTINGS */
+
 async function getSiteValue(key){
   const {data,error}=await db.from("site_content").select("value").eq("key",key).maybeSingle();
-
   if(error)throw error;
-
   return data?data.value:null;
 }
 
 async function saveSiteValue(key,value){
   const {error}=await db.from("site_content").upsert({key,value},{onConflict:"key"});
-
   if(error)throw error;
 }
 
@@ -1061,7 +1164,6 @@ document.getElementById("biographyForm").addEventListener("submit",async event=>
     };
 
     await saveSiteValue("biography",JSON.stringify(value));
-
     notify("Biography saved successfully.");
 
   }catch(error){
@@ -1104,7 +1206,6 @@ document.getElementById("settingsForm").addEventListener("submit",async event=>{
     };
 
     await saveSiteValue("settings",JSON.stringify(settings));
-
     notify("Website settings saved successfully.");
 
   }catch(error){
@@ -1112,9 +1213,10 @@ document.getElementById("settingsForm").addEventListener("submit",async event=>{
   }
 });
 
+/* START DASHBOARD */
+
 async function initialiseDashboard(){
   const authorised=await requireAdministrator();
-
   if(!authorised)return;
 
   await Promise.all([
