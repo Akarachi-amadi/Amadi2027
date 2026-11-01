@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Gallery | Hon. Akarachi Amadi</title>
+<meta name="description" content="Watch videos, speeches, interviews and constituency activities of Hon. Akarachi Amadi.">
+
+<style>
+:root {
+  --green: #075b32;
+  --dark-green: #034323;
+  --gold: #d6a62e;
+  --red: #c90019;
+  --light: #f5f8f5;
+  --text: #26332b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--green);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 12px rgba(0,0,0,.15);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.brand span {
+  display: block;
+  color: #f2d47c;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+nav a {
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a.active {
+  color: #f5d36e;
+}
+
+.login-link {
+  background: var(--gold);
+  color: #172b1e !important;
+  padding: 8px 13px;
+  border-radius: 4px;
+}
+
+.welcome-bar {
+  background: var(--red);
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+  border-bottom: 3px solid var(--gold);
+}
+
+.welcome-track {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollWelcome 35s linear infinite;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.welcome-track strong {
+  color: #ffdf70;
+}
+
+@keyframes scrollWelcome {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.hero {
+  background:
+    linear-gradient(rgba(0,65,34,.88), rgba(0,65,34,.88)),
+    url("https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
+  color: white;
+  text-align: center;
+  padding: 85px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 12px;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: auto;
+  font-size: 17px;
+}
+
+.gold-line {
+  width: 75px;
+  height: 4px;
+  background: var(--gold);
+  margin: 20px auto;
+  border-radius: 5px;
+}
+
+.container {
+  max-width: 1150px;
+  width: 90%;
+  margin: auto;
+}
+
+.intro {
+  text-align: center;
+  padding: 50px 0 25px;
+}
+
+.intro h2 {
+  color: var(--green);
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.intro p {
+  color: #65736a;
+  max-width: 750px;
+  margin: auto;
+}
+
+.video-section {
+  padding: 20px 0 65px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.video-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+  transition: transform .2s;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+}
+
+.video-frame iframe,
+.video-frame video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.video-info {
+  padding: 19px;
+}
+
+.video-info h3 {
+  color: var(--green);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.video-info p {
+  color: #65736a;
+  font-size: 14px;
+  white-space: pre-line;
+}
+
+.video-date {
+  display: inline-block;
+  color: #8a6815;
+  background: #fff5d7;
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.status {
+  text-align: center;
+  padding: 35px 15px;
+  color: #65736a;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+footer {
+  background: #022f1a;
+  color: white;
+  text-align: center;
+  padding: 27px 15px;
+  font-size: 13px;
+}
+
+footer p {
+  margin: 4px 0;
+}
+
+@media(max-width: 850px) {
+  .header-inner {
+    flex-direction: column;
+  }
+
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  nav {
+    justify-content: center;
+  }
+}
+
+@media(max-width: 600px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    gap: 10px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 65px 18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="brand">
+      HON. AKARACHI AMADI
+      <span>Mbaitoli/Ikeduru Federal Constituency</span>
+    </a>
+
+    <nav>
+      <a href="login.html" class="login-link">LOGIN</a>
+      <a href="index.html">HOME</a>
+      <a href="biography.html">BIOGRAPHY</a>
+      <a href="constituency.html">CONSTITUENCY</a>
+      <a href="legislative.html">LEGISLATIVE</a>
+      <a href="projects.html">PROJECTS</a>
+      <a href="achievements.html">ACHIEVEMENTS</a>
+      <a href="vision.html">VISION</a>
+      <a href="news.html">NEWS</a>
+      <a href="press.html">PRESS</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="videos.html" class="active">VIDEOS</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </div>
+</header>
+
+<div class="welcome-bar">
+  <div class="welcome-track">
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </div>
+</div>
+
+<section class="hero">
+  <h1>Video Gallery</h1>
+  <div class="gold-line"></div>
+  <p>
+    Watch speeches, interviews, public engagements and video updates
+    relating to Mbaitoli/Ikeduru Federal Constituency.
+  </p>
+</section>
+
+<section class="container intro">
+  <h2>Videos & Media Updates</h2>
+  <p>
+    This page provides a collection of video materials and public updates.
+    New videos will appear here when they are published by the website administrator.
+  </p>
+</section>
+
+<section class="container video-section">
+  <div id="videoStatus" class="status">
+    Loading videos...
+  </div>
+
+  <div class="video-grid" id="videoGrid"></div>
+</section>
+
+<footer>
+  <p><strong>Hon. Akarachi Amadi</strong></p>
+  <p>Member, House of Representatives</p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria</p>
+  <p>© <span id="year"></span> All Rights Reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+const videoGrid = document.getElementById("videoGrid");
+const videoStatus = document.getElementById("videoStatus");
+
+function safeText(value) {
+  return String(value || "");
+}
+
+function getVideoEmbed(url) {
+  try {
+    const parsed = new URL(url);
+
+    if (
+      parsed.hostname === "www.youtube.com" ||
+      parsed.hostname === "youtube.com"
+    ) {
+      const id = parsed.searchParams.get("v");
+      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+    }
+
+    if (parsed.hostname === "youtu.be") {
+      const id = parsed.pathname.split("/").filter(Boolean)[0];
+      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+    }
+
+    if (parsed.hostname.endsWith("youtube.com") && parsed.pathname.startsWith("/embed/")) {
+      return url;
+    }
+
+    if (parsed.hostname === "www.youtube.com" && parsed.pathname.startsWith("/shorts/")) {
+      const id = parsed.pathname.split("/")[2];
+      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+    }
+
+    if (parsed.hostname === "www.youtube.com" && parsed.pathname.startsWith("/live/")) {
+      const id = parsed.pathname.split("/")[2];
+      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+    }
+
+    return null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function createVideoCard(item) {
+  const card = document.createElement("article");
+  card.className = "video-card";
+
+  const frame = document.createElement("div");
+  frame.className = "video-frame";
+
+  const embedUrl = getVideoEmbed(item.video_url);
+
+  if (embedUrl) {
+    const iframe = document.createElement("iframe");
+    iframe.src = embedUrl;
+    iframe.title = safeText(item.title) || "Constituency video";
+    iframe.loading = "lazy";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    frame.appendChild(iframe);
+  } else if (item.video_url) {
+    const video = document.createElement("video");
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    video.src = item.video_url;
+    frame.appendChild(video);
+  } else {
+    frame.textContent = "Video link unavailable";
+    frame.style.color = "white";
+    frame.style.display = "grid";
+    frame.style.placeItems = "center";
+  }
+
+  const info = document.createElement("div");
+  info.className = "video-info";
+
+  if (item.created_at) {
+    const date = document.createElement("span");
+    date.className = "video-date";
+    date.textContent = new Date(item.created_at).toLocaleDateString();
+    info.appendChild(date);
+  }
+
+  const title = document.createElement("h3");
+  title.textContent = safeText(item.title) || "Untitled video";
+
+  const description = document.createElement("p");
+  description.textContent = safeText(item.description);
+
+  info.appendChild(title);
+  info.appendChild(description);
+
+  card.appendChild(frame);
+  card.appendChild(info);
+
+  return card;
+}
+
+async function loadVideos() {
+  videoStatus.style.display = "block";
+  videoStatus.textContent = "Loading videos...";
+
+  try {
+    const { data, error } = await db
+      .from("videos")
+      .select("id,title,description,video_url,created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    videoGrid.replaceChildren();
+
+    if (!data || data.length === 0) {
+      videoStatus.textContent =
+        "No videos have been published yet. Please check back for updates.";
+      return;
+    }
+
+    data.forEach(item => {
+      videoGrid.appendChild(createVideoCard(item));
+    });
+
+    videoStatus.style.display = "none";
+
+  } catch (error) {
+    console.error("Video loading error:", error);
+
+    videoStatus.textContent =
+      "Videos could not be loaded. Please check the database setup and try again.";
+  }
+}
+
+loadVideos();
+</script>
+
+</body>
+</html>
