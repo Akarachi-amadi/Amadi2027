@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Frequently Asked Questions | Hon. Akarachi Amadi</title>  <meta name="description" content="Frequently asked questions about Hon. Akarachi Amadi and Mbaitoli/Ikeduru Federal Constituency.">  <style>
+    :root {
+      --green: #08743b;
+      --dark-green: #064d2b;
+      --gold: #d6a62e;
+      --red: #c90019;
+      --light: #f5f8f5;
+      --text: #26332b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .welcome {
+      background: var(--red);
+      color: white;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .welcome-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 27s linear infinite;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .welcome strong {
+      color: #ffe18a;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 15px 4%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--dark-green);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.3;
+      flex-shrink: 0;
+    }
+
+    .brand span {
+      display: block;
+      color: #777;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    nav a {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    nav a.login-menu {
+      background: var(--gold);
+      color: var(--dark-green);
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-weight: 800;
+    }
+
+    .page-banner {
+      background: linear-gradient(rgba(3,48,25,.85), rgba(3,48,25,.85)),
+        url("https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 75px 5%;
+    }
+
+    .page-banner h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 10px;
+    }
+
+    .page-banner p {
+      color: #e4eee7;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 950px;
+      margin: auto;
+    }
+
+    .section {
+      padding: 65px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      color: var(--dark-green);
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: #68746c;
+    }
+
+    .faq-item {
+      background: white;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.05);
+      border-left: 4px solid var(--gold);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px;
+      background: white;
+      border: none;
+      text-align: left;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--dark-green);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .faq-question:hover {
+      color: var(--green);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 20px;
+      color: #59665d;
+      font-size: 15px;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-icon {
+      font-size: 22px;
+      transition: .3s;
+      flex-shrink: 0;
+    }
+
+    .contact-box {
+      background: var(--dark-green);
+      color: white;
+      padding: 35px;
+      text-align: center;
+      border-radius: 9px;
+      margin-top: 35px;
+    }
+
+    .contact-box h2 {
+      color: #f4d47c;
+      margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      margin-bottom: 20px;
+      color: #e4eee7;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark-green);
+      padding: 12px 23px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #092e1c;
+      color: #e4eee7;
+      text-align: center;
+      padding: 40px 5%;
+    }
+
+    footer strong {
+      color: white;
+      font-size: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 17px;
+      margin: 20px 0;
+    }
+
+    .footer-links a {
+      color: #f2d27d;
+      font-size: 13px;
+    }
+
+    footer p {
+      font-size: 13px;
+      margin: 5px 0;
+    }
+
+    @media (max-width: 1000px) {
+      .nav-container {
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 500px) {
+      nav {
+        gap: 11px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .section {
+        padding: 45px 0;
+      }
+
+      .faq-question {
+        font-size: 14px;
+      }
+    }
+  </style></head><body>  <div class="welcome">
+    <div class="welcome-track">
+      <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+    </div>
+  </div>  <header>
+    <div class="nav-container">  <a href="index.html" class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
+  </a>
+
+  <nav>
+    <a href="login.html" class="login-menu">LOGIN</a>
+    <a href="index.html">Home</a>
+    <a href="biography.html">Biography</a>
+    <a href="constituency.html">Constituency</a>
+    <a href="projects.html">Projects</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="legislative.html">Legislative</a>
+    <a href="vision.html">Vision</a>
+    <a href="news.html">News</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="press.html">Press</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+</div>
+
+  </header>  <section class="page-banner">
+    <h1>Frequently Asked Questions</h1>
+    <p>Answers to common questions about Hon. Akarachi Amadi and the constituency.</p>
+  </section>  <section class="section">
+    <div class="container">  <div class="section-heading">
+    <h2>How Can We Help You?</h2>
+    <p>Click any question below to read its answer.</p>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Who is Hon. Akarachi Amadi?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Hon. Akarachi Amadi is a Nigerian politician who represents
+        Mbaitoli/Ikeduru Federal Constituency of Imo State in the
+        Federal House of Representatives.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Which constituency does he represent?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        He represents Mbaitoli/Ikeduru Federal Constituency in Imo State,
+        Nigeria.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Where can I read his biography?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Visit the <a href="biography.html">Biography page</a> to read
+        the available biographical information.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Where can I find information about constituency projects?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Visit the <a href="projects.html">Projects page</a> for published
+        project information and updates.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How can I follow news and announcements?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Visit the <a href="news.html">News page</a> and
+        <a href="press.html">Press page</a> for published updates,
+        announcements and media releases.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How can I contact the office?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Visit the <a href="contact.html">Contact page</a> to send
+        an enquiry or constituency-related message.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Can I submit a message or suggestion?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Yes. You can use the contact form on the Contact page to send
+        feedback, suggestions or enquiries.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Where can I view photographs and media?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Visit the <a href="gallery.html">Gallery page</a> to view
+        photographs published on the website.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        Where can I find legislative information?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Visit the <a href="legislative.html">Legislative Activities page</a>
+        for information about legislative responsibilities and published
+        records.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        How can I access the website administration area?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        The authorised administrator can use the LOGIN link at the top
+        of the website to access the administration area.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="contact-box">
+    <h2>Still Have Questions?</h2>
+    <p>
+      If you need further information, please send your enquiry
+      through the website contact page.
+    </p>
+    <a href="contact.html" class="btn">Contact Us</a>
+  </div>
+
+</div>
+
+  </section>  <footer><strong>HON. AKARACHI AMADI</strong>
+
+<p>
+  Mbaitoli/Ikeduru Federal Constituency,
+  Imo State, Nigeria.
+</p>
+
+<div class="footer-links">
+  <a href="login.html">Login</a>
+  <a href="index.html">Home</a>
+  <a href="biography.html">Biography</a>
+  <a href="constituency.html">Constituency</a>
+  <a href="projects.html">Projects</a>
+  <a href="achievements.html">Achievements</a>
+  <a href="legislative.html">Legislative</a>
+  <a href="vision.html">Vision</a>
+  <a href="news.html">News</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="press.html">Press</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<p>
+  &copy; <span id="year"></span>
+  Hon. Akarachi Amadi. All Rights Reserved.
+</p>
+
+  </footer>  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    document.querySelectorAll(".faq-question").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        item.classList.toggle("active");
+      });
+    });
+  </script></body>
+</html>
