@@ -1,635 +1,547 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact the office of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency, Imo State.">
+  <title>Contact Us | Hon. Akarachi Amadi</title>
 
-<title>Contact Us | Engr. Akarachi Amadi 2027</title>
+  <style>
+    :root {
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d6a72c;
+      --red: #c90019;
+      --light: #f5f8f5;
+      --text: #26332b;
+      --white: #fff;
+    }
 
-<style>
-:root {
-    --green: #08783e;
-    --dark: #064d2a;
-    --gold: #d6a928;
-    --light: #f4f8f5;
-    --white: #fff;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: var(--light);
-    color: #222;
-    line-height: 1.6;
-}
-
-header {
-    background: var(--green);
-    color: white;
-    padding: 17px 6%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-nav {
-    display: flex;
-    gap: 17px;
-    flex-wrap: wrap;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-nav a:hover {
-    color: var(--gold);
-}
-
-/* HERO */
-
-.hero {
-    background: linear-gradient(120deg, var(--dark), var(--green));
-    color: white;
-    text-align: center;
-    padding: 75px 20px;
-}
-
-.hero h1 {
-    font-size: clamp(32px, 5vw, 45px);
-    margin-bottom: 12px;
-}
-
-.hero p {
-    font-size: 17px;
-}
-
-/* MAIN */
-
-.container {
-    width: 90%;
-    max-width: 1150px;
-    margin: auto;
-    padding: 55px 0;
-}
-
-.section-title {
-    text-align: center;
-    color: var(--green);
-    font-size: 30px;
-    margin-bottom: 12px;
-}
-
-.section-subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 35px;
-}
-
-/* CONTACT GRID */
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 30px;
-}
-
-/* CONTACT INFORMATION */
-
-.contact-info {
-    background: var(--dark);
-    color: white;
-    padding: 30px;
-    border-radius: 10px;
-}
-
-.contact-info h2 {
-    color: var(--gold);
-    margin-bottom: 12px;
-}
-
-.contact-info > p {
-    margin-bottom: 25px;
-    color: #e0eee5;
-}
-
-.info-item {
-    display: flex;
-    gap: 14px;
-    margin-bottom: 25px;
-    align-items: flex-start;
-}
-
-.info-icon {
-    width: 42px;
-    height: 42px;
-    background: var(--gold);
-    color: var(--dark);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    font-size: 19px;
-}
-
-.info-item h3 {
-    font-size: 15px;
-    margin-bottom: 4px;
-}
-
-.info-item p,
-.info-item a {
-    color: #e0eee5;
-    font-size: 14px;
-    text-decoration: none;
-    overflow-wrap: anywhere;
-}
-
-/* SOCIAL LINKS */
-
-.social-links {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-.social-links a {
-    text-decoration: none;
-    background: white;
-    color: var(--dark);
-    padding: 9px 13px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.social-links a:hover {
-    background: var(--gold);
-}
-
-/* CONTACT FORM */
-
-.contact-form {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.06);
-}
-
-.contact-form h2 {
-    color: var(--green);
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 13px;
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 13px;
-    margin-top: 7px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-}
-
-textarea {
-    min-height: 140px;
-    resize: vertical;
-}
-
-.submit-btn {
-    background: var(--green);
-    color: white;
-    padding: 13px 25px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.submit-btn:hover {
-    background: var(--dark);
-}
-
-.form-message {
-    display: none;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 5px;
-    background: #e5f2e8;
-    color: var(--dark);
-}
-
-/* MAP */
-
-.map-section {
-    background: white;
-    padding: 45px 6%;
-    text-align: center;
-}
-
-.map-box {
-    max-width: 1000px;
-    height: 300px;
-    margin: 25px auto 0;
-    background: #e5eee7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed var(--green);
-    border-radius: 9px;
-    color: var(--dark);
-    padding: 20px;
-}
-
-/* FOOTER */
-
-footer {
-    background: var(--dark);
-    color: white;
-    text-align: center;
-    padding: 25px 15px;
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-/* WHATSAPP FLOAT BUTTON */
-
-.whatsapp {
-    position: fixed;
-    bottom: 22px;
-    right: 22px;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-    padding: 14px 18px;
-    border-radius: 30px;
-    font-weight: bold;
-    box-shadow: 0 3px 12px rgba(0,0,0,.2);
-    z-index: 50;
-}
-
-.whatsapp:hover {
-    background: #128c45;
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 800px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
     }
 
     header {
-        justify-content: center;
-        text-align: center;
+      background: var(--green);
+      color: white;
+      padding: 15px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: normal;
     }
 
     nav {
-        justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
     }
-}
 
-@media(max-width: 500px) {
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .welcome {
+      background: var(--red);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      border-bottom: 3px solid var(--gold);
+      font-weight: bold;
+    }
+
+    .welcome span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .welcome strong {
+      color: #ffe36a;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    .hero {
+      background: linear-gradient(rgba(3,67,35,.9), rgba(3,67,35,.9)),
+                  url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 85px 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+    }
+
     .container {
-        width: 92%;
-        padding: 35px 0;
+      width: 90%;
+      max-width: 1100px;
+      margin: 55px auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 30px;
+      align-items: start;
     }
 
     .contact-info,
     .contact-form {
-        padding: 22px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.06);
     }
 
-    .whatsapp {
-        bottom: 15px;
-        right: 12px;
+    h2 {
+      color: var(--green);
+      margin-bottom: 18px;
+      font-size: 25px;
     }
-}
-</style>
+
+    .contact-info p {
+      color: #59635c;
+      margin-bottom: 17px;
+    }
+
+    .contact-info strong {
+      color: var(--green);
+    }
+
+    .contact-info .note {
+      background: #f3f6f3;
+      border-left: 4px solid var(--gold);
+      padding: 13px;
+      font-size: 13px;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 7px;
+      color: #344239;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd5ce;
+      border-radius: 5px;
+      font-size: 14px;
+      font-family: inherit;
+      background: white;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 2px rgba(7,91,50,.1);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 14px;
+      background: var(--green);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: var(--dark-green);
+    }
+
+    .submit-button:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .form-status {
+      display: none;
+      margin-top: 17px;
+      padding: 13px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .form-status.success {
+      display: block;
+      color: #075b32;
+      background: #e6f5eb;
+    }
+
+    .form-status.error {
+      display: block;
+      color: #a00016;
+      background: #fde8eb;
+    }
+
+    .map-section {
+      margin-top: 45px;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .map-section p {
+      color: #59635c;
+      margin-bottom: 15px;
+    }
+
+    .map-link {
+      display: inline-block;
+      background: var(--gold);
+      color: #222;
+      text-decoration: none;
+      padding: 11px 18px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: var(--dark-green);
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    @media(max-width: 750px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .hero {
+        padding: 65px 18px;
+      }
+    }
+
+    @media(max-width: 480px) {
+      .contact-info,
+      .contact-form {
+        padding: 22px 17px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
+  <div class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
+  </div>
 
-    <div class="logo">AKARACHI AMADI 2027</div>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="biography.html">Biography</a>
-        <a href="projects.html">Projects</a>
-        <a href="vision.html">Vision</a>
-        <a href="news.html">News</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-
+  <nav>
+    <a href="login.html">LOGIN</a>
+    <a href="index.html">HOME</a>
+    <a href="biography.html">BIOGRAPHY</a>
+    <a href="constituency.html">CONSTITUENCY</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="vision.html">VISION & MISSION</a>
+    <a href="legislative.html">LEGISLATIVE</a>
+    <a href="achievements.html">ACHIEVEMENTS</a>
+    <a href="news.html">NEWS</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="press.html">PRESS</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
 </header>
 
-
-<!-- HERO -->
+<div class="welcome">
+  <span>
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </span>
+</div>
 
 <section class="hero">
-
-    <h1>Contact Us</h1>
-
-    <p>
-        We welcome your questions, suggestions,
-        feedback and enquiries.
-    </p>
-
+  <h1>Contact Our Office</h1>
+  <p>
+    We welcome enquiries, suggestions, community concerns and messages
+    from residents of Mbaitoli/Ikeduru Federal Constituency and the public.
+  </p>
 </section>
-
-
-<!-- CONTACT SECTION -->
 
 <main class="container">
 
-    <h2 class="section-title">Get In Touch</h2>
+  <div class="contact-grid">
 
-    <p class="section-subtitle">
-        Your voice matters. We welcome constructive engagement
-        and conversations about the future of Mbaitoli.
-    </p>
+    <section class="contact-info">
+      <h2>Get in Touch</h2>
 
+      <p>
+        <strong>Office:</strong><br>
+        Office of Hon. Akarachi Amadi
+      </p>
 
-    <div class="contact-grid">
+      <p>
+        <strong>Constituency:</strong><br>
+        Mbaitoli/Ikeduru Federal Constituency
+      </p>
 
+      <p>
+        <strong>State:</strong><br>
+        Imo State, Nigeria
+      </p>
 
-        <!-- CONTACT INFORMATION -->
+      <p>
+        <strong>Send an Enquiry:</strong><br>
+        Use the contact form to submit your message directly to the office.
+      </p>
 
-        <div class="contact-info">
+      <div class="note">
+        Please provide accurate contact information so the office can
+        reach you if a response is required. Do not submit passwords,
+        bank details or other sensitive personal information.
+      </div>
+    </section>
 
-            <h2>Contact Information</h2>
+    <section class="contact-form">
+      <h2>Send Us a Message</h2>
 
-            <p>
-                Connect with the official communication team
-                of Engr. Akarachi Amadi.
-            </p>
+      <form id="contactForm">
 
-
-            <div class="info-item">
-
-                <div class="info-icon">📍</div>
-
-                <div>
-                    <h3>Office Address</h3>
-                    <p>Official office address to be provided.</p>
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-icon">📞</div>
-
-                <div>
-                    <h3>Phone Number</h3>
-                    <p>Add official contact number.</p>
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-icon">✉️</div>
-
-                <div>
-                    <h3>Email Address</h3>
-                    <p>Add official email address.</p>
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-icon">🌐</div>
-
-                <div>
-                    <h3>Website</h3>
-                    <p>Official website of Engr. Akarachi Amadi.</p>
-                </div>
-
-            </div>
-
-
-            <h3 style="color:var(--gold);margin-top:25px;">
-                Follow Our Updates
-            </h3>
-
-
-            <div class="social-links">
-
-                <a href="#" target="_blank">Facebook</a>
-
-                <a href="#" target="_blank">Instagram</a>
-
-                <a href="#" target="_blank">X</a>
-
-                <a href="#" target="_blank">YouTube</a>
-
-            </div>
-
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            maxlength="120"
+            autocomplete="name"
+            required
+          >
         </div>
 
-
-        <!-- CONTACT FORM -->
-
-        <div class="contact-form">
-
-            <h2>Send Us A Message</h2>
-
-            <form id="contactForm">
-
-                <label>Full Name</label>
-
-                <input type="text"
-                    id="name"
-                    placeholder="Enter your full name"
-                    required>
-
-
-                <label>Email Address</label>
-
-                <input type="email"
-                    id="email"
-                    placeholder="Enter your email address"
-                    required>
-
-
-                <label>Phone Number</label>
-
-                <input type="tel"
-                    id="phone"
-                    placeholder="Enter your phone number">
-
-
-                <label>Subject</label>
-
-                <select id="subject" required>
-
-                    <option value="">Select enquiry subject</option>
-
-                    <option>General Enquiry</option>
-
-                    <option>Community Development</option>
-
-                    <option>Partnership</option>
-
-                    <option>Media Enquiry</option>
-
-                    <option>Suggestion</option>
-
-                    <option>Other</option>
-
-                </select>
-
-
-                <label>Your Message</label>
-
-                <textarea id="message"
-                    placeholder="Write your message here..."
-                    required></textarea>
-
-
-                <button type="submit" class="submit-btn">
-                    Send Message
-                </button>
-
-                <div class="form-message" id="formMessage"></div>
-
-            </form>
-
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            maxlength="254"
+            autocomplete="email"
+            required
+          >
         </div>
 
-    </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            maxlength="30"
+            autocomplete="tel"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            maxlength="200"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message *</label>
+          <textarea
+            id="message"
+            name="message"
+            maxlength="5000"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-button" id="submitButton">
+          SEND MESSAGE
+        </button>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+      </form>
+    </section>
+
+  </div>
+
+  <section class="map-section">
+    <h2>Our Constituency</h2>
+    <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+    <a
+      class="map-link"
+      href="https://www.google.com/maps/search/?api=1&query=Mbaitoli+Ikeduru+Imo+State+Nigeria"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Constituency on Map
+    </a>
+  </section>
 
 </main>
 
-
-<!-- MAP SECTION -->
-
-<section class="map-section">
-
-    <h2 class="section-title">Our Location</h2>
-
-    <p>
-        Our official office location will be displayed here.
-    </p>
-
-    <div class="map-box">
-
-        <p>
-            📍 Google Maps location will be integrated
-            after the official office address is provided.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- FOOTER -->
-
 <footer>
-
-    <p>
-        © 2027 Engr. Akarachi Amadi.
-        All Rights Reserved.
-    </p>
-
-    <p>
-        Mbaitoli Federal Constituency.
-    </p>
-
+  <p><strong>HON. AKARACHI AMADI</strong></p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+  <p><a href="login.html" style="color:#f1d47c;">LOGIN</a></p>
+  <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
 </footer>
 
-
-<!-- WHATSAPP BUTTON -->
-
-<a href="https://wa.me/2340000000000"
-   class="whatsapp"
-   target="_blank"
-   rel="noopener">
-    WhatsApp Us
-</a>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
 
-// ===================================
-// CONTACT FORM DEMONSTRATION
-// ===================================
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// This form currently validates visitor
-// input but does not store or send messages.
-// Backend connection will be added later.
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-document.getElementById("contactForm").addEventListener(
-    "submit",
-    function(event) {
+  const contactForm = document.getElementById("contactForm");
+  const submitButton = document.getElementById("submitButton");
+  const formStatus = document.getElementById("formStatus");
 
-        event.preventDefault();
+  function showStatus(message, type) {
+    formStatus.textContent = message;
+    formStatus.className = "form-status " + type;
+  }
 
-        const name = document.getElementById("name").value.trim();
+  contactForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
+    if (!contactForm.reportValidity()) return;
 
-        const message = document.getElementById("message").value.trim();
+    submitButton.disabled = true;
+    submitButton.textContent = "SENDING...";
+    formStatus.className = "form-status";
+    formStatus.textContent = "";
 
-        const output = document.getElementById("formMessage");
+    const formData = {
+      name: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      subject: document.getElementById("subject").value.trim(),
+      message: document.getElementById("message").value.trim()
+    };
 
-        if (!name || !email || !message) {
-
-            output.style.display = "block";
-            output.textContent = "Please complete all required fields.";
-
-            return;
-        }
-
-        output.style.display = "block";
-
-        output.textContent =
-            "Thank you, " + name +
-            ". The contact form is ready. Message delivery will be activated after backend integration.";
-
-        this.reset();
-
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
+      showStatus("Please complete all required fields.", "error");
+      submitButton.disabled = false;
+      submitButton.textContent = "SEND MESSAGE";
+      return;
     }
-);
 
+    try {
+      const { error } = await db
+        .from("messages")
+        .insert([formData]);
+
+      if (error) throw error;
+
+      showStatus(
+        "Thank you. Your message has been submitted successfully.",
+        "success"
+      );
+
+      contactForm.reset();
+
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      showStatus(
+        "Your message could not be submitted. Please try again later.",
+        "error"
+      );
+
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "SEND MESSAGE";
+    }
+  });
 </script>
 
 </body>
