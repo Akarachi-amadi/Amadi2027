@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter Subscription | Hon. Akarachi Amadi</title>
+<meta name="description" content="Subscribe to official updates from Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency."><style>
+:root {
+    --green: #006b35;
+    --dark-green: #004d26;
+    --gold: #d6a928;
+    --light: #f5f8f5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: #222;
+}
+
+header {
+    background: var(--green);
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+header img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+header h2 {
+    margin: 0;
+    font-size: 19px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 12px;
+}
+
+nav {
+    background: var(--dark-green);
+    padding: 13px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+.hero {
+    background: linear-gradient(135deg, #006b35, #003d20);
+    color: white;
+    text-align: center;
+    padding: 65px 20px;
+}
+
+.hero h1 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 650px;
+    margin: -35px auto 50px;
+    padding: 0 18px;
+    position: relative;
+}
+
+.form-box {
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.09);
+    border-top: 5px solid var(--gold);
+}
+
+.form-box h2 {
+    color: var(--green);
+    text-align: center;
+    margin-top: 0;
+}
+
+.form-box p {
+    text-align: center;
+    line-height: 1.6;
+    color: #555;
+}
+
+label {
+    display: block;
+    margin: 18px 0 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 22px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--dark-green);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#message {
+    margin-top: 18px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+footer {
+    background: var(--dark-green);
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    line-height: 1.7;
+}
+
+@media(max-width: 500px) {
+    header h2 {
+        font-size: 15px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .form-box {
+        padding: 25px 18px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 6px;
+    }
+}
+</style></head><body><header>
+    <a href="index.html">
+        <img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png"
+        alt="Website Logo">
+    </a><div>
+    <h2>HON. AKARACHI AMADI</h2>
+    <p>Mbaitoli/Ikeduru Federal Constituency</p>
+</div>
+
+</header><nav>
+    <a href="login.html">LOGIN</a>
+    <a href="index.html">Home</a>
+    <a href="biography.html">Biography</a>
+    <a href="news.html">News</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
+</nav><section class="hero">
+    <h1>Stay Connected With Us</h1>
+    <p>
+        Subscribe to receive official announcements, constituency
+        updates, development projects, news and important information
+        from Hon. Akarachi Amadi.
+    </p>
+</section><div class="container">
+    <div class="form-box">    <h2>Subscribe to Our Newsletter</h2>
+
+    <p>
+        Join our mailing list and stay informed about activities
+        and developments across Mbaitoli and Ikeduru.
+    </p>
+
+    <form id="newsletterForm">
+
+        <label for="name">Full Name</label>
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <label for="email">Email Address</label>
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            required
+        >
+
+        <button type="submit" id="subscribeBtn">
+            Subscribe Now
+        </button>
+
+    </form>
+
+    <div id="message" role="status" aria-live="polite"></div>
+
+</div>
+
+</div><footer>
+    <p>
+        &copy; 2026 Hon. Akarachi Amadi.
+        All Rights Reserved.
+    </p>
+    <p>Mbaitoli/Ikeduru Federal Constituency, Imo State.</p>
+</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+const form = document.getElementById("newsletterForm");
+const message = document.getElementById("message");
+const button = document.getElementById("subscribeBtn");
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+
+    if (!name || !email) {
+        message.style.color = "red";
+        message.textContent = "Please enter your name and email address.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Submitting...";
+    message.textContent = "";
+
+    try {
+
+        const { error } = await db
+            .from("subscribers")
+            .insert([
+                {
+                    name: name,
+                    email: email
+                }
+            ]);
+
+        if (error) {
+
+            if (error.code === "23505") {
+                message.style.color = "#b45309";
+                message.textContent = "This email address is already subscribed.";
+            } else {
+                throw error;
+            }
+
+        } else {
+
+            message.style.color = "green";
+            message.textContent = "Thank you for subscribing! You are now on our mailing list.";
+
+            form.reset();
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.style.color = "red";
+        message.textContent = "Subscription failed. Please try again later.";
+
+    }
+
+    button.disabled = false;
+    button.textContent = "Subscribe Now";
+
+});
+</script></body>
+</html>
