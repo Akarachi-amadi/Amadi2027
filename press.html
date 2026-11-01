@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Official press releases, media statements and media updates from the office of Hon. Akarachi Amadi.">
+  <meta name="description" content="Official press releases, statements and media updates from the office of Hon. Akarachi Amadi.">
   <title>Press & Media | Hon. Akarachi Amadi</title>
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #064b2b;
-      --gold: #d9a520;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d6a72c;
       --red: #c90019;
       --light: #f5f8f5;
-      --white: #fff;
       --text: #26332b;
-      --muted: #68746c;
-      --shadow: 0 8px 25px rgba(0,0,0,.08);
+      --white: #fff;
     }
 
     * {
@@ -25,473 +23,271 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      line-height: 1.7;
-      background: var(--white);
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .topbar {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 9px 5%;
-      font-size: 13px;
-    }
-
-    .welcome {
-      overflow: hidden;
-      white-space: nowrap;
-      background: var(--red);
-      color: white;
-      padding: 12px 0;
-      border-bottom: 3px solid var(--gold);
-      font-weight: bold;
-    }
-
-    .welcome-track {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scrollWelcome 32s linear infinite;
-    }
-
-    .welcome-track span {
-      color: #ffdf63;
-    }
-
-    @keyframes scrollWelcome {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+      background: var(--light);
+      line-height: 1.6;
     }
 
     header {
-      background: white;
-      box-shadow: 0 3px 12px rgba(0,0,0,.08);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 14px 5%;
+      background: var(--green);
+      color: white;
+      padding: 15px 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 220px;
-    }
-
-    .brand-mark {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: var(--green);
-      color: white;
-      display: grid;
-      place-items: center;
-      border: 3px solid var(--gold);
+      font-size: 19px;
       font-weight: bold;
     }
 
-    .brand-text strong {
+    .brand span {
       display: block;
-      color: var(--dark-green);
-      font-size: 15px;
-      line-height: 1.3;
-    }
-
-    .brand-text small {
-      color: var(--muted);
-      font-size: 11px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: normal;
     }
 
     nav {
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 15px;
     }
 
     nav a {
-      font-size: 12px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
       font-weight: bold;
-      color: var(--text);
-      transition: .3s;
     }
 
-    nav a:hover,
-    nav a.active {
-      color: var(--green);
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .welcome {
+      background: var(--red);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      border-bottom: 3px solid var(--gold);
+      font-weight: bold;
+    }
+
+    .welcome span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .welcome strong {
+      color: #ffe36a;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
     }
 
     .hero {
-      background:
-        linear-gradient(rgba(4,65,35,.9), rgba(4,65,35,.9)),
-        url("https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80");
+      background: linear-gradient(rgba(3,67,35,.9), rgba(3,67,35,.9)),
+                  url("https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80");
       background-size: cover;
       background-position: center;
-      color: white;
       text-align: center;
-      padding: 100px 20px;
-    }
-
-    .hero .eyebrow {
-      color: #ffdc70;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 13px;
-      margin-bottom: 12px;
+      color: white;
+      padding: 85px 20px;
     }
 
     .hero h1 {
-      font-size: clamp(34px,5vw,55px);
-      margin-bottom: 15px;
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 12px;
     }
 
     .hero p {
-      max-width: 760px;
+      max-width: 750px;
       margin: auto;
-      font-size: 17px;
-      color: #f1f6f2;
-    }
-
-    .hero-line {
-      width: 75px;
-      height: 4px;
-      background: var(--gold);
-      margin: 22px auto;
-      border-radius: 5px;
     }
 
     .container {
-      max-width: 1150px;
-      margin: auto;
-      padding: 70px 5%;
+      width: 90%;
+      max-width: 1100px;
+      margin: 55px auto;
     }
 
     .section-heading {
       text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-heading .tag {
-      color: var(--green);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 12px;
-      font-weight: bold;
+      margin-bottom: 35px;
     }
 
     .section-heading h2 {
-      color: var(--dark-green);
-      font-size: clamp(26px,4vw,36px);
-      margin: 8px 0 12px;
+      color: var(--green);
+      font-size: 30px;
     }
 
     .section-heading p {
-      color: var(--muted);
-      max-width: 720px;
-      margin: auto;
+      color: #657168;
+      margin-top: 8px;
     }
 
-    .intro {
-      background: var(--light);
-    }
-
-    .intro-content {
-      max-width: 850px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .intro-content p {
-      margin-bottom: 15px;
-      color: #4d5b51;
-    }
-
-    .media-grid {
+    .press-list {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
       gap: 22px;
     }
 
-    .media-card {
+    .press-card {
       background: white;
-      border: 1px solid #e4ebe5;
-      border-radius: 12px;
-      padding: 28px 24px;
-      box-shadow: var(--shadow);
-      transition: .3s;
-    }
-
-    .media-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .media-icon {
-      width: 55px;
-      height: 55px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: #e8f4ec;
-      color: var(--green);
-      font-size: 26px;
-      margin-bottom: 18px;
-    }
-
-    .media-card h3 {
-      color: var(--dark-green);
-      margin-bottom: 10px;
-      font-size: 19px;
-    }
-
-    .media-card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .news-section {
-      background: var(--light);
-    }
-
-    .empty-state {
-      text-align: center;
-      background: white;
-      border: 1px dashed #b9cabb;
-      border-radius: 12px;
-      padding: 45px 25px;
-      max-width: 850px;
-      margin: auto;
-    }
-
-    .empty-icon {
-      font-size: 42px;
-      margin-bottom: 12px;
-    }
-
-    .empty-state h3 {
-      color: var(--dark-green);
-      margin-bottom: 10px;
-    }
-
-    .empty-state p {
-      color: var(--muted);
-      max-width: 650px;
-      margin: auto;
-    }
-
-    .media-guidelines {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-      align-items: stretch;
-    }
-
-    .guideline-box {
-      padding: 30px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e4ebe5;
-    }
-
-    .guideline-box h3 {
-      color: var(--dark-green);
-      margin-bottom: 14px;
-    }
-
-    .guideline-box p {
-      color: var(--muted);
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-
-    .guideline-box ul {
-      padding-left: 20px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .guideline-box li {
-      margin-bottom: 9px;
-    }
-
-    .notice {
-      background: #fff8e7;
+      padding: 25px;
       border-left: 5px solid var(--gold);
-      padding: 22px;
-      border-radius: 5px;
-      margin-top: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
     }
 
-    .notice strong {
-      color: var(--dark-green);
-    }
-
-    .notice p {
-      color: #5e5848;
-      margin-top: 5px;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 65px 20px;
-      background: var(--green);
-      color: white;
-    }
-
-    .cta h2 {
-      font-size: 30px;
-      margin-bottom: 12px;
-    }
-
-    .cta p {
-      max-width: 700px;
-      margin: 0 auto 22px;
-      color: #e8f3eb;
-    }
-
-    .cta a {
-      display: inline-block;
-      padding: 12px 25px;
-      background: var(--gold);
-      color: #17251b;
-      font-weight: bold;
-      border-radius: 5px;
-      transition: .3s;
-    }
-
-    .cta a:hover {
-      background: #f0c64c;
-      transform: translateY(-2px);
-    }
-
-    footer {
-      background: #032f1b;
-      color: white;
-      padding: 45px 5% 18px;
-    }
-
-    .footer-content {
-      max-width: 1150px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 35px;
-      padding-bottom: 30px;
-    }
-
-    footer h3 {
-      color: #ffdc70;
-      margin-bottom: 14px;
-      font-size: 17px;
-    }
-
-    footer p,
-    footer a {
-      color: #d4e1d7;
-      font-size: 13px;
-    }
-
-    footer a {
-      display: block;
+    .press-date {
+      color: #777;
+      font-size: 12px;
       margin-bottom: 8px;
     }
 
-    footer a:hover {
-      color: #ffdc70;
+    .press-card h3 {
+      color: var(--green);
+      font-size: 21px;
+      margin-bottom: 12px;
     }
 
-    .copyright {
-      max-width: 1150px;
-      margin: auto;
-      border-top: 1px solid rgba(255,255,255,.18);
-      padding-top: 17px;
+    .press-card p {
+      color: #59635c;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      margin-bottom: 15px;
+    }
+
+    .press-actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .read-button,
+    .file-button {
+      display: inline-block;
+      border: none;
+      background: var(--green);
+      color: white;
+      padding: 10px 17px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .read-button:hover,
+    .file-button:hover {
+      background: var(--dark-green);
+    }
+
+    .file-button {
+      background: #a77b14;
+    }
+
+    .status-message {
       text-align: center;
-      color: #c6d5ca;
-      font-size: 12px;
+      background: white;
+      padding: 35px 20px;
+      border-radius: 8px;
+      color: #59635c;
     }
 
-    @media(max-width:950px) {
-      .nav-container {
-        flex-direction: column;
+    .status-message.error {
+      color: #a00016;
+    }
+
+    .article-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.75);
+      padding: 25px;
+      overflow-y: auto;
+    }
+
+    .article-modal.show {
+      display: block;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      border: none;
+      background: transparent;
+      font-size: 28px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    footer {
+      background: var(--dark-green);
+      color: white;
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    @media(max-width: 600px) {
+      header {
+        justify-content: center;
+        text-align: center;
       }
 
       nav {
         justify-content: center;
       }
 
-      .media-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:650px) {
       .hero {
-        padding: 75px 18px;
+        padding: 65px 18px;
       }
 
-      .hero p {
-        font-size: 15px;
+      .press-card {
+        padding: 20px;
       }
 
-      .container {
-        padding: 50px 5%;
-      }
-
-      .media-grid,
-      .media-guidelines {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      nav {
-        gap: 10px 14px;
-      }
-
-      nav a {
-        font-size: 11px;
-      }
-    }
-
-    @media(prefers-reduced-motion:reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .welcome-track {
-        animation: none;
-        padding-left: 10px;
-        white-space: normal;
-      }
-
-      * {
-        transition: none !important;
+      .modal-content {
+        padding: 25px 17px;
       }
     }
   </style>
@@ -499,284 +295,230 @@
 
 <body>
 
-  <div class="topbar">
-    Official Website | Hon. Akarachi Amadi | Mbaitoli/Ikeduru Federal Constituency, Imo State
+<header>
+  <div class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
   </div>
 
-  <div class="welcome">
-    <div class="welcome-track">
-      <span>IKEDURU CORP MEMBERS (NYSC)</span> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
-    </div>
+  <nav>
+    <a href="login.html">LOGIN</a>
+    <a href="index.html">HOME</a>
+    <a href="biography.html">BIOGRAPHY</a>
+    <a href="constituency.html">CONSTITUENCY</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="vision.html">VISION & MISSION</a>
+    <a href="legislative.html">LEGISLATIVE</a>
+    <a href="achievements.html">ACHIEVEMENTS</a>
+    <a href="news.html">NEWS</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="press.html">PRESS</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+</header>
+
+<div class="welcome">
+  <span>
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </span>
+</div>
+
+<section class="hero">
+  <h1>Press & Media</h1>
+  <p>
+    Official statements, press releases and media information from
+    the office of Hon. Akarachi Amadi.
+  </p>
+</section>
+
+<main class="container">
+  <div class="section-heading">
+    <h2>Official Press Releases</h2>
+    <p>Read published statements and official media updates.</p>
   </div>
 
-  <header>
-    <div class="nav-container">
+  <div class="press-list" id="pressList">
+    <div class="status-message">Loading press releases...</div>
+  </div>
+</main>
 
-      <a href="index.html" class="brand">
-        <div class="brand-mark">AA</div>
-        <div class="brand-text">
-          <strong>HON. AKARACHI AMADI</strong>
-          <small>Mbaitoli/Ikeduru Federal Constituency</small>
-        </div>
-      </a>
+<div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-content">
+    <button class="close-modal" id="closeModal" aria-label="Close">&times;</button>
+    <div class="press-date" id="modalDate"></div>
+    <h2 id="modalTitle"></h2>
+    <p id="modalContent"></p>
+    <div id="modalFileArea" style="margin-top:20px;"></div>
+  </div>
+</div>
 
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="biography.html">Biography</a>
-        <a href="constituency.html">Constituency</a>
-        <a href="legislative.html">Legislative</a>
-        <a href="projects.html">Projects</a>
-        <a href="achievements.html">Achievements</a>
-        <a href="vision.html">Vision &amp; Mission</a>
-        <a href="news.html">News</a>
-        <a href="press.html" class="active">Press &amp; Media</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+<footer>
+  <p><strong>HON. AKARACHI AMADI</strong></p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+  <p><a href="login.html" style="color:#f1d47c;">LOGIN</a></p>
+  <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
+</footer>
 
-    </div>
-  </header>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <section class="hero">
-    <div class="eyebrow">Official Information and Media Updates</div>
-    <h1>Press &amp; Media Centre</h1>
-    <div class="hero-line"></div>
-    <p>
-      Access official press releases, public statements, media reports
-      and verified updates concerning the activities of Hon. Akarachi Amadi.
-    </p>
-  </section>
+<script>
+  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
 
-  <section class="intro">
-    <div class="container">
-      <div class="intro-content">
-        <div class="section-heading">
-          <span class="tag">Communication and public information</span>
-          <h2>Welcome to the Media Centre</h2>
-        </div>
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        <p>
-          This section serves as an information point for journalists,
-          media organisations, community stakeholders and members of the public.
-        </p>
+  const pressList = document.getElementById("pressList");
+  const modal = document.getElementById("articleModal");
 
-        <p>
-          Official statements and media materials will be published here
-          to support access to accurate and timely information about
-          constituency representation and public activities.
-        </p>
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-        <p>
-          Only verified and authorised materials should be presented
-          as official communications.
-        </p>
-      </div>
-    </div>
-  </section>
+  function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
 
-  <section class="container">
-    <div class="section-heading">
-      <span class="tag">Media resources</span>
-      <h2>Explore the Media Centre</h2>
-      <p>
-        The following sections organise the different types of information
-        that will be made available to the public and media organisations.
-      </p>
-    </div>
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
 
-    <div class="media-grid">
+    return element;
+  }
 
-      <article class="media-card">
-        <div class="media-icon">📰</div>
-        <h3>Press Releases</h3>
-        <p>
-          Official announcements and press releases concerning verified
-          activities, programmes and public engagements.
-        </p>
-      </article>
+  function formatDate(value) {
+    if (!value) return "Date not specified";
 
-      <article class="media-card">
-        <div class="media-icon">📢</div>
-        <h3>Official Statements</h3>
-        <p>
-          Authorised statements and public communications on relevant
-          constituency and national matters.
-        </p>
-      </article>
+    const date = new Date(value);
 
-      <article class="media-card">
-        <div class="media-icon">🎙️</div>
-        <h3>Interviews and Speeches</h3>
-        <p>
-          Verified interviews, recorded speeches and media appearances
-          available for public information.
-        </p>
-      </article>
+    if (Number.isNaN(date.getTime())) return "Date not specified";
 
-      <article class="media-card">
-        <div class="media-icon">📸</div>
-        <h3>Media Photographs</h3>
-        <p>
-          Approved photographs from official engagements, events
-          and constituency activities.
-        </p>
-      </article>
+    return date.toLocaleDateString("en-NG", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
 
-      <article class="media-card">
-        <div class="media-icon">📄</div>
-        <h3>Media Documents</h3>
-        <p>
-          Official documents and publications approved for public access
-          and media reference.
-        </p>
-      </article>
+  function openArticle(item) {
+    document.getElementById("modalTitle").textContent =
+      item.title || "Official Statement";
 
-      <article class="media-card">
-        <div class="media-icon">📺</div>
-        <h3>Media Coverage</h3>
-        <p>
-          Links to relevant media coverage and published reports
-          from identifiable news organisations.
-        </p>
-      </article>
+    document.getElementById("modalDate").textContent =
+      formatDate(item.created_at);
 
-    </div>
-  </section>
+    document.getElementById("modalContent").textContent =
+      item.content || "No additional information available.";
 
-  <section class="news-section">
-    <div class="container">
-      <div class="section-heading">
-        <span class="tag">Latest communications</span>
-        <h2>Press Releases and Statements</h2>
-        <p>
-          Official communications will appear here when they have
-          been approved and published.
-        </p>
-      </div>
+    const fileArea = document.getElementById("modalFileArea");
+    fileArea.replaceChildren();
 
-      <div class="empty-state">
-        <div class="empty-icon">📰</div>
-        <h3>No Press Releases Published Yet</h3>
-        <p>
-          There are currently no published press releases or official
-          statements in this section. Please check back for verified
-          announcements and media updates.
-        </p>
-      </div>
-    </div>
-  </section>
+    if (item.file_url) {
+      const link = makeElement("a", "file-button", "View / Download Attachment");
+      link.href = item.file_url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      fileArea.appendChild(link);
+    }
 
-  <section class="container">
-    <div class="section-heading">
-      <span class="tag">Media engagement</span>
-      <h2>Media Information</h2>
-      <p>
-        Guidance for journalists and media organisations seeking
-        accurate information and authorised materials.
-      </p>
-    </div>
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
 
-    <div class="media-guidelines">
+  function closeArticle() {
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
 
-      <div class="guideline-box">
-        <h3>For Journalists and Media Organisations</h3>
-        <p>
-          Media representatives are encouraged to use verified information
-          published through official communication channels.
-        </p>
+  document.getElementById("closeModal").addEventListener("click", closeArticle);
 
-        <ul>
-          <li>Confirm the date and source of every official statement.</li>
-          <li>Use approved photographs and media materials.</li>
-          <li>Verify quotations before publication.</li>
-          <li>Distinguish official announcements from proposed activities.</li>
-          <li>Contact the office through verified official channels for clarification.</li>
-        </ul>
-      </div>
+  modal.addEventListener("click", function(event) {
+    if (event.target === modal) closeArticle();
+  });
 
-      <div class="guideline-box">
-        <h3>Media Resources</h3>
-        <p>
-          Approved media resources may be made available here
-          as they are prepared and authorised.
-        </p>
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeArticle();
+  });
 
-        <ul>
-          <li>Official biography and profile.</li>
-          <li>Approved portrait photographs.</li>
-          <li>Official press releases and statements.</li>
-          <li>Verified speeches and interview recordings.</li>
-          <li>Relevant public documents and publications.</li>
-        </ul>
+  function renderPress(items) {
+    pressList.replaceChildren();
 
-        <div class="notice">
-          <strong>Important Notice</strong>
-          <p>
-            No media contact details, spokesperson names or official
-            email addresses should be published until they have
-            been confirmed and authorised.
-          </p>
-        </div>
-      </div>
+    if (!items.length) {
+      pressList.appendChild(
+        makeElement(
+          "div",
+          "status-message",
+          "There are currently no published press releases. Please check back for official updates."
+        )
+      );
+      return;
+    }
 
-    </div>
-  </section>
+    items.forEach(item => {
+      const card = makeElement("article", "press-card");
 
-  <section class="cta">
-    <h2>Stay Informed</h2>
-    <p>
-      Visit the news section for website updates and verified information
-      about activities concerning Mbaitoli/Ikeduru Federal Constituency.
-    </p>
-    <a href="news.html">Visit News &amp; Updates</a>
-  </section>
+      card.appendChild(
+        makeElement("div", "press-date", formatDate(item.created_at))
+      );
 
-  <footer>
-    <div class="footer-content">
+      card.appendChild(
+        makeElement("h3", "", item.title || "Official Statement")
+      );
 
-      <div>
-        <h3>Hon. Akarachi Amadi</h3>
-        <p>
-          Member representing Mbaitoli/Ikeduru Federal Constituency,
-          Imo State, Nigeria.
-        </p>
-        <p style="margin-top:12px;">
-          This website provides information about representation,
-          legislative activities and constituency development.
-        </p>
-      </div>
+      const content = item.content || "";
+      const excerpt = content.length > 260
+        ? content.slice(0, 260).trim() + "..."
+        : content;
 
-      <div>
-        <h3>Quick Links</h3>
-        <a href="index.html">Home</a>
-        <a href="biography.html">Biography</a>
-        <a href="constituency.html">Constituency</a>
-        <a href="legislative.html">Legislative Activities</a>
-        <a href="projects.html">Projects</a>
-        <a href="achievements.html">Achievements</a>
-      </div>
+      card.appendChild(makeElement("p", "", excerpt));
 
-      <div>
-        <h3>Explore</h3>
-        <a href="vision.html">Vision &amp; Mission</a>
-        <a href="news.html">News &amp; Updates</a>
-        <a href="press.html">Press &amp; Media</a>
-        <a href="gallery.html">Photo Gallery</a>
-        <a href="contact.html">Contact</a>
-      </div>
+      const actions = makeElement("div", "press-actions");
 
-    </div>
+      const readButton = makeElement("button", "read-button", "Read Full Statement");
+      readButton.type = "button";
+      readButton.addEventListener("click", () => openArticle(item));
 
-    <div class="copyright">
-      &copy; <span id="year"></span> Hon. Akarachi Amadi.
-      All Rights Reserved.
-    </div>
-  </footer>
+      actions.appendChild(readButton);
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
-  </script>
+      if (item.file_url) {
+        const fileLink = makeElement("a", "file-button", "View Attachment");
+        fileLink.href = item.file_url;
+        fileLink.target = "_blank";
+        fileLink.rel = "noopener noreferrer";
+        actions.appendChild(fileLink);
+      }
+
+      card.appendChild(actions);
+      pressList.appendChild(card);
+    });
+  }
+
+  async function loadPressReleases() {
+    pressList.replaceChildren(
+      makeElement("div", "status-message", "Loading press releases...")
+    );
+
+    const { data, error } = await db
+      .from("press_releases")
+      .select("id,title,content,file_url,created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Supabase press releases error:", error);
+
+      pressList.replaceChildren(
+        makeElement(
+          "div",
+          "status-message error",
+          "We could not load press releases at this time. Please refresh the page or try again later."
+        )
+      );
+
+      return;
+    }
+
+    renderPress(data || []);
+  }
+
+  loadPressReleases();
+</script>
 
 </body>
 </html>
