@@ -8,13 +8,13 @@
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #04552d;
-      --gold: #d6a928;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d6a72c;
+      --red: #c90019;
       --light: #f5f8f5;
       --text: #26332b;
-      --muted: #68756c;
-      --white: #ffffff;
+      --white: #fff;
     }
 
     * {
@@ -24,20 +24,16 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: var(--light);
       color: var(--text);
       line-height: 1.6;
     }
 
-    a {
-      text-decoration: none;
-    }
-
     header {
       background: var(--green);
       color: white;
-      padding: 15px 7%;
+      padding: 15px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,107 +41,133 @@
       flex-wrap: wrap;
     }
 
-    .logo {
+    .brand {
       font-size: 19px;
       font-weight: bold;
     }
 
-    .logo span {
+    .brand span {
+      display: block;
       color: var(--gold);
+      font-size: 12px;
+      font-weight: normal;
     }
 
     nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 17px;
+      gap: 15px;
     }
 
     nav a {
       color: white;
-      font-size: 14px;
+      text-decoration: none;
+      font-size: 13px;
       font-weight: bold;
     }
 
-    nav a:hover,
-    nav a.active {
+    nav a:hover {
       color: var(--gold);
     }
 
-    .hero {
-      background:
-        linear-gradient(rgba(0,70,35,.88), rgba(0,70,35,.88)),
-        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
+    .welcome {
+      background: var(--red);
       color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      border-bottom: 3px solid var(--gold);
+      font-weight: bold;
+    }
+
+    .welcome span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .welcome strong {
+      color: #ffe36a;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
+    .hero {
+      background: linear-gradient(rgba(3,67,35,.88), rgba(3,67,35,.88)),
+                  url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
+      background-position: center;
+      background-size: cover;
       text-align: center;
-      padding: 100px 20px;
+      color: white;
+      padding: 85px 20px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 12px;
     }
 
     .hero p {
       max-width: 700px;
       margin: auto;
-      font-size: 17px;
-    }
-
-    .gold-line {
-      width: 75px;
-      height: 4px;
-      background: var(--gold);
-      margin: 20px auto;
-      border-radius: 5px;
     }
 
     .container {
-      width: 86%;
-      max-width: 1150px;
-      margin: auto;
+      width: 90%;
+      max-width: 1200px;
+      margin: 55px auto;
     }
 
-    .intro {
+    .section-heading {
       text-align: center;
-      padding: 65px 0 35px;
+      margin-bottom: 35px;
     }
 
-    .intro h2 {
-      color: var(--dark-green);
+    .section-heading h2 {
+      color: var(--green);
       font-size: 30px;
-      margin-bottom: 12px;
     }
 
-    .intro p {
-      max-width: 750px;
-      margin: auto;
-      color: var(--muted);
-    }
-
-    .gallery-section {
-      padding: 20px 0 75px;
+    .section-heading p {
+      color: #657168;
+      margin-top: 8px;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
 
     .gallery-card {
       background: white;
-      border-radius: 10px;
+      border-radius: 9px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,.07);
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    .gallery-card button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: zoom-in;
     }
 
     .gallery-card img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
       display: block;
+      width: 100%;
+      height: 245px;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+
+    .gallery-card button:hover img {
+      transform: scale(1.04);
     }
 
     .gallery-caption {
@@ -153,85 +175,80 @@
     }
 
     .gallery-caption h3 {
-      color: var(--dark-green);
+      color: var(--green);
       font-size: 17px;
       margin-bottom: 5px;
     }
 
     .gallery-caption p {
-      color: var(--muted);
+      color: #657168;
       font-size: 13px;
     }
 
-    .empty-state {
+    .status-message {
       background: white;
-      border: 1px dashed #b8c9bc;
-      border-radius: 12px;
-      padding: 55px 25px;
       text-align: center;
-      max-width: 750px;
-      margin: 20px auto;
+      padding: 35px 20px;
+      border-radius: 8px;
+      color: #59635c;
+      grid-column: 1 / -1;
     }
 
-    .empty-icon {
-      font-size: 50px;
-      margin-bottom: 15px;
+    .status-message.error {
+      color: #a00016;
     }
 
-    .empty-state h3 {
-      color: var(--dark-green);
-      margin-bottom: 10px;
-      font-size: 23px;
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0,0,0,.92);
+      padding: 30px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
 
-    .empty-state p {
-      color: var(--muted);
-      max-width: 550px;
-      margin: auto;
+    .lightbox.show {
+      display: flex;
     }
 
-    .cta {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 65px 20px;
-    }
-
-    .cta h2 {
-      font-size: 29px;
-      margin-bottom: 12px;
-    }
-
-    .cta p {
-      max-width: 650px;
-      margin: 0 auto 22px;
-    }
-
-    .cta a {
-      display: inline-block;
-      background: var(--gold);
-      color: #183322;
-      padding: 12px 25px;
+    .lightbox img {
+      max-width: 95%;
+      max-height: 78vh;
+      object-fit: contain;
       border-radius: 5px;
-      font-weight: bold;
+    }
+
+    .lightbox-caption {
+      color: white;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .close-lightbox {
+      position: absolute;
+      right: 25px;
+      top: 10px;
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
     }
 
     footer {
-      background: #033c20;
+      background: var(--dark-green);
       color: white;
       text-align: center;
-      padding: 25px 15px;
-      font-size: 13px;
+      padding: 30px 15px;
+      margin-top: 60px;
     }
 
-    footer span {
-      color: var(--gold);
-    }
-
-    @media(max-width: 850px) {
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
     }
 
     @media(max-width: 600px) {
@@ -242,23 +259,14 @@
 
       nav {
         justify-content: center;
-        gap: 12px;
       }
 
       .hero {
-        padding: 75px 20px;
+        padding: 65px 18px;
       }
 
-      .hero h1 {
-        font-size: 31px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .container {
-        width: 90%;
+      .gallery-card img {
+        height: 220px;
       }
     }
   </style>
@@ -266,95 +274,209 @@
 
 <body>
 
-  <header>
-    <div class="logo">
-      HON. <span>AKARACHI AMADI</span>
-    </div>
+<header>
+  <div class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
+  </div>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="biography.html">Biography</a>
-      <a href="projects.html">Projects</a>
-      <a href="vision.html">Vision & Mission</a>
-      <a href="news.html">News</a>
-      <a href="gallery.html" class="active">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="login.html">LOGIN</a>
+    <a href="index.html">HOME</a>
+    <a href="biography.html">BIOGRAPHY</a>
+    <a href="constituency.html">CONSTITUENCY</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="vision.html">VISION & MISSION</a>
+    <a href="legislative.html">LEGISLATIVE</a>
+    <a href="achievements.html">ACHIEVEMENTS</a>
+    <a href="news.html">NEWS</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="press.html">PRESS</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <h1>Photo Gallery</h1>
-    <div class="gold-line"></div>
-    <p>
-      Moments, engagements, community visits and activities
-      involving Hon. Akarachi Amadi and the people of
-      Mbaitoli/Ikeduru Federal Constituency.
-    </p>
-  </section>
+<div class="welcome">
+  <span>
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </span>
+</div>
 
-  <section class="intro container">
-    <h2>Moments in Our Constituency</h2>
-    <div class="gold-line"></div>
-    <p>
-      Explore photographs documenting constituency engagements,
-      community activities, events and development initiatives.
-      New photographs will be published as they are uploaded
-      through the website's Admin Dashboard.
-    </p>
-  </section>
+<section class="hero">
+  <h1>Photo Gallery</h1>
+  <p>
+    A collection of photographs documenting constituency engagements,
+    community activities, projects and official events.
+  </p>
+</section>
 
-  <section class="gallery-section container">
+<main class="container">
+  <div class="section-heading">
+    <h2>Our Gallery</h2>
+    <p>Photographs published by the office of Hon. Akarachi Amadi.</p>
+  </div>
 
-    <!--
-      FUTURE SUPABASE INTEGRATION:
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="status-message">Loading photographs...</div>
+  </div>
+</main>
 
-      Photographs uploaded through admin.html will appear here.
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer">
+  <button class="close-lightbox" id="closeLightbox" aria-label="Close photograph">&times;</button>
+  <img id="lightboxImage" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
 
-      Planned fields:
-      - Photo title
-      - Photo description
-      - Image file
-      - Event or category
-      - Date
-      - Published / Unpublished
+<footer>
+  <p><strong>HON. AKARACHI AMADI</strong></p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+  <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
+</footer>
 
-      Only published photographs will appear publicly.
-    -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <div id="gallery-grid" class="gallery-grid">
-      <!-- Dynamically uploaded photographs will appear here. -->
-    </div>
+<script>
+  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
 
-    <div id="empty-state" class="empty-state">
-      <div class="empty-icon">📷</div>
-      <h3>Gallery Coming Soon</h3>
-      <p>
-        Photographs and memorable moments will appear here as
-        they are uploaded and published through the official
-        website's Admin Dashboard.
-      </p>
-    </div>
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  </section>
+  const galleryGrid = document.getElementById("galleryGrid");
+  const lightbox = document.getElementById("lightbox");
 
-  <section class="cta">
-    <h2>Stay Connected</h2>
-    <p>
-      Keep up with activities, community engagements and
-      development updates across Mbaitoli and Ikeduru.
-    </p>
-    <a href="contact.html">Contact the Office</a>
-  </section>
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-  <footer>
-    <p>
-      &copy; 2026 Hon. Akarachi Amadi. All Rights Reserved.
-    </p>
-    <p>
-      Representing <span>Mbaitoli/Ikeduru Federal Constituency</span>,
-      Imo State.
-    </p>
-  </footer>
+  function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+
+    return element;
+  }
+
+  function openLightbox(photo) {
+    document.getElementById("lightboxImage").src = photo.image_url;
+    document.getElementById("lightboxImage").alt = photo.title || "Gallery photograph";
+    document.getElementById("lightboxCaption").textContent =
+      photo.title || photo.description || "";
+
+    lightbox.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("show");
+    document.body.style.overflow = "";
+    document.getElementById("lightboxImage").src = "";
+  }
+
+  document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
+
+  lightbox.addEventListener("click", function(event) {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeLightbox();
+  });
+
+  function renderGallery(photos) {
+    galleryGrid.replaceChildren();
+
+    if (!photos.length) {
+      galleryGrid.appendChild(
+        makeElement(
+          "div",
+          "status-message",
+          "There are currently no published photographs. Please check back for updates."
+        )
+      );
+      return;
+    }
+
+    photos.forEach(photo => {
+      if (!photo.image_url) return;
+
+      const card = makeElement("article", "gallery-card");
+      const imageButton = document.createElement("button");
+      imageButton.type = "button";
+      imageButton.setAttribute(
+        "aria-label",
+        "View " + (photo.title || "gallery photograph")
+      );
+
+      const image = document.createElement("img");
+      image.src = photo.image_url;
+      image.alt = photo.title || "Gallery photograph";
+      image.loading = "lazy";
+
+      image.onerror = function() {
+        card.remove();
+      };
+
+      imageButton.appendChild(image);
+      imageButton.addEventListener("click", () => openLightbox(photo));
+
+      const caption = makeElement("div", "gallery-caption");
+
+      caption.appendChild(
+        makeElement("h3", "", photo.title || "Gallery Photograph")
+      );
+
+      if (photo.description) {
+        caption.appendChild(
+          makeElement("p", "", photo.description)
+        );
+      }
+
+      card.appendChild(imageButton);
+      card.appendChild(caption);
+      galleryGrid.appendChild(card);
+    });
+
+    if (!galleryGrid.children.length) {
+      galleryGrid.appendChild(
+        makeElement(
+          "div",
+          "status-message",
+          "There are currently no photographs available."
+        )
+      );
+    }
+  }
+
+  async function loadGallery() {
+    galleryGrid.replaceChildren(
+      makeElement("div", "status-message", "Loading photographs...")
+    );
+
+    const { data, error } = await db
+      .from("gallery")
+      .select("id,title,description,image_url,created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Supabase gallery error:", error);
+
+      galleryGrid.replaceChildren(
+        makeElement(
+          "div",
+          "status-message error",
+          "We could not load the gallery at this time. Please refresh the page or try again later."
+        )
+      );
+
+      return;
+    }
+
+    renderGallery(data || []);
+  }
+
+  loadGallery();
+</script>
 
 </body>
 </html>
