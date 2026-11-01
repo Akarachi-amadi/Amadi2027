@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hon. Akarachi Amadi | Mbaitoli/Ikeduru Federal Constituency</title>
+
   <meta name="description" content="Official website of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.">
-  <title>Hon. Akarachi Amadi | Official Website</title>
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #064b2b;
-      --gold: #d6aa35;
-      --light-gold: #f5e6b5;
+      --green: #08743b;
+      --dark-green: #064d2b;
+      --gold: #d6a62e;
       --red: #c90019;
-      --dark-red: #a00014;
-      --white: #ffffff;
       --light: #f5f8f5;
-      --dark: #17251c;
-      --gray: #65736a;
+      --white: #ffffff;
+      --text: #26332b;
     }
 
     * {
@@ -32,46 +31,62 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      color: var(--dark);
-      background: var(--white);
-      line-height: 1.6;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.7;
     }
 
     a {
       text-decoration: none;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    /* Scrolling welcome message */
 
-    /* TOP BAR */
-
-    .topbar {
-      background: var(--dark-green);
+    .welcome {
+      background: var(--red);
       color: white;
-      padding: 9px 5%;
-      text-align: center;
-      font-size: 13px;
-      letter-spacing: .5px;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 3px solid var(--gold);
     }
 
-    /* HEADER */
+    .welcome-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 27s linear infinite;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .welcome strong {
+      color: #ffe18a;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Header */
 
     header {
       background: white;
-      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 100;
     }
 
-    .header-container {
-      width: 90%;
-      max-width: 1200px;
+    .nav-container {
+      max-width: 1300px;
       margin: auto;
-      min-height: 85px;
+      padding: 15px 4%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -79,44 +94,29 @@
     }
 
     .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-mark {
-      width: 53px;
-      height: 53px;
-      border-radius: 50%;
-      background: var(--green);
-      border: 3px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 17px;
-    }
-
-    .brand-text h2 {
       color: var(--dark-green);
-      font-size: 19px;
-      line-height: 1.2;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.3;
+      flex-shrink: 0;
     }
 
-    .brand-text p {
+    .brand span {
+      display: block;
+      color: #777;
       font-size: 11px;
-      color: var(--gray);
+      font-weight: 600;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 19px;
+      flex-wrap: wrap;
+      gap: 13px;
     }
 
     nav a {
-      color: var(--dark);
+      color: var(--text);
       font-size: 13px;
       font-weight: bold;
       transition: .3s;
@@ -126,123 +126,84 @@
       color: var(--green);
     }
 
-    .menu-toggle {
-      display: none;
+    /* Login menu */
+
+    nav a.login-menu {
+      background: var(--gold);
+      color: var(--dark-green);
+      padding: 10px 16px;
+      border-radius: 5px;
+      font-weight: 800;
+      border: 1px solid var(--gold);
+    }
+
+    nav a.login-menu:hover {
       background: var(--green);
       color: white;
-      border: none;
-      padding: 9px 13px;
-      font-size: 22px;
-      border-radius: 5px;
-      cursor: pointer;
+      border-color: var(--green);
     }
 
-    /* RED SCROLLING WELCOME NOTE */
-
-    .welcome-bar {
-      background: var(--red);
-      color: white;
-      overflow: hidden;
-      padding: 13px 0;
-      border-bottom: 4px solid var(--gold);
-    }
-
-    .welcome-track {
-      display: flex;
-      width: max-content;
-      animation: scrollWelcome 35s linear infinite;
-    }
-
-    .welcome-track span {
-      padding-left: 45px;
-      white-space: nowrap;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: .3px;
-    }
-
-    .welcome-track strong {
-      color: var(--light-gold);
-      font-size: 15px;
-    }
-
-    .welcome-bar:hover .welcome-track {
-      animation-play-state: paused;
-    }
-
-    @keyframes scrollWelcome {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    /* HERO */
+    /* Hero section */
 
     .hero {
-      min-height: 590px;
+      min-height: 570px;
       background:
-        linear-gradient(
-          90deg,
-          rgba(3, 48, 27, .94),
-          rgba(3, 48, 27, .65),
-          rgba(3, 48, 27, .15)
-        ),
+        linear-gradient(rgba(3,48,25,.78), rgba(3,48,25,.78)),
         url("https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png");
 
       background-size: cover;
       background-position: center 25%;
+
       display: flex;
       align-items: center;
       color: white;
+      padding: 70px 7%;
     }
 
     .hero-content {
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-      padding: 80px 0;
+      max-width: 750px;
     }
 
     .hero-label {
       display: inline-block;
       background: var(--gold);
       color: var(--dark-green);
-      padding: 8px 16px;
-      font-weight: bold;
+      padding: 7px 15px;
       font-size: 12px;
+      font-weight: bold;
       border-radius: 3px;
       margin-bottom: 20px;
     }
 
     .hero h1 {
-      font-size: clamp(35px, 5vw, 65px);
-      max-width: 720px;
-      line-height: 1.12;
+      font-size: clamp(35px, 6vw, 58px);
+      line-height: 1.15;
       margin-bottom: 20px;
     }
 
     .hero h1 span {
-      color: var(--gold);
+      color: #f4d47c;
     }
 
     .hero p {
-      max-width: 620px;
+      max-width: 650px;
+      color: #edf5ef;
       font-size: 17px;
-      margin-bottom: 30px;
-      color: #f2f2f2;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
     }
 
     .btn {
       display: inline-block;
-      padding: 13px 24px;
-      border-radius: 4px;
+      padding: 13px 23px;
+      border-radius: 5px;
       font-size: 14px;
       font-weight: bold;
-      margin: 5px;
       transition: .3s;
     }
 
@@ -251,19 +212,30 @@
       color: var(--dark-green);
     }
 
+    .btn-gold:hover {
+      background: white;
+    }
+
     .btn-outline {
       border: 2px solid white;
       color: white;
     }
 
-    .btn:hover {
-      transform: translateY(-3px);
+    .btn-outline:hover {
+      background: white;
+      color: var(--dark-green);
     }
 
-    /* GENERAL SECTIONS */
+    /* General sections */
 
-    section {
-      padding: 75px 5%;
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section {
+      padding: 75px 0;
     }
 
     .section-heading {
@@ -271,318 +243,218 @@
       margin-bottom: 40px;
     }
 
-    .section-heading small {
-      color: var(--green);
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
     .section-heading h2 {
       color: var(--dark-green);
       font-size: 32px;
-      margin-top: 8px;
+      margin-bottom: 10px;
     }
 
-    .section-heading .line {
-      width: 65px;
-      height: 4px;
-      background: var(--gold);
-      margin: 13px auto;
-    }
-
-    /* ABOUT */
-
-    .about {
-      background: var(--light);
-    }
-
-    .about-container {
-      max-width: 1150px;
+    .section-heading p {
+      color: #6a766e;
+      max-width: 700px;
       margin: auto;
+    }
+
+    /* About */
+
+    .about-grid {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 45px;
+      gap: 40px;
       align-items: center;
     }
 
     .about-image img {
       width: 100%;
-      max-height: 450px;
+      max-height: 470px;
       object-fit: cover;
-      object-position: center top;
-      border: 7px solid white;
+      object-position: center 20%;
+      border-radius: 10px;
       box-shadow: 0 8px 25px rgba(0,0,0,.12);
-      border-radius: 5px;
     }
 
-    .about-text h3 {
+    .about-content h2 {
+      color: var(--dark-green);
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .about-content p {
+      color: #59665d;
+      margin-bottom: 15px;
+    }
+
+    .text-link {
       color: var(--green);
-      font-size: 26px;
-      margin-bottom: 15px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 8px;
     }
 
-    .about-text p {
-      color: var(--gray);
-      margin-bottom: 15px;
-    }
-
-    /* HIGHLIGHTS */
-
-    .highlights {
-      background: white;
-    }
+    /* Cards */
 
     .cards {
-      max-width: 1150px;
-      margin: auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+      gap: 23px;
     }
 
     .card {
       background: white;
-      border-radius: 7px;
-      overflow: hidden;
-      box-shadow: 0 5px 22px rgba(0,0,0,.08);
+      padding: 27px;
+      border-radius: 9px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.05);
       border-bottom: 4px solid var(--gold);
       transition: .3s;
     }
 
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
     }
 
-    .card-content {
-      padding: 25px;
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 13px;
     }
 
-    .card-content h3 {
-      color: var(--green);
-      margin-bottom: 12px;
+    .card h3 {
+      color: var(--dark-green);
       font-size: 20px;
+      margin-bottom: 10px;
     }
 
-    .card-content p {
-      color: var(--gray);
+    .card p {
+      color: #68746c;
       font-size: 14px;
+      margin-bottom: 15px;
     }
 
-    .card-content a {
-      display: inline-block;
-      color: var(--green);
-      font-weight: bold;
-      margin-top: 15px;
-      font-size: 13px;
-    }
+    /* Vision */
 
-    /* VISION */
-
-    .vision {
+    .vision-section {
       background: var(--dark-green);
       color: white;
       text-align: center;
     }
 
-    .vision .section-heading h2 {
-      color: white;
+    .vision-section h2 {
+      color: #f4d47c;
+      font-size: 32px;
+      margin-bottom: 18px;
     }
 
-    .vision .section-heading small {
-      color: var(--gold);
-    }
-
-    .vision-text {
+    .vision-section p {
       max-width: 850px;
       margin: auto;
-      font-size: 18px;
-      color: #e6eee8;
+      color: #e4eee7;
+      font-size: 16px;
     }
 
-    /* NEWS */
+    /* Contact */
 
-    .news {
-      background: var(--light);
+    .contact-section {
+      background: #eaf3ec;
     }
 
-    .empty-news {
-      max-width: 700px;
+    .contact-content {
+      text-align: center;
+      max-width: 750px;
       margin: auto;
-      text-align: center;
-      background: white;
-      padding: 35px;
-      border-radius: 7px;
-      border: 1px solid #e4e9e4;
-      color: var(--gray);
     }
 
-    /* CALL TO ACTION */
-
-    .cta {
-      background: var(--green);
-      color: white;
-      text-align: center;
+    .contact-content h2 {
+      color: var(--dark-green);
+      font-size: 31px;
+      margin-bottom: 13px;
     }
 
-    .cta h2 {
-      font-size: 30px;
-      margin-bottom: 12px;
+    .contact-content p {
+      color: #59665d;
+      margin-bottom: 22px;
     }
 
-    .cta p {
-      max-width: 650px;
-      margin: 0 auto 20px;
-    }
-
-    /* FOOTER */
+    /* Footer */
 
     footer {
       background: #092e1c;
+      color: #e4eee7;
+      text-align: center;
+      padding: 40px 5%;
+    }
+
+    footer strong {
       color: white;
-      padding: 45px 5% 20px;
+      font-size: 18px;
     }
 
-    .footer-container {
-      max-width: 1150px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 35px;
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 17px;
+      margin: 20px 0;
     }
 
-    footer h3 {
-      color: var(--gold);
-      margin-bottom: 15px;
-    }
-
-    footer p,
-    footer a {
-      color: #d4ded7;
+    .footer-links a {
+      color: #f2d27d;
       font-size: 13px;
     }
 
-    footer a {
-      display: block;
-      margin-bottom: 9px;
+    .footer-links a:hover {
+      color: white;
     }
 
-    footer a:hover {
-      color: var(--gold);
+    footer p {
+      font-size: 13px;
+      margin: 5px 0;
     }
 
-    .copyright {
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,.15);
-      margin-top: 35px;
-      padding-top: 18px;
-      font-size: 12px;
-      color: #b9c8bd;
-    }
+    /* Responsive design */
 
-    /* RESPONSIVE DESIGN */
-
-    @media (max-width: 900px) {
-      .menu-toggle {
-        display: block;
+    @media (max-width: 1000px) {
+      .nav-container {
+        flex-direction: column;
       }
 
       nav {
-        display: none;
-        position: absolute;
-        top: 85px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px 5%;
-        box-shadow: 0 8px 15px rgba(0,0,0,.1);
-        gap: 17px;
+        justify-content: center;
       }
+    }
 
-      nav.active {
-        display: flex;
-      }
-
-      .about-container {
+    @media (max-width: 750px) {
+      .about-grid {
         grid-template-columns: 1fr;
       }
 
-      .about-image {
-        max-width: 500px;
-        margin: auto;
-      }
-
       .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .header-container {
-        min-height: 75px;
-      }
-
-      .brand-mark {
-        width: 45px;
-        height: 45px;
-        font-size: 14px;
-      }
-
-      .brand-text h2 {
-        font-size: 15px;
-      }
-
-      .brand-text p {
-        font-size: 9px;
-      }
-
-      nav {
-        top: 75px;
+        grid-template-columns: 1fr 1fr;
       }
 
       .hero {
-        min-height: 520px;
-        background-position: 60% center;
+        min-height: 500px;
+        padding: 55px 6%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .cards {
+        grid-template-columns: 1fr;
       }
 
-      .hero-content {
-        padding: 60px 0;
+      nav {
+        gap: 11px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .section {
+        padding: 55px 0;
       }
 
       .hero p {
         font-size: 15px;
-      }
-
-      section {
-        padding: 55px 5%;
-      }
-
-      .section-heading h2 {
-        font-size: 26px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-container {
-        grid-template-columns: 1fr;
-      }
-
-      .welcome-track span {
-        font-size: 12px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .welcome-track {
-        animation: none;
       }
     }
   </style>
@@ -590,141 +462,71 @@
 
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    OFFICIAL WEBSITE | MBAITOLI/IKEDURU FEDERAL CONSTITUENCY | IMO STATE
+  <!-- Scrolling Welcome Message -->
+
+  <div class="welcome">
+    <div class="welcome-track">
+      <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+    </div>
   </div>
 
-  <!-- HEADER -->
+  <!-- Website Navigation -->
+
   <header>
-    <div class="header-container">
+    <div class="nav-container">
 
       <a href="index.html" class="brand">
-        <div class="brand-mark">AA</div>
-
-        <div class="brand-text">
-          <h2>HON. AKARACHI AMADI</h2>
-          <p>Federal House of Representatives</p>
-        </div>
+        HON. AKARACHI AMADI
+        <span>Mbaitoli/Ikeduru Federal Constituency</span>
       </a>
 
-      <button class="menu-toggle"
-              id="menuToggle"
-              aria-label="Open navigation menu"
-              aria-expanded="false">
-        ☰
-      </button>
-
-      <nav id="mainNav">
+      <nav>
+        <a href="login.html" class="login-menu">LOGIN</a>
         <a href="index.html">Home</a>
         <a href="biography.html">Biography</a>
+        <a href="constituency.html">Constituency</a>
         <a href="projects.html">Projects</a>
-        <a href="vision.html">Vision & Mission</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="legislative.html">Legislative</a>
+        <a href="vision.html">Vision</a>
         <a href="news.html">News</a>
         <a href="gallery.html">Gallery</a>
+        <a href="press.html">Press</a>
+        <a href="faq.html">FAQ</a>
         <a href="contact.html">Contact</a>
       </nav>
 
     </div>
   </header>
 
-  <!-- RED SCROLLING WELCOME NOTE -->
-  <div class="welcome-bar">
-    <div class="welcome-track">
+  <!-- Hero Section -->
 
-      <span>
-        <strong>IKEDURU CORP MEMBERS (NYSC)</strong>
-        — Welcome to the official website of Hon. Akarachi Amadi,
-        Member representing Mbaitoli/Ikeduru Federal Constituency,
-        Imo State, Nigeria. This platform provides updates on our
-        activities, projects, achievements, vision and commitment
-        to the development of our constituency.
-      </span>
-
-      <span aria-hidden="true">
-        <strong>IKEDURU CORP MEMBERS (NYSC)</strong>
-        — Welcome to the official website of Hon. Akarachi Amadi,
-        Member representing Mbaitoli/Ikeduru Federal Constituency,
-        Imo State, Nigeria. This platform provides updates on our
-        activities, projects, achievements, vision and commitment
-        to the development of our constituency.
-      </span>
-
-    </div>
-  </div>
-
-  <!-- HERO SECTION -->
   <section class="hero">
 
     <div class="hero-content">
 
       <span class="hero-label">
-        MBAITOLI / IKEDURU FEDERAL CONSTITUENCY
+        MBaitoli/IKEDURU FEDERAL CONSTITUENCY
       </span>
 
       <h1>
-        HON. <span>AKARACHI AMADI</span>
+        Hon. <span>Akarachi Amadi</span>
       </h1>
 
       <p>
-        Representing the people of Mbaitoli and Ikeduru Federal
-        Constituency, Imo State, Nigeria, in the Federal House
-        of Representatives.
+        Welcome to the official website of Hon. Akarachi Amadi,
+        representing Mbaitoli/Ikeduru Federal Constituency,
+        Imo State, Nigeria.
       </p>
 
-      <a href="biography.html" class="btn btn-gold">
-        READ BIOGRAPHY
-      </a>
-
-      <a href="projects.html" class="btn btn-outline">
-        VIEW PROJECTS
-      </a>
-
-    </div>
-
-  </section>
-
-  <!-- ABOUT SECTION -->
-  <section class="about">
-
-    <div class="section-heading">
-      <small>Get to know your representative</small>
-      <h2>About Hon. Akarachi Amadi</h2>
-      <div class="line"></div>
-    </div>
-
-    <div class="about-container">
-
-      <div class="about-image">
-        <img
-          src="https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png"
-          alt="Portrait of Hon. Akarachi Amadi">
-      </div>
-
-      <div class="about-text">
-
-        <h3>Dedicated to Representation and Development</h3>
-
-        <p>
-          Hon. Akarachi Amadi is a Nigerian politician representing
-          Mbaitoli/Ikeduru Federal Constituency of Imo State,
-          Nigeria, in the Federal House of Representatives.
-        </p>
-
-        <p>
-          As a federal lawmaker, he participates in legislative
-          activities, national policy discussions and the
-          representation of his constituents.
-        </p>
-
-        <p>
-          This website serves as an information platform for
-          constituency updates, projects, news, activities and
-          development-related information.
-        </p>
+      <div class="hero-buttons">
 
         <a href="biography.html" class="btn btn-gold">
-          READ FULL BIOGRAPHY
+          Read Biography
+        </a>
+
+        <a href="projects.html" class="btn btn-outline">
+          View Projects
         </a>
 
       </div>
@@ -733,201 +535,295 @@
 
   </section>
 
-  <!-- HIGHLIGHTS -->
-  <section class="highlights">
+  <!-- About Section -->
 
-    <div class="section-heading">
-      <small>Explore the platform</small>
-      <h2>Our Activities & Information</h2>
-      <div class="line"></div>
-    </div>
+  <section class="section">
 
-    <div class="cards">
+    <div class="container">
 
-      <div class="card">
-        <div class="card-content">
-          <h3>Projects</h3>
-          <p>
-            Explore information about constituency projects
-            and development initiatives.
-          </p>
-          <a href="projects.html">EXPLORE PROJECTS →</a>
+      <div class="about-grid">
+
+        <div class="about-image">
+
+          <img
+            src="https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png"
+            alt="Hon. Akarachi Amadi"
+          >
+
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-content">
-          <h3>Vision & Mission</h3>
-          <p>
-            Learn about the vision, mission and development
-            priorities for the constituency.
-          </p>
-          <a href="vision.html">READ MORE →</a>
-        </div>
-      </div>
+        <div class="about-content">
 
-      <div class="card">
-        <div class="card-content">
-          <h3>Photo Gallery</h3>
+          <h2>About Hon. Akarachi Amadi</h2>
+
           <p>
-            View photographs of official activities,
-            engagements and constituency events.
+            Hon. Akarachi Amadi is a Nigerian politician representing
+            Mbaitoli/Ikeduru Federal Constituency of Imo State in the
+            Federal House of Representatives.
           </p>
-          <a href="gallery.html">VIEW GALLERY →</a>
+
+          <p>
+            His legislative responsibilities include participating
+            in lawmaking, national policy discussions and representing
+            the interests and developmental needs of his constituents.
+          </p>
+
+          <p>
+            This website provides information about his biography,
+            constituency, projects, legislative activities and
+            public updates.
+          </p>
+
+          <a href="biography.html" class="text-link">
+            Read Full Biography →
+          </a>
+
         </div>
+
       </div>
 
     </div>
 
   </section>
 
-  <!-- VISION SECTION -->
-  <section class="vision">
+  <!-- Projects Section -->
 
-    <div class="section-heading">
-      <small>Our direction</small>
-      <h2>Vision for Mbaitoli and Ikeduru</h2>
-      <div class="line"></div>
+  <section class="section" style="background:#ffffff;">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <h2>Projects and Development</h2>
+
+        <p>
+          Explore project updates and development information
+          relating to Mbaitoli and Ikeduru.
+        </p>
+
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+
+          <div class="card-icon">🏗️</div>
+
+          <h3>Infrastructure</h3>
+
+          <p>
+            Follow published updates on infrastructure and
+            development projects across the constituency.
+          </p>
+
+          <a href="projects.html" class="text-link">
+            View Projects →
+          </a>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-icon">🎓</div>
+
+          <h3>Education</h3>
+
+          <p>
+            Explore education-related initiatives and verified
+            updates when they are published.
+          </p>
+
+          <a href="achievements.html" class="text-link">
+            Learn More →
+          </a>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-icon">🤝</div>
+
+          <h3>Community Development</h3>
+
+          <p>
+            Find information about community development interests
+            and constituency engagement.
+          </p>
+
+          <a href="constituency.html" class="text-link">
+            Explore Constituency →
+          </a>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="vision-text">
+  </section>
+
+  <!-- Vision Section -->
+
+  <section class="section vision-section">
+
+    <div class="container">
+
+      <h2>Vision and Mission</h2>
+
       <p>
-        A commitment to effective representation, responsible
-        leadership and development-focused engagement for
-        the people of Mbaitoli and Ikeduru Federal Constituency.
+        A commitment to responsible representation, effective
+        legislative participation and development initiatives
+        that address the needs and aspirations of the people
+        of Mbaitoli and Ikeduru.
       </p>
 
       <br>
 
       <a href="vision.html" class="btn btn-gold">
-        EXPLORE OUR VISION
+        Read Vision and Mission
       </a>
+
     </div>
 
   </section>
 
-  <!-- NEWS SECTION -->
-  <section class="news">
+  <!-- News Section -->
 
-    <div class="section-heading">
-      <small>Latest information</small>
-      <h2>News & Updates</h2>
-      <div class="line"></div>
-    </div>
+  <section class="section">
 
-    <div class="empty-news">
-      <h3>News and Updates</h3>
+    <div class="container">
 
-      <p>
-        Official news, announcements and updates will be
-        published here as they become available.
-      </p>
+      <div class="section-heading">
 
-      <br>
-
-      <a href="news.html" class="btn btn-gold">
-        VIEW ALL NEWS
-      </a>
-    </div>
-
-  </section>
-
-  <!-- CALL TO ACTION -->
-  <section class="cta">
-
-    <h2>Stay Connected</h2>
-
-    <p>
-      Visit our website regularly for constituency information,
-      official announcements, project updates and other activities.
-    </p>
-
-    <a href="contact.html" class="btn btn-gold">
-      CONTACT US
-    </a>
-
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-
-    <div class="footer-container">
-
-      <div>
-        <h3>HON. AKARACHI AMADI</h3>
+        <h2>News and Updates</h2>
 
         <p>
-          Member, Federal House of Representatives,
-          Mbaitoli/Ikeduru Federal Constituency,
-          Imo State, Nigeria.
+          Stay informed about published announcements, activities
+          and updates relating to the constituency.
         </p>
+
       </div>
 
-      <div>
-        <h3>Quick Links</h3>
+      <div class="cards">
 
-        <a href="index.html">Home</a>
-        <a href="biography.html">Biography</a>
-        <a href="projects.html">Projects</a>
-        <a href="vision.html">Vision & Mission</a>
-      </div>
+        <div class="card">
 
-      <div>
-        <h3>More Information</h3>
+          <div class="card-icon">📰</div>
 
-        <a href="news.html">News</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
+          <h3>Latest News</h3>
+
+          <p>
+            Read news and updates published on the official website.
+          </p>
+
+          <a href="news.html" class="text-link">
+            Visit News Page →
+          </a>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-icon">📸</div>
+
+          <h3>Photo Gallery</h3>
+
+          <p>
+            View approved photographs and media from published activities.
+          </p>
+
+          <a href="gallery.html" class="text-link">
+            View Gallery →
+          </a>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-icon">🎙️</div>
+
+          <h3>Press and Media</h3>
+
+          <p>
+            Find official statements, media releases and published coverage.
+          </p>
+
+          <a href="press.html" class="text-link">
+            Visit Press Page →
+          </a>
+
+        </div>
+
       </div>
 
     </div>
 
-    <div class="copyright">
+  </section>
+
+  <!-- Contact Section -->
+
+  <section class="section contact-section">
+
+    <div class="container">
+
+      <div class="contact-content">
+
+        <h2>Get in Touch</h2>
+
+        <p>
+          For enquiries, feedback and constituency-related communication,
+          visit the Contact page for the available contact options.
+        </p>
+
+        <a href="contact.html" class="btn btn-gold">
+          Contact Us
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+
+  <footer>
+
+    <strong>HON. AKARACHI AMADI</strong>
+
+    <p>
+      Mbaitoli/Ikeduru Federal Constituency,
+      Imo State, Nigeria.
+    </p>
+
+    <div class="footer-links">
+
+      <a href="login.html">Login</a>
+      <a href="index.html">Home</a>
+      <a href="biography.html">Biography</a>
+      <a href="constituency.html">Constituency</a>
+      <a href="projects.html">Projects</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="legislative.html">Legislative</a>
+      <a href="vision.html">Vision</a>
+      <a href="news.html">News</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="press.html">Press</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+
+    </div>
+
+    <p>
       &copy; <span id="year"></span>
       Hon. Akarachi Amadi. All Rights Reserved.
-    </div>
+    </p>
 
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script>
-
-    // MOBILE NAVIGATION
-
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
-
-    menuToggle.addEventListener("click", function () {
-
-      const isOpen = mainNav.classList.toggle("active");
-
-      menuToggle.setAttribute("aria-expanded", isOpen);
-
-      menuToggle.innerHTML = isOpen ? "&times;" : "☰";
-
-    });
-
-    // CLOSE MENU AFTER CLICKING A LINK
-
-    document.querySelectorAll("#mainNav a").forEach(function(link) {
-
-      link.addEventListener("click", function() {
-
-        mainNav.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-
-        menuToggle.innerHTML = "☰";
-
-      });
-
-    });
-
-    // AUTOMATIC COPYRIGHT YEAR
-
     document.getElementById("year").textContent =
       new Date().getFullYear();
-
   </script>
 
 </body>
