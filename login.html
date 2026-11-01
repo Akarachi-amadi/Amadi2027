@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="Administrator login for the official website of Hon. Akarachi Amadi.">
   <title>Admin Login | Hon. Akarachi Amadi</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
-      --green: #08743b;
-      --dark-green: #064d2b;
-      --gold: #d6a62e;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d5a62e;
       --red: #c90019;
-      --light: #f4f7f4;
       --white: #ffffff;
-      --text: #26332b;
+      --light: #f4f7f4;
+      --text: #26342b;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       background: var(--light);
       color: var(--text);
       min-height: 100vh;
@@ -32,15 +34,40 @@
       flex-direction: column;
     }
 
-    a {
-      text-decoration: none;
+    header {
+      background: var(--green);
+      color: white;
+      border-bottom: 4px solid var(--gold);
+      padding: 17px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
     }
 
-    /* Welcome ticker */
+    .brand {
+      font-weight: bold;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .brand span {
+      display: block;
+      color: #f4d77e;
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
     .welcome {
       background: var(--red);
       color: white;
-      padding: 10px 0;
+      padding: 11px 0;
       overflow: hidden;
       white-space: nowrap;
       border-bottom: 3px solid var(--gold);
@@ -49,267 +76,160 @@
     .welcome-track {
       display: inline-block;
       padding-left: 100%;
-      animation: scroll 27s linear infinite;
-      font-size: 14px;
-      font-weight: bold;
+      animation: scroll 25s linear infinite;
     }
 
     .welcome strong {
-      color: #ffe18a;
+      color: #ffdf68;
     }
 
     @keyframes scroll {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-100%);
-      }
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
     }
 
-    /* Header */
-    header {
-      background: white;
-      box-shadow: 0 3px 12px rgba(0,0,0,.07);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 15px 5%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      color: var(--dark-green);
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1.3;
-    }
-
-    .brand span {
-      display: block;
-      color: #777;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 15px;
-    }
-
-    nav a {
-      color: var(--text);
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: var(--green);
-    }
-
-    nav a.active {
-      background: var(--gold);
-      color: var(--dark-green);
-      padding: 9px 15px;
-      border-radius: 5px;
-    }
-
-    /* Login area */
-    .login-area {
+    main {
       flex: 1;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 55px 20px;
-      background:
-        linear-gradient(rgba(6,77,43,.91), rgba(6,77,43,.91)),
-        linear-gradient(135deg, #08743b, #064d2b);
+      justify-content: center;
+      padding: 45px 18px;
     }
 
     .login-card {
-      width: 100%;
-      max-width: 430px;
       background: white;
-      border-radius: 13px;
+      width: 100%;
+      max-width: 440px;
       padding: 38px 32px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.2);
-    }
-
-    .login-logo {
-      width: 75px;
-      height: 75px;
-      margin: 0 auto 17px;
-      border-radius: 50%;
-      background: var(--dark-green);
-      border: 4px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
+      border-radius: 13px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.09);
+      border-top: 5px solid var(--gold);
     }
 
     .login-card h1 {
-      color: var(--dark-green);
+      color: var(--green);
       text-align: center;
       font-size: 27px;
-      margin-bottom: 7px;
+      margin-bottom: 10px;
     }
 
     .subtitle {
       text-align: center;
-      color: #777;
-      font-size: 13px;
+      color: #69756d;
+      font-size: 14px;
+      line-height: 1.6;
       margin-bottom: 28px;
     }
 
-    .form-group {
-      margin-bottom: 19px;
-    }
-
-    .form-group label {
+    label {
       display: block;
-      font-size: 13px;
       font-weight: bold;
-      margin-bottom: 8px;
-      color: #34443a;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #d9e1da;
-      border-radius: 6px;
       font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5cd;
+      border-radius: 6px;
+      margin-bottom: 19px;
+      font-size: 15px;
       outline: none;
-      transition: .3s;
     }
 
-    .form-group input:focus {
+    input:focus {
       border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(8,116,59,.1);
+      box-shadow: 0 0 0 3px rgba(7,91,50,.1);
     }
 
-    .password-wrapper {
+    .password-wrap {
       position: relative;
     }
 
-    .password-wrapper input {
-      padding-right: 75px;
+    .password-wrap input {
+      padding-right: 70px;
     }
 
     .show-password {
       position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
+      right: 10px;
+      top: 11px;
       border: none;
-      background: none;
+      background: transparent;
       color: var(--green);
-      font-size: 12px;
-      font-weight: bold;
       cursor: pointer;
+      font-weight: bold;
     }
 
-    .login-button {
+    .login-btn {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       background: var(--green);
       color: white;
       border: none;
       border-radius: 6px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: .3s;
-      margin-top: 5px;
+      transition: .2s;
     }
 
-    .login-button:hover {
+    .login-btn:hover {
       background: var(--dark-green);
     }
 
-    .login-message {
+    .login-btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .message {
       display: none;
-      margin-top: 17px;
       padding: 12px;
-      border-radius: 5px;
-      font-size: 13px;
-      text-align: center;
+      border-radius: 6px;
+      margin-bottom: 17px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
-    .login-message.error {
+    .message.error {
       display: block;
-      background: #ffe8e8;
+      background: #fff0f0;
       color: #a00000;
+      border: 1px solid #efb4b4;
     }
 
-    .login-message.success {
+    .message.success {
       display: block;
-      background: #e7f6eb;
-      color: #08743b;
+      background: #edf8ef;
+      color: #12612c;
+      border: 1px solid #b8dfc1;
     }
 
-    .back-home {
+    .back-link {
       display: block;
       text-align: center;
-      margin-top: 23px;
+      margin-top: 22px;
       color: var(--green);
-      font-size: 13px;
+      text-decoration: none;
       font-weight: bold;
+      font-size: 14px;
     }
 
-    .back-home:hover {
-      color: var(--dark-green);
-    }
-
-    .security-note {
-      margin-top: 20px;
-      padding: 12px;
-      background: #fff8e8;
-      border-left: 3px solid var(--gold);
-      color: #76602d;
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    /* Footer */
     footer {
-      background: #092e1c;
-      color: #e4eee7;
-      padding: 25px 5%;
+      background: var(--dark-green);
+      color: white;
       text-align: center;
+      padding: 19px;
+      font-size: 13px;
     }
 
-    footer p {
-      font-size: 12px;
-      margin: 5px 0;
-    }
-
-    footer a {
-      color: #f2d27d;
-    }
-
-    @media (max-width: 850px) {
-      .nav-container {
-        flex-direction: column;
+    @media(max-width: 480px) {
+      header {
+        padding: 15px 5%;
       }
 
-      nav {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 480px) {
       .login-card {
         padding: 30px 22px;
       }
@@ -323,169 +243,217 @@
 
 <body>
 
-  <!-- Welcome Message -->
+  <header>
+    <div class="brand">
+      HON. AKARACHI AMADI
+      <span>Mbaitoli/Ikeduru Federal Constituency</span>
+    </div>
+
+    <a href="index.html">HOME</a>
+  </header>
+
   <div class="welcome">
     <div class="welcome-track">
       <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
     </div>
   </div>
 
-  <!-- Header -->
-  <header>
-    <div class="nav-container">
+  <main>
+    <section class="login-card">
 
-      <a href="index.html" class="brand">
-        HON. AKARACHI AMADI
-        <span>Mbaitoli/Ikeduru Federal Constituency</span>
-      </a>
-
-      <nav>
-        <a href="login.html" class="active">LOGIN</a>
-        <a href="index.html">Home</a>
-        <a href="biography.html">Biography</a>
-        <a href="constituency.html">Constituency</a>
-        <a href="projects.html">Projects</a>
-        <a href="achievements.html">Achievements</a>
-        <a href="legislative.html">Legislative</a>
-        <a href="vision.html">Vision</a>
-        <a href="news.html">News</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="press.html">Press</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-    </div>
-  </header>
-
-  <!-- Login Section -->
-  <main class="login-area">
-
-    <div class="login-card">
-
-      <div class="login-logo">AA</div>
-
-      <h1>Admin Login</h1>
+      <h1>Administrator Login</h1>
 
       <p class="subtitle">
-        Sign in to access the website administration dashboard.
+        Sign in with your authorised administrator account
+        to manage website content and updates.
       </p>
+
+      <div id="message" class="message" role="alert"></div>
 
       <form id="loginForm">
 
-        <div class="form-group">
-          <label for="email">Admin Email Address</label>
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter administrator email"
+          autocomplete="username"
+          required
+        >
 
+        <label for="password">Password</label>
+
+        <div class="password-wrap">
           <input
-            type="email"
-            id="email"
-            placeholder="Enter your admin email"
-            autocomplete="username"
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
             required
           >
+
+          <button
+            type="button"
+            class="show-password"
+            id="togglePassword"
+          >Show</button>
         </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-
-          <div class="password-wrapper">
-
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-              required
-            >
-
-            <button
-              type="button"
-              class="show-password"
-              id="togglePassword"
-            >
-              SHOW
-            </button>
-
-          </div>
-        </div>
-
-        <button type="submit" class="login-button" id="loginButton">
+        <button type="submit" class="login-btn" id="loginButton">
           LOGIN TO DASHBOARD
         </button>
 
-        <div id="loginMessage" class="login-message" role="status"></div>
-
       </form>
 
-      <div class="security-note">
-        <strong>Security notice:</strong>
-        This page is a login interface only. Real account verification
-        must be connected to secure authentication before public use.
-        Do not use front-end-only passwords to protect a live website.
-      </div>
-
-      <a href="index.html" class="back-home">
-        ← Back to Website Home
+      <a href="index.html" class="back-link">
+        ← Back to Official Website
       </a>
 
-    </div>
-
+    </section>
   </main>
 
-  <!-- Footer -->
   <footer>
-
-    <p><strong>HON. AKARACHI AMADI</strong></p>
-
-    <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
-
-    <p>
-      &copy; <span id="year"></span> Hon. Akarachi Amadi.
-      All Rights Reserved.
-    </p>
-
+    © <span id="year"></span> Hon. Akarachi Amadi.
+    All Rights Reserved.
   </footer>
 
   <script>
-    // Show or hide password
+    // Supabase public project configuration.
+    // Never place a service_role or secret key in frontend code.
+
+    const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+
+    const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+    const messageBox = document.getElementById("message");
     const passwordInput = document.getElementById("password");
     const togglePassword = document.getElementById("togglePassword");
 
-    togglePassword.addEventListener("click", function () {
-
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        togglePassword.textContent = "HIDE";
-      } else {
-        passwordInput.type = "password";
-        togglePassword.textContent = "SHOW";
-      }
-
-    });
-
-    // Login form
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-
-      event.preventDefault();
-
-      const message = document.getElementById("loginMessage");
-      const button = document.getElementById("loginButton");
-
-      message.className = "login-message";
-      message.textContent = "";
-
-      // Authentication is not connected yet.
-      message.className = "login-message error";
-      message.textContent =
-        "Authentication has not been connected yet. Please connect secure admin authentication before logging in.";
-
-      button.textContent = "LOGIN TO DASHBOARD";
-
-    });
-
-    // Automatically update year
     document.getElementById("year").textContent =
       new Date().getFullYear();
+
+    function showMessage(message, type) {
+      messageBox.textContent = message;
+      messageBox.className = "message " + type;
+    }
+
+    function clearMessage() {
+      messageBox.textContent = "";
+      messageBox.className = "message";
+    }
+
+    togglePassword.addEventListener("click", function () {
+      const isPassword = passwordInput.type === "password";
+
+      passwordInput.type = isPassword ? "text" : "password";
+      togglePassword.textContent = isPassword ? "Hide" : "Show";
+    });
+
+    async function verifyAdministrator(user) {
+      const { data, error } = await supabaseClient.rpc("is_admin");
+
+      if (error) {
+        console.error("Administrator verification error:", error);
+        throw new Error(
+          "Your account could not be verified. Please contact the website administrator."
+        );
+      }
+
+      return data === true;
+    }
+
+    // Check whether an existing session belongs to an administrator.
+    async function checkExistingSession() {
+      const { data, error } =
+        await supabaseClient.auth.getSession();
+
+      if (error || !data.session) {
+        return;
+      }
+
+      try {
+        const isAdmin = await verifyAdministrator(data.session.user);
+
+        if (isAdmin) {
+          window.location.replace("admin.html");
+        } else {
+          await supabaseClient.auth.signOut();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      clearMessage();
+
+      const email = document.getElementById("email").value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        showMessage("Please enter your email and password.", "error");
+        return;
+      }
+
+      loginButton.disabled = true;
+      loginButton.textContent = "PLEASE WAIT...";
+
+      try {
+        // Authenticate the user through Supabase Auth.
+        const { data, error } =
+          await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
+
+        if (error) {
+          throw error;
+        }
+
+        // Confirm that the authenticated user is registered as an admin.
+        const isAdmin = await verifyAdministrator(data.user);
+
+        if (!isAdmin) {
+          await supabaseClient.auth.signOut();
+
+          showMessage(
+            "Access denied. This account is not registered as a website administrator.",
+            "error"
+          );
+
+          return;
+        }
+
+        showMessage(
+          "Login successful. Opening your dashboard...",
+          "success"
+        );
+
+        window.location.replace("admin.html");
+
+      } catch (error) {
+        console.error("Login error:", error);
+
+        showMessage(
+          error.message || "Login failed. Please check your details and try again.",
+          "error"
+        );
+
+      } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = "LOGIN TO DASHBOARD";
+      }
+    });
+
+    checkExistingSession();
   </script>
 
 </body>
