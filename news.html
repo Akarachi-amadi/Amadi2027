@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Official news, announcements and constituency updates from Hon. Akarachi Amadi.">
+  <meta name="description" content="Latest news and updates from the office of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency.">
   <title>News & Updates | Hon. Akarachi Amadi</title>
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #04552d;
-      --gold: #d6a928;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d6a72c;
+      --red: #c90019;
       --light: #f5f8f5;
       --text: #26332b;
-      --muted: #68756c;
-      --white: #ffffff;
+      --white: #fff;
     }
 
     * {
@@ -24,113 +24,121 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: var(--light);
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
+      background: var(--light);
       line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
     }
 
     header {
       background: var(--green);
       color: white;
-      padding: 15px 7%;
+      padding: 15px 6%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 20px;
       flex-wrap: wrap;
     }
 
-    .logo {
+    .brand {
       font-size: 19px;
       font-weight: bold;
     }
 
-    .logo span {
+    .brand span {
+      display: block;
       color: var(--gold);
+      font-size: 12px;
+      font-weight: normal;
     }
 
     nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 17px;
+      gap: 15px;
     }
 
     nav a {
       color: white;
-      font-size: 14px;
+      text-decoration: none;
+      font-size: 13px;
       font-weight: bold;
     }
 
-    nav a:hover,
-    nav a.active {
+    nav a:hover {
       color: var(--gold);
     }
 
+    .welcome {
+      background: var(--red);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      border-bottom: 3px solid var(--gold);
+      font-weight: bold;
+    }
+
+    .welcome span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .welcome strong {
+      color: #ffe36a;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
+
     .hero {
-      background:
-        linear-gradient(rgba(0,70,35,.89), rgba(0,70,35,.89)),
-        url("https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
+      background: linear-gradient(rgba(3, 67, 35, .88), rgba(3, 67, 35, .88)),
+                  url("https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1600&q=80");
       background-position: center;
+      background-size: cover;
       color: white;
       text-align: center;
-      padding: 100px 20px;
+      padding: 85px 20px;
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: 12px;
     }
 
     .hero p {
       max-width: 700px;
       margin: auto;
-      font-size: 17px;
-    }
-
-    .gold-line {
-      width: 75px;
-      height: 4px;
-      background: var(--gold);
-      margin: 20px auto;
-      border-radius: 5px;
     }
 
     .container {
-      width: 86%;
+      width: 90%;
       max-width: 1150px;
-      margin: auto;
+      margin: 55px auto;
     }
 
-    .intro {
+    .section-heading {
       text-align: center;
-      padding: 65px 0 35px;
+      margin-bottom: 35px;
     }
 
-    .intro h2 {
-      color: var(--dark-green);
+    .section-heading h2 {
+      color: var(--green);
       font-size: 30px;
-      margin-bottom: 12px;
     }
 
-    .intro p {
-      max-width: 750px;
-      margin: auto;
-      color: var(--muted);
-    }
-
-    .news-section {
-      padding: 20px 0 75px;
+    .section-heading p {
+      color: #657168;
+      margin-top: 8px;
     }
 
     .news-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
       gap: 25px;
     }
 
@@ -138,8 +146,8 @@
       background: white;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,.07);
-      transition: transform .3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      transition: transform .25s;
     }
 
     .news-card:hover {
@@ -148,113 +156,125 @@
 
     .news-card img {
       width: 100%;
-      height: 220px;
+      height: 210px;
       object-fit: cover;
       display: block;
+      background: #e5eae6;
     }
 
     .news-content {
       padding: 22px;
     }
 
-    .category {
-      display: inline-block;
-      background: #e4f3e9;
-      color: var(--green);
-      padding: 5px 11px;
-      border-radius: 20px;
+    .news-date {
+      color: #777;
       font-size: 12px;
-      font-weight: bold;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .news-content h3 {
-      color: var(--dark-green);
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
-
-    .news-content p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .news-date {
-      display: block;
-      color: #89948c;
-      font-size: 12px;
-      margin-top: 15px;
-    }
-
-    .empty-state {
-      background: white;
-      border: 1px dashed #b8c9bc;
-      border-radius: 12px;
-      padding: 55px 25px;
-      text-align: center;
-      max-width: 750px;
-      margin: 20px auto;
-    }
-
-    .empty-icon {
-      font-size: 50px;
-      margin-bottom: 15px;
-    }
-
-    .empty-state h3 {
-      color: var(--dark-green);
-      margin-bottom: 10px;
-      font-size: 23px;
-    }
-
-    .empty-state p {
-      color: var(--muted);
-      max-width: 550px;
-      margin: auto;
-    }
-
-    .cta {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 65px 20px;
-    }
-
-    .cta h2 {
-      font-size: 29px;
+      color: var(--green);
+      font-size: 20px;
       margin-bottom: 12px;
     }
 
-    .cta p {
-      max-width: 650px;
-      margin: 0 auto 22px;
+    .news-content p {
+      color: #59635c;
+      font-size: 14px;
+      margin-bottom: 15px;
     }
 
-    .cta a {
+    .read-more {
       display: inline-block;
-      background: var(--gold);
-      color: #183322;
-      padding: 12px 25px;
-      border-radius: 5px;
+      color: var(--green);
       font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+    }
+
+    .read-more:hover {
+      color: #b18416;
+    }
+
+    .status-message {
+      text-align: center;
+      background: white;
+      padding: 35px 20px;
+      border-radius: 8px;
+      color: #59635c;
+      grid-column: 1 / -1;
+    }
+
+    .status-message.error {
+      color: #a00016;
+    }
+
+    .article-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.75);
+      padding: 25px;
+      overflow-y: auto;
+    }
+
+    .article-modal.show {
+      display: block;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    .modal-content img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 7px;
+      margin: 15px 0;
+    }
+
+    .modal-body {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      border: none;
+      background: transparent;
+      font-size: 28px;
+      cursor: pointer;
+      color: #333;
     }
 
     footer {
-      background: #033c20;
+      background: var(--dark-green);
       color: white;
       text-align: center;
-      padding: 25px 15px;
-      font-size: 13px;
+      padding: 30px 15px;
+      margin-top: 60px;
     }
 
-    footer span {
-      color: var(--gold);
-    }
-
-    @media(max-width: 850px) {
-      .news-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    footer p {
+      margin: 5px 0;
+      font-size: 14px;
     }
 
     @media(max-width: 600px) {
@@ -265,23 +285,14 @@
 
       nav {
         justify-content: center;
-        gap: 12px;
       }
 
       .hero {
-        padding: 75px 20px;
+        padding: 65px 18px;
       }
 
-      .hero h1 {
-        font-size: 31px;
-      }
-
-      .news-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .container {
-        width: 90%;
+      .modal-content {
+        padding: 23px 17px;
       }
     }
   </style>
@@ -289,94 +300,230 @@
 
 <body>
 
-  <header>
-    <div class="logo">
-      HON. <span>AKARACHI AMADI</span>
-    </div>
+<header>
+  <div class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
+  </div>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="biography.html">Biography</a>
-      <a href="projects.html">Projects</a>
-      <a href="vision.html">Vision & Mission</a>
-      <a href="news.html" class="active">News</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="login.html">LOGIN</a>
+    <a href="index.html">HOME</a>
+    <a href="biography.html">BIOGRAPHY</a>
+    <a href="constituency.html">CONSTITUENCY</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="vision.html">VISION & MISSION</a>
+    <a href="legislative.html">LEGISLATIVE</a>
+    <a href="achievements.html">ACHIEVEMENTS</a>
+    <a href="news.html">NEWS</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="press.html">PRESS</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <h1>News & Updates</h1>
-    <div class="gold-line"></div>
-    <p>
-      Official announcements, constituency activities,
-      press releases and important updates concerning
-      Mbaitoli/Ikeduru Federal Constituency.
-    </p>
-  </section>
+<div class="welcome">
+  <span>
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </span>
+</div>
 
-  <section class="intro container">
-    <h2>Latest News & Announcements</h2>
-    <div class="gold-line"></div>
-    <p>
-      Stay informed about official activities, community
-      engagements, legislative updates and development
-      initiatives.
-    </p>
-  </section>
+<section class="hero">
+  <h1>News & Updates</h1>
+  <p>
+    Stay informed about official announcements, constituency activities,
+    programmes and developments from the office of Hon. Akarachi Amadi.
+  </p>
+</section>
 
-  <section class="news-section container">
+<main class="container">
+  <div class="section-heading">
+    <h2>Latest News</h2>
+    <p>Updates published by the office through the official website.</p>
+  </div>
 
-    <!-- FUTURE SUPABASE INTEGRATION:
+  <div class="news-grid" id="newsGrid">
+    <div class="status-message">Loading latest news...</div>
+  </div>
+</main>
 
-      Articles created through admin.html will appear here.
+<div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-content">
+    <button class="close-modal" id="closeModal" aria-label="Close article">&times;</button>
+    <div class="news-date" id="modalDate"></div>
+    <h2 id="modalTitle"></h2>
+    <img id="modalImage" alt="" hidden>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
-      Planned fields:
-      - News headline
-      - Article content
-      - Featured image
-      - News category
-      - Publication date
-      - Author
-      - Published / Unpublished
+<footer>
+  <p><strong>HON. AKARACHI AMADI</strong></p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+  <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
+</footer>
 
-      Only published articles will be displayed publicly.
-    -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <div id="news-grid" class="news-grid">
-      <!-- Dynamically published news articles will appear here. -->
-    </div>
+<script>
+  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
 
-    <div id="empty-state" class="empty-state">
-      <div class="empty-icon">📰</div>
-      <h3>No News Articles Yet</h3>
-      <p>
-        Official news, announcements and constituency updates
-        will appear here when they are published through
-        the website's Admin Dashboard.
-      </p>
-    </div>
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  </section>
+  const newsGrid = document.getElementById("newsGrid");
+  const modal = document.getElementById("articleModal");
 
-  <section class="cta">
-    <h2>Stay Informed and Connected</h2>
-    <p>
-      Follow official updates and stay connected with activities
-      across Mbaitoli and Ikeduru Federal Constituency.
-    </p>
-    <a href="contact.html">Contact the Office</a>
-  </section>
+  let newsArticles = [];
 
-  <footer>
-    <p>
-      &copy; 2026 Hon. Akarachi Amadi. All Rights Reserved.
-    </p>
-    <p>
-      Representing <span>Mbaitoli/Ikeduru Federal Constituency</span>,
-      Imo State.
-    </p>
-  </footer>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function formatDate(dateValue) {
+    if (!dateValue) return "Date not specified";
+
+    const date = new Date(dateValue);
+
+    if (Number.isNaN(date.getTime())) return "Date not specified";
+
+    return date.toLocaleDateString("en-NG", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  function makeElement(tag, className, text) {
+    const element = document.createElement(tag);
+
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+
+    return element;
+  }
+
+  function openArticle(article) {
+    document.getElementById("modalTitle").textContent = article.title || "News Update";
+    document.getElementById("modalDate").textContent = formatDate(article.created_at);
+    document.getElementById("modalBody").textContent =
+      article.content || article.summary || "No additional details available.";
+
+    const image = document.getElementById("modalImage");
+
+    if (article.image_url) {
+      image.src = article.image_url;
+      image.alt = article.title || "News photograph";
+      image.hidden = false;
+    } else {
+      image.removeAttribute("src");
+      image.hidden = true;
+    }
+
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeArticle() {
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  document.getElementById("closeModal").addEventListener("click", closeArticle);
+
+  modal.addEventListener("click", function(event) {
+    if (event.target === modal) closeArticle();
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeArticle();
+  });
+
+  function renderNews(articles) {
+    newsGrid.replaceChildren();
+
+    if (!articles.length) {
+      newsGrid.appendChild(
+        makeElement(
+          "div",
+          "status-message",
+          "There are currently no published news articles. Please check back for updates."
+        )
+      );
+      return;
+    }
+
+    articles.forEach(article => {
+      const card = makeElement("article", "news-card");
+
+      if (article.image_url) {
+        const image = document.createElement("img");
+        image.src = article.image_url;
+        image.alt = article.title || "News photograph";
+        image.loading = "lazy";
+        image.onerror = function() {
+          this.remove();
+        };
+        card.appendChild(image);
+      }
+
+      const content = makeElement("div", "news-content");
+
+      content.appendChild(
+        makeElement("div", "news-date", formatDate(article.created_at))
+      );
+
+      content.appendChild(
+        makeElement("h3", "", article.title || "News Update")
+      );
+
+      const summary = article.summary || article.content || "";
+      const shortSummary = summary.length > 180
+        ? summary.slice(0, 180).trim() + "..."
+        : summary;
+
+      content.appendChild(makeElement("p", "", shortSummary));
+
+      const button = makeElement("button", "read-more", "Read Full Article →");
+      button.type = "button";
+      button.addEventListener("click", () => openArticle(article));
+
+      content.appendChild(button);
+      card.appendChild(content);
+      newsGrid.appendChild(card);
+    });
+  }
+
+  async function loadNews() {
+    newsGrid.replaceChildren(
+      makeElement("div", "status-message", "Loading latest news...")
+    );
+
+    const { data, error } = await db
+      .from("news")
+      .select("id,title,summary,content,image_url,created_at")
+      .eq("published", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Supabase news error:", error);
+
+      newsGrid.replaceChildren(
+        makeElement(
+          "div",
+          "status-message error",
+          "We could not load news at this time. Please refresh the page or try again later."
+        )
+      );
+
+      return;
+    }
+
+    newsArticles = data || [];
+    renderNews(newsArticles);
+  }
+
+  loadNews();
+</script>
 
 </body>
 </html>
