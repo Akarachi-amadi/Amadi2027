@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description" content="Official biography of Hon. Akarachi Amadi, Member of the Federal House of Representatives representing Mbaitoli/Ikeduru Federal Constituency, Imo State.">
-
-  <title>Biography | Hon. Akarachi Amadi 2027</title>
+  <meta name="description" content="Biography of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.">
+  <title>Biography | Hon. Akarachi Amadi</title>
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #064d2b;
-      --gold: #e8b923;
-      --light: #f5f8f4;
-      --white: #ffffff;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d6a72c;
+      --red: #c90019;
+      --light: #f5f8f5;
       --text: #26332b;
+      --white: #fff;
     }
 
     * {
@@ -24,384 +23,178 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
       background: var(--light);
+      color: var(--text);
+      line-height: 1.7;
     }
-
-    a {
-      text-decoration: none;
-    }
-
-    /* TOP BAR */
-
-    .topbar {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 10px 15px;
-      font-size: 13px;
-      letter-spacing: .5px;
-    }
-
-    /* HEADER */
 
     header {
-      background: white;
+      background: var(--green);
+      color: white;
       padding: 15px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
       flex-wrap: wrap;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     .brand {
-      color: var(--dark-green);
-      font-size: 20px;
+      font-size: 19px;
       font-weight: bold;
     }
 
     .brand span {
       display: block;
-      color: #777;
-      font-size: 10px;
-      letter-spacing: 1px;
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: normal;
     }
 
     nav {
       display: flex;
-      gap: 17px;
       flex-wrap: wrap;
+      gap: 15px;
     }
 
     nav a {
-      color: #26332b;
+      color: white;
+      text-decoration: none;
       font-size: 13px;
       font-weight: bold;
-      transition: .3s;
     }
 
-    nav a:hover,
-    nav a.active {
-      color: var(--green);
+    nav a:hover {
+      color: var(--gold);
     }
 
-    /* HERO */
+    .welcome {
+      background: var(--red);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 11px 0;
+      border-bottom: 3px solid var(--gold);
+      font-weight: bold;
+    }
+
+    .welcome span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 30s linear infinite;
+    }
+
+    .welcome strong {
+      color: #ffe36a;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
+    }
 
     .hero {
-      min-height: 370px;
-      padding: 80px 20px;
+      background: linear-gradient(rgba(3,67,35,.9), rgba(3,67,35,.9));
       text-align: center;
       color: white;
-
-      background:
-        linear-gradient(
-          rgba(4,65,34,.88),
-          rgba(4,65,34,.88)
-        ),
-        url("https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1600&q=80")
-        center/cover;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .hero-content {
-      max-width: 850px;
+      padding: 65px 20px;
     }
 
     .hero h1 {
-      font-size: clamp(34px, 5vw, 55px);
-      margin-bottom: 12px;
-    }
-
-    .hero h1 span {
-      color: var(--gold);
+      font-size: clamp(32px, 5vw, 45px);
+      margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 17px;
+      max-width: 750px;
+      margin: auto;
     }
-
-    .gold-line {
-      width: 75px;
-      height: 4px;
-      background: var(--gold);
-      margin: 20px auto;
-      border-radius: 5px;
-    }
-
-    /* GENERAL SECTIONS */
 
     .container {
-      width: 88%;
-      max-width: 1150px;
-      margin: auto;
+      width: 90%;
+      max-width: 1100px;
+      margin: 55px auto;
     }
 
-    .section {
-      padding: 75px 0;
-    }
-
-    /* BIOGRAPHY PROFILE */
-
-    .profile-layout {
+    .profile {
       display: grid;
-      grid-template-columns: 350px 1fr;
-      gap: 45px;
+      grid-template-columns: 340px 1fr;
+      gap: 40px;
       align-items: start;
-    }
-
-    .profile-card {
       background: white;
-      padding: 15px;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 5px 22px rgba(0,0,0,.08);
-      text-align: center;
-      position: sticky;
-      top: 110px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.07);
     }
 
-    .profile-card img {
+    .profile-image {
       width: 100%;
-      height: 430px;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 8px;
-      display: block;
-    }
-
-    .profile-card h2 {
-      color: var(--dark-green);
-      margin-top: 18px;
-      font-size: 23px;
-    }
-
-    .profile-card .position {
-      color: var(--green);
-      font-weight: bold;
-      font-size: 14px;
-      margin-top: 5px;
-    }
-
-    .profile-card .location {
-      color: #777;
-      font-size: 13px;
-      margin-top: 5px;
-    }
-
-    /* BIOGRAPHY TEXT */
-
-    .bio-content h2 {
-      color: var(--dark-green);
-      font-size: 31px;
-      margin-bottom: 18px;
-    }
-
-    .bio-content p {
-      margin-bottom: 18px;
-      color: #4c5b51;
-      font-size: 16px;
-      text-align: justify;
-    }
-
-    .bio-content .intro {
-      font-size: 18px;
-      color: var(--dark-green);
-      font-weight: 500;
-    }
-
-    /* PROFILE FACTS */
-
-    .fact-box {
-      background: white;
-      padding: 25px;
-      border-left: 5px solid var(--gold);
-      border-radius: 8px;
-      margin-top: 28px;
-      box-shadow: 0 4px 15px rgba(0,0,0,.05);
-    }
-
-    .fact-box h3 {
-      color: var(--dark-green);
-      margin-bottom: 15px;
-      font-size: 21px;
-    }
-
-    .fact-box p {
-      margin-bottom: 9px;
-      color: #536057;
-      font-size: 15px;
-      text-align: left;
-    }
-
-    .fact-box strong {
-      color: var(--dark-green);
-    }
-
-    /* RESPONSIBILITIES */
-
-    .responsibilities {
-      background: #edf4ee;
-    }
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 42px;
-    }
-
-    .section-heading h2 {
-      color: var(--dark-green);
-      font-size: 32px;
-    }
-
-    .section-heading p {
-      color: #66736a;
-      margin-top: 8px;
-    }
-
-    .responsibility-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .responsibility-card {
-      background: white;
-      padding: 30px 25px;
       border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(0,0,0,.05);
-      transition: .3s;
+      overflow: hidden;
+      border-bottom: 5px solid var(--gold);
     }
 
-    .responsibility-card:hover {
-      transform: translateY(-5px);
+    .profile-image img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
     }
 
-    .responsibility-card .icon {
-      font-size: 36px;
-      margin-bottom: 12px;
-    }
-
-    .responsibility-card h3 {
+    .profile-content h2 {
       color: var(--green);
-      margin-bottom: 10px;
-      font-size: 20px;
+      font-size: 28px;
+      margin-bottom: 8px;
     }
 
-    .responsibility-card p {
-      color: #66736a;
-      font-size: 14px;
-    }
-
-    /* CLOSING SECTION */
-
-    .closing {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 75px 20px;
-    }
-
-    .closing h2 {
-      color: var(--gold);
-      font-size: 32px;
-      margin-bottom: 18px;
-    }
-
-    .closing p {
-      max-width: 850px;
-      margin: auto;
-      font-size: 17px;
-    }
-
-    /* CALL TO ACTION */
-
-    .cta {
-      text-align: center;
-      padding: 65px 20px;
-      background: white;
-    }
-
-    .cta h2 {
-      color: var(--dark-green);
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    .cta p {
-      color: #66736a;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: var(--green);
-      color: white;
-      padding: 13px 27px;
-      border-radius: 5px;
+    .profile-content .position {
+      color: #9b7417;
       font-weight: bold;
-      margin: 6px;
-      transition: .3s;
+      margin-bottom: 22px;
     }
 
-    .btn:hover {
-      background: var(--dark-green);
-      transform: translateY(-2px);
+    .biography-text {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #46534a;
     }
 
-    /* FOOTER */
+    .biography-text p {
+      margin-bottom: 16px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #657168;
+    }
 
     footer {
-      background: #03351d;
+      background: var(--dark-green);
       color: white;
       text-align: center;
       padding: 30px 15px;
-      font-size: 14px;
-    }
-
-    footer span {
-      color: var(--gold);
+      margin-top: 60px;
     }
 
     footer p {
       margin: 5px 0;
+      font-size: 14px;
     }
 
-    /* MOBILE RESPONSIVENESS */
-
-    @media (max-width: 900px) {
-
-      .profile-layout {
+    @media(max-width: 800px) {
+      .profile {
         grid-template-columns: 1fr;
       }
 
-      .profile-card {
+      .profile-image {
         max-width: 400px;
-        width: 100%;
         margin: auto;
-        position: static;
-      }
-
-      .responsibility-grid {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 600px) {
-
+    @media(max-width: 600px) {
       header {
         justify-content: center;
         text-align: center;
@@ -409,341 +202,172 @@
 
       nav {
         justify-content: center;
-        gap: 12px;
       }
 
-      nav a {
-        font-size: 12px;
+      .profile {
+        padding: 20px;
       }
 
-      .section {
-        padding: 50px 0;
-      }
-
-      .profile-card img {
-        height: 380px;
-      }
-
-      .bio-content p {
-        text-align: left;
-        font-size: 15px;
-      }
-
-      .responsibility-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-heading h2 {
-        font-size: 27px;
-      }
-
-      .closing h2 {
-        font-size: 27px;
+      .hero {
+        padding: 50px 18px;
       }
     }
-
   </style>
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
-
-  <div class="topbar">
-    HON. AKARACHI AMADI | HOUSE OF REPRESENTATIVES |
-    MBAITOLI/IKEDURU FEDERAL CONSTITUENCY
+<header>
+  <div class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
   </div>
 
-  <!-- HEADER AND NAVIGATION -->
+  <nav>
+    <a href="login.html">LOGIN</a>
+    <a href="index.html">HOME</a>
+    <a href="biography.html">BIOGRAPHY</a>
+    <a href="constituency.html">CONSTITUENCY</a>
+    <a href="projects.html">PROJECTS</a>
+    <a href="vision.html">VISION & MISSION</a>
+    <a href="legislative.html">LEGISLATIVE</a>
+    <a href="achievements.html">ACHIEVEMENTS</a>
+    <a href="news.html">NEWS</a>
+    <a href="gallery.html">GALLERY</a>
+    <a href="press.html">PRESS</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">CONTACT</a>
+  </nav>
+</header>
 
-  <header>
+<div class="welcome">
+  <span>
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </span>
+</div>
 
-    <a href="index.html" class="brand">
-      AKARACHI AMADI
-      <span>LEADERSHIP • SERVICE • DEVELOPMENT</span>
-    </a>
+<section class="hero">
+  <h1>Biography</h1>
+  <p>
+    Learn about Hon. Akarachi Amadi and his role in representing
+    the people of Mbaitoli/Ikeduru Federal Constituency.
+  </p>
+</section>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="biography.html" class="active">Biography</a>
-      <a href="projects.html">Projects</a>
-      <a href="vision.html">Vision & Mission</a>
-      <a href="news.html">News</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+<main class="container">
 
-  </header>
+  <section class="profile">
 
-  <!-- HERO SECTION -->
+    <div class="profile-image">
+      <img
+        src="https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png"
+        alt="Portrait of Hon. Akarachi Amadi"
+        onerror="this.style.display='none';"
+      >
+    </div>
 
-  <section class="hero">
+    <div class="profile-content">
+      <h2>Hon. Akarachi Amadi</h2>
 
-    <div class="hero-content">
+      <div class="position">
+        Member, Federal House of Representatives<br>
+        Mbaitoli/Ikeduru Federal Constituency, Imo State
+      </div>
 
-      <h1>
-        Biography of
-        <span>Hon. Akarachi Amadi</span>
-      </h1>
-
-      <div class="gold-line"></div>
-
-      <p>
-        Public Service • Legislative Representation •
-        Constituency Development
-      </p>
-
+      <div class="biography-text" id="biographyText">
+        <p class="loading">Loading biography...</p>
+      </div>
     </div>
 
   </section>
 
-  <!-- BIOGRAPHY SECTION -->
-
-  <section class="section">
+</main>
 
-    <div class="container">
-
-      <div class="profile-layout">
+<footer>
+  <p><strong>HON. AKARACHI AMADI</strong></p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+  <p><a href="login.html" style="color:#f1d47c;">LOGIN</a></p>
+  <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
+</footer>
 
-        <!-- PROFILE IMAGE -->
-
-        <div class="profile-card">
-
-          <img
-            src="https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png"
-            alt="Portrait of Hon. Akarachi Amadi"
-          >
-
-          <h2>Hon. Akarachi Amadi</h2>
-
-          <p class="position">
-            Member, Federal House of Representatives
-          </p>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-          <p class="location">
-            Mbaitoli/Ikeduru Federal Constituency,
-            Imo State, Nigeria
-          </p>
+<script>
+  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
 
-        </div>
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        <!-- BIOGRAPHY TEXT -->
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-        <div class="bio-content">
+  const defaultBiography = `Hon. Akarachi Amadi is a Nigerian politician and member of the Federal House of Representatives, representing the Mbaitoli/Ikeduru Federal Constituency of Imo State, Nigeria.
 
-          <h2>About Hon. Akarachi Amadi</h2>
+He emerged as a member of the National Assembly following the 2023 general elections, where he secured the mandate to represent the people of Mbaitoli and Ikeduru Federal Constituency.
 
-          <p class="intro">
-            Hon. Akarachi Amadi is a Nigerian politician and member
-            of the Federal House of Representatives, representing
-            the Mbaitoli/Ikeduru Federal Constituency of Imo State,
-            Nigeria.
-          </p>
+As a federal lawmaker, Akarachi Amadi is involved in legislative activities, national policy discussions and the representation of his constituents. His responsibilities include participating in the formulation of laws, contributing to national development discussions and advocating for projects and programmes that can improve the lives of people in his constituency.
 
-          <p>
-            He emerged as a member of the National Assembly following
-            the 2023 general elections, where he secured the mandate
-            to represent the people of Mbaitoli and Ikeduru Federal
-            Constituency.
-          </p>
+His political role places him among the representatives responsible for bringing the concerns, interests and developmental needs of the people of Mbaitoli and Ikeduru to the federal government.
 
-          <p>
-            As a federal lawmaker, Akarachi Amadi is involved in
-            legislative activities, national policy discussions and
-            the representation of his constituents. His responsibilities
-            include participating in the formulation of laws,
-            contributing to national development discussions and
-            advocating for projects and programmes that can improve
-            the lives of people in his constituency.
-          </p>
+Although he is publicly recognised for his political position, detailed information about his early childhood, parents, family background, educational qualifications and personal life has not been sufficiently verified in reliable public records.
 
-          <p>
-            His political role places him among the representatives
-            responsible for bringing the concerns, interests and
-            developmental needs of the people of Mbaitoli and Ikeduru
-            to the federal government.
-          </p>
+Hon. Akarachi Amadi continues to serve as a political representative of Mbaitoli/Ikeduru Federal Constituency in Imo State.`;
 
-          <p>
-            Although he is publicly recognised for his political
-            position, detailed information about his early childhood,
-            parents, family background, educational qualifications
-            and personal life has not been sufficiently verified in
-            reliable public records.
-          </p>
+  function displayBiography(text) {
+    const container = document.getElementById("biographyText");
+    container.replaceChildren();
 
-          <p>
-            Hon. Akarachi Amadi continues to serve as a political
-            representative of Mbaitoli/Ikeduru Federal Constituency
-            in Imo State.
-          </p>
+    const paragraphs = String(text || defaultBiography)
+      .split(/\n\s*\n/)
+      .map(part => part.trim())
+      .filter(Boolean);
 
-          <!-- PROFILE INFORMATION -->
+    paragraphs.forEach(paragraph => {
+      const p = document.createElement("p");
+      p.textContent = paragraph;
+      container.appendChild(p);
+    });
+  }
 
-          <div class="fact-box">
+  async function loadBiography() {
+    const { data, error } = await db
+      .from("site_content")
+      .select("value")
+      .eq("key", "biography")
+      .maybeSingle();
 
-            <h3>Public Profile</h3>
+    if (error) {
+      console.error("Biography loading error:", error);
+      displayBiography(defaultBiography);
+      return;
+    }
 
-            <p>
-              <strong>Name:</strong>
-              Hon. Akarachi Amadi
-            </p>
+    if (!data || !data.value) {
+      displayBiography(defaultBiography);
+      return;
+    }
 
-            <p>
-              <strong>Country:</strong>
-              Nigeria
-            </p>
+    let biography = data.value;
 
-            <p>
-              <strong>State:</strong>
-              Imo State
-            </p>
+    // The dashboard stores site content as JSON strings.
+    try {
+      const parsed = JSON.parse(biography);
 
-            <p>
-              <strong>Constituency:</strong>
-              Mbaitoli/Ikeduru Federal Constituency
-            </p>
+      if (typeof parsed === "string") {
+        biography = parsed;
+      } else if (parsed && typeof parsed.text === "string") {
+        biography = parsed.text;
+      } else if (parsed && typeof parsed.content === "string") {
+        biography = parsed.content;
+      }
+    } catch (error) {
+      // Use the original value if it is plain text.
+    }
 
-            <p>
-              <strong>Public Office:</strong>
-              Member, Federal House of Representatives
-            </p>
+    displayBiography(biography || defaultBiography);
+  }
 
-            <p>
-              <strong>National Assembly:</strong>
-              Emerged following the 2023 general elections
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- NATIONAL ASSEMBLY RESPONSIBILITIES -->
-
-  <section class="section responsibilities">
-
-    <div class="container">
-
-      <div class="section-heading">
-
-        <h2>Role in the National Assembly</h2>
-
-        <p>
-          Key responsibilities of a federal representative.
-        </p>
-
-        <div class="gold-line"></div>
-
-      </div>
-
-      <div class="responsibility-grid">
-
-        <div class="responsibility-card">
-
-          <div class="icon">⚖️</div>
-
-          <h3>Legislative Activities</h3>
-
-          <p>
-            Participating in legislative proceedings and contributing
-            to discussions and the formulation of laws.
-          </p>
-
-        </div>
-
-        <div class="responsibility-card">
-
-          <div class="icon">🏛️</div>
-
-          <h3>National Policy</h3>
-
-          <p>
-            Taking part in policy discussions on issues affecting
-            Nigeria and its citizens.
-          </p>
-
-        </div>
-
-        <div class="responsibility-card">
-
-          <div class="icon">🤝</div>
-
-          <h3>Constituency Representation</h3>
-
-          <p>
-            Bringing the concerns, interests and developmental
-            needs of Mbaitoli and Ikeduru to the federal level.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- CLOSING MESSAGE -->
-
-  <section class="closing">
-
-    <h2>Representation and Public Service</h2>
-
-    <p>
-      The role of a federal representative is to contribute to
-      national development while ensuring that the voices and
-      interests of the constituency are represented in the
-      National Assembly.
-    </p>
-
-  </section>
-
-  <!-- CALL TO ACTION -->
-
-  <section class="cta">
-
-    <h2>Explore More</h2>
-
-    <p>
-      Learn more about the campaign's vision, activities and updates.
-    </p>
-
-    <a href="vision.html" class="btn">
-      Vision & Mission
-    </a>
-
-    <a href="projects.html" class="btn">
-      Projects
-    </a>
-
-    <a href="contact.html" class="btn">
-      Contact
-    </a>
-
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <p>
-      &copy; 2026–2027
-      <span>Hon. Akarachi Amadi</span>.
-      All Rights Reserved.
-    </p>
-
-    <p>
-      Mbaitoli/Ikeduru Federal Constituency |
-      Imo State, Nigeria
-    </p>
-
-  </footer>
+  loadBiography();
+</script>
 
 </body>
 </html>
