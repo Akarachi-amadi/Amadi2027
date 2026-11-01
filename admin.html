@@ -1,1966 +1,882 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Hon. Akarachi Amadi</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    :root {
-      --green: #075b32;
-      --dark-green: #034323;
-      --gold: #d5a62e;
-      --red: #c90019;
-      --light: #f3f6f3;
-      --white: #fff;
-      --text: #26342b;
-      --muted: #718078;
-      --border: #e1e8e2;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--light);
-      color: var(--text);
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .topbar {
-      background: var(--green);
-      color: white;
-      padding: 17px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      border-bottom: 4px solid var(--gold);
-    }
-
-    .brand {
-      font-weight: bold;
-      font-size: 17px;
-      line-height: 1.5;
-    }
-
-    .brand small {
-      display: block;
-      font-weight: normal;
-      color: #f5d77b;
-      font-size: 12px;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .top-actions a,
-    .top-actions button {
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,.5);
-      background: transparent;
-      color: white;
-      padding: 10px 14px;
-      border-radius: 5px;
-      font-weight: bold;
-    }
-
-    .top-actions button {
-      background: var(--red);
-      border-color: var(--red);
-    }
-
-    .layout {
-      display: flex;
-      min-height: calc(100vh - 75px);
-    }
-
-    .sidebar {
-      width: 245px;
-      flex-shrink: 0;
-      background: var(--dark-green);
-      color: white;
-      padding: 25px 13px;
-    }
-
-    .sidebar h3 {
-      color: #f4d77e;
-      font-size: 12px;
-      letter-spacing: 1px;
-      padding: 5px 12px 18px;
-    }
-
-    .nav-btn {
-      display: block;
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: none;
-      color: white;
-      padding: 13px 12px;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      font-size: 14px;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: rgba(255,255,255,.15);
-      border-left: 3px solid var(--gold);
-    }
-
-    .main {
-      flex: 1;
-      min-width: 0;
-      padding: 30px;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .page-heading {
-      margin-bottom: 25px;
-    }
-
-    .page-heading h1 {
-      color: var(--green);
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
-
-    .page-heading p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(130px, 1fr));
-      gap: 17px;
-      margin-bottom: 28px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 22px;
-      border-radius: 9px;
-      border-left: 4px solid var(--gold);
-      box-shadow: 0 3px 12px rgba(0,0,0,.04);
-    }
-
-    .stat-card span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .stat-card strong {
-      display: block;
-      color: var(--green);
-      font-size: 30px;
-      margin-top: 10px;
-    }
-
-    .panel {
-      background: white;
-      border-radius: 9px;
-      padding: 23px;
-      margin-bottom: 22px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.04);
-    }
-
-    .panel h2 {
-      color: var(--green);
-      font-size: 19px;
-      margin-bottom: 17px;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-      align-items: center;
-    }
-
-    .toolbar h2 {
-      margin: 0;
-    }
-
-    .primary-btn,
-    .secondary-btn,
-    .danger-btn {
-      border: none;
-      padding: 11px 16px;
-      border-radius: 5px;
-      font-weight: bold;
-      font-size: 13px;
-    }
-
-    .primary-btn {
-      background: var(--green);
-      color: white;
-    }
-
-    .primary-btn:hover {
-      background: var(--dark-green);
-    }
-
-    .secondary-btn {
-      background: #e8efe9;
-      color: var(--green);
-    }
-
-    .danger-btn {
-      background: #ffe8e8;
-      color: #a00000;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 13px 11px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      vertical-align: middle;
-    }
-
-    th {
-      background: #f5f8f5;
-      color: var(--green);
-    }
-
-    td img {
-      width: 55px;
-      height: 45px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    .published {
-      background: #e3f5e7;
-      color: #12612c;
-    }
-
-    .unpublished {
-      background: #fff0d8;
-      color: #8a5600;
-    }
-
-    .action-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .action-buttons button {
-      border: none;
-      padding: 7px 9px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    .edit-btn {
-      background: #e6efff;
-      color: #174b9a;
-    }
-
-    .publish-btn {
-      background: #e3f5e7;
-      color: #12612c;
-    }
-
-    .delete-btn {
-      background: #ffe8e8;
-      color: #a00000;
-    }
-
-    .empty {
-      padding: 28px 12px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 17px;
-    }
-
-    .form-group {
-      margin-bottom: 17px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccd8ce;
-      border-radius: 5px;
-      background: white;
-      color: var(--text);
-      outline: none;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 2px rgba(7,91,50,.08);
-    }
-
-    textarea {
-      min-height: 125px;
-      resize: vertical;
-    }
-
-    .form-note {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .preview {
-      max-width: 160px;
-      max-height: 120px;
-      display: none;
-      margin-top: 10px;
-      border-radius: 5px;
-    }
-
-    .notice {
-      display: none;
-      padding: 13px 15px;
-      border-radius: 5px;
-      margin-bottom: 18px;
-      line-height: 1.5;
-      font-size: 13px;
-    }
-
-    .notice.success {
-      display: block;
-      background: #e8f7eb;
-      color: #12612c;
-      border: 1px solid #b8dfc1;
-    }
-
-    .notice.error {
-      display: block;
-      background: #fff0f0;
-      color: #a00000;
-      border: 1px solid #efb4b4;
-    }
-
-    .message-card {
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 16px;
-      margin-bottom: 12px;
-    }
-
-    .message-card h3 {
-      color: var(--green);
-      margin-bottom: 7px;
-      font-size: 15px;
-    }
-
-    .message-card p {
-      font-size: 13px;
-      line-height: 1.6;
-      margin: 7px 0;
-      overflow-wrap: anywhere;
-    }
-
-    .message-meta {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .content-editor {
-      max-width: 850px;
-    }
-
-    .loading {
-      color: var(--muted);
-      padding: 18px;
-      text-align: center;
-    }
-
-    @media(max-width: 900px) {
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width: 700px) {
-      .layout {
-        display: block;
-      }
-
-      .sidebar {
-        width: 100%;
-        display: flex;
-        overflow-x: auto;
-        padding: 10px;
-        gap: 5px;
-      }
-
-      .sidebar h3 {
-        display: none;
-      }
-
-      .nav-btn {
-        width: auto;
-        white-space: nowrap;
-        margin: 0;
-        padding: 11px 13px;
-      }
-
-      .main {
-        padding: 20px 13px;
-      }
-
-      .topbar {
-        padding: 14px;
-      }
-
-      .top-actions a {
-        display: none;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full {
-        grid-column: auto;
-      }
-    }
-
-    @media(max-width: 400px) {
-      .cards {
-        grid-template-columns: 1fr 1fr;
-        gap: 9px;
-      }
-
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-card strong {
-        font-size: 24px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Hon. Akarachi Amadi</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+  --green:#075b32;
+  --dark-green:#034323;
+  --gold:#d5a62e;
+  --red:#c90019;
+  --light:#f3f6f3;
+  --white:#fff;
+  --text:#26342b;
+  --muted:#718078;
+  --border:#e1e8e2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:var(--light);color:var(--text)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.topbar{background:var(--green);color:white;padding:17px 25px;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:4px solid var(--gold)}
+.brand{font-weight:bold;font-size:17px;line-height:1.5}
+.brand small{display:block;font-weight:normal;color:#f5d77b;font-size:12px}
+.top-actions{display:flex;gap:10px;align-items:center}
+.top-actions a,.top-actions button{text-decoration:none;border:1px solid rgba(255,255,255,.5);background:transparent;color:white;padding:10px 14px;border-radius:5px;font-weight:bold}
+.top-actions button{background:var(--red);border-color:var(--red)}
+.layout{display:flex;min-height:calc(100vh - 75px)}
+.sidebar{width:245px;flex-shrink:0;background:var(--dark-green);color:white;padding:25px 13px}
+.sidebar h3{color:#f4d77e;font-size:12px;letter-spacing:1px;padding:5px 12px 18px}
+.nav-btn{display:block;width:100%;text-align:left;background:transparent;border:none;color:white;padding:13px 12px;border-radius:5px;margin-bottom:5px;font-size:14px}
+.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,.15);border-left:3px solid var(--gold)}
+.main{flex:1;min-width:0;padding:30px}
+.section{display:none}
+.section.active{display:block}
+.page-heading{margin-bottom:25px}
+.page-heading h1{color:var(--green);font-size:27px;margin-bottom:8px}
+.page-heading p{color:var(--muted);line-height:1.6;font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:17px;margin-bottom:28px}
+.stat-card{background:white;padding:22px;border-radius:9px;border-left:4px solid var(--gold);box-shadow:0 3px 12px rgba(0,0,0,.04)}
+.stat-card span{color:var(--muted);font-size:13px}
+.stat-card strong{display:block;color:var(--green);font-size:30px;margin-top:10px}
+.panel{background:white;border-radius:9px;padding:23px;margin-bottom:22px;box-shadow:0 3px 12px rgba(0,0,0,.04)}
+.panel h2{color:var(--green);font-size:19px;margin-bottom:17px}
+.toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-bottom:18px;align-items:center}
+.toolbar h2{margin:0}
+.primary-btn,.secondary-btn,.danger-btn{border:none;padding:11px 16px;border-radius:5px;font-weight:bold;font-size:13px}
+.primary-btn{background:var(--green);color:white}
+.primary-btn:hover{background:var(--dark-green)}
+.secondary-btn{background:#e8efe9;color:var(--green)}
+.danger-btn{background:#ffe8e8;color:#a00000}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{text-align:left;padding:13px 11px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+th{background:#f5f8f5;color:var(--green)}
+td img{width:55px;height:45px;object-fit:cover;border-radius:4px}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:bold}
+.published{background:#e3f5e7;color:#12612c}
+.unpublished{background:#fff0d8;color:#8a5600}
+.action-buttons{display:flex;flex-wrap:wrap;gap:6px}
+.action-buttons button{border:none;padding:7px 9px;border-radius:4px;font-size:11px;font-weight:bold}
+.edit-btn{background:#e6efff;color:#174b9a}
+.publish-btn{background:#e3f5e7;color:#12612c}
+.delete-btn{background:#ffe8e8;color:#a00000}
+.empty{padding:28px 12px;text-align:center;color:var(--muted);font-size:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.form-group{margin-bottom:17px}
+.form-group.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:8px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #ccd8ce;border-radius:5px;background:white;color:var(--text);outline:none}
+input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 2px rgba(7,91,50,.08)}
+textarea{min-height:125px;resize:vertical}
+.form-note{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.5}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap}
+.preview{max-width:160px;max-height:120px;display:none;margin-top:10px;border-radius:5px}
+.notice{display:none;padding:13px 15px;border-radius:5px;margin-bottom:18px;line-height:1.5;font-size:13px}
+.notice.success{display:block;background:#e8f7eb;color:#12612c;border:1px solid #b8dfc1}
+.notice.error{display:block;background:#fff0f0;color:#a00000;border:1px solid #efb4b4}
+.message-card{border:1px solid var(--border);border-radius:7px;padding:16px;margin-bottom:12px}
+.message-card h3{color:var(--green);margin-bottom:7px;font-size:15px}
+.message-card p{font-size:13px;line-height:1.6;margin:7px 0;overflow-wrap:anywhere}
+.message-meta{color:var(--muted);font-size:12px}
+.content-editor{max-width:850px}
+.loading{color:var(--muted);padding:18px;text-align:center}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){
+.layout{display:block}
+.sidebar{width:100%;display:flex;overflow-x:auto;padding:10px;gap:5px}
+.sidebar h3{display:none}
+.nav-btn{width:auto;white-space:nowrap;margin:0;padding:11px 13px}
+.main{padding:20px 13px}
+.topbar{padding:14px}
+.top-actions a{display:none}
+.form-grid{grid-template-columns:1fr}
+.form-group.full{grid-column:auto}
+}
+@media(max-width:400px){.cards{grid-template-columns:1fr 1fr;gap:9px}.stat-card{padding:15px}.stat-card strong{font-size:24px}}
+</style>
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div class="brand">
-      HON. AKARACHI AMADI
-      <small>ADMINISTRATOR DASHBOARD</small>
-    </div>
-
-    <div class="top-actions">
-      <a href="index.html" target="_blank">View Website</a>
-      <button id="logoutButton" type="button">LOG OUT</button>
-    </div>
-  </header>
-
-  <div class="layout">
-
-    <aside class="sidebar">
-      <h3>WEBSITE MANAGEMENT</h3>
-
-      <button class="nav-btn active" data-section="overview">Overview</button>
-      <button class="nav-btn" data-section="projects">Projects</button>
-      <button class="nav-btn" data-section="news">News & Updates</button>
-      <button class="nav-btn" data-section="gallery">Photo Gallery</button>
-      <button class="nav-btn" data-section="press">Press Releases</button>
-      <button class="nav-btn" data-section="messages">Messages</button>
-      <button class="nav-btn" data-section="biography">Biography</button>
-      <button class="nav-btn" data-section="vision">Vision & Mission</button>
-      <button class="nav-btn" data-section="settings">Website Settings</button>
-    </aside>
-
-    <main class="main">
-
-      <div id="globalNotice" class="notice"></div>
-
-      <!-- OVERVIEW -->
-      <section class="section active" id="overview">
-        <div class="page-heading">
-          <h1>Dashboard Overview</h1>
-          <p>Welcome to your website management dashboard.</p>
-        </div>
-
-        <div class="cards">
-          <div class="stat-card">
-            <span>Total Projects</span>
-            <strong id="projectCount">0</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>News Articles</span>
-            <strong id="newsCount">0</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>Gallery Photos</span>
-            <strong id="galleryCount">0</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>Messages</span>
-            <strong id="messageCount">0</strong>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h2>Website Management</h2>
-          <p style="line-height:1.8;font-size:14px;color:#65736a">
-            Use the menu to manage your website content. Projects, news,
-            gallery items and press releases can be saved to Supabase.
-            Items marked as published can be displayed on the public website
-            once the corresponding public pages are connected.
-          </p>
-        </div>
-
-        <div class="panel">
-          <h2>Administrator Account</h2>
-          <p id="adminEmail" style="font-size:14px;line-height:1.8">
-            Checking administrator account...
-          </p>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section class="section" id="projects">
-        <div class="page-heading">
-          <h1>Manage Projects</h1>
-          <p>Add constituency projects, upload photographs and publish updates.</p>
-        </div>
-
-        <div class="panel">
-          <div class="toolbar">
-            <h2>Projects</h2>
-            <button class="primary-btn" onclick="openForm('projects')">+ Add Project</button>
-          </div>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>Project</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Publication</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="projectsTable">
-                <tr><td colspan="6" class="loading">Loading projects...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- NEWS -->
-      <section class="section" id="news">
-        <div class="page-heading">
-          <h1>News & Updates</h1>
-          <p>Publish official news, announcements and constituency updates.</p>
-        </div>
-
-        <div class="panel">
-          <div class="toolbar">
-            <h2>News Articles</h2>
-            <button class="primary-btn" onclick="openForm('news')">+ Add News</button>
-          </div>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>Headline</th>
-                  <th>Publication</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="newsTable">
-                <tr><td colspan="4" class="loading">Loading news...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALLERY -->
-      <section class="section" id="gallery">
-        <div class="page-heading">
-          <h1>Photo Gallery</h1>
-          <p>Upload and manage photographs for the public website.</p>
-        </div>
-
-        <div class="panel">
-          <div class="toolbar">
-            <h2>Gallery Photos</h2>
-            <button class="primary-btn" onclick="openForm('gallery')">+ Add Photo</button>
-          </div>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>Title</th>
-                  <th>Publication</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="galleryTable">
-                <tr><td colspan="4" class="loading">Loading gallery...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- PRESS -->
-      <section class="section" id="press">
-        <div class="page-heading">
-          <h1>Press Releases</h1>
-          <p>Manage official statements, press releases and media documents.</p>
-        </div>
-
-        <div class="panel">
-          <div class="toolbar">
-            <h2>Press Releases</h2>
-            <button class="primary-btn" onclick="openForm('press')">+ Add Press Release</button>
-          </div>
-
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Publication</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="pressTable">
-                <tr><td colspan="3" class="loading">Loading press releases...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- MESSAGES -->
-      <section class="section" id="messages">
-        <div class="page-heading">
-          <h1>Website Messages</h1>
-          <p>Messages submitted by visitors through the contact page.</p>
-        </div>
-
-        <div class="panel">
-          <div class="toolbar">
-            <h2>Inbox</h2>
-            <button class="secondary-btn" onclick="loadMessages()">Refresh Messages</button>
-          </div>
-
-          <div id="messagesList">
-            <p class="loading">Loading messages...</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- BIOGRAPHY -->
-      <section class="section" id="biography">
-        <div class="page-heading">
-          <h1>Biography</h1>
-          <p>Manage the biography displayed on your website.</p>
-        </div>
-
-        <div class="panel content-editor">
-          <h2>Biography Content</h2>
-
-          <form id="biographyForm">
-            <div class="form-group">
-              <label for="bioTitle">Section Title</label>
-              <input id="bioTitle" value="Biography of Hon. Akarachi Amadi" required>
-            </div>
-
-            <div class="form-group">
-              <label for="bioContent">Biography Text</label>
-              <textarea id="bioContent" rows="10" required></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="bioImage">Portrait Image URL</label>
-              <input id="bioImage" type="url" placeholder="https://example.com/portrait.jpg">
-            </div>
-
-            <button class="primary-btn" type="submit">Save Biography</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- VISION -->
-      <section class="section" id="vision">
-        <div class="page-heading">
-          <h1>Vision & Mission</h1>
-          <p>Manage your vision, mission and development priorities.</p>
-        </div>
-
-        <div class="panel content-editor">
-          <form id="visionForm">
-            <div class="form-group">
-              <label for="visionTitle">Vision Heading</label>
-              <input id="visionTitle" value="Our Vision">
-            </div>
-
-            <div class="form-group">
-              <label for="visionContent">Vision Statement</label>
-              <textarea id="visionContent" rows="5"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="missionTitle">Mission Heading</label>
-              <input id="missionTitle" value="Our Mission">
-            </div>
-
-            <div class="form-group">
-              <label for="missionContent">Mission Statement</label>
-              <textarea id="missionContent" rows="5"></textarea>
-            </div>
-
-            <button class="primary-btn" type="submit">Save Vision & Mission</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- SETTINGS -->
-      <section class="section" id="settings">
-        <div class="page-heading">
-          <h1>Website Settings</h1>
-          <p>Manage general website information.</p>
-        </div>
-
-        <div class="panel content-editor">
-          <form id="settingsForm">
-            <div class="form-group">
-              <label for="siteTitle">Website Title</label>
-              <input id="siteTitle" value="Hon. Akarachi Amadi">
-            </div>
-
-            <div class="form-group">
-              <label for="siteDescription">Website Description</label>
-              <textarea id="siteDescription" rows="4"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="siteEmail">Public Contact Email</label>
-              <input id="siteEmail" type="email">
-            </div>
-
-            <button class="primary-btn" type="submit">Save Settings</button>
-          </form>
-        </div>
-      </section>
-
-    </main>
+<header class="topbar">
+  <div class="brand">HON. AKARACHI AMADI<small>ADMINISTRATOR DASHBOARD</small></div>
+  <div class="top-actions">
+    <a href="index.html" target="_blank">View Website</a>
+    <button id="logoutButton" type="button">LOG OUT</button>
   </div>
+</header>
 
-  <!-- CONTENT FORM DIALOG -->
-  <dialog id="contentDialog" style="
-    width:min(650px,94%);
-    border:none;
-    border-radius:10px;
-    padding:0;
-    margin:auto;
-    box-shadow:0 15px 50px rgba(0,0,0,.25);
-    max-height:90vh;
-    overflow:auto;
-  ">
-    <div style="padding:24px">
-      <div class="toolbar">
-        <h2 id="formHeading" style="color:#075b32">Add Content</h2>
-        <button class="danger-btn" type="button" onclick="closeForm()">Close</button>
-      </div>
+<div class="layout">
+<aside class="sidebar">
+  <h3>WEBSITE MANAGEMENT</h3>
+  <button class="nav-btn active" data-section="overview">Overview</button>
+  <button class="nav-btn" data-section="projects">Projects</button>
+  <button class="nav-btn" data-section="news">News & Updates</button>
+  <button class="nav-btn" data-section="gallery">Photo Gallery</button>
+  <button class="nav-btn" data-section="videos">Video Management</button>
+  <button class="nav-btn" data-section="press">Press Releases</button>
+  <button class="nav-btn" data-section="messages">Messages</button>
+  <button class="nav-btn" data-section="biography">Biography</button>
+  <button class="nav-btn" data-section="vision">Vision & Mission</button>
+  <button class="nav-btn" data-section="settings">Website Settings</button>
+</aside>
 
-      <div id="formNotice" class="notice"></div>
+<main class="main">
+<div id="globalNotice" class="notice"></div>
 
-      <form id="contentForm">
-        <input type="hidden" id="recordId">
-        <input type="hidden" id="recordType">
+<section class="section active" id="overview">
+  <div class="page-heading">
+    <h1>Dashboard Overview</h1>
+    <p>Welcome to your website management dashboard.</p>
+  </div>
+  <div class="cards">
+    <div class="stat-card"><span>Total Projects</span><strong id="projectCount">0</strong></div>
+    <div class="stat-card"><span>News Articles</span><strong id="newsCount">0</strong></div>
+    <div class="stat-card"><span>Gallery Photos</span><strong id="galleryCount">0</strong></div>
+    <div class="stat-card"><span>Published Videos</span><strong id="videoCount">0</strong></div>
+  </div>
+  <div class="panel">
+    <h2>Website Management</h2>
+    <p style="line-height:1.8;font-size:14px;color:#65736a">
+      Use the menu to manage your website content. Projects, news,
+      gallery photos, videos and press releases can be saved to Supabase.
+      Published content can appear on the corresponding public website pages.
+    </p>
+  </div>
+  <div class="panel">
+    <h2>Administrator Account</h2>
+    <p id="adminEmail" style="font-size:14px;line-height:1.8">Checking administrator account...</p>
+  </div>
+</section>
 
-        <div class="form-group">
-          <label for="itemTitle">Title / Headline *</label>
-          <input id="itemTitle" required maxlength="200">
-        </div>
+<section class="section" id="projects">
+  <div class="page-heading"><h1>Manage Projects</h1><p>Add constituency projects, upload photographs and publish updates.</p></div>
+  <div class="panel">
+    <div class="toolbar"><h2>Projects</h2><button class="primary-btn" onclick="openForm('projects')">+ Add Project</button></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Photo</th><th>Project</th><th>Location</th><th>Status</th><th>Publication</th><th>Actions</th></tr></thead>
+      <tbody id="projectsTable"><tr><td colspan="6" class="loading">Loading projects...</td></tr></tbody>
+    </table></div>
+  </div>
+</section>
 
-        <div id="projectFields" style="display:none">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="itemLocation">Location</label>
-              <select id="itemLocation">
-                <option value="Mbaitoli">Mbaitoli</option>
-                <option value="Ikeduru">Ikeduru</option>
-                <option value="Mbaitoli/Ikeduru">Both</option>
-              </select>
-            </div>
+<section class="section" id="news">
+  <div class="page-heading"><h1>News & Updates</h1><p>Publish official news, announcements and constituency updates.</p></div>
+  <div class="panel">
+    <div class="toolbar"><h2>News Articles</h2><button class="primary-btn" onclick="openForm('news')">+ Add News</button></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Photo</th><th>Headline</th><th>Publication</th><th>Actions</th></tr></thead>
+      <tbody id="newsTable"><tr><td colspan="4" class="loading">Loading news...</td></tr></tbody>
+    </table></div>
+  </div>
+</section>
 
-            <div class="form-group">
-              <label for="itemCategory">Category</label>
-              <select id="itemCategory">
-                <option value="Infrastructure">Infrastructure</option>
-                <option value="Education">Education</option>
-                <option value="Healthcare">Healthcare</option>
-                <option value="Youth Development">Youth Development</option>
-                <option value="Community Development">Community Development</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+<section class="section" id="gallery">
+  <div class="page-heading"><h1>Photo Gallery</h1><p>Upload and manage photographs for the public website.</p></div>
+  <div class="panel">
+    <div class="toolbar"><h2>Gallery Photos</h2><button class="primary-btn" onclick="openForm('gallery')">+ Add Photo</button></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Photo</th><th>Title</th><th>Publication</th><th>Actions</th></tr></thead>
+      <tbody id="galleryTable"><tr><td colspan="4" class="loading">Loading gallery...</td></tr></tbody>
+    </table></div>
+  </div>
+</section>
 
-            <div class="form-group full">
-              <label for="itemStatus">Project Status</label>
-              <select id="itemStatus">
-                <option value="Proposed">Proposed</option>
-                <option value="Ongoing">Ongoing</option>
-                <option value="Completed">Completed</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div id="newsFields" style="display:none">
-          <div class="form-group">
-            <label for="itemSummary">Short Summary</label>
-            <textarea id="itemSummary" rows="3"></textarea>
-          </div>
-        </div>
-
-        <div id="descriptionField" class="form-group">
-          <label for="itemDescription">Description / Content *</label>
-          <textarea id="itemDescription" required></textarea>
-        </div>
-
-        <div id="imageField" class="form-group">
-          <label for="itemImage">Upload Photograph</label>
-          <input type="file" id="itemImage" accept="image/*">
-          <p class="form-note">Accepted image formats depend on your browser. Keep images reasonably sized.</p>
-          <img id="imagePreview" class="preview" alt="Image preview">
-        </div>
-
-        <div id="pressFileField" class="form-group" style="display:none">
-          <label for="pressFile">Upload Press Document (optional)</label>
-          <input type="file" id="pressFile" accept=".pdf,.doc,.docx">
-          <p class="form-note">Upload public press documents only. Files in this bucket are publicly accessible.</p>
-        </div>
-
-        <div class="form-group">
-          <label for="publishedStatus">Publication Status</label>
-          <select id="publishedStatus">
-            <option value="false">Save as Unpublished</option>
-            <option value="true">Publish on Website</option>
-          </select>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="primary-btn" id="saveContentButton">Save Content</button>
-          <button type="button" class="secondary-btn" onclick="closeForm()">Cancel</button>
-        </div>
-      </form>
+<!-- VIDEO MANAGEMENT -->
+<section class="section" id="videos">
+  <div class="page-heading">
+    <h1>Video Management</h1>
+    <p>Add and manage YouTube videos or direct video links displayed on your public Video Gallery page.</p>
+  </div>
+  <div class="panel">
+    <div class="toolbar">
+      <h2>Website Videos</h2>
+      <button class="primary-btn" onclick="openForm('videos')">+ Add Video</button>
     </div>
-  </dialog>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Title</th><th>Video Link</th><th>Publication</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="videosTable">
+          <tr><td colspan="4" class="loading">Loading videos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // ---------------------------------------------------
-    // SUPABASE CONFIGURATION
-    // ---------------------------------------------------
+<section class="section" id="press">
+  <div class="page-heading"><h1>Press Releases</h1><p>Manage official statements, press releases and media documents.</p></div>
+  <div class="panel">
+    <div class="toolbar"><h2>Press Releases</h2><button class="primary-btn" onclick="openForm('press')">+ Add Press Release</button></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Title</th><th>Publication</th><th>Actions</th></tr></thead>
+      <tbody id="pressTable"><tr><td colspan="3" class="loading">Loading press releases...</td></tr></tbody>
+    </table></div>
+  </div>
+</section>
 
-    const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+<section class="section" id="messages">
+  <div class="page-heading"><h1>Website Messages</h1><p>Messages submitted by visitors through the contact page.</p></div>
+  <div class="panel">
+    <div class="toolbar"><h2>Inbox</h2><button class="secondary-btn" onclick="loadMessages()">Refresh Messages</button></div>
+    <div id="messagesList"><p class="loading">Loading messages...</p></div>
+  </div>
+</section>
 
-    const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+<section class="section" id="biography">
+  <div class="page-heading"><h1>Biography</h1><p>Manage the biography displayed on your website.</p></div>
+  <div class="panel content-editor">
+    <h2>Biography Content</h2>
+    <form id="biographyForm">
+      <div class="form-group"><label for="bioTitle">Section Title</label><input id="bioTitle" value="Biography of Hon. Akarachi Amadi" required></div>
+      <div class="form-group"><label for="bioContent">Biography Text</label><textarea id="bioContent" rows="10" required></textarea></div>
+      <div class="form-group"><label for="bioImage">Portrait Image URL</label><input id="bioImage" type="url" placeholder="https://example.com/portrait.jpg"></div>
+      <button class="primary-btn" type="submit">Save Biography</button>
+    </form>
+  </div>
+</section>
 
-    const db = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+<section class="section" id="vision">
+  <div class="page-heading"><h1>Vision & Mission</h1><p>Manage your vision and mission statements.</p></div>
+  <div class="panel content-editor">
+    <form id="visionForm">
+      <div class="form-group"><label for="visionTitle">Vision Heading</label><input id="visionTitle" value="Our Vision"></div>
+      <div class="form-group"><label for="visionContent">Vision Statement</label><textarea id="visionContent" rows="5"></textarea></div>
+      <div class="form-group"><label for="missionTitle">Mission Heading</label><input id="missionTitle" value="Our Mission"></div>
+      <div class="form-group"><label for="missionContent">Mission Statement</label><textarea id="missionContent" rows="5"></textarea></div>
+      <button class="primary-btn" type="submit">Save Vision & Mission</button>
+    </form>
+  </div>
+</section>
 
-    let currentUser = null;
-    let currentRecords = {
-      projects: [],
-      news: [],
-      gallery: [],
-      press: []
-    };
+<section class="section" id="settings">
+  <div class="page-heading"><h1>Website Settings</h1><p>Manage general website information.</p></div>
+  <div class="panel content-editor">
+    <form id="settingsForm">
+      <div class="form-group"><label for="siteTitle">Website Title</label><input id="siteTitle" value="Hon. Akarachi Amadi"></div>
+      <div class="form-group"><label for="siteDescription">Website Description</label><textarea id="siteDescription" rows="4"></textarea></div>
+      <div class="form-group"><label for="siteEmail">Public Contact Email</label><input id="siteEmail" type="email"></div>
+      <button class="primary-btn" type="submit">Save Settings</button>
+    </form>
+  </div>
+</section>
 
-    const BUCKETS = {
-      projects: "project-images",
-      news: "news-images",
-      gallery: "gallery-images",
-      press: "press-files"
-    };
+</main>
+</div>
 
-    // ---------------------------------------------------
-    // SECURITY: REQUIRE A SIGNED-IN ADMINISTRATOR
-    // ---------------------------------------------------
+<!-- ADD / EDIT DIALOG -->
+<dialog id="contentDialog" style="width:min(650px,94%);border:none;border-radius:10px;padding:0;margin:auto;box-shadow:0 15px 50px rgba(0,0,0,.25);max-height:90vh;overflow:auto">
+<div style="padding:24px">
+  <div class="toolbar"><h2 id="formHeading" style="color:#075b32">Add Content</h2><button class="danger-btn" type="button" onclick="closeForm()">Close</button></div>
+  <div id="formNotice" class="notice"></div>
+  <form id="contentForm">
+    <input type="hidden" id="recordId">
+    <input type="hidden" id="recordType">
 
-    async function requireAdministrator() {
-      const { data, error } = await db.auth.getSession();
+    <div class="form-group">
+      <label for="itemTitle">Title / Headline *</label>
+      <input id="itemTitle" required maxlength="200">
+    </div>
 
-      if (error || !data.session) {
-        window.location.replace("login.html");
-        return false;
-      }
+    <div id="projectFields" style="display:none">
+      <div class="form-grid">
+        <div class="form-group"><label for="itemLocation">Location</label><select id="itemLocation"><option value="Mbaitoli">Mbaitoli</option><option value="Ikeduru">Ikeduru</option><option value="Mbaitoli/Ikeduru">Both</option></select></div>
+        <div class="form-group"><label for="itemCategory">Category</label><select id="itemCategory"><option value="Infrastructure">Infrastructure</option><option value="Education">Education</option><option value="Healthcare">Healthcare</option><option value="Youth Development">Youth Development</option><option value="Community Development">Community Development</option><option value="Other">Other</option></select></div>
+        <div class="form-group full"><label for="itemStatus">Project Status</label><select id="itemStatus"><option value="Proposed">Proposed</option><option value="Ongoing">Ongoing</option><option value="Completed">Completed</option></select></div>
+      </div>
+    </div>
 
-      currentUser = data.session.user;
+    <div id="newsFields" style="display:none">
+      <div class="form-group"><label for="itemSummary">Short Summary</label><textarea id="itemSummary" rows="3"></textarea></div>
+    </div>
 
-      const { data: adminResult, error: adminError } =
-        await db.rpc("is_admin");
+    <div id="descriptionField" class="form-group">
+      <label for="itemDescription">Description / Content *</label>
+      <textarea id="itemDescription" required></textarea>
+    </div>
 
-      if (adminError || adminResult !== true) {
-        await db.auth.signOut();
-        alert("Access denied. Administrator permission is required.");
-        window.location.replace("login.html");
-        return false;
-      }
+    <!-- VIDEO URL FIELD -->
+    <div id="videoFields" style="display:none">
+      <div class="form-group">
+        <label for="itemVideoUrl">YouTube URL or Direct Video URL *</label>
+        <input id="itemVideoUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="url">
+        <p class="form-note">Paste a YouTube video link or a direct link to an MP4/WebM video. The public videos page will display it.</p>
+      </div>
+    </div>
 
-      document.getElementById("adminEmail").textContent =
-        "Signed in as: " + currentUser.email;
+    <div id="imageField" class="form-group">
+      <label for="itemImage">Upload Photograph</label>
+      <input type="file" id="itemImage" accept="image/*">
+      <p class="form-note">Accepted image formats depend on your browser. Keep images reasonably sized.</p>
+      <img id="imagePreview" class="preview" alt="Image preview">
+    </div>
 
-      return true;
-    }
+    <div id="pressFileField" class="form-group" style="display:none">
+      <label for="pressFile">Upload Press Document (optional)</label>
+      <input type="file" id="pressFile" accept=".pdf,.doc,.docx">
+      <p class="form-note">Upload public press documents only. Files in this bucket are publicly accessible.</p>
+    </div>
 
-    document.getElementById("logoutButton").addEventListener("click", async function () {
-      const confirmed = confirm("Are you sure you want to log out?");
+    <div class="form-group">
+      <label for="publishedStatus">Publication Status</label>
+      <select id="publishedStatus"><option value="false">Save as Unpublished</option><option value="true">Publish on Website</option></select>
+    </div>
 
-      if (!confirmed) return;
+    <div class="form-actions">
+      <button type="submit" class="primary-btn" id="saveContentButton">Save Content</button>
+      <button type="button" class="secondary-btn" onclick="closeForm()">Cancel</button>
+    </div>
+  </form>
+</div>
+</dialog>
 
-      await db.auth.signOut();
-      window.location.replace("login.html");
+<script>
+const SUPABASE_URL="https://znkeancluykkwduydory.supabase.co";
+const SUPABASE_KEY="sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+let currentUser=null;
+let currentRecords={projects:[],news:[],gallery:[],videos:[],press:[]};
+
+const BUCKETS={
+  projects:"project-images",
+  news:"news-images",
+  gallery:"gallery-images",
+  press:"press-files"
+};
+
+async function requireAdministrator(){
+  const {data,error}=await db.auth.getSession();
+  if(error||!data.session){window.location.replace("login.html");return false;}
+  currentUser=data.session.user;
+
+  const {data:adminResult,error:adminError}=await db.rpc("is_admin");
+  if(adminError||adminResult!==true){
+    await db.auth.signOut();
+    alert("Access denied. Administrator permission is required.");
+    window.location.replace("login.html");
+    return false;
+  }
+
+  document.getElementById("adminEmail").textContent="Signed in as: "+currentUser.email;
+  return true;
+}
+
+document.getElementById("logoutButton").addEventListener("click",async()=>{
+  if(!confirm("Are you sure you want to log out?"))return;
+  await db.auth.signOut();
+  window.location.replace("login.html");
+});
+
+document.querySelectorAll(".nav-btn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const section=button.dataset.section;
+    document.querySelectorAll(".nav-btn").forEach(item=>item.classList.remove("active"));
+    document.querySelectorAll(".section").forEach(item=>item.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById(section).classList.add("active");
+    if(section==="messages")loadMessages();
+    if(["biography","vision","settings"].includes(section))loadSiteContent();
+    if(section==="videos")loadVideos();
+  });
+});
+
+function notify(message,type="success"){
+  const box=document.getElementById("globalNotice");
+  box.textContent=message;
+  box.className="notice "+type;
+  window.scrollTo({top:0,behavior:"smooth"});
+  setTimeout(()=>{box.className="notice";box.textContent="";},6500);
+}
+function formNotify(message,type="error"){
+  const box=document.getElementById("formNotice");
+  box.textContent=message;
+  box.className="notice "+type;
+}
+function makeCell(text){const cell=document.createElement("td");cell.textContent=text==null?"":String(text);return cell;}
+function makeButton(label,className,action){
+  const button=document.createElement("button");
+  button.type="button";button.textContent=label;button.className=className;
+  button.addEventListener("click",action);return button;
+}
+function makeImageCell(url){
+  const cell=document.createElement("td");
+  if(url){const img=document.createElement("img");img.src=url;img.alt="Uploaded content image";img.loading="lazy";cell.appendChild(img);}
+  else cell.textContent="No image";
+  return cell;
+}
+function makePublicationBadge(isPublished){
+  const cell=document.createElement("td");
+  const badge=document.createElement("span");
+  badge.className="badge "+(isPublished?"published":"unpublished");
+  badge.textContent=isPublished?"Published":"Unpublished";
+  cell.appendChild(badge);return cell;
+}
+function showEmptyRow(tbody,columns,message){
+  tbody.replaceChildren();
+  const row=document.createElement("tr");
+  const cell=document.createElement("td");
+  cell.colSpan=columns;cell.className="empty";cell.textContent=message;
+  row.appendChild(cell);tbody.appendChild(row);
+}
+
+async function getRecords(table){
+  const {data,error}=await db.from(table).select("*").order("created_at",{ascending:false});
+  if(error)throw error;
+  return data||[];
+}
+
+async function loadProjects(){
+  const tbody=document.getElementById("projectsTable");
+  try{
+    const rows=await getRecords("projects");currentRecords.projects=rows;tbody.replaceChildren();
+    if(!rows.length){showEmptyRow(tbody,6,"No projects have been added yet.");return;}
+    rows.forEach(record=>{
+      const row=document.createElement("tr");
+      row.appendChild(makeImageCell(record.image_url));
+      row.appendChild(makeCell(record.title));
+      row.appendChild(makeCell(record.location));
+      row.appendChild(makeCell(record.status));
+      row.appendChild(makePublicationBadge(record.published));
+      const actions=document.createElement("td"),wrap=document.createElement("div");wrap.className="action-buttons";
+      wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("projects",record.id)));
+      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("projects",record)));
+      wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("projects",record)));
+      actions.appendChild(wrap);row.appendChild(actions);tbody.appendChild(row);
     });
+  }catch(error){console.error(error);showEmptyRow(tbody,6,"Could not load projects: "+error.message);}
+  updateCounts();
+}
 
-    // ---------------------------------------------------
-    // NAVIGATION
-    // ---------------------------------------------------
-
-    document.querySelectorAll(".nav-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        const section = button.dataset.section;
-
-        document.querySelectorAll(".nav-btn").forEach(item => {
-          item.classList.remove("active");
-        });
-
-        document.querySelectorAll(".section").forEach(item => {
-          item.classList.remove("active");
-        });
-
-        button.classList.add("active");
-        document.getElementById(section).classList.add("active");
-
-        if (section === "messages") loadMessages();
-        if (section === "biography") loadSiteContent();
-        if (section === "vision") loadSiteContent();
-        if (section === "settings") loadSiteContent();
-      });
+async function loadNews(){
+  const tbody=document.getElementById("newsTable");
+  try{
+    const rows=await getRecords("news");currentRecords.news=rows;tbody.replaceChildren();
+    if(!rows.length){showEmptyRow(tbody,4,"No news articles have been added yet.");return;}
+    rows.forEach(record=>{
+      const row=document.createElement("tr");
+      row.appendChild(makeImageCell(record.image_url));row.appendChild(makeCell(record.title));row.appendChild(makePublicationBadge(record.published));
+      const actions=document.createElement("td"),wrap=document.createElement("div");wrap.className="action-buttons";
+      wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("news",record.id)));
+      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("news",record)));
+      wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("news",record)));
+      actions.appendChild(wrap);row.appendChild(actions);tbody.appendChild(row);
     });
+  }catch(error){console.error(error);showEmptyRow(tbody,4,"Could not load news: "+error.message);}
+  updateCounts();
+}
 
-    // ---------------------------------------------------
-    // NOTIFICATIONS
-    // ---------------------------------------------------
+async function loadGallery(){
+  const tbody=document.getElementById("galleryTable");
+  try{
+    const rows=await getRecords("gallery");currentRecords.gallery=rows;tbody.replaceChildren();
+    if(!rows.length){showEmptyRow(tbody,4,"No gallery photos have been uploaded yet.");return;}
+    rows.forEach(record=>{
+      const row=document.createElement("tr");
+      row.appendChild(makeImageCell(record.image_url));row.appendChild(makeCell(record.title));row.appendChild(makePublicationBadge(record.published));
+      const actions=document.createElement("td"),wrap=document.createElement("div");wrap.className="action-buttons";
+      wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("gallery",record.id)));
+      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("gallery",record)));
+      wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("gallery",record)));
+      actions.appendChild(wrap);row.appendChild(actions);tbody.appendChild(row);
+    });
+  }catch(error){console.error(error);showEmptyRow(tbody,4,"Could not load gallery: "+error.message);}
+  updateCounts();
+}
 
-    function notify(message, type = "success") {
-      const box = document.getElementById("globalNotice");
+async function loadPress(){
+  const tbody=document.getElementById("pressTable");
+  try{
+    const rows=await getRecords("press_releases");currentRecords.press=rows;tbody.replaceChildren();
+    if(!rows.length){showEmptyRow(tbody,3,"No press releases have been added yet.");return;}
+    rows.forEach(record=>{
+      const row=document.createElement("tr");
+      row.appendChild(makeCell(record.title));row.appendChild(makePublicationBadge(record.published));
+      const actions=document.createElement("td"),wrap=document.createElement("div");wrap.className="action-buttons";
+      wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("press",record.id)));
+      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("press",record)));
+      wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("press",record)));
+      actions.appendChild(wrap);row.appendChild(actions);tbody.appendChild(row);
+    });
+  }catch(error){console.error(error);showEmptyRow(tbody,3,"Could not load press releases: "+error.message);}
+  updateCounts();
+}
 
-      box.textContent = message;
-      box.className = "notice " + type;
+/* VIDEO LOADING AND MANAGEMENT */
+async function loadVideos(){
+  const tbody=document.getElementById("videosTable");
+  try{
+    const rows=await getRecords("videos");
+    currentRecords.videos=rows;
+    tbody.replaceChildren();
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
-      setTimeout(() => {
-        box.className = "notice";
-        box.textContent = "";
-      }, 6500);
+    if(!rows.length){
+      showEmptyRow(tbody,4,"No videos have been added yet.");
+      updateCounts();
+      return;
     }
 
-    function formNotify(message, type = "error") {
-      const box = document.getElementById("formNotice");
+    rows.forEach(record=>{
+      const row=document.createElement("tr");
+      row.appendChild(makeCell(record.title));
 
-      box.textContent = message;
-      box.className = "notice " + type;
-    }
-
-    // ---------------------------------------------------
-    // SAFE HTML HELPERS
-    // ---------------------------------------------------
-
-    function makeCell(text) {
-      const cell = document.createElement("td");
-      cell.textContent = text == null ? "" : String(text);
-      return cell;
-    }
-
-    function makeButton(label, className, action) {
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.textContent = label;
-      button.className = className;
-      button.addEventListener("click", action);
-
-      return button;
-    }
-
-    function makeImageCell(url) {
-      const cell = document.createElement("td");
-
-      if (url) {
-        const img = document.createElement("img");
-        img.src = url;
-        img.alt = "Uploaded content image";
-        img.loading = "lazy";
-        cell.appendChild(img);
-      } else {
-        cell.textContent = "No image";
+      const linkCell=document.createElement("td");
+      if(record.video_url){
+        const link=document.createElement("a");
+        link.href=record.video_url;
+        link.target="_blank";
+        link.rel="noopener noreferrer";
+        link.textContent="Open video";
+        link.style.color="#075b32";
+        link.style.fontWeight="bold";
+        linkCell.appendChild(link);
+      }else{
+        linkCell.textContent="No link";
       }
+      row.appendChild(linkCell);
+      row.appendChild(makePublicationBadge(record.published));
 
-      return cell;
-    }
-
-    function makePublicationBadge(isPublished) {
-      const cell = document.createElement("td");
-      const badge = document.createElement("span");
-
-      badge.className = "badge " +
-        (isPublished ? "published" : "unpublished");
-
-      badge.textContent = isPublished ? "Published" : "Unpublished";
-      cell.appendChild(badge);
-
-      return cell;
-    }
-
-    function showEmptyRow(tbody, columns, message) {
-      tbody.replaceChildren();
-
-      const row = document.createElement("tr");
-      const cell = document.createElement("td");
-
-      cell.colSpan = columns;
-      cell.className = "empty";
-      cell.textContent = message;
-
-      row.appendChild(cell);
+      const actions=document.createElement("td");
+      const wrap=document.createElement("div");
+      wrap.className="action-buttons";
+      wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("videos",record.id)));
+      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("videos",record)));
+      wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("videos",record)));
+      actions.appendChild(wrap);
+      row.appendChild(actions);
       tbody.appendChild(row);
-    }
-
-    // ---------------------------------------------------
-    // LOAD DATA
-    // ---------------------------------------------------
-
-    async function getRecords(table) {
-      const { data, error } = await db
-        .from(table)
-        .select("*")
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-
-      return data || [];
-    }
-
-    async function loadProjects() {
-      const tbody = document.getElementById("projectsTable");
-
-      try {
-        const rows = await getRecords("projects");
-        currentRecords.projects = rows;
-
-        tbody.replaceChildren();
-
-        if (!rows.length) {
-          showEmptyRow(tbody, 6, "No projects have been added yet.");
-          return;
-        }
-
-        rows.forEach(record => {
-          const row = document.createElement("tr");
-
-          row.appendChild(makeImageCell(record.image_url));
-          row.appendChild(makeCell(record.title));
-          row.appendChild(makeCell(record.location));
-          row.appendChild(makeCell(record.status));
-          row.appendChild(makePublicationBadge(record.published));
-
-          const actions = document.createElement("td");
-          const wrap = document.createElement("div");
-          wrap.className = "action-buttons";
-
-          wrap.appendChild(makeButton("Edit", "edit-btn", () =>
-            editRecord("projects", record.id)
-          ));
-
-          wrap.appendChild(makeButton(
-            record.published ? "Unpublish" : "Publish",
-            "publish-btn",
-            () => togglePublication("projects", record)
-          ));
-
-          wrap.appendChild(makeButton("Delete", "delete-btn", () =>
-            deleteRecord("projects", record)
-          ));
-
-          actions.appendChild(wrap);
-          row.appendChild(actions);
-          tbody.appendChild(row);
-        });
-
-      } catch (error) {
-        console.error(error);
-        showEmptyRow(tbody, 6, "Could not load projects: " + error.message);
-      }
-
-      updateCounts();
-    }
-
-    async function loadNews() {
-      const tbody = document.getElementById("newsTable");
-
-      try {
-        const rows = await getRecords("news");
-        currentRecords.news = rows;
-
-        tbody.replaceChildren();
-
-        if (!rows.length) {
-          showEmptyRow(tbody, 4, "No news articles have been added yet.");
-          return;
-        }
-
-        rows.forEach(record => {
-          const row = document.createElement("tr");
-
-          row.appendChild(makeImageCell(record.image_url));
-          row.appendChild(makeCell(record.title));
-          row.appendChild(makePublicationBadge(record.published));
-
-          const actions = document.createElement("td");
-          const wrap = document.createElement("div");
-          wrap.className = "action-buttons";
-
-          wrap.appendChild(makeButton("Edit", "edit-btn", () =>
-            editRecord("news", record.id)
-          ));
-
-          wrap.appendChild(makeButton(
-            record.published ? "Unpublish" : "Publish",
-            "publish-btn",
-            () => togglePublication("news", record)
-          ));
-
-          wrap.appendChild(makeButton("Delete", "delete-btn", () =>
-            deleteRecord("news", record)
-          ));
-
-          actions.appendChild(wrap);
-          row.appendChild(actions);
-          tbody.appendChild(row);
-        });
-
-      } catch (error) {
-        console.error(error);
-        showEmptyRow(tbody, 4, "Could not load news: " + error.message);
-      }
-
-      updateCounts();
-    }
-
-    async function loadGallery() {
-      const tbody = document.getElementById("galleryTable");
-
-      try {
-        const rows = await getRecords("gallery");
-        currentRecords.gallery = rows;
-
-        tbody.replaceChildren();
-
-        if (!rows.length) {
-          showEmptyRow(tbody, 4, "No gallery photos have been uploaded yet.");
-          return;
-        }
-
-        rows.forEach(record => {
-          const row = document.createElement("tr");
-
-          row.appendChild(makeImageCell(record.image_url));
-          row.appendChild(makeCell(record.title));
-          row.appendChild(makePublicationBadge(record.published));
-
-          const actions = document.createElement("td");
-          const wrap = document.createElement("div");
-          wrap.className = "action-buttons";
-
-          wrap.appendChild(makeButton("Edit", "edit-btn", () =>
-            editRecord("gallery", record.id)
-          ));
-
-          wrap.appendChild(makeButton(
-            record.published ? "Unpublish" : "Publish",
-            "publish-btn",
-            () => togglePublication("gallery", record)
-          ));
-
-          wrap.appendChild(makeButton("Delete", "delete-btn", () =>
-            deleteRecord("gallery", record)
-          ));
-
-          actions.appendChild(wrap);
-          row.appendChild(actions);
-          tbody.appendChild(row);
-        });
-
-      } catch (error) {
-        console.error(error);
-        showEmptyRow(tbody, 4, "Could not load gallery: " + error.message);
-      }
-
-      updateCounts();
-    }
-
-    async function loadPress() {
-      const tbody = document.getElementById("pressTable");
-
-      try {
-        const rows = await getRecords("press_releases");
-        currentRecords.press = rows;
-
-        tbody.replaceChildren();
-
-        if (!rows.length) {
-          showEmptyRow(tbody, 3, "No press releases have been added yet.");
-          return;
-        }
-
-        rows.forEach(record => {
-          const row = document.createElement("tr");
-
-          row.appendChild(makeCell(record.title));
-          row.appendChild(makePublicationBadge(record.published));
-
-          const actions = document.createElement("td");
-          const wrap = document.createElement("div");
-          wrap.className = "action-buttons";
-
-          wrap.appendChild(makeButton("Edit", "edit-btn", () =>
-            editRecord("press", record.id)
-          ));
-
-          wrap.appendChild(makeButton(
-            record.published ? "Unpublish" : "Publish",
-            "publish-btn",
-            () => togglePublication("press", record)
-          ));
-
-          wrap.appendChild(makeButton("Delete", "delete-btn", () =>
-            deleteRecord("press", record)
-          ));
-
-          actions.appendChild(wrap);
-          row.appendChild(actions);
-          tbody.appendChild(row);
-        });
-
-      } catch (error) {
-        console.error(error);
-        showEmptyRow(tbody, 3, "Could not load press releases: " + error.message);
-      }
-
-      updateCounts();
-    }
-
-    async function loadMessages() {
-      const container = document.getElementById("messagesList");
-
-      container.textContent = "Loading messages...";
-
-      try {
-        const { data, error } = await db
-          .from("messages")
-          .select("*")
-          .order("created_at", { ascending: false });
-
-        if (error) throw error;
-
-        container.replaceChildren();
-
-        if (!data || !data.length) {
-          container.textContent = "No messages have been received yet.";
-          container.className = "empty";
-          document.getElementById("messageCount").textContent = "0";
-          return;
-        }
-
-        document.getElementById("messageCount").textContent = data.length;
-
-        data.forEach(message => {
-          const card = document.createElement("article");
-          card.className = "message-card";
-
-          const heading = document.createElement("h3");
-          heading.textContent = message.subject || "Website Message";
-
-          const sender = document.createElement("p");
-          sender.textContent = "From: " + (message.name || "Visitor");
-
-          const email = document.createElement("p");
-          email.textContent = "Email: " + (message.email || "Not supplied");
-
-          const phone = document.createElement("p");
-          phone.textContent = "Phone: " + (message.phone || "Not supplied");
-
-          const body = document.createElement("p");
-          body.textContent = message.message || message.content || "";
-
-          const date = document.createElement("p");
-          date.className = "message-meta";
-          date.textContent = message.created_at
-            ? new Date(message.created_at).toLocaleString()
-            : "";
-
-          card.append(heading, sender, email, phone, body, date);
-
-          const actions = document.createElement("div");
-          actions.className = "action-buttons";
-
-          actions.appendChild(makeButton(
-            "Delete Message",
-            "delete-btn",
-            () => deleteMessage(message.id)
-          ));
-
-          card.appendChild(actions);
-          container.appendChild(card);
-        });
-
-      } catch (error) {
-        console.error(error);
-        container.textContent =
-          "Could not load messages: " + error.message;
-      }
-    }
-
-    function updateCounts() {
-      document.getElementById("projectCount").textContent =
-        currentRecords.projects.length;
-
-      document.getElementById("newsCount").textContent =
-        currentRecords.news.length;
-
-      document.getElementById("galleryCount").textContent =
-        currentRecords.gallery.length;
-    }
-
-    // ---------------------------------------------------
-    // ADD / EDIT CONTENT
-    // ---------------------------------------------------
-
-    const dialog = document.getElementById("contentDialog");
-
-    function openForm(type) {
-      document.getElementById("contentForm").reset();
-      document.getElementById("recordId").value = "";
-      document.getElementById("recordType").value = type;
-      document.getElementById("formHeading").textContent =
-        "Add " + type.charAt(0).toUpperCase() + type.slice(1);
-
-      document.getElementById("imagePreview").style.display = "none";
-      document.getElementById("formNotice").className = "notice";
-
-      document.getElementById("projectFields").style.display =
-        type === "projects" ? "block" : "none";
-
-      document.getElementById("newsFields").style.display =
-        type === "news" ? "block" : "none";
-
-      document.getElementById("imageField").style.display =
-        type === "press" ? "none" : "block";
-
-      document.getElementById("pressFileField").style.display =
-        type === "press" ? "block" : "none";
-
-      document.getElementById("descriptionField").style.display =
-        type === "gallery" ? "none" : "block";
-
-      document.getElementById("itemDescription").required =
-        type !== "gallery";
-
-      dialog.showModal();
-    }
-
-    function closeForm() {
-      dialog.close();
-    }
-
-    function findRecord(type, id) {
-      return currentRecords[type].find(item =>
-        String(item.id) === String(id)
-      );
-    }
-
-    function editRecord(type, id) {
-      const record = findRecord(type, id);
-
-      if (!record) return;
-
-      openForm(type);
-
-      document.getElementById("formHeading").textContent =
-        "Edit " + type.slice(0, -1);
-
-      document.getElementById("recordId").value = record.id;
-      document.getElementById("itemTitle").value = record.title || "";
-
-      document.getElementById("itemDescription").value =
-        record.description || record.content || "";
-
-      document.getElementById("publishedStatus").value =
-        String(!!record.published);
-
-      if (type === "projects") {
-        document.getElementById("itemLocation").value =
-          record.location || "Mbaitoli";
-
-        document.getElementById("itemCategory").value =
-          record.category || "Infrastructure";
-
-        document.getElementById("itemStatus").value =
-          record.status || "Proposed";
-      }
-
-      if (type === "news") {
-        document.getElementById("itemSummary").value =
-          record.summary || "";
-      }
-
-      if (record.image_url) {
-        const preview = document.getElementById("imagePreview");
-        preview.src = record.image_url;
-        preview.style.display = "block";
-      }
-    }
-
-    // ---------------------------------------------------
-    // FILE UPLOAD
-    // ---------------------------------------------------
-
-    async function uploadFile(file, bucket) {
-      if (!file) return null;
-
-      const allowedImageTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-        "image/gif"
-      ];
-
-      if (bucket !== "press-files" &&
-          !allowedImageTypes.includes(file.type)) {
-        throw new Error("Please upload a JPG, PNG, WEBP or GIF image.");
-      }
-
-      if (file.size > 10 * 1024 * 1024) {
-        throw new Error("File is too large. Maximum allowed size is 10 MB.");
-      }
-
-      const safeName = file.name
-        .replace(/[^a-zA-Z0-9._-]/g, "-");
-
-      const path = Date.now() + "-" +
-        crypto.randomUUID() + "-" + safeName;
-
-      const { data, error } = await db.storage
-        .from(bucket)
-        .upload(path, file, {
-          cacheControl: "3600",
-          upsert: false
-        });
-
-      if (error) throw error;
-
-      const { data: publicData } = db.storage
-        .from(bucket)
-        .getPublicUrl(data.path);
-
-      return publicData.publicUrl;
-    }
-
-    document.getElementById("itemImage").addEventListener("change", function () {
-      const file = this.files[0];
-      const preview = document.getElementById("imagePreview");
-
-      if (!file) {
-        preview.style.display = "none";
-        return;
-      }
-
-      preview.src = URL.createObjectURL(file);
-      preview.style.display = "block";
     });
 
-    // ---------------------------------------------------
-    // SAVE CONTENT
-    // ---------------------------------------------------
+    updateCounts();
+  }catch(error){
+    console.error(error);
+    showEmptyRow(tbody,4,"Could not load videos: "+error.message);
+  }
+}
 
-    document.getElementById("contentForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const button = document.getElementById("saveContentButton");
-      button.disabled = true;
-      button.textContent = "SAVING...";
-
-      try {
-        const type = document.getElementById("recordType").value;
-        const id = document.getElementById("recordId").value;
-        const title = document.getElementById("itemTitle").value.trim();
-
-        if (!title) {
-          throw new Error("Please enter a title.");
-        }
-
-        const published =
-          document.getElementById("publishedStatus").value === "true";
-
-        let existing = id ? findRecord(type, id) : null;
-        let imageUrl = existing?.image_url || null;
-        let fileUrl = existing?.file_url || null;
-
-        const imageFile = document.getElementById("itemImage").files[0];
-        const pressFile = document.getElementById("pressFile").files[0];
-
-        if (imageFile && type !== "press") {
-          imageUrl = await uploadFile(imageFile, BUCKETS[type]);
-        }
-
-        if (pressFile && type === "press") {
-          fileUrl = await uploadFile(pressFile, BUCKETS.press);
-        }
-
-        const payload = {
-          title: title,
-          published: published
-        };
-
-        if (type === "projects") {
-          payload.location =
-            document.getElementById("itemLocation").value;
-
-          payload.category =
-            document.getElementById("itemCategory").value;
-
-          payload.status =
-            document.getElementById("itemStatus").value;
-
-          payload.description =
-            document.getElementById("itemDescription").value.trim();
-
-          payload.image_url = imageUrl;
-        }
-
-        if (type === "news") {
-          payload.summary =
-            document.getElementById("itemSummary").value.trim();
-
-          payload.content =
-            document.getElementById("itemDescription").value.trim();
-
-          payload.image_url = imageUrl;
-        }
-
-        if (type === "gallery") {
-          payload.description =
-            document.getElementById("itemDescription").value.trim();
-
-          payload.image_url = imageUrl;
-
-          if (!imageUrl) {
-            throw new Error("Please upload a photograph for this gallery item.");
-          }
-        }
-
-        if (type === "press") {
-          payload.content =
-            document.getElementById("itemDescription").value.trim();
-
-          payload.file_url = fileUrl;
-        }
-
-        const table = type === "press" ? "press_releases" : type;
-
-        let result;
-
-        if (id) {
-          result = await db
-            .from(table)
-            .update(payload)
-            .eq("id", id);
-        } else {
-          result = await db
-            .from(table)
-            .insert(payload);
-        }
-
-        if (result.error) throw result.error;
-
-        closeForm();
-
-        notify(
-          type.charAt(0).toUpperCase() + type.slice(1) +
-          (id ? " updated successfully." : " saved successfully.")
-        );
-
-        await reloadType(type);
-
-      } catch (error) {
-        console.error(error);
-        formNotify(error.message || "Could not save this content.");
-      } finally {
-        button.disabled = false;
-        button.textContent = "Save Content";
-      }
+async function loadMessages(){
+  const container=document.getElementById("messagesList");
+  container.textContent="Loading messages...";
+  try{
+    const {data,error}=await db.from("messages").select("*").order("created_at",{ascending:false});
+    if(error)throw error;
+    container.replaceChildren();
+    document.getElementById("messageCount").textContent=(data||[]).length;
+    if(!data||!data.length){container.textContent="No messages have been received yet.";container.className="empty";return;}
+    data.forEach(message=>{
+      const card=document.createElement("article");card.className="message-card";
+      const heading=document.createElement("h3");heading.textContent=message.subject||"Website Message";
+      const sender=document.createElement("p");sender.textContent="From: "+(message.name||"Visitor");
+      const email=document.createElement("p");email.textContent="Email: "+(message.email||"Not supplied");
+      const phone=document.createElement("p");phone.textContent="Phone: "+(message.phone||"Not supplied");
+      const body=document.createElement("p");body.textContent=message.message||message.content||"";
+      const date=document.createElement("p");date.className="message-meta";date.textContent=message.created_at?new Date(message.created_at).toLocaleString():"";
+      card.append(heading,sender,email,phone,body,date);
+      const actions=document.createElement("div");actions.className="action-buttons";
+      actions.appendChild(makeButton("Delete Message","delete-btn",()=>deleteMessage(message.id)));
+      card.appendChild(actions);container.appendChild(card);
     });
+  }catch(error){console.error(error);container.textContent="Could not load messages: "+error.message;}
+}
 
-    // ---------------------------------------------------
-    // PUBLISH / UNPUBLISH
-    // ---------------------------------------------------
+function updateCounts(){
+  document.getElementById("projectCount").textContent=currentRecords.projects.length;
+  document.getElementById("newsCount").textContent=currentRecords.news.length;
+  document.getElementById("galleryCount").textContent=currentRecords.gallery.length;
+  document.getElementById("videoCount").textContent=currentRecords.videos.filter(item=>item.published).length;
+}
 
-    async function togglePublication(type, record) {
-      const newValue = !record.published;
+const dialog=document.getElementById("contentDialog");
 
-      const confirmed = confirm(
-        newValue
-          ? "Publish this content on the website?"
-          : "Unpublish this content?"
-      );
+function openForm(type){
+  document.getElementById("contentForm").reset();
+  document.getElementById("recordId").value="";
+  document.getElementById("recordType").value=type;
+  document.getElementById("formHeading").textContent="Add "+type.charAt(0).toUpperCase()+type.slice(1);
+  document.getElementById("imagePreview").style.display="none";
+  document.getElementById("formNotice").className="notice";
 
-      if (!confirmed) return;
+  document.getElementById("projectFields").style.display=type==="projects"?"block":"none";
+  document.getElementById("newsFields").style.display=type==="news"?"block":"none";
+  document.getElementById("videoFields").style.display=type==="videos"?"block":"none";
+  document.getElementById("itemVideoUrl").required=type==="videos";
+  document.getElementById("imageField").style.display=["press","videos"].includes(type)?"none":"block";
+  document.getElementById("pressFileField").style.display=type==="press"?"block":"none";
+  document.getElementById("descriptionField").style.display=type==="gallery"?"none":"block";
+  document.getElementById("itemDescription").required=!["gallery","videos"].includes(type);
 
-      const table = type === "press" ? "press_releases" : type;
+  dialog.showModal();
+}
+function closeForm(){dialog.close();}
+function findRecord(type,id){return currentRecords[type].find(item=>String(item.id)===String(id));}
 
-      try {
-        const { error } = await db
-          .from(table)
-          .update({ published: newValue })
-          .eq("id", record.id);
+function editRecord(type,id){
+  const record=findRecord(type,id);
+  if(!record)return;
+  openForm(type);
+  document.getElementById("formHeading").textContent="Edit "+type.slice(0,-1);
+  document.getElementById("recordId").value=record.id;
+  document.getElementById("itemTitle").value=record.title||"";
+  document.getElementById("itemDescription").value=record.description||record.content||"";
+  document.getElementById("publishedStatus").value=String(!!record.published);
 
-        if (error) throw error;
+  if(type==="projects"){
+    document.getElementById("itemLocation").value=record.location||"Mbaitoli";
+    document.getElementById("itemCategory").value=record.category||"Infrastructure";
+    document.getElementById("itemStatus").value=record.status||"Proposed";
+  }
+  if(type==="news")document.getElementById("itemSummary").value=record.summary||"";
+  if(type==="videos")document.getElementById("itemVideoUrl").value=record.video_url||"";
 
-        notify(newValue ? "Content published." : "Content unpublished.");
+  if(record.image_url){
+    const preview=document.getElementById("imagePreview");
+    preview.src=record.image_url;preview.style.display="block";
+  }
+}
 
-        await reloadType(type);
+async function uploadFile(file,bucket){
+  if(!file)return null;
+  const allowed=["image/jpeg","image/png","image/webp","image/gif"];
+  if(bucket!=="press-files"&&!allowed.includes(file.type))throw new Error("Please upload a JPG, PNG, WEBP or GIF image.");
+  if(file.size>10*1024*1024)throw new Error("File is too large. Maximum allowed size is 10 MB.");
+  const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+  const path=Date.now()+"-"+crypto.randomUUID()+"-"+safeName;
+  const {data,error}=await db.storage.from(bucket).upload(path,file,{cacheControl:"3600",upsert:false});
+  if(error)throw error;
+  const {data:publicData}=db.storage.from(bucket).getPublicUrl(data.path);
+  return publicData.publicUrl;
+}
 
-      } catch (error) {
-        console.error(error);
-        notify("Could not update publication status: " + error.message, "error");
-      }
+document.getElementById("itemImage").addEventListener("change",function(){
+  const file=this.files[0],preview=document.getElementById("imagePreview");
+  if(!file){preview.style.display="none";return;}
+  preview.src=URL.createObjectURL(file);preview.style.display="block";
+});
+
+document.getElementById("contentForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const button=document.getElementById("saveContentButton");
+  button.disabled=true;button.textContent="SAVING...";
+
+  try{
+    const type=document.getElementById("recordType").value;
+    const id=document.getElementById("recordId").value;
+    const title=document.getElementById("itemTitle").value.trim();
+    if(!title)throw new Error("Please enter a title.");
+
+    const published=document.getElementById("publishedStatus").value==="true";
+    const existing=id?findRecord(type,id):null;
+    let imageUrl=existing?.image_url||null;
+    let fileUrl=existing?.file_url||null;
+
+    const imageFile=document.getElementById("itemImage").files[0];
+    const pressFile=document.getElementById("pressFile").files[0];
+
+    if(imageFile&&type!=="press")imageUrl=await uploadFile(imageFile,BUCKETS[type]);
+    if(pressFile&&type==="press")fileUrl=await uploadFile(pressFile,BUCKETS.press);
+
+    const payload={title,published};
+
+    if(type==="projects"){
+      payload.location=document.getElementById("itemLocation").value;
+      payload.category=document.getElementById("itemCategory").value;
+      payload.status=document.getElementById("itemStatus").value;
+      payload.description=document.getElementById("itemDescription").value.trim();
+      payload.image_url=imageUrl;
     }
 
-    // ---------------------------------------------------
-    // DELETE CONTENT
-    // ---------------------------------------------------
-
-    async function deleteRecord(type, record) {
-      if (!confirm("Permanently delete this content?")) return;
-
-      const table = type === "press" ? "press_releases" : type;
-
-      try {
-        const { error } = await db
-          .from(table)
-          .delete()
-          .eq("id", record.id);
-
-        if (error) throw error;
-
-        notify("Content deleted successfully.");
-
-        await reloadType(type);
-
-      } catch (error) {
-        console.error(error);
-        notify("Could not delete content: " + error.message, "error");
-      }
+    if(type==="news"){
+      payload.summary=document.getElementById("itemSummary").value.trim();
+      payload.content=document.getElementById("itemDescription").value.trim();
+      payload.image_url=imageUrl;
     }
 
-    async function deleteMessage(id) {
-      if (!confirm("Permanently delete this message?")) return;
-
-      try {
-        const { error } = await db
-          .from("messages")
-          .delete()
-          .eq("id", id);
-
-        if (error) throw error;
-
-        notify("Message deleted.");
-        await loadMessages();
-
-      } catch (error) {
-        console.error(error);
-        notify("Could not delete message: " + error.message, "error");
-      }
+    if(type==="gallery"){
+      payload.description=document.getElementById("itemDescription").value.trim();
+      payload.image_url=imageUrl;
+      if(!imageUrl)throw new Error("Please upload a photograph for this gallery item.");
     }
 
-    async function reloadType(type) {
-      if (type === "projects") await loadProjects();
-      if (type === "news") await loadNews();
-      if (type === "gallery") await loadGallery();
-      if (type === "press") await loadPress();
+    if(type==="press"){
+      payload.content=document.getElementById("itemDescription").value.trim();
+      payload.file_url=fileUrl;
     }
 
-    // ---------------------------------------------------
-    // SITE CONTENT
-    // Uses site_content with key/value columns.
-    // ---------------------------------------------------
-
-    async function getSiteValue(key) {
-      const { data, error } = await db
-        .from("site_content")
-        .select("value")
-        .eq("key", key)
-        .maybeSingle();
-
-      if (error) throw error;
-
-      return data ? data.value : null;
+    if(type==="videos"){
+      const videoUrl=document.getElementById("itemVideoUrl").value.trim();
+      if(!videoUrl)throw new Error("Please enter a video URL.");
+      let parsed;
+      try{parsed=new URL(videoUrl);}catch(e){throw new Error("Please enter a valid video URL.");}
+      if(!["http:","https:"].includes(parsed.protocol))throw new Error("Video URL must start with http:// or https://");
+      payload.video_url=videoUrl;
+      payload.description=document.getElementById("itemDescription").value.trim();
     }
 
-    async function saveSiteValue(key, value) {
-      const { error } = await db
-        .from("site_content")
-        .upsert(
-          { key: key, value: value },
-          { onConflict: "key" }
-        );
+    const table=type==="press"?"press_releases":type;
+    const result=id
+      ?await db.from(table).update(payload).eq("id",id)
+      :await db.from(table).insert(payload);
 
-      if (error) throw error;
+    if(result.error)throw result.error;
+
+    closeForm();
+    notify(type.charAt(0).toUpperCase()+type.slice(1)+(id?" updated successfully.":" saved successfully."));
+    await reloadType(type);
+  }catch(error){
+    console.error(error);
+    formNotify(error.message||"Could not save this content.");
+  }finally{
+    button.disabled=false;button.textContent="Save Content";
+  }
+});
+
+async function togglePublication(type,record){
+  const newValue=!record.published;
+  if(!confirm(newValue?"Publish this content on the website?":"Unpublish this content?"))return;
+  const table=type==="press"?"press_releases":type;
+  try{
+    const {error}=await db.from(table).update({published:newValue}).eq("id",record.id);
+    if(error)throw error;
+    notify(newValue?"Content published.":"Content unpublished.");
+    await reloadType(type);
+  }catch(error){console.error(error);notify("Could not update publication status: "+error.message,"error");}
+}
+
+async function deleteRecord(type,record){
+  if(!confirm("Permanently delete this content?"))return;
+  const table=type==="press"?"press_releases":type;
+  try{
+    const {error}=await db.from(table).delete().eq("id",record.id);
+    if(error)throw error;
+    notify("Content deleted successfully.");
+    await reloadType(type);
+  }catch(error){console.error(error);notify("Could not delete content: "+error.message,"error");}
+}
+
+async function deleteMessage(id){
+  if(!confirm("Permanently delete this message?"))return;
+  try{
+    const {error}=await db.from("messages").delete().eq("id",id);
+    if(error)throw error;
+    notify("Message deleted.");await loadMessages();
+  }catch(error){console.error(error);notify("Could not delete message: "+error.message,"error");}
+}
+
+async function reloadType(type){
+  if(type==="projects")await loadProjects();
+  if(type==="news")await loadNews();
+  if(type==="gallery")await loadGallery();
+  if(type==="videos")await loadVideos();
+  if(type==="press")await loadPress();
+}
+
+async function getSiteValue(key){
+  const {data,error}=await db.from("site_content").select("value").eq("key",key).maybeSingle();
+  if(error)throw error;
+  return data?data.value:null;
+}
+async function saveSiteValue(key,value){
+  const {error}=await db.from("site_content").upsert({key,value},{onConflict:"key"});
+  if(error)throw error;
+}
+function parseStoredValue(raw){
+  if(!raw)return null;
+  if(typeof raw!=="string")return raw;
+  try{return JSON.parse(raw);}catch(error){return raw;}
+}
+
+async function loadSiteContent(){
+  try{
+    const [bioRaw,visionRaw,missionRaw,settingsRaw]=await Promise.all([
+      getSiteValue("biography"),getSiteValue("vision"),getSiteValue("mission"),getSiteValue("settings")
+    ]);
+    const bio=parseStoredValue(bioRaw);
+    const vision=parseStoredValue(visionRaw);
+    const mission=parseStoredValue(missionRaw);
+    const settings=parseStoredValue(settingsRaw);
+
+    if(bio&&typeof bio==="object"){
+      document.getElementById("bioTitle").value=bio.title||"Biography of Hon. Akarachi Amadi";
+      document.getElementById("bioContent").value=bio.content||"";
+      document.getElementById("bioImage").value=bio.image||"";
     }
-
-    async function loadSiteContent() {
-      try {
-        const [bio, vision, mission, settings] = await Promise.all([
-          getSiteValue("biography"),
-          getSiteValue("vision"),
-          getSiteValue("mission"),
-          getSiteValue("settings")
-        ]);
-
-        if (bio) {
-          const value = typeof bio === "string" ? JSON.parse(bio) : bio;
-
-          document.getElementById("bioTitle").value =
-            value.title || "Biography of Hon. Akarachi Amadi";
-
-          document.getElementById("bioContent").value =
-            value.content || "";
-
-          document.getElementById("bioImage").value =
-            value.image || "";
-        }
-
-        if (vision) {
-          const value = typeof vision === "string" ? JSON.parse(vision) : vision;
-
-          document.getElementById("visionTitle").value =
-            value.title || "Our Vision";
-
-          document.getElementById("visionContent").value =
-            value.content || "";
-        }
-
-        if (mission) {
-          const value = typeof mission === "string" ? JSON.parse(mission) : mission;
-
-          document.getElementById("missionTitle").value =
-            value.title || "Our Mission";
-
-          document.getElementById("missionContent").value =
-            value.content || "";
-        }
-
-        if (settings) {
-          const value = typeof settings === "string"
-            ? JSON.parse(settings)
-            : settings;
-
-          document.getElementById("siteTitle").value =
-            value.title || "Hon. Akarachi Amadi";
-
-          document.getElementById("siteDescription").value =
-            value.description || "";
-
-          document.getElementById("siteEmail").value =
-            value.email || "";
-        }
-
-      } catch (error) {
-        console.error("Site content loading error:", error);
-      }
+    if(vision&&typeof vision==="object"){
+      document.getElementById("visionTitle").value=vision.title||"Our Vision";
+      document.getElementById("visionContent").value=vision.content||"";
+    }else if(typeof vision==="string"){
+      document.getElementById("visionContent").value=vision;
     }
-
-    document.getElementById("biographyForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      try {
-        const value = {
-          title: document.getElementById("bioTitle").value.trim(),
-          content: document.getElementById("bioContent").value.trim(),
-          image: document.getElementById("bioImage").value.trim()
-        };
-
-        await saveSiteValue("biography", JSON.stringify(value));
-        notify("Biography saved successfully.");
-
-      } catch (error) {
-        notify("Could not save biography: " + error.message, "error");
-      }
-    });
-
-    document.getElementById("visionForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      try {
-        const vision = {
-          title: document.getElementById("visionTitle").value.trim(),
-          content: document.getElementById("visionContent").value.trim()
-        };
-
-        const mission = {
-          title: document.getElementById("missionTitle").value.trim(),
-          content: document.getElementById("missionContent").value.trim()
-        };
-
-        await saveSiteValue("vision", JSON.stringify(vision));
-        await saveSiteValue("mission", JSON.stringify(mission));
-
-        notify("Vision and mission saved successfully.");
-
-      } catch (error) {
-        notify("Could not save vision and mission: " + error.message, "error");
-      }
-    });
-
-    document.getElementById("settingsForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      try {
-        const settings = {
-          title: document.getElementById("siteTitle").value.trim(),
-          description: document.getElementById("siteDescription").value.trim(),
-          email: document.getElementById("siteEmail").value.trim()
-        };
-
-        await saveSiteValue("settings", JSON.stringify(settings));
-
-        notify("Website settings saved successfully.");
-
-      } catch (error) {
-        notify("Could not save website settings: " + error.message, "error");
-      }
-    });
-
-    // ---------------------------------------------------
-    // INITIAL LOAD
-    // ---------------------------------------------------
-
-    async function initialiseDashboard() {
-      const authorised = await requireAdministrator();
-
-      if (!authorised) return;
-
-      await Promise.all([
-        loadProjects(),
-        loadNews(),
-        loadGallery(),
-        loadPress(),
-        loadMessages(),
-        loadSiteContent()
-      ]);
+    if(mission&&typeof mission==="object"){
+      document.getElementById("missionTitle").value=mission.title||"Our Mission";
+      document.getElementById("missionContent").value=mission.content||"";
+    }else if(typeof mission==="string"){
+      document.getElementById("missionContent").value=mission;
     }
+    if(settings&&typeof settings==="object"){
+      document.getElementById("siteTitle").value=settings.title||"Hon. Akarachi Amadi";
+      document.getElementById("siteDescription").value=settings.description||"";
+      document.getElementById("siteEmail").value=settings.email||"";
+    }
+  }catch(error){console.error("Site content loading error:",error);}
+}
 
-    initialiseDashboard();
+document.getElementById("biographyForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  try{
+    const value={
+      title:document.getElementById("bioTitle").value.trim(),
+      content:document.getElementById("bioContent").value.trim(),
+      image:document.getElementById("bioImage").value.trim()
+    };
+    await saveSiteValue("biography",JSON.stringify(value));
+    notify("Biography saved successfully.");
+  }catch(error){notify("Could not save biography: "+error.message,"error");}
+});
 
-    // Automatically return to login if the session ends.
-    db.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_OUT" || !session) {
-        window.location.replace("login.html");
-      }
-    });
-  </script>
+document.getElementById("visionForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  try{
+    const vision={title:document.getElementById("visionTitle").value.trim(),content:document.getElementById("visionContent").value.trim()};
+    const mission={title:document.getElementById("missionTitle").value.trim(),content:document.getElementById("missionContent").value.trim()};
+    await saveSiteValue("vision",JSON.stringify(vision));
+    await saveSiteValue("mission",JSON.stringify(mission));
+    notify("Vision and mission saved successfully.");
+  }catch(error){notify("Could not save vision and mission: "+error.message,"error");}
+});
 
+document.getElementById("settingsForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  try{
+    const settings={
+      title:document.getElementById("siteTitle").value.trim(),
+      description:document.getElementById("siteDescription").value.trim(),
+      email:document.getElementById("siteEmail").value.trim()
+    };
+    await saveSiteValue("settings",JSON.stringify(settings));
+    notify("Website settings saved successfully.");
+  }catch(error){notify("Could not save website settings: "+error.message,"error");}
+});
+
+async function initialiseDashboard(){
+  const authorised=await requireAdministrator();
+  if(!authorised)return;
+  await Promise.all([
+    loadProjects(),loadNews(),loadGallery(),loadVideos(),
+    loadPress(),loadMessages(),loadSiteContent()
+  ]);
+}
+initialiseDashboard();
+
+db.auth.onAuthStateChange((event,session)=>{
+  if(event==="SIGNED_OUT"||!session)window.location.replace("login.html");
+});
+</script>
 </body>
 </html>
