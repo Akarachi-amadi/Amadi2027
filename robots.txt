@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /Amadi2027/admin.html
+Disallow: /Amadi2027/login.html
+
+Sitemap: https://akarachi-amadi.github.io/Amadi2027/sitemap.xml
