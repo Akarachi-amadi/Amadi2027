@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The vision, mission and core values of Engr. Akarachi Amadi for Mbaitoli Federal Constituency 2027.">
-  <title>Vision & Mission | Engr. Akarachi Amadi 2027</title>
+  <meta name="description" content="The vision, mission and development priorities of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency.">
+  <title>Vision & Mission | Hon. Akarachi Amadi</title>
 
   <style>
     :root {
-      --green: #08783e;
-      --dark-green: #064d2b;
-      --gold: #e8b923;
-      --light: #f5f8f4;
-      --white: #ffffff;
+      --green: #075b32;
+      --dark-green: #034323;
+      --gold: #d6a62e;
+      --red: #c90019;
+      --light: #f5f8f5;
       --text: #26332b;
+      --muted: #65736a;
+      --white: #ffffff;
     }
 
     * {
@@ -22,100 +24,133 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background: var(--light);
+      line-height: 1.7;
     }
 
     a {
       text-decoration: none;
     }
 
-    .topbar {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 9px 15px;
-      font-size: 14px;
-    }
-
     header {
-      background: white;
-      padding: 15px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      background: var(--green);
+      color: var(--white);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .brand {
-      color: var(--dark-green);
-      font-size: 19px;
+      color: white;
+      font-size: 17px;
       font-weight: bold;
+      line-height: 1.35;
     }
 
     .brand span {
       display: block;
-      color: #777;
-      font-size: 11px;
-      letter-spacing: 1px;
+      color: #f2d47c;
+      font-size: 12px;
+      font-weight: normal;
     }
 
     nav {
       display: flex;
-      gap: 17px;
+      align-items: center;
       flex-wrap: wrap;
+      gap: 15px;
     }
 
     nav a {
-      color: #26332b;
-      font-size: 14px;
+      color: white;
+      font-size: 13px;
       font-weight: bold;
+      transition: color .2s;
     }
 
     nav a:hover,
     nav a.active {
-      color: var(--green);
+      color: #f5d36e;
+    }
+
+    .login-link {
+      background: var(--gold);
+      color: #172b1e !important;
+      padding: 8px 13px;
+      border-radius: 4px;
+    }
+
+    .welcome-bar {
+      background: var(--red);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 9px 0;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .welcome-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scrollWelcome 35s linear infinite;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .welcome-track strong {
+      color: #ffdf70;
+    }
+
+    @keyframes scrollWelcome {
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
     }
 
     .hero {
-      min-height: 390px;
-      padding: 90px 20px;
-      text-align: center;
-      color: white;
+      min-height: 340px;
       background:
-        linear-gradient(rgba(4,65,34,.88), rgba(4,65,34,.88)),
+        linear-gradient(rgba(0,65,34,.88), rgba(0,65,34,.88)),
         url("https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1600&q=80")
         center/cover;
+      color: white;
       display: flex;
-      justify-content: center;
       align-items: center;
+      text-align: center;
+      padding: 65px 20px;
     }
 
     .hero-content {
       max-width: 850px;
+      margin: auto;
     }
 
     .hero h1 {
-      font-size: clamp(34px, 5vw, 55px);
+      font-size: clamp(32px, 5vw, 48px);
       margin-bottom: 15px;
     }
 
-    .hero h1 span {
-      color: var(--gold);
-    }
-
     .hero p {
-      font-size: 18px;
       max-width: 700px;
       margin: auto;
+      font-size: 17px;
     }
 
     .gold-line {
@@ -127,208 +162,192 @@
     }
 
     .container {
-      width: 88%;
-      max-width: 1150px;
+      width: 90%;
+      max-width: 1100px;
       margin: auto;
     }
 
-    .section {
-      padding: 75px 0;
-    }
-
-    .section-heading {
+    .intro {
       text-align: center;
-      margin-bottom: 40px;
+      padding: 55px 0 25px;
     }
 
-    .section-heading h2 {
-      color: var(--dark-green);
-      font-size: 32px;
+    .intro h2 {
+      color: var(--green);
+      font-size: 29px;
+      margin-bottom: 12px;
     }
 
-    .section-heading p {
-      color: #66736a;
-      margin-top: 8px;
+    .intro p {
+      max-width: 780px;
+      margin: auto;
+      color: var(--muted);
     }
 
     .statement-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 25px;
+      padding: 25px 0 55px;
     }
 
     .statement-card {
       background: white;
-      padding: 35px;
-      border-radius: 12px;
+      border-radius: 10px;
+      padding: 30px;
       border-top: 5px solid var(--gold);
-      box-shadow: 0 5px 22px rgba(0,0,0,.06);
+      box-shadow: 0 5px 20px rgba(0,0,0,.07);
     }
 
-    .statement-card .icon {
-      font-size: 38px;
-      margin-bottom: 12px;
+    .statement-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #e9f3ec;
+      color: var(--green);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      margin-bottom: 16px;
     }
 
     .statement-card h2 {
       color: var(--green);
-      margin-bottom: 15px;
-      font-size: 26px;
+      font-size: 24px;
+      margin-bottom: 12px;
     }
 
     .statement-card p {
-      color: #536057;
+      color: #526057;
+      white-space: pre-line;
     }
 
-    .commitment {
-      background: var(--dark-green);
-      color: white;
+    .priorities {
+      background: #eaf1eb;
+      padding: 55px 0;
+    }
+
+    .section-heading {
       text-align: center;
-      padding: 75px 20px;
+      margin-bottom: 30px;
     }
 
-    .commitment h2 {
-      font-size: 32px;
-      color: var(--gold);
-      margin-bottom: 18px;
+    .section-heading h2 {
+      color: var(--green);
+      font-size: 30px;
     }
 
-    .commitment p {
-      max-width: 850px;
-      margin: auto;
-      font-size: 17px;
+    .section-heading p {
+      color: var(--muted);
+      margin-top: 8px;
     }
 
-    .values-grid {
+    .priority-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
-    .value-card {
+    .priority-card {
       background: white;
-      padding: 27px 22px;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(0,0,0,.05);
-      transition: transform .3s;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 3px 14px rgba(0,0,0,.05);
     }
 
-    .value-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .value-card h3 {
+    .priority-card h3 {
       color: var(--green);
-      margin-bottom: 10px;
+      margin-bottom: 9px;
+      font-size: 18px;
     }
 
-    .value-card p {
-      color: #66736a;
+    .priority-card p {
+      color: var(--muted);
       font-size: 14px;
     }
 
-    .priorities {
-      background: #edf4ee;
-    }
-
-    .priority-list {
-      max-width: 850px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .priority {
-      background: white;
-      padding: 18px;
-      border-left: 4px solid var(--gold);
-      border-radius: 7px;
-      font-weight: bold;
-    }
-
-    .priority span {
-      color: var(--green);
-      margin-right: 8px;
-    }
-
-    .cta {
-      padding: 65px 20px;
+    .commitment {
+      background: var(--green);
+      color: white;
       text-align: center;
-      background: white;
+      padding: 55px 20px;
     }
 
-    .cta h2 {
-      color: var(--dark-green);
-      font-size: 30px;
+    .commitment h2 {
+      font-size: 28px;
       margin-bottom: 12px;
     }
 
-    .cta p {
-      max-width: 650px;
-      margin: 0 auto 25px;
-      color: #66736a;
+    .commitment p {
+      max-width: 780px;
+      margin: auto;
+      color: #e4eee7;
     }
 
-    .btn {
+    .gold-button {
       display: inline-block;
-      background: var(--green);
-      color: white;
-      padding: 13px 28px;
+      margin-top: 22px;
+      background: var(--gold);
+      color: #14291c;
+      padding: 12px 22px;
       border-radius: 5px;
       font-weight: bold;
-      margin: 5px;
     }
 
-    .btn:hover {
-      background: var(--dark-green);
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      padding: 12px;
+      font-size: 13px;
     }
 
     footer {
-      background: #03351d;
+      background: #022f1a;
       color: white;
       text-align: center;
-      padding: 28px 15px;
-      font-size: 14px;
+      padding: 25px 15px;
+      font-size: 13px;
     }
 
-    footer span {
-      color: var(--gold);
+    footer p {
+      margin: 4px 0;
     }
 
-    @media (max-width: 800px) {
-      header {
-        justify-content: center;
-        text-align: center;
+    @media (max-width: 850px) {
+      .header-inner {
+        flex-direction: column;
       }
 
       nav {
         justify-content: center;
       }
 
-      .statement-grid,
-      .values-grid,
-      .priority-list {
-        grid-template-columns: 1fr;
+      .priority-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       nav {
-        gap: 11px;
+        gap: 10px;
       }
 
       nav a {
         font-size: 12px;
       }
 
-      .section {
-        padding: 50px 0;
+      .statement-grid,
+      .priority-grid {
+        grid-template-columns: 1fr;
       }
 
       .statement-card {
-        padding: 25px;
+        padding: 23px;
+      }
+
+      .hero {
+        min-height: 290px;
       }
     }
   </style>
@@ -336,160 +355,261 @@
 
 <body>
 
-  <div class="topbar">
-    ENG R. AKARACHI AMADI | HOUSE OF REPRESENTATIVES | MBAITOLI FEDERAL CONSTITUENCY 2027
-  </div>
-
-  <header>
+<header>
+  <div class="header-inner">
     <a href="index.html" class="brand">
-      AKARACHI AMADI
-      <span>LEADERSHIP • SERVICE • DEVELOPMENT</span>
+      HON. AKARACHI AMADI
+      <span>Mbaitoli/Ikeduru Federal Constituency</span>
     </a>
 
     <nav>
-      <a href="index.html">Home</a>
-      <a href="biography.html">Biography</a>
-      <a href="projects.html">Projects</a>
-      <a href="vision.html" class="active">Vision & Mission</a>
-      <a href="news.html">News</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
+      <a href="login.html" class="login-link">LOGIN</a>
+      <a href="index.html">HOME</a>
+      <a href="biography.html">BIOGRAPHY</a>
+      <a href="constituency.html">CONSTITUENCY</a>
+      <a href="legislative.html">LEGISLATIVE</a>
+      <a href="projects.html">PROJECTS</a>
+      <a href="achievements.html">ACHIEVEMENTS</a>
+      <a href="vision.html" class="active">VISION & MISSION</a>
+      <a href="news.html">NEWS</a>
+      <a href="press.html">PRESS</a>
+      <a href="gallery.html">GALLERY</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">CONTACT</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Our <span>Vision & Mission</span></h1>
-      <div class="gold-line"></div>
-      <p>
-        A vision for a stronger, more prosperous and better-represented
-        Mbaitoli Federal Constituency.
-      </p>
-    </div>
+<div class="welcome-bar">
+  <div class="welcome-track">
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Our Vision & Mission</h1>
+    <div class="gold-line"></div>
+    <p>
+      A statement of the development aspirations, public-service priorities
+      and commitment to representation of the people of Mbaitoli and Ikeduru.
+    </p>
+  </div>
+</section>
+
+<main>
+  <section class="container intro">
+    <h2>Building a Better Mbaitoli/Ikeduru</h2>
+    <p>
+      Effective representation requires listening to the people, understanding
+      community needs and working constructively towards sustainable development.
+      Our vision and mission provide a framework for these priorities.
+    </p>
   </section>
 
-  <section class="section">
+  <div class="container">
+    <div class="loading" id="contentStatus">Loading the latest statements...</div>
+
+    <section class="statement-grid">
+      <article class="statement-card">
+        <div class="statement-icon">◎</div>
+        <h2>Our Vision</h2>
+        <p id="visionText">
+          To support a constituency where communities have improved access to
+          opportunities, essential services and sustainable development, and
+          where every person has the opportunity to contribute to progress.
+        </p>
+      </article>
+
+      <article class="statement-card">
+        <div class="statement-icon">✦</div>
+        <h2>Our Mission</h2>
+        <p id="missionText">
+          To provide responsive representation, listen to constituents,
+          advocate for development priorities, support constructive legislation
+          and promote accountability in public service.
+        </p>
+      </article>
+    </section>
+  </div>
+
+  <section class="priorities">
     <div class="container">
       <div class="section-heading">
-        <h2>The Direction We Stand For</h2>
-        <p>Our guiding principles for purposeful representation and development.</p>
-        <div class="gold-line"></div>
+        <h2>Development Priorities</h2>
+        <p>
+          Areas of interest that can guide engagement and development discussions
+          across Mbaitoli and Ikeduru.
+        </p>
       </div>
 
-      <div class="statement-grid">
-        <div class="statement-card">
-          <div class="icon">🌍</div>
-          <h2>Our Vision</h2>
+      <div class="priority-grid">
+        <article class="priority-card">
+          <h3>Infrastructure</h3>
           <p>
-            To see Mbaitoli Federal Constituency become a thriving community
-            where people have access to opportunities, quality infrastructure,
-            improved education, healthcare and economic prosperity.
+            Supporting advocacy for better roads, public facilities,
+            electricity and access to essential infrastructure.
           </p>
-        </div>
+        </article>
 
-        <div class="statement-card">
-          <div class="icon">🎯</div>
-          <h2>Our Mission</h2>
+        <article class="priority-card">
+          <h3>Education</h3>
           <p>
-            To promote responsive representation, listen to the needs of our
-            people, advocate effective policies and pursue practical
-            development initiatives that improve the lives of constituents.
+            Promoting access to quality education, learning opportunities
+            and skills development for young people.
           </p>
-        </div>
+        </article>
+
+        <article class="priority-card">
+          <h3>Healthcare</h3>
+          <p>
+            Supporting efforts to improve access to healthcare services
+            and community health facilities.
+          </p>
+        </article>
+
+        <article class="priority-card">
+          <h3>Youth Empowerment</h3>
+          <p>
+            Encouraging skills acquisition, entrepreneurship and opportunities
+            that help young people participate in economic life.
+          </p>
+        </article>
+
+        <article class="priority-card">
+          <h3>Community Development</h3>
+          <p>
+            Encouraging inclusive engagement and attention to the needs
+            of communities across both local government areas.
+          </p>
+        </article>
+
+        <article class="priority-card">
+          <h3>Responsive Representation</h3>
+          <p>
+            Listening to constituents, raising community concerns and
+            communicating relevant updates about public responsibilities.
+          </p>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="commitment">
-    <h2>A Commitment to the People</h2>
+    <h2>Representation Through Engagement</h2>
     <p>
-      Leadership should be measured by service, accountability and meaningful
-      results. Our commitment is to give the people of Mbaitoli a voice,
-      strengthen community participation and work towards opportunities
-      that benefit every part of the constituency.
+      The needs and aspirations of constituents should remain central to
+      representation. Community participation, constructive dialogue and
+      accountability are important parts of the development process.
     </p>
+    <a href="contact.html" class="gold-button">Share Your Views</a>
   </section>
+</main>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Our Core Values</h2>
-        <p>The principles that should guide every decision and action.</p>
-        <div class="gold-line"></div>
-      </div>
+<footer>
+  <p><strong>Hon. Akarachi Amadi</strong></p>
+  <p>Member, House of Representatives</p>
+  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria</p>
+  <p>© <span id="year"></span> All Rights Reserved.</p>
+</footer>
 
-      <div class="values-grid">
-        <div class="value-card">
-          <h3>Integrity</h3>
-          <p>Upholding honesty, transparency and ethical leadership.</p>
-        </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        <div class="value-card">
-          <h3>Accountability</h3>
-          <p>Being answerable to the people and committed to responsible service.</p>
-        </div>
+<script>
+  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
 
-        <div class="value-card">
-          <h3>Inclusiveness</h3>
-          <p>Listening to and respecting the voices of every community and group.</p>
-        </div>
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-        <div class="value-card">
-          <h3>Development</h3>
-          <p>Supporting practical initiatives that create lasting community benefits.</p>
-        </div>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-        <div class="value-card">
-          <h3>Unity</h3>
-          <p>Encouraging cooperation, peace and a shared sense of purpose.</p>
-        </div>
+  function getText(value, fallback) {
+    if (value === null || value === undefined || value === "") {
+      return fallback;
+    }
 
-        <div class="value-card">
-          <h3>Service</h3>
-          <p>Putting the needs and wellbeing of the people at the heart of leadership.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    // The dashboard may store content as JSON-encoded text.
+    if (typeof value === "string") {
+      try {
+        const parsed = JSON.parse(value);
 
-  <section class="section priorities">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Our Development Priorities</h2>
-        <p>Areas for advocacy, engagement and constituency development.</p>
-        <div class="gold-line"></div>
-      </div>
+        if (typeof parsed === "string") {
+          return parsed;
+        }
 
-      <div class="priority-list">
-        <div class="priority"><span>✓</span> Quality education and youth development</div>
-        <div class="priority"><span>✓</span> Better healthcare access</div>
-        <div class="priority"><span>✓</span> Roads and community infrastructure</div>
-        <div class="priority"><span>✓</span> Skills acquisition and job opportunities</div>
-        <div class="priority"><span>✓</span> Agriculture and economic empowerment</div>
-        <div class="priority"><span>✓</span> Transparent and responsive representation</div>
-        <div class="priority"><span>✓</span> Support for women and vulnerable groups</div>
-        <div class="priority"><span>✓</span> Community engagement and inclusion</div>
-      </div>
-    </div>
-  </section>
+        if (parsed && typeof parsed === "object") {
+          return parsed.text || parsed.content || fallback;
+        }
+      } catch (error) {
+        // It is ordinary text, so use it as it is.
+      }
 
-  <section class="cta">
-    <h2>Let's Build a Better Mbaitoli</h2>
-    <p>
-      A stronger constituency begins with listening, participation and a
-      shared commitment to progress.
-    </p>
-    <a href="contact.html" class="btn">Get in Touch</a>
-    <a href="index.html" class="btn">Back to Home</a>
-  </section>
+      return value;
+    }
 
-  <footer>
-    <p>
-      &copy; 2026–2027 <span>Engr. Akarachi Amadi</span>.
-      All Rights Reserved.
-    </p>
-    <p>House of Representatives | Mbaitoli Federal Constituency</p>
-  </footer>
+    if (typeof value === "object") {
+      return value.text || value.content || fallback;
+    }
+
+    return fallback;
+  }
+
+  async function loadVisionAndMission() {
+    const status = document.getElementById("contentStatus");
+
+    const defaultVision =
+      "To support a constituency where communities have improved access to opportunities, essential services and sustainable development, and where every person has the opportunity to contribute to progress.";
+
+    const defaultMission =
+      "To provide responsive representation, listen to constituents, advocate for development priorities, support constructive legislation and promote accountability in public service.";
+
+    try {
+      const { data, error } = await db
+        .from("site_content")
+        .select("key, value")
+        .in("key", ["vision", "mission"]);
+
+      if (error) {
+        throw error;
+      }
+
+      const content = {};
+
+      (data || []).forEach((item) => {
+        content[item.key] = item.value;
+      });
+
+      document.getElementById("visionText").textContent =
+        getText(content.vision, defaultVision);
+
+      document.getElementById("missionText").textContent =
+        getText(content.mission, defaultMission);
+
+      status.textContent = "Vision and Mission statements loaded.";
+      status.style.color = "#075b32";
+
+      setTimeout(() => {
+        status.style.display = "none";
+      }, 2500);
+
+    } catch (error) {
+      console.error("Could not load Vision and Mission:", error);
+
+      document.getElementById("visionText").textContent = defaultVision;
+      document.getElementById("missionText").textContent = defaultMission;
+
+      status.textContent =
+        "Showing the default statements. The latest content could not be loaded from the database.";
+      status.style.color = "#a33";
+    }
+  }
+
+  loadVisionAndMission();
+</script>
 
 </body>
 </html>
