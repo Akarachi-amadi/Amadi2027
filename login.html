@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Login | Hon. Akarachi Amadi</title>
+
+  <style>
+    :root {
+      --green: #08743b;
+      --dark-green: #064d2b;
+      --gold: #d6a62e;
+      --red: #c90019;
+      --light: #f4f7f4;
+      --white: #ffffff;
+      --text: #26332b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--light);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Welcome ticker */
+    .welcome {
+      background: var(--red);
+      color: white;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 3px solid var(--gold);
+    }
+
+    .welcome-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 27s linear infinite;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .welcome strong {
+      color: #ffe18a;
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--dark-green);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .brand span {
+      display: block;
+      color: #777;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 15px;
+    }
+
+    nav a {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    nav a.active {
+      background: var(--gold);
+      color: var(--dark-green);
+      padding: 9px 15px;
+      border-radius: 5px;
+    }
+
+    /* Login area */
+    .login-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 55px 20px;
+      background:
+        linear-gradient(rgba(6,77,43,.91), rgba(6,77,43,.91)),
+        linear-gradient(135deg, #08743b, #064d2b);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border-radius: 13px;
+      padding: 38px 32px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.2);
+    }
+
+    .login-logo {
+      width: 75px;
+      height: 75px;
+      margin: 0 auto 17px;
+      border-radius: 50%;
+      background: var(--dark-green);
+      border: 4px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .login-card h1 {
+      color: var(--dark-green);
+      text-align: center;
+      font-size: 27px;
+      margin-bottom: 7px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #34443a;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d9e1da;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: .3s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(8,116,59,.1);
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 75px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: none;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 15px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .3s;
+      margin-top: 5px;
+    }
+
+    .login-button:hover {
+      background: var(--dark-green);
+    }
+
+    .login-message {
+      display: none;
+      margin-top: 17px;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .login-message.error {
+      display: block;
+      background: #ffe8e8;
+      color: #a00000;
+    }
+
+    .login-message.success {
+      display: block;
+      background: #e7f6eb;
+      color: #08743b;
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 23px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .back-home:hover {
+      color: var(--dark-green);
+    }
+
+    .security-note {
+      margin-top: 20px;
+      padding: 12px;
+      background: #fff8e8;
+      border-left: 3px solid var(--gold);
+      color: #76602d;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: #092e1c;
+      color: #e4eee7;
+      padding: 25px 5%;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      margin: 5px 0;
+    }
+
+    footer a {
+      color: #f2d27d;
+    }
+
+    @media (max-width: 850px) {
+      .nav-container {
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 30px 22px;
+      }
+
+      .login-card h1 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Welcome Message -->
+  <div class="welcome">
+    <div class="welcome-track">
+      <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+
+      <a href="index.html" class="brand">
+        HON. AKARACHI AMADI
+        <span>Mbaitoli/Ikeduru Federal Constituency</span>
+      </a>
+
+      <nav>
+        <a href="login.html" class="active">LOGIN</a>
+        <a href="index.html">Home</a>
+        <a href="biography.html">Biography</a>
+        <a href="constituency.html">Constituency</a>
+        <a href="projects.html">Projects</a>
+        <a href="achievements.html">Achievements</a>
+        <a href="legislative.html">Legislative</a>
+        <a href="vision.html">Vision</a>
+        <a href="news.html">News</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="press.html">Press</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Login Section -->
+  <main class="login-area">
+
+    <div class="login-card">
+
+      <div class="login-logo">AA</div>
+
+      <h1>Admin Login</h1>
+
+      <p class="subtitle">
+        Sign in to access the website administration dashboard.
+      </p>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="email">Admin Email Address</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your admin email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <div class="password-wrapper">
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              id="togglePassword"
+            >
+              SHOW
+            </button>
+
+          </div>
+        </div>
+
+        <button type="submit" class="login-button" id="loginButton">
+          LOGIN TO DASHBOARD
+        </button>
+
+        <div id="loginMessage" class="login-message" role="status"></div>
+
+      </form>
+
+      <div class="security-note">
+        <strong>Security notice:</strong>
+        This page is a login interface only. Real account verification
+        must be connected to secure authentication before public use.
+        Do not use front-end-only passwords to protect a live website.
+      </div>
+
+      <a href="index.html" class="back-home">
+        ← Back to Website Home
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+
+    <p><strong>HON. AKARACHI AMADI</strong></p>
+
+    <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
+
+    <p>
+      &copy; <span id="year"></span> Hon. Akarachi Amadi.
+      All Rights Reserved.
+    </p>
+
+  </footer>
+
+  <script>
+    // Show or hide password
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+
+    togglePassword.addEventListener("click", function () {
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePassword.textContent = "HIDE";
+      } else {
+        passwordInput.type = "password";
+        togglePassword.textContent = "SHOW";
+      }
+
+    });
+
+    // Login form
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const message = document.getElementById("loginMessage");
+      const button = document.getElementById("loginButton");
+
+      message.className = "login-message";
+      message.textContent = "";
+
+      // Authentication is not connected yet.
+      message.className = "login-message error";
+      message.textContent =
+        "Authentication has not been connected yet. Please connect secure admin authentication before logging in.";
+
+      button.textContent = "LOGIN TO DASHBOARD";
+
+    });
+
+    // Automatically update year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
