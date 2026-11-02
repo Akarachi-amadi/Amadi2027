@@ -3,7 +3,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | Hon. Akarachi Amadi</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
 :root {
   --green:#075b32;
   --dark-green:#034323;
@@ -96,8 +97,9 @@ textarea{min-height:125px;resize:vertical}
 .form-group.full{grid-column:auto}
 }
 @media(max-width:400px){.cards{grid-template-columns:1fr 1fr;gap:9px}.stat-card{padding:15px}.stat-card strong{font-size:24px}}
-</style></head><body>
-<header class="topbar">
+</style>
+</head>
+<body><header class="topbar">
   <div class="brand">HON. AKARACHI AMADI<small>ADMINISTRATOR DASHBOARD</small></div>
   <div class="top-actions">
     <a href="index.html" target="_blank">View Website</a>
@@ -113,6 +115,7 @@ textarea{min-height:125px;resize:vertical}
   <button class="nav-btn" data-section="videos">Video Management</button>
   <button class="nav-btn" data-section="press">Press Releases</button>
   <button class="nav-btn" data-section="messages">Messages</button>
+  <button class="nav-btn" data-section="subscribers">Newsletter Subscribers</button>
   <button class="nav-btn" data-section="biography">Biography</button>
   <button class="nav-btn" data-section="vision">Vision & Mission</button>
   <button class="nav-btn" data-section="settings">Website Settings</button>
@@ -121,20 +124,24 @@ textarea{min-height:125px;resize:vertical}
   <div class="page-heading">
     <h1>Dashboard Overview</h1>
     <p>Welcome to your website management dashboard.</p>
-  </div>  <div class="cards">
+  </div>
+  <div class="cards">
     <div class="stat-card"><span>Total Projects</span><strong id="projectCount">0</strong></div>
     <div class="stat-card"><span>News Articles</span><strong id="newsCount">0</strong></div>
     <div class="stat-card"><span>Gallery Photos</span><strong id="galleryCount">0</strong></div>
     <div class="stat-card"><span>Published Videos</span><strong id="videoCount">0</strong></div>
     <div class="stat-card"><span>Total Messages</span><strong id="messageCount">0</strong></div>
-  </div>  <div class="panel">
+    <div class="stat-card"><span>Newsletter Subscribers</span><strong id="subscriberCount">0</strong></div>
+  </div>
+  <div class="panel">
     <h2>Website Management</h2>
     <p style="line-height:1.8;font-size:14px;color:#65736a">
       Use the menu to manage your website content. Projects, news,
       gallery photos, videos and press releases can be saved to Supabase.
       Published content can appear on the corresponding public website pages.
     </p>
-  </div>  <div class="panel">
+  </div>
+  <div class="panel">
     <h2>Administrator Account</h2>
     <p id="adminEmail" style="font-size:14px;line-height:1.8">Checking administrator account...</p>
   </div>
@@ -197,6 +204,27 @@ textarea{min-height:125px;resize:vertical}
     <div class="toolbar"><h2>Inbox</h2><button class="secondary-btn" onclick="loadMessages()">Refresh Messages</button></div>
     <div id="messagesList"><p class="loading">Loading messages...</p></div>
   </div>
+</section><section class="section" id="subscribers">
+  <div class="page-heading">
+    <h1>Newsletter Subscribers</h1>
+    <p>View and manage visitors who have subscribed to receive official website updates.</p>
+  </div>
+  <div class="panel">
+    <div class="toolbar">
+      <h2>Subscriber List</h2>
+      <button class="secondary-btn" onclick="loadSubscribers()">Refresh Subscribers</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Email Address</th><th>Subscription Date</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="subscribersTable">
+          <tr><td colspan="5" class="loading">Loading subscribers...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section><section class="section" id="biography">
   <div class="page-heading"><h1>Biography</h1><p>Manage the biography displayed on your website.</p></div>
   <div class="panel content-editor">
@@ -229,19 +257,18 @@ textarea{min-height:125px;resize:vertical}
       <button class="primary-btn" type="submit">Save Settings</button>
     </form>
   </div>
-</section>
-</main>
+</section></main>
 </div><dialog id="contentDialog" style="width:min(650px,94%);border:none;border-radius:10px;padding:0;margin:auto;box-shadow:0 15px 50px rgba(0,0,0,.25);max-height:90vh;overflow:auto">
 <div style="padding:24px">
   <div class="toolbar"><h2 id="formHeading" style="color:#075b32">Add Content</h2><button class="danger-btn" type="button" onclick="closeForm()">Close</button></div>
-  <div id="formNotice" class="notice"></div>  <form id="contentForm">
+  <div id="formNotice" class="notice"></div>
+  <form id="contentForm">
     <input type="hidden" id="recordId">
-    <input type="hidden" id="recordType"><div class="form-group">
-  <label for="itemTitle">Title / Headline *</label>
-  <input id="itemTitle" required maxlength="200">
-</div>
-
-<div id="projectFields" style="display:none">
+    <input type="hidden" id="recordType">
+    <div class="form-group">
+      <label for="itemTitle">Title / Headline *</label>
+      <input id="itemTitle" required maxlength="200">
+    </div><div id="projectFields" style="display:none">
   <div class="form-grid">
     <div class="form-group"><label for="itemLocation">Location</label><select id="itemLocation"><option value="Mbaitoli">Mbaitoli</option><option value="Ikeduru">Ikeduru</option><option value="Mbaitoli/Ikeduru">Both</option></select></div>
     <div class="form-group"><label for="itemCategory">Category</label><select id="itemCategory"><option value="Infrastructure">Infrastructure</option><option value="Education">Education</option><option value="Healthcare">Healthcare</option><option value="Youth Development">Youth Development</option><option value="Community Development">Community Development</option><option value="Other">Other</option></select></div>
@@ -345,6 +372,7 @@ document.querySelectorAll(".nav-btn").forEach(button=>{
     document.getElementById(section).classList.add("active");
 
     if(section==="messages")loadMessages();
+    if(section==="subscribers")loadSubscribers();
     if(["biography","vision","settings"].includes(section))loadSiteContent();
     if(section==="videos")loadVideos();
   });
@@ -567,7 +595,7 @@ async function loadPress(){
   updateCounts();
 }
 
-/* VIDEO MANAGEMENT: DIRECT PHONE UPLOADS */
+/* VIDEO MANAGEMENT */
 
 async function loadVideos(){
   const tbody=document.getElementById("videosTable");
@@ -689,6 +717,102 @@ async function loadMessages(){
     if(countElement)countElement.textContent="!";
     container.className="notice error";
     container.textContent="Could not load messages: "+error.message;
+  }
+}
+
+/* NEWSLETTER SUBSCRIBERS */
+
+async function loadSubscribers(){
+  const tbody=document.getElementById("subscribersTable");
+  const countElement=document.getElementById("subscriberCount");
+
+  if(!tbody)return;
+
+  tbody.innerHTML='<tr><td colspan="5" class="loading">Loading subscribers...</td></tr>';
+
+  try{
+    const {data,error}=await db
+      .from("subscribers")
+      .select("id,name,email,subscribed_at,active")
+      .order("subscribed_at",{ascending:false});
+
+    if(error)throw error;
+
+    const subscribers=data||[];
+
+    if(countElement)countElement.textContent=subscribers.length;
+
+    tbody.replaceChildren();
+
+    if(subscribers.length===0){
+      showEmptyRow(tbody,5,"No newsletter subscribers yet.");
+      return;
+    }
+
+    subscribers.forEach(subscriber=>{
+      const row=document.createElement("tr");
+
+      row.appendChild(makeCell(subscriber.name));
+      row.appendChild(makeCell(subscriber.email));
+
+      const date=subscriber.subscribed_at
+        ?new Date(subscriber.subscribed_at).toLocaleString()
+        :"Date unavailable";
+
+      row.appendChild(makeCell(date));
+
+      const statusCell=document.createElement("td");
+      const badge=document.createElement("span");
+      badge.className="badge "+(subscriber.active?"published":"unpublished");
+      badge.textContent=subscriber.active?"Active":"Inactive";
+      statusCell.appendChild(badge);
+      row.appendChild(statusCell);
+
+      const actions=document.createElement("td");
+      const wrap=document.createElement("div");
+      wrap.className="action-buttons";
+
+      wrap.appendChild(makeButton(
+        "Delete",
+        "delete-btn",
+        ()=>deleteSubscriber(subscriber)
+      ));
+
+      actions.appendChild(wrap);
+      row.appendChild(actions);
+      tbody.appendChild(row);
+    });
+
+  }catch(error){
+    console.error("Subscriber loading error:",error);
+
+    if(countElement)countElement.textContent="!";
+
+    showEmptyRow(
+      tbody,
+      5,
+      "Could not load subscribers: "+error.message
+    );
+  }
+}
+
+async function deleteSubscriber(subscriber){
+  if(!confirm("Delete the newsletter subscription for "+subscriber.email+"?"))return;
+
+  try{
+    const {error}=await db
+      .from("subscribers")
+      .delete()
+      .eq("id",subscriber.id);
+
+    if(error)throw error;
+
+    notify("Subscriber deleted successfully.");
+    await loadSubscribers();
+
+  }catch(error){
+    console.error(error);
+    notify("Could not delete subscriber: "+error.message,"error");
   }
 }
 
@@ -1226,6 +1350,7 @@ async function initialiseDashboard(){
     loadVideos(),
     loadPress(),
     loadMessages(),
+    loadSubscribers(),
     loadSiteContent()
   ]);
 }
