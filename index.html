@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Hon. Akarachi Amadi | Mbaitoli/Ikeduru Federal Constituency</title>  <meta name="description" content="Official website of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.">  <!-- Google Search Console Verification -->  <meta name="google-site-verification" content="JAzkNE5dk9pGTV8lNE7j6MklZ7mas90sqKy7KOnBBNw" />  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Hon. Akarachi Amadi | Mbaitoli/Ikeduru Federal Constituency</title>  <meta name="description" content="Official website of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.">  <meta name="google-site-verification" content="JAzkNE5dk9pGTV8lNE7j6MklZ7mas90sqKy7KOnBBNw">  <style>
     :root {
       --green: #08743b;
       --dark-green: #064d2b;
@@ -57,13 +57,8 @@
     }
 
     @keyframes scroll {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-100%);
-      }
+      from { transform: translateX(0); }
+      to { transform: translateX(-100%); }
     }
 
     /* Header */
@@ -129,8 +124,6 @@
       color: var(--green);
     }
 
-    /* Login menu */
-
     nav a.login-menu {
       background: var(--gold);
       color: var(--dark-green);
@@ -153,10 +146,8 @@
       background:
         linear-gradient(rgba(3,48,25,.78), rgba(3,48,25,.78)),
         url("https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png");
-
       background-size: cover;
       background-position: center 25%;
-
       display: flex;
       align-items: center;
       color: white;
@@ -353,6 +344,86 @@
       font-size: 16px;
     }
 
+    /* Newsletter */
+
+    .newsletter-section {
+      background: linear-gradient(135deg, #064d2b, #08743b);
+      padding: 70px 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .newsletter-container {
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .newsletter-section h2 {
+      font-size: 32px;
+      color: #f4d47c;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-section .newsletter-description {
+      color: #e4eee7;
+      margin: 0 auto 25px;
+      max-width: 600px;
+    }
+
+    .newsletter-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .newsletter-form input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(214,166,46,.25);
+    }
+
+    .newsletter-form button {
+      grid-column: 1 / -1;
+      padding: 15px;
+      border: none;
+      border-radius: 6px;
+      background: var(--gold);
+      color: var(--dark-green);
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .newsletter-form button:hover {
+      background: white;
+    }
+
+    .newsletter-form button:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    #newsletterMessage {
+      margin-top: 17px;
+      font-weight: bold;
+      min-height: 25px;
+    }
+
+    .newsletter-note {
+      font-size: 12px;
+      color: #dce9df;
+      margin-top: 12px;
+    }
+
     /* Contact */
 
     .contact-section {
@@ -464,6 +535,18 @@
         width: 55px;
         height: 55px;
       }
+
+      .newsletter-form {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-form button {
+        grid-column: 1;
+      }
+
+      .newsletter-section h2 {
+        font-size: 26px;
+      }
     }
   </style></head><body>  <!-- Scrolling Welcome Message -->  <div class="welcome">
     <div class="welcome-track">
@@ -476,6 +559,7 @@
       alt="Hon. Akarachi Amadi Website Logo"
       class="brand-logo"
     >
+
     <div>
       HON. AKARACHI AMADI
       <span>Mbaitoli/Ikeduru Federal Constituency</span>
@@ -500,10 +584,9 @@
 
 </div>
 
-  </header>  <!-- Hero Section -->  <section class="hero"><div class="hero-content">
-
-  <span class="hero-label">
-    MBaitoli/IKEDURU FEDERAL CONSTITUENCY
+  </header>  <!-- Hero Section -->  <section class="hero">
+    <div class="hero-content">  <span class="hero-label">
+    MBAITOLI/IKEDURU FEDERAL CONSTITUENCY
   </span>
 
   <h1>
@@ -517,7 +600,6 @@
   </p>
 
   <div class="hero-buttons">
-
     <a href="biography.html" class="btn btn-gold">
       Read Biography
     </a>
@@ -525,22 +607,18 @@
     <a href="projects.html" class="btn btn-outline">
       View Projects
     </a>
-
   </div>
 
 </div>
 
-  </section>  <!-- About Section -->  <section class="section"><div class="container">
-
-  <div class="about-grid">
+  </section>  <!-- About Section -->  <section class="section">
+    <div class="container">  <div class="about-grid">
 
     <div class="about-image">
-
       <img
         src="https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png"
         alt="Hon. Akarachi Amadi"
       >
-
     </div>
 
     <div class="about-content">
@@ -575,25 +653,20 @@
 
 </div>
 
-  </section>  <!-- Projects Section -->  <section class="section" style="background:#ffffff;"><div class="container">
-
-  <div class="section-heading">
-
+  </section>  <!-- Projects Section -->  <section class="section" style="background:#ffffff;">
+    <div class="container">  <div class="section-heading">
     <h2>Projects and Development</h2>
 
     <p>
       Explore project updates and development information
       relating to Mbaitoli and Ikeduru.
     </p>
-
   </div>
 
   <div class="cards">
 
     <div class="card">
-
       <div class="card-icon">🏗️</div>
-
       <h3>Infrastructure</h3>
 
       <p>
@@ -604,13 +677,10 @@
       <a href="projects.html" class="text-link">
         View Projects →
       </a>
-
     </div>
 
     <div class="card">
-
       <div class="card-icon">🎓</div>
-
       <h3>Education</h3>
 
       <p>
@@ -621,13 +691,10 @@
       <a href="achievements.html" class="text-link">
         Learn More →
       </a>
-
     </div>
 
     <div class="card">
-
       <div class="card-icon">🤝</div>
-
       <h3>Community Development</h3>
 
       <p>
@@ -638,16 +705,13 @@
       <a href="constituency.html" class="text-link">
         Explore Constituency →
       </a>
-
     </div>
 
   </div>
-
 </div>
 
-  </section>  <!-- Vision Section -->  <section class="section vision-section"><div class="container">
-
-  <h2>Vision and Mission</h2>
+  </section>  <!-- Vision Section -->  <section class="section vision-section">
+    <div class="container">  <h2>Vision and Mission</h2>
 
   <p>
     A commitment to responsible representation, effective
@@ -664,25 +728,20 @@
 
 </div>
 
-  </section>  <!-- News Section -->  <section class="section"><div class="container">
-
-  <div class="section-heading">
-
+  </section>  <!-- News Section -->  <section class="section">
+    <div class="container">  <div class="section-heading">
     <h2>News and Updates</h2>
 
     <p>
       Stay informed about published announcements, activities
       and updates relating to the constituency.
     </p>
-
   </div>
 
   <div class="cards">
 
     <div class="card">
-
       <div class="card-icon">📰</div>
-
       <h3>Latest News</h3>
 
       <p>
@@ -692,13 +751,10 @@
       <a href="news.html" class="text-link">
         Visit News Page →
       </a>
-
     </div>
 
     <div class="card">
-
       <div class="card-icon">📸</div>
-
       <h3>Photo Gallery</h3>
 
       <p>
@@ -708,13 +764,10 @@
       <a href="gallery.html" class="text-link">
         View Gallery →
       </a>
-
     </div>
 
     <div class="card">
-
       <div class="card-icon">🎙️</div>
-
       <h3>Press and Media</h3>
 
       <p>
@@ -724,16 +777,57 @@
       <a href="press.html" class="text-link">
         Visit Press Page →
       </a>
-
     </div>
 
   </div>
+</div>
+
+  </section>  <!-- Newsletter Subscription Section -->  <section class="newsletter-section" id="newsletter">
+    <div class="newsletter-container">  <h2>Stay Connected With Hon. Akarachi Amadi</h2>
+
+  <p class="newsletter-description">
+    Subscribe to receive official news, constituency updates,
+    project information and important announcements.
+  </p>
+
+  <form id="newsletterForm" class="newsletter-form">
+
+    <input
+      type="text"
+      id="subscriberName"
+      name="name"
+      placeholder="Enter your full name"
+      autocomplete="name"
+      maxlength="150"
+      required
+    >
+
+    <input
+      type="email"
+      id="subscriberEmail"
+      name="email"
+      placeholder="Enter your email address"
+      autocomplete="email"
+      maxlength="254"
+      required
+    >
+
+    <button type="submit" id="subscribeButton">
+      SUBSCRIBE NOW
+    </button>
+
+  </form>
+
+  <p id="newsletterMessage" role="status" aria-live="polite"></p>
+
+  <p class="newsletter-note">
+    Your email address will be used to send you website updates.
+  </p>
 
 </div>
 
-  </section>  <!-- Contact Section -->  <section class="section contact-section"><div class="container">
-
-  <div class="contact-content">
+  </section>  <!-- Contact Section -->  <section class="section contact-section">
+    <div class="container">  <div class="contact-content">
 
     <h2>Get in Touch</h2>
 
@@ -780,8 +874,105 @@
   Hon. Akarachi Amadi. All Rights Reserved.
 </p>
 
-  </footer>  <script>
+  </footer>  <!-- Supabase Newsletter Connection -->  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script>
+    // Automatically update copyright year
+
     document.getElementById("year").textContent =
       new Date().getFullYear();
+
+
+    // Supabase connection
+
+    const newsletterSupabase = window.supabase.createClient(
+      "https://znkeancluykkwduydory.supabase.co",
+      "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i"
+    );
+
+
+    // Newsletter form submission
+
+    const newsletterForm = document.getElementById("newsletterForm");
+    const subscribeButton = document.getElementById("subscribeButton");
+    const newsletterMessage = document.getElementById("newsletterMessage");
+
+
+    newsletterForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      const name = document.getElementById("subscriberName")
+        .value.trim();
+
+      const email = document.getElementById("subscriberEmail")
+        .value.trim().toLowerCase();
+
+
+      if (!name || !email) {
+        newsletterMessage.textContent =
+          "Please enter your name and email address.";
+
+        newsletterMessage.style.color = "#ffcccc";
+        return;
+      }
+
+
+      subscribeButton.disabled = true;
+      subscribeButton.textContent = "SUBSCRIBING...";
+
+      newsletterMessage.textContent = "";
+
+
+      try {
+
+        const { error } = await newsletterSupabase
+          .from("newsletter_subscribers")
+          .insert([
+            {
+              name: name,
+              email: email,
+              active: true
+            }
+          ]);
+
+
+        if (error) {
+
+          if (error.code === "23505") {
+            throw new Error(
+              "This email address is already subscribed."
+            );
+          }
+
+          throw error;
+        }
+
+
+        newsletterMessage.textContent =
+          "Thank you! You have successfully subscribed.";
+
+        newsletterMessage.style.color = "#b8f5c8";
+
+        newsletterForm.reset();
+
+
+      } catch (error) {
+
+        console.error("Newsletter subscription error:", error);
+
+        newsletterMessage.textContent =
+          error.message ||
+          "Subscription failed. Please try again later.";
+
+        newsletterMessage.style.color = "#ffcccc";
+
+
+      } finally {
+
+        subscribeButton.disabled = false;
+        subscribeButton.textContent = "SUBSCRIBE NOW";
+
+      }
+
+    });
   </script></body>
 </html>
