@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polling Units | Akarachi Amadi 2027</title>
+
+<style>
+:root {
+    --green: #08743b;
+    --dark: #064d2b;
+    --gold: #d6a62e;
+    --light: #f5f8f5;
+    --text: #26332b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--dark);
+    color: white;
+    padding: 18px 5%;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: linear-gradient(120deg, #064d2b, #08743b);
+    color: white;
+    text-align: center;
+    padding: 45px 6%;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+.notice {
+    background: #fff6dc;
+    border-left: 5px solid var(--gold);
+    padding: 16px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.search-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    margin-bottom: 25px;
+}
+
+.search-box h2 {
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.search-box button {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: var(--dark);
+}
+
+.information-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.information-card h2 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.information-card p {
+    margin-bottom: 10px;
+}
+
+.information-card a {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 25px;
+    color: #66716a;
+    background: white;
+    border-radius: 8px;
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 45px;
+    font-size: 13px;
+}
+
+footer a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+@media(max-width:600px) {
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="logo">AKARACHI AMADI <span>2027</span></div>
+        <a href="election-monitoring.html">← Monitoring Dashboard</a>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Polling Units Information</h1>
+    <p>
+        Public polling unit information for Mbaitoli/Ikeduru
+        Federal Constituency, Imo State.
+    </p>
+</section>
+
+<main class="container">
+
+    <div class="notice">
+        <strong>Information Notice:</strong>
+        This page is not an official INEC polling unit directory.
+        Polling unit names, codes and locations must be checked
+        against current information published by INEC.
+    </div>
+
+    <section class="search-box">
+        <h2>Find Polling Unit Information</h2>
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by ward, polling unit or location..."
+            oninput="searchUnits()"
+        >
+        <button onclick="searchUnits()">Search</button>
+    </section>
+
+    <section class="information-card">
+        <h2>Mbaitoli Local Government Area</h2>
+        <p>
+            Use official INEC information to confirm the wards,
+            polling unit names, codes and locations in Mbaitoli.
+        </p>
+        <a href="https://www.inecnigeria.org/" target="_blank" rel="noopener">
+            Visit INEC Official Website →
+        </a>
+    </section>
+
+    <section class="information-card">
+        <h2>Ikeduru Local Government Area</h2>
+        <p>
+            Consult the official INEC directory for verified
+            polling unit details in Ikeduru.
+        </p>
+        <a href="https://www.inecnigeria.org/" target="_blank" rel="noopener">
+            Visit INEC Official Website →
+        </a>
+    </section>
+
+    <div class="empty-state" id="emptyState">
+        <h3>Polling Unit Directory Coming Soon</h3>
+        <p>
+            Verified polling unit records will be displayed here
+            after they have been checked against official INEC data.
+        </p>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026–2027 Akarachi Amadi Campaign Information Portal.</p>
+    <p>Independent information platform — Not affiliated with INEC.</p>
+    <p style="margin-top:10px;">
+        <a href="index.html">Homepage</a> |
+        <a href="election-monitoring.html">Monitoring Dashboard</a>
+    </p>
+</footer>
+
+<script>
+function searchUnits() {
+    const query = document.getElementById("searchInput")
+        .value.trim().toLowerCase();
+
+    const cards = document.querySelectorAll(".information-card");
+    const emptyState = document.getElementById("emptyState");
+
+    let found = false;
+
+    cards.forEach(card => {
+        const matches = card.textContent.toLowerCase().includes(query);
+        card.style.display = matches ? "block" : "none";
+
+        if (matches && query !== "") {
+            found = true;
+        }
+    });
+
+    if (query === "") {
+        cards.forEach(card => card.style.display = "block");
+        emptyState.style.display = "block";
+    } else {
+        emptyState.style.display = found ? "none" : "block";
+    }
+}
+</script>
+
+</body>
+</html>
