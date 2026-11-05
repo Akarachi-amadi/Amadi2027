@@ -1,0 +1,626 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Election Results Monitoring | Akarachi Amadi</title><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f3f6f4;
+color:#222;
+}
+
+header{
+background:#006b3c;
+color:white;
+text-align:center;
+padding:25px 15px;
+}
+
+header h1{
+font-size:24px;
+margin-bottom:8px;
+}
+
+nav{
+background:#004d2b;
+padding:14px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:7px;
+font-size:12px;
+font-weight:bold;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+.back{
+display:inline-block;
+background:#008751;
+color:white;
+padding:12px 18px;
+text-decoration:none;
+border-radius:5px;
+margin-bottom:20px;
+}
+
+h2{
+color:#006b3c;
+margin-bottom:12px;
+}
+
+.intro{
+line-height:1.7;
+color:#555;
+margin-bottom:20px;
+}
+
+.notice{
+background:#fff3cd;
+padding:15px;
+border-left:5px solid #e0a800;
+margin-bottom:20px;
+font-size:13px;
+line-height:1.7;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat{
+background:white;
+padding:20px;
+border-radius:8px;
+border-bottom:4px solid #008751;
+box-shadow:0 2px 8px #0001;
+}
+
+.stat p{
+color:#666;
+font-size:13px;
+margin-bottom:10px;
+}
+
+.stat strong{
+font-size:27px;
+color:#006b3c;
+}
+
+.box{
+background:white;
+padding:22px;
+border-radius:8px;
+box-shadow:0 2px 8px #0001;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+font-size:13px;
+font-weight:bold;
+margin-bottom:7px;
+}
+
+input,select{
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:5px;
+margin-bottom:16px;
+font-size:14px;
+}
+
+button{
+background:#008751;
+color:white;
+border:none;
+padding:13px 20px;
+border-radius:5px;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#004d2b;
+}
+
+.result-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
+.total{
+background:#e8f5e9;
+padding:15px;
+border-radius:6px;
+margin:15px 0;
+font-weight:bold;
+color:#006b3c;
+}
+
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:750px;
+}
+
+th,td{
+padding:13px;
+border-bottom:1px solid #ddd;
+text-align:left;
+font-size:13px;
+}
+
+th{
+background:#006b3c;
+color:white;
+}
+
+.delete{
+background:#c62828;
+padding:8px 12px;
+font-size:12px;
+}
+
+footer{
+background:#004d2b;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:30px;
+font-size:13px;
+line-height:1.8;
+}
+
+@media(max-width:600px){
+.container{
+padding:13px;
+}
+
+.box{
+padding:15px;
+}
+}
+</style></head><body><header>
+<h1>HON. AKARACHI AMADI</h1>
+<p>Mbaitoli/Ikeduru Federal Constituency</p>
+<p>ELECTION RESULTS MONITORING CENTRE</p>
+</header><nav>
+<a href="index.html">HOME</a>
+<a href="election-monitoring.html">DASHBOARD</a>
+<a href="polling-units.html">POLLING UNITS</a>
+<a href="ward-reports.html">WARD REPORTS</a>
+<a href="incident-reporting.html">INCIDENTS</a>
+</nav><div class="container"><a href="election-monitoring.html" class="back">
+← Back to Monitoring Dashboard
+</a><h2>Election Results Monitoring</h2><p class="intro">
+Welcome to the Election Results Monitoring Centre.
+This page provides a structured platform for recording,
+organising and reviewing publicly available polling-unit
+election results within Mbaitoli/Ikeduru Federal Constituency.
+</p><div class="notice">
+<strong>DISCLAIMER:</strong>
+This is an independent results-recording tool and is not
+an official INEC platform. All entries must be verified
+against official result sheets and INEC announcements.
+Unverified figures must never be presented as official
+election results.
+</div><div class="stats"><div class="stat">
+<p>Total Records</p>
+<strong id="records">0</strong>
+</div><div class="stat">
+<p>Total Valid Votes</p>
+<strong id="valid">0</strong>
+</div><div class="stat">
+<p>Total Rejected Votes</p>
+<strong id="rejected">0</strong>
+</div><div class="stat">
+<p>Total Accredited Voters</p>
+<strong id="accredited">0</strong>
+</div></div><div class="box"><h2>Record Polling Unit Results</h2><form id="resultForm"><label>Local Government Area</label>
+
+<select id="lga" required>
+<option value="">Select LGA</option>
+<option>Mbaitoli</option>
+<option>Ikeduru</option>
+</select><label>Ward</label>
+<input type="text" id="ward"
+placeholder="Enter ward name" required>
+
+<label>Polling Unit</label>
+<input type="text" id="polling"
+placeholder="Enter polling unit name" required>
+
+<label>Polling Unit Code</label>
+<input type="text" id="code"
+placeholder="Official polling unit code">
+
+<label>Election Date</label>
+<input type="date" id="date" required>
+
+<label>Accredited Voters</label>
+<input type="number" id="accredited"
+min="0" required>
+
+<h2 style="margin-top:15px;">Candidate Results</h2><div id="candidates"><div class="result-grid candidate"><div>
+<label>Candidate Name</label>
+<input type="text" class="candidateName"
+placeholder="Candidate name" required>
+</div><div>
+<label>Political Party</label>
+<input type="text" class="party"
+placeholder="Party name" required>
+</div><div>
+<label>Votes Obtained</label>
+<input type="number" class="votes"
+value="0" min="0" required>
+</div></div></div><button type="button" onclick="addCandidate()"
+style="margin-bottom:18px;">
+
++ ADD ANOTHER CANDIDATE
+  </button>
+
+<div class="result-grid"><div>
+<label>Valid Votes</label>
+<input type="number" id="validVotes"
+min="0" value="0" required>
+</div><div>
+<label>Rejected Votes</label>
+<input type="number" id="rejectedVotes"
+min="0" value="0" required>
+</div></div><label>Result Source</label>
+
+<select id="source" required>
+<option value="">Select source</option>
+<option>INEC Published Result</option>
+<option>Official Polling Unit Result Sheet</option>
+<option>Other Verifiable Source</option>
+</select><label>Verification Status</label>
+
+<select id="verification" required>
+<option value="">Select status</option>
+<option>Unverified</option>
+<option>Verified Against Result Sheet</option>
+</select><label>Additional Notes</label>
+
+<input type="text" id="notes"
+placeholder="Optional observations">
+
+<div class="total">
+TOTAL CANDIDATE VOTES:
+<span id="candidateTotal">0</span>
+</div><button type="submit">
+SAVE RESULTS
+</button></form></div><div class="box"><h2>Recorded Election Results</h2><input type="text" id="search"
+placeholder="Search LGA, ward or polling unit..."
+onkeyup="displayResults()">
+
+<div class="table-wrap"><table><thead>
+<tr>
+<th>No.</th>
+<th>LGA</th>
+<th>Ward</th>
+<th>Polling Unit</th>
+<th>Valid Votes</th>
+<th>Rejected</th>
+<th>Verification</th>
+<th>Action</th>
+</tr>
+</thead><tbody id="resultTable"></tbody></table></div></div></div><footer>
+<h3>HON. AKARACHI AMADI</h3>
+<p>Mbaitoli/Ikeduru Federal Constituency</p>
+<p>Election Results Monitoring Centre</p>
+<p>© 2026 All Rights Reserved.</p>
+</footer><script>
+
+let results = JSON.parse(
+localStorage.getItem("akarachiElectionResults")
+) || [];
+
+function addCandidate(){
+
+let div=document.createElement("div");
+
+div.className="result-grid candidate";
+
+div.innerHTML=`
+
+<div>
+<label>Candidate Name</label>
+<input type="text" class="candidateName"
+placeholder="Candidate name" required>
+</div>
+
+<div>
+<label>Political Party</label>
+<input type="text" class="party"
+placeholder="Party name" required>
+</div>
+
+<div>
+<label>Votes Obtained</label>
+<input type="number" class="votes"
+value="0" min="0" required>
+</div>
+
+`;
+
+document.getElementById("candidates")
+.appendChild(div);
+
+}
+
+function updateTotal(){
+
+let total=0;
+
+document.querySelectorAll(".votes")
+.forEach(input=>{
+total+=Number(input.value)||0;
+});
+
+document.getElementById("candidateTotal")
+.innerText=total.toLocaleString();
+
+}
+
+document.addEventListener("input",function(e){
+
+if(e.target.classList.contains("votes")){
+updateTotal();
+}
+
+});
+
+document.getElementById("resultForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let candidates=[];
+
+document.querySelectorAll(".candidate")
+.forEach(row=>{
+
+candidates.push({
+
+name:row.querySelector(".candidateName").value,
+
+party:row.querySelector(".party").value,
+
+votes:Number(row.querySelector(".votes").value)
+
+});
+
+});
+
+let totalVotes=candidates.reduce(
+(sum,c)=>sum+c.votes,0
+);
+
+let valid=Number(
+document.getElementById("validVotes").value
+);
+
+let rejected=Number(
+document.getElementById("rejectedVotes").value
+);
+
+let accredited=Number(
+document.getElementById("accredited").value
+);
+
+if(totalVotes!==valid){
+
+alert("Candidate vote totals must equal the valid votes.");
+
+return;
+
+}
+
+if(valid+rejected>accredited){
+
+alert("Valid and rejected votes cannot exceed accredited voters.");
+
+return;
+
+}
+
+let record={
+
+id:Date.now(),
+
+lga:document.getElementById("lga").value,
+
+ward:document.getElementById("ward").value,
+
+polling:document.getElementById("polling").value,
+
+code:document.getElementById("code").value,
+
+date:document.getElementById("date").value,
+
+accredited:accredited,
+
+valid:valid,
+
+rejected:rejected,
+
+candidates:candidates,
+
+source:document.getElementById("source").value,
+
+verification:document.getElementById("verification").value,
+
+notes:document.getElementById("notes").value
+
+};
+
+results.unshift(record);
+
+saveResults();
+
+displayResults();
+
+this.reset();
+
+document.getElementById("candidates").innerHTML=`
+
+<div class="result-grid candidate">
+
+<div>
+<label>Candidate Name</label>
+<input type="text" class="candidateName"
+placeholder="Candidate name" required>
+</div>
+
+<div>
+<label>Political Party</label>
+<input type="text" class="party"
+placeholder="Party name" required>
+</div>
+
+<div>
+<label>Votes Obtained</label>
+<input type="number" class="votes"
+value="0" min="0" required>
+</div>
+
+</div>
+
+`;
+
+updateTotal();
+
+alert("Election result record saved successfully.");
+
+});
+
+function saveResults(){
+
+localStorage.setItem(
+"akarachiElectionResults",
+JSON.stringify(results)
+);
+
+}
+
+function displayResults(){
+
+let table=document.getElementById("resultTable");
+
+let search=document.getElementById("search")
+.value.toLowerCase();
+
+table.innerHTML="";
+
+let filtered=results.filter(r=>
+
+(r.lga+r.ward+r.polling+r.code)
+.toLowerCase().includes(search)
+
+);
+
+filtered.forEach((r,index)=>{
+
+let originalIndex=results.indexOf(r);
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${index+1}</td>
+
+<td>${escapeHTML(r.lga)}</td>
+
+<td>${escapeHTML(r.ward)}</td>
+
+<td>${escapeHTML(r.polling)}</td>
+
+<td>${r.valid.toLocaleString()}</td>
+
+<td>${r.rejected.toLocaleString()}</td>
+
+<td>${escapeHTML(r.verification)}</td>
+
+<td>
+<button class="delete"
+onclick="deleteResult(${originalIndex})">
+Delete
+</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("records").innerText=
+results.length;
+
+document.getElementById("valid").innerText=
+results.reduce((s,r)=>s+r.valid,0).toLocaleString();
+
+document.getElementById("rejected").innerText=
+results.reduce((s,r)=>s+r.rejected,0).toLocaleString();
+
+document.getElementById("accredited").innerText=
+results.reduce((s,r)=>s+r.accredited,0).toLocaleString();
+
+}
+
+function escapeHTML(value){
+
+return String(value).replace(/[&<>"']/g,c=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[c]));
+
+}
+
+function deleteResult(index){
+
+if(confirm("Delete this result record?")){
+
+results.splice(index,1);
+
+saveResults();
+
+displayResults();
+
+}
+
+}
+
+displayResults();
+updateTotal();
+
+</script></body>
+</html>
