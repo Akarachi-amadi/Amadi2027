@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ward Reports | Akarachi Amadi 2027</title>
+
+<style>
+:root {
+    --green: #08743b;
+    --dark: #064d2b;
+    --gold: #d6a62e;
+    --light: #f5f8f5;
+    --text: #26332b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--dark);
+    color: white;
+    padding: 18px 5%;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    background: linear-gradient(120deg, #064d2b, #08743b);
+    color: white;
+    text-align: center;
+    padding: 45px 6%;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 35px auto;
+}
+
+.notice {
+    background: #fff6dc;
+    border-left: 5px solid var(--gold);
+    padding: 16px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.search-panel, .report-card {
+    background: white;
+    padding: 24px;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.search-panel h2, .report-card h2 {
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.search-panel input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.report-card p {
+    margin-bottom: 10px;
+}
+
+.status {
+    display: inline-block;
+    background: #fff1d1;
+    color: #805b00;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.empty {
+    background: white;
+    text-align: center;
+    padding: 30px 20px;
+    border-radius: 10px;
+    color: #657168;
+}
+
+.empty h3 {
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 45px;
+    font-size: 13px;
+}
+
+footer a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+@media(max-width:600px) {
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="logo">AKARACHI AMADI <span>2027</span></div>
+        <a href="election-monitoring.html">← Monitoring Dashboard</a>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Ward Reports Centre</h1>
+    <p>
+        Access published election-related observations and
+        information organised by ward across Mbaitoli/Ikeduru.
+    </p>
+</section>
+
+<main class="container">
+
+    <div class="notice">
+        <strong>Transparency Notice:</strong>
+        Reports displayed on this page are not official election
+        results. Each submission must be reviewed before it can
+        be described as verified. Personal voter information
+        must not be published.
+    </div>
+
+    <section class="search-panel">
+        <h2>Search Ward Reports</h2>
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by ward, location or report reference..."
+            oninput="filterReports()"
+        >
+    </section>
+
+    <section id="reportsContainer">
+
+        <div class="report-card">
+            <h2>Mbaitoli Ward Reports</h2>
+            <p>
+                Ward-level reports for Mbaitoli will appear here
+                after submissions have been reviewed.
+            </p>
+            <span class="status">AWAITING VERIFIED RECORDS</span>
+        </div>
+
+        <div class="report-card">
+            <h2>Ikeduru Ward Reports</h2>
+            <p>
+                Ward-level reports for Ikeduru will appear here
+                after submissions have been reviewed.
+            </p>
+            <span class="status">AWAITING VERIFIED RECORDS</span>
+        </div>
+
+    </section>
+
+    <div class="empty" id="emptyMessage" style="display:none;">
+        <h3>No matching reports found</h3>
+        <p>Try another ward name or search term.</p>
+    </div>
+
+    <section class="report-card">
+        <h2>Reporting Guidelines</h2>
+        <p>Responsible reports should include:</p>
+        <ul style="padding-left:20px;">
+            <li>The relevant ward or polling unit, where known.</li>
+            <li>Date and time of the observation.</li>
+            <li>A clear, factual description of what was observed.</li>
+            <li>Supporting evidence where lawfully and safely available.</li>
+            <li>The report's review and verification status.</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026–2027 Akarachi Amadi Campaign Information Portal.</p>
+    <p>Independent information platform — Not affiliated with INEC.</p>
+    <p style="margin-top:10px;">
+        <a href="index.html">Homepage</a> |
+        <a href="election-monitoring.html">Monitoring Dashboard</a>
+    </p>
+</footer>
+
+<script>
+function filterReports() {
+    const query = document.getElementById("searchInput")
+        .value.toLowerCase().trim();
+
+    const reports = document.querySelectorAll(".report-card");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    let visible = 0;
+
+    reports.forEach(report => {
+        const match = report.textContent.toLowerCase().includes(query);
+
+        report.style.display = match ? "block" : "none";
+
+        if (match) visible++;
+    });
+
+    emptyMessage.style.display =
+        visible === 0 ? "block" : "none";
+}
+</script>
+
+</body>
+</html>
