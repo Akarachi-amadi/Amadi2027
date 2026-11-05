@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Field Personnel Login | Akarachi Amadi 2027</title>
+
+<style>
+:root {
+    --green: #08743b;
+    --dark: #064d2b;
+    --gold: #d6a62e;
+    --light: #f5f8f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: var(--dark);
+    color: white;
+    padding: 18px 5%;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.login-card {
+    background: white;
+    width: 100%;
+    max-width: 440px;
+    padding: 35px 28px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.09);
+}
+
+.login-icon {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.login-card h1 {
+    color: var(--dark);
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #68746c;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--green);
+}
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 65px;
+}
+
+.show-password {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    border: none;
+    background: none;
+    color: var(--green);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: var(--dark);
+}
+
+.message {
+    display: none;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.notice {
+    background: #fff6dc;
+    border-left: 4px solid var(--gold);
+    padding: 13px;
+    margin-top: 22px;
+    font-size: 12px;
+    color: #665522;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    color: var(--green);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 22px 10px;
+    font-size: 12px;
+}
+
+@media(max-width:500px) {
+    .header-inner {
+        flex-direction: column;
+    }
+
+    .login-card {
+        padding: 28px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="logo">AKARACHI AMADI <span>2027</span></div>
+        <a href="election-monitoring.html">← Monitoring Dashboard</a>
+    </div>
+</header>
+
+<main>
+
+    <div class="login-card">
+
+        <div class="login-icon">🔐</div>
+
+        <h1>Field Personnel Login</h1>
+
+        <p class="subtitle">
+            Authorised personnel access portal
+        </p>
+
+        <form id="loginForm">
+
+            <label for="email">Registered Email Address</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your registered email"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <div class="password-box">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button
+                    type="button"
+                    class="show-password"
+                    onclick="togglePassword()"
+                >
+                    SHOW
+                </button>
+            </div>
+
+            <button type="submit" class="login-button">
+                SIGN IN
+            </button>
+
+            <div class="message" id="message"></div>
+
+        </form>
+
+        <div class="notice">
+            <strong>Security Notice:</strong>
+            Access is restricted to authorised personnel.
+            Never share your password or another person's
+            login credentials.
+        </div>
+
+        <a href="election-monitoring.html" class="back-link">
+            Return to Monitoring Dashboard
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026–2027 Akarachi Amadi Campaign Information Portal.</p>
+    <p>Independent information platform — Not affiliated with INEC.</p>
+</footer>
+
+<script>
+function togglePassword() {
+    const password = document.getElementById("password");
+    const button = document.querySelector(".show-password");
+
+    if (password.type === "password") {
+        password.type = "text";
+        button.textContent = "HIDE";
+    } else {
+        password.type = "password";
+        button.textContent = "SHOW";
+    }
+}
+
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const message = document.getElementById("message");
+
+    message.style.display = "block";
+    message.style.background = "#fff6dc";
+    message.style.color = "#665522";
+
+    message.textContent =
+        "Authentication has not yet been connected. Please check back after the secure login system is configured.";
+});
+</script>
+
+</body>
+</html>
