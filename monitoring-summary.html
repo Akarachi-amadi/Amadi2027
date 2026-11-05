@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Election Monitoring Summary | Akarachi Amadi</title>
+
+<style>
+:root {
+    --green: #006b3c;
+    --dark: #004d2b;
+    --gold: #d4a017;
+    --light: #f3f8f4;
+    --white: #ffffff;
+    --text: #26332b;
+    --muted: #68756c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: var(--text);
+}
+
+header {
+    background: linear-gradient(120deg, var(--dark), var(--green));
+    color: white;
+    padding: 25px 16px;
+    text-align: center;
+    border-bottom: 5px solid var(--gold);
+}
+
+header h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.container {
+    width: 94%;
+    max-width: 1150px;
+    margin: 25px auto;
+}
+
+.section-title {
+    color: var(--dark);
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 10px;
+    border-left: 5px solid var(--green);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.card .number {
+    color: var(--dark);
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.card small {
+    display: block;
+    color: var(--muted);
+    margin-top: 7px;
+}
+
+.panel {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    color: var(--dark);
+    font-size: 19px;
+    margin-bottom: 15px;
+}
+
+.activity {
+    border-bottom: 1px solid #e8eee9;
+    padding: 13px 0;
+    line-height: 1.5;
+}
+
+.activity:last-child {
+    border-bottom: none;
+}
+
+.activity strong {
+    color: var(--green);
+}
+
+.activity small {
+    display: block;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.quick-links a {
+    display: block;
+    background: var(--green);
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 7px;
+    text-align: center;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.quick-links a:hover {
+    background: var(--dark);
+}
+
+.status {
+    background: #fff8df;
+    border-left: 4px solid var(--gold);
+    padding: 13px;
+    border-radius: 5px;
+    color: #604a0b;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.refresh {
+    background: var(--gold);
+    color: #222;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 20px 12px;
+    margin-top: 35px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media(max-width: 500px) {
+    header h1 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .card .number {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>ELECTION MONITORING SUMMARY</h1>
+    <p>Hon. Akarachi Amadi | Mbaitoli/Ikeduru Federal Constituency</p>
+    <p>Election Monitoring and Field Information Dashboard</p>
+</header>
+
+<div class="container">
+
+    <div class="status">
+        <strong>Monitoring Dashboard:</strong>
+        This page provides a summary of election monitoring records
+        available in this browser. Information should be verified
+        against official records before being treated as confirmed.
+    </div>
+
+    <button class="refresh" onclick="loadDashboard()">
+        Refresh Dashboard
+    </button>
+
+    <h2 class="section-title">Monitoring Statistics</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Polling Units Recorded</h3>
+            <div class="number" id="pollingCount">0</div>
+            <small>Available polling unit records</small>
+        </div>
+
+        <div class="card">
+            <h3>Ward Reports</h3>
+            <div class="number" id="wardCount">0</div>
+            <small>Available ward reports</small>
+        </div>
+
+        <div class="card">
+            <h3>Incident Reports</h3>
+            <div class="number" id="incidentCount">0</div>
+            <small>Submitted incident records</small>
+        </div>
+
+        <div class="card">
+            <h3>Election Results</h3>
+            <div class="number" id="resultCount">0</div>
+            <small>Recorded result entries</small>
+        </div>
+
+        <div class="card">
+            <h3>Election Updates</h3>
+            <div class="number" id="updateCount">0</div>
+            <small>Published monitoring updates</small>
+        </div>
+
+    </div>
+
+    <div class="panel">
+        <h2>Latest Field Updates</h2>
+        <div id="latestUpdates">
+            <p>No election updates have been recorded yet.</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Recent Incident Reports</h2>
+        <div id="latestIncidents">
+            <p>No incident reports have been recorded yet.</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Election Monitoring Sections</h2>
+
+        <div class="quick-links">
+            <a href="polling-units.html">Polling Unit Monitoring</a>
+            <a href="ward-reports.html">Ward Reports</a>
+            <a href="incident-reporting.html">Incident Reporting</a>
+            <a href="election-results.html">Results Monitoring</a>
+            <a href="election-updates.html">Election Updates</a>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Dashboard Information</h2>
+        <p style="line-height:1.8; color:#526057;">
+            This dashboard summarizes records entered into the election
+            monitoring pages. The figures displayed are based on data
+            stored in the current browser. They are not independently
+            verified election results.
+        </p>
+        <p style="margin-top:12px; color:#526057;">
+            <strong>Last refreshed:</strong>
+            <span id="lastRefresh">Not yet refreshed</span>
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    <strong>HON. AKARACHI AMADI</strong><br>
+    Election Monitoring Information Centre<br>
+    Mbaitoli/Ikeduru Federal Constituency<br>
+    Imo State, Nigeria
+</footer>
+
+<script>
+function readRecords(key) {
+    try {
+        const data = JSON.parse(localStorage.getItem(key) || "[]");
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function findWardRecords() {
+    const possibleKeys = [
+        "akarachiWardReports",
+        "wardReports",
+        "akarachi_ward_reports"
+    ];
+
+    for (const key of possibleKeys) {
+        const records = readRecords(key);
+        if (records.length > 0) return records;
+    }
+
+    return [];
+}
+
+function safeText(value) {
+    const element = document.createElement("div");
+    element.textContent = value == null ? "" : String(value);
+    return element.innerHTML;
+}
+
+function getDate(record) {
+    return record.date ||
+           record.createdAt ||
+           record.timestamp ||
+           record.time ||
+           "";
+}
+
+function showRecent(records, targetId, emptyMessage, titleFields) {
+    const target = document.getElementById(targetId);
+
+    if (!records.length) {
+        target.innerHTML = "<p>" + emptyMessage + "</p>";
+        return;
+    }
+
+    const sorted = [...records].reverse().slice(0, 5);
+
+    target.innerHTML = sorted.map(record => {
+        let title = "";
+
+        for (const field of titleFields) {
+            if (record[field]) {
+                title = record[field];
+                break;
+            }
+        }
+
+        if (!title) title = "Monitoring record";
+
+        const location =
+            record.location ||
+            record.ward ||
+            record.pollingUnit ||
+            "";
+
+        const date = getDate(record);
+
+        return `
+            <div class="activity">
+                <strong>${safeText(title)}</strong>
+                ${location ? "<div>" + safeText(location) + "</div>" : ""}
+                ${date ? "<small>" + safeText(date) + "</small>" : ""}
+            </div>
+        `;
+    }).join("");
+}
+
+function loadDashboard() {
+    const polling = readRecords("akarachiPollingUnits");
+    const wards = findWardRecords();
+    const incidents = readRecords("akarachiIncidents");
+    const results = readRecords("akarachiElectionResults");
+    const updates = readRecords("akarachiElectionUpdates");
+
+    document.getElementById("pollingCount").textContent = polling.length;
+    document.getElementById("wardCount").textContent = wards.length;
+    document.getElementById("incidentCount").textContent = incidents.length;
+    document.getElementById("resultCount").textContent = results.length;
+    document.getElementById("updateCount").textContent = updates.length;
+
+    showRecent(
+        updates,
+        "latestUpdates",
+        "No election updates have been recorded yet.",
+        ["headline", "title", "details"]
+    );
+
+    showRecent(
+        incidents,
+        "latestIncidents",
+        "No incident reports have been recorded yet.",
+        ["incident", "title", "description", "details"]
+    );
+
+    document.getElementById("lastRefresh").textContent =
+        new Date().toLocaleString();
+}
+
+loadDashboard();
+</script>
+
+</body>
+</html>
