@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Incident Reporting | Akarachi Amadi</title><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f3f6f4;
+color:#222;
+}
+
+header{
+background:#006b3c;
+color:white;
+text-align:center;
+padding:25px 15px;
+}
+
+header h1{
+font-size:24px;
+margin-bottom:8px;
+}
+
+header p{
+font-size:13px;
+line-height:1.6;
+}
+
+nav{
+background:#004d2b;
+padding:14px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:13px;
+font-weight:bold;
+margin:5px 10px;
+}
+
+.container{
+max-width:1050px;
+margin:auto;
+padding:20px;
+}
+
+.back{
+display:inline-block;
+background:#008751;
+color:white;
+padding:11px 17px;
+text-decoration:none;
+border-radius:5px;
+margin-bottom:20px;
+}
+
+.heading{
+color:#006b3c;
+font-size:25px;
+margin-bottom:10px;
+}
+
+.intro{
+color:#555;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.notice{
+background:#fff3cd;
+border-left:5px solid #e0a800;
+padding:15px;
+margin-bottom:20px;
+font-size:13px;
+line-height:1.7;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 2px 8px #0001;
+border-bottom:4px solid #008751;
+}
+
+.stat h3{
+font-size:13px;
+color:#666;
+margin-bottom:10px;
+}
+
+.stat strong{
+font-size:27px;
+color:#006b3c;
+}
+
+.box{
+background:white;
+padding:22px;
+border-radius:9px;
+box-shadow:0 2px 10px #0001;
+margin-bottom:25px;
+}
+
+.box h2{
+color:#006b3c;
+margin-bottom:18px;
+font-size:20px;
+}
+
+label{
+display:block;
+font-weight:bold;
+font-size:13px;
+margin-bottom:7px;
+}
+
+input,select,textarea{
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:5px;
+margin-bottom:17px;
+font-size:14px;
+}
+
+textarea{
+resize:vertical;
+}
+
+button{
+background:#008751;
+color:white;
+border:none;
+padding:13px 20px;
+border-radius:5px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#005c34;
+}
+
+.delete{
+background:#c62828;
+padding:8px 12px;
+font-size:12px;
+}
+
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:750px;
+}
+
+th,td{
+padding:13px;
+text-align:left;
+border-bottom:1px solid #ddd;
+font-size:13px;
+}
+
+th{
+background:#006b3c;
+color:white;
+}
+
+.badge{
+background:#fff3cd;
+color:#856404;
+padding:6px 9px;
+border-radius:4px;
+font-size:11px;
+}
+
+footer{
+background:#004d2b;
+color:white;
+text-align:center;
+padding:25px 15px;
+margin-top:30px;
+font-size:13px;
+line-height:1.8;
+}
+
+@media(max-width:600px){
+.container{
+padding:13px;
+}
+
+.box{
+padding:16px;
+}
+
+.heading{
+font-size:22px;
+}
+}
+</style></head><body><header>
+<h1>HON. AKARACHI AMADI</h1>
+<p>Mbaitoli/Ikeduru Federal Constituency</p>
+<p>ELECTION MONITORING CENTRE</p>
+</header><nav>
+<a href="index.html">HOME</a>
+<a href="election-monitoring.html">DASHBOARD</a>
+<a href="polling-units.html">POLLING UNITS</a>
+<a href="ward-reports.html">WARD REPORTS</a>
+</nav><div class="container"><a href="election-monitoring.html" class="back">
+← Back to Monitoring Dashboard
+</a><h2 class="heading">Election Incident Reporting</h2><p class="intro">
+This platform provides a structured reporting channel
+for documenting election-related incidents and
+observations within Mbaitoli/Ikeduru Federal Constituency.
+Reports should be factual, accurate and supported by
+verifiable information wherever possible.
+</p><div class="notice">
+<strong>IMPORTANT:</strong> Report only incidents personally
+observed or supported by credible evidence. Do not publish
+unverified allegations, private personal information or
+sensitive details that could endanger anyone. For emergencies
+or immediate threats, contact the appropriate authorities.
+This is not an official INEC reporting platform.
+</div><div class="stats"><div class="stat">
+<h3>Total Reports</h3>
+<strong id="total">0</strong>
+</div><div class="stat">
+<h3>Pending Review</h3>
+<strong id="pending">0</strong>
+</div><div class="stat">
+<h3>Reviewed</h3>
+<strong id="reviewed">0</strong>
+</div></div><div class="box"><h2>Submit Incident Report</h2><form id="incidentForm"><label>Reporter Name</label>
+<input type="text" id="reporter"
+placeholder="Enter your name" required>
+
+<label>Contact Information</label>
+<input type="text" id="contact"
+placeholder="Enter contact details">
+
+<label>Local Government Area</label>
+
+<select id="lga" required>
+<option value="">Select LGA</option>
+<option>Mbaitoli</option>
+<option>Ikeduru</option>
+</select><label>Ward</label>
+<input type="text" id="ward"
+placeholder="Enter ward name" required>
+
+<label>Polling Unit</label>
+<input type="text" id="polling"
+placeholder="Enter polling unit">
+
+<label>Incident Type</label>
+
+<select id="type" required>
+<option value="">Select incident type</option>
+<option>Violence or Threat</option>
+<option>Voter Intimidation</option>
+<option>Disruption of Voting</option>
+<option>Electoral Material Issue</option>
+<option>Polling Unit Accessibility</option>
+<option>Other Observation</option>
+</select><label>Date of Incident</label>
+<input type="date" id="date" required>
+
+<label>Time of Incident</label>
+<input type="time" id="time">
+
+<label>Incident Description</label>
+
+<textarea id="description"
+rows="5"
+placeholder="Describe exactly what happened..."
+required></textarea><label>Upload Supporting Photograph (Optional)</label>
+<input type="file" id="evidence"
+accept="image/*">
+
+<p style="font-size:12px;color:#777;margin-bottom:15px;">
+Only upload photographs you are authorised to share.
+Avoid exposing voters' private information.
+</p><button type="submit">
+SUBMIT INCIDENT REPORT
+</button></form></div><div class="box"><h2>Incident Records</h2><input type="text"
+id="search"
+placeholder="Search incident records..."
+onkeyup="displayReports()">
+
+<div class="table-wrap"><table><thead>
+<tr>
+<th>No.</th>
+<th>Reporter</th>
+<th>LGA</th>
+<th>Ward</th>
+<th>Incident</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead><tbody id="reportTable"></tbody></table></div></div></div><footer><h3>HON. AKARACHI AMADI</h3>
+<p>Mbaitoli/Ikeduru Federal Constituency</p>
+<p>Election Monitoring Information Centre</p>
+<p>© 2026 All Rights Reserved.</p></footer><script>
+
+let reports = JSON.parse(
+localStorage.getItem("akarachiIncidents")
+) || [];
+
+function saveReports(){
+
+localStorage.setItem(
+"akarachiIncidents",
+JSON.stringify(reports)
+);
+
+}
+
+function escapeHTML(value){
+
+return String(value).replace(/[&<>"']/g,c=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[c]));
+
+}
+
+document.getElementById("incidentForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const file =
+document.getElementById("evidence").files[0];
+
+function finishReport(image){
+
+let report = {
+
+id:Date.now(),
+
+reporter:document.getElementById("reporter").value,
+
+contact:document.getElementById("contact").value,
+
+lga:document.getElementById("lga").value,
+
+ward:document.getElementById("ward").value,
+
+polling:document.getElementById("polling").value,
+
+type:document.getElementById("type").value,
+
+date:document.getElementById("date").value,
+
+time:document.getElementById("time").value,
+
+description:document.getElementById("description").value,
+
+image:image,
+
+status:"Pending Review"
+
+};
+
+reports.unshift(report);
+
+saveReports();
+
+displayReports();
+
+document.getElementById("incidentForm").reset();
+
+alert("Incident report saved successfully.");
+
+}
+
+if(file){
+
+if(file.size > 1024*1024){
+
+alert("Please select an image smaller than 1MB.");
+
+return;
+
+}
+
+let reader = new FileReader();
+
+reader.onload = function(){
+
+finishReport(reader.result);
+
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+finishReport("");
+
+}
+
+});
+
+function displayReports(){
+
+let table =
+document.getElementById("reportTable");
+
+let search =
+document.getElementById("search").value.toLowerCase();
+
+let filtered = reports.filter(r=>
+
+(r.reporter+r.lga+r.ward+r.type+r.date)
+.toLowerCase().includes(search)
+
+);
+
+table.innerHTML="";
+
+filtered.forEach((r,index)=>{
+
+let originalIndex=reports.indexOf(r);
+
+table.innerHTML+=`
+
+<tr>
+
+<td>${index+1}</td>
+
+<td>${escapeHTML(r.reporter)}</td>
+
+<td>${escapeHTML(r.lga)}</td>
+
+<td>${escapeHTML(r.ward)}</td>
+
+<td>${escapeHTML(r.type)}</td>
+
+<td>${escapeHTML(r.date)}</td>
+
+<td>
+<span class="badge">
+${escapeHTML(r.status)}
+</span>
+</td>
+
+<td>
+<button class="delete"
+onclick="deleteReport(${originalIndex})">
+Delete
+</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("total").innerText=
+reports.length;
+
+document.getElementById("pending").innerText=
+reports.filter(r=>r.status==="Pending Review").length;
+
+document.getElementById("reviewed").innerText=
+reports.filter(r=>r.status==="Reviewed").length;
+
+}
+
+function deleteReport(index){
+
+if(confirm("Delete this incident record?")){
+
+reports.splice(index,1);
+
+saveReports();
+
+displayReports();
+
+}
+
+}
+
+displayReports();
+
+</script></body>
+</html>
