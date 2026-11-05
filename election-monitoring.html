@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Election Monitoring 2027 | Akarachi Amadi</title>
+
+<style>
+:root {
+    --green: #08743b;
+    --dark-green: #064d2b;
+    --gold: #d6a62e;
+    --red: #c90019;
+    --light: #f5f8f5;
+    --white: #ffffff;
+    --text: #26332b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    background: var(--dark-green);
+    color: white;
+    padding: 18px 5%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.hero {
+    background: linear-gradient(120deg, #064d2b, #08743b);
+    color: white;
+    padding: 55px 7%;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    max-width: 750px;
+    margin: auto;
+    font-size: 16px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1150px;
+    margin: 35px auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    color: var(--dark-green);
+    font-size: 25px;
+}
+
+.section-title p {
+    color: #657168;
+    margin-top: 7px;
+}
+
+.notice {
+    background: #fff6dc;
+    border-left: 5px solid var(--gold);
+    padding: 17px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--green);
+    transition: 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.dashboard-card h3 {
+    color: var(--dark-green);
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    color: #66716a;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.card-button {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.card-button:hover {
+    background: var(--dark-green);
+}
+
+.info-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 35px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+.info-box h2 {
+    color: var(--dark-green);
+    margin-bottom: 12px;
+}
+
+.info-box ul {
+    padding-left: 20px;
+}
+
+.info-box li {
+    margin-bottom: 8px;
+}
+
+footer {
+    background: #073c24;
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 50px;
+    font-size: 13px;
+}
+
+footer a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+@media(max-width:600px) {
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo">
+            AKARACHI AMADI <span>2027</span>
+        </div>
+
+        <a href="index.html">← Back to Campaign Homepage</a>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Election Monitoring Dashboard</h1>
+
+    <p>
+        A public information and reporting portal for election-related
+        observations across Mbaitoli/Ikeduru Federal Constituency,
+        Imo State.
+    </p>
+</section>
+
+<div class="container">
+
+    <div class="notice">
+        <strong>Important Notice:</strong>
+        This is an independent information and reporting platform.
+        It is not an official INEC website and does not replace INEC's
+        election procedures, announcements or official results.
+        All submitted reports must be treated as unverified until checked.
+    </div>
+
+    <div class="section-title">
+        <h2>Monitoring Portal</h2>
+        <p>Select a section below to access its information.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+            <div class="card-icon">🗳️</div>
+            <h3>Polling Unit Information</h3>
+            <p>
+                Access publicly available polling unit and ward
+                information for the constituency.
+            </p>
+            <a href="polling-units.html" class="card-button">
+                VIEW POLLING UNITS
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">📋</div>
+            <h3>Ward Reports</h3>
+            <p>
+                Access submitted reports and updates organised
+                by ward.
+            </p>
+            <a href="ward-reports.html" class="card-button">
+                VIEW WARD REPORTS
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">👥</div>
+            <h3>Field Personnel Register</h3>
+            <p>
+                Access the designated portal for authorised
+                field personnel.
+            </p>
+            <a href="field-login.html" class="card-button">
+                FIELD PERSONNEL LOGIN
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">📊</div>
+            <h3>Election Reports</h3>
+            <p>
+                View published reports, submission dates and
+                verification status.
+            </p>
+            <a href="election-reports.html" class="card-button">
+                VIEW REPORTS
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">🚨</div>
+            <h3>Incident Reporting</h3>
+            <p>
+                Document election-related incidents with
+                relevant details for review.
+            </p>
+            <a href="election-incident.html" class="card-button">
+                REPORT AN INCIDENT
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">🔍</div>
+            <h3>Report Verification</h3>
+            <p>
+                Check the review status of submitted reports
+                and supporting information.
+            </p>
+            <a href="results-verification.html" class="card-button">
+                CHECK REPORT STATUS
+            </a>
+        </div>
+
+    </div>
+
+    <div class="info-box">
+        <h2>How the Monitoring Portal Works</h2>
+
+        <ul>
+            <li>Field personnel submit factual observations through the designated reporting channels.</li>
+            <li>Reports should include the relevant ward or polling unit, date and time.</li>
+            <li>Supporting evidence may be submitted where appropriate and safe.</li>
+            <li>Reports are reviewed before being published as verified information.</li>
+            <li>Unverified reports must not be presented as confirmed election results.</li>
+            <li>Official election results should always be obtained from INEC.</li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <h2>Our Commitment</h2>
+
+        <p>
+            The purpose of this portal is to support responsible
+            documentation, transparency and access to election-related
+            information. Participation must remain peaceful, lawful
+            and respectful of voters, electoral officials and all
+            political participants.
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        &copy; 2026–2027 Akarachi Amadi Campaign Information Portal.
+    </p>
+    <p>
+        Independent information platform — Not affiliated with INEC.
+    </p>
+    <p style="margin-top:10px;">
+        <a href="index.html">Return to Homepage</a>
+    </p>
+</footer>
+
+</body>
+</html>
