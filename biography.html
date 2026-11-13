@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Official biography of Engr. Akarachi Etinosa Amadi, entrepreneur, philanthropist and representative of Mbaitoli/Ikeduru Federal Constituency."><meta name="author" content="Engr. Akarachi Etinosa Amadi"><title>Biography | Engr. Akarachi Etinosa Amadi</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Biography | Hon. Engr. Akarachi Etinosa Tosan Amadi</title><meta name="description" content="Official biography of Hon. Engr. Akarachi Etinosa Tosan Amadi, representing Mbaitoli/Ikeduru Federal Constituency."><style>
 
 * {
     margin: 0;
@@ -16,25 +16,121 @@ body {
     line-height: 1.8;
 }
 
-/* HERO SECTION */
+/* TOP HEADER */
+
+.top-header {
+    background: #071d3b;
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.brand {
+    font-size: 19px;
+    font-weight: bold;
+    color: #e4bd60;
+}
+
+.brand small {
+    display: block;
+    font-size: 11px;
+    color: white;
+    font-weight: normal;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    background: #102e50;
+    border-bottom: 4px solid #d4a73c;
+    padding: 12px 5%;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    list-style: none;
+}
+
+.nav-links a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background: #d4a73c;
+    color: #071d3b;
+}
+
+.menu-toggle {
+    display: none;
+    background: #d4a73c;
+    border: none;
+    padding: 9px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* BACK TO HOME */
+
+.back-home {
+    max-width: 1100px;
+    margin: 25px auto 0;
+    padding: 0 20px;
+}
+
+.back-home a {
+    display: inline-block;
+    background: #071d3b;
+    color: white;
+    padding: 11px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-left: 4px solid #d4a73c;
+}
+
+.back-home a:hover {
+    background: #d4a73c;
+    color: #071d3b;
+}
+
+/* HERO */
 
 .hero {
     background: linear-gradient(135deg, #071d3b, #123c68);
     color: white;
-    padding: 75px 20px;
     text-align: center;
+    padding: 65px 20px;
     border-bottom: 5px solid #d4a73c;
 }
 
 .hero h1 {
-    font-size: 36px;
-    letter-spacing: 1px;
+    font-size: 34px;
     margin-bottom: 12px;
 }
 
 .hero p {
     color: #e4bd60;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
     letter-spacing: 2px;
 }
@@ -43,11 +139,11 @@ body {
 
 .container {
     max-width: 1050px;
-    margin: 45px auto;
+    margin: 40px auto;
     padding: 0 22px;
 }
 
-/* PROFILE IMAGE */
+/* PROFILE */
 
 .profile-photo {
     text-align: center;
@@ -107,7 +203,7 @@ body {
     margin-bottom: 8px;
 }
 
-/* QUOTE SECTION */
+/* QUOTE */
 
 .quote {
     background: #0b2b50;
@@ -115,7 +211,7 @@ body {
     padding: 40px 25px;
     text-align: center;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .quote h2 {
@@ -133,21 +229,77 @@ body {
 .footer {
     background: #071d3b;
     color: white;
-    text-align: center;
-    padding: 25px 15px;
+    padding: 40px 20px 20px;
     border-top: 4px solid #d4a73c;
 }
 
-.footer p {
-    font-size: 14px;
+.footer-content {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.footer h3 {
+    color: #e4bd60;
+    margin-bottom: 15px;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer a:hover {
+    color: #e4bd60;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #35516e;
+    margin-top: 30px;
+    padding-top: 20px;
+    font-size: 13px;
 }
 
 /* MOBILE RESPONSIVENESS */
 
-@media(max-width: 600px) {
+@media(max-width: 768px) {
+
+    .top-header {
+        padding: 15px 20px;
+    }
+
+    .nav-container {
+        display: block;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links a {
+        border-bottom: 1px solid #35516e;
+        padding: 12px;
+    }
 
     .hero {
-        padding: 55px 15px;
+        padding: 50px 15px;
     }
 
     .hero h1 {
@@ -171,24 +323,24 @@ body {
         max-width: 320px;
         height: 380px;
     }
-
 }
 
-</style></head><body><!-- HEADER --><header class="hero"><h1>ENGR. AKARACHI ETINOSA AMADI</h1>
+</style></head><body><!-- WEBSITE HEADER --><header class="top-header"><div class="brand">
+    HON. AKARACHI AMADI
+    <small>Mbaitoli/Ikeduru Federal Constituency</small>
+</div>
 
-<p>
-    ENTREPRENEUR | PHILANTHROPIST | LEGISLATOR | PUBLIC SERVANT
-</p>
-
-</header><main class="container"><!-- OFFICIAL PORTRAIT --><div class="profile-photo"><img
+</header><!-- MAIN NAVIGATION --><nav class="navbar"><div class="nav-container"><button class="menu-toggle" onclick="toggleMenu()" aria-label="Open navigation menu">
+☰ MENU
+</button><ul class="nav-links" id="navLinks"><li><a href="/Amadi2027/">Home</a></li><li><a href="/Amadi2027/biography.html" class="active">Biography</a></li><li><a href="/Amadi2027/constituency.html">Constituency</a></li><li><a href="/Amadi2027/projects.html">Projects</a></li><li><a href="/Amadi2027/achievements.html">Achievements</a></li><li><a href="/Amadi2027/legislative.html">Legislative</a></li><li><a href="/Amadi2027/vision.html">Vision</a></li><li><a href="/Amadi2027/news.html">News</a></li><li><a href="/Amadi2027/gallery.html">Gallery</a></li><li><a href="/Amadi2027/press.html">Press</a></li><li><a href="/Amadi2027/faq.html">FAQ</a></li><li><a href="/Amadi2027/contact.html">Contact</a></li></ul></div></nav><!-- RETURN TO HOMEPAGE --><div class="back-home"><a href="/Amadi2027/">
+&#8592; BACK TO MAIN WEBSITE
+</a></div><!-- HERO SECTION --><header class="hero"><h1>ENGR. AKARACHI ETINOSA TOSAN AMADI</h1><p>
+ENTREPRENEUR | PHILANTHROPIST | LEGISLATOR | PUBLIC SERVANT
+</p></header><main class="container"><!-- OFFICIAL PORTRAIT --><div class="profile-photo"><img
 src="https://i.ibb.co/dsFssSg6/file-00000000d42c81f4ac454b22218c4a9a.png"
-alt="Official portrait of Engr. Akarachi Etinosa Amadi">
+alt="Official portrait of Hon. Engr. Akarachi Etinosa Tosan Amadi">
 
-<h2>Engr. Akarachi Etinosa Amadi</h2>
-
-<p>Entrepreneur | Philanthropist | Legislator</p>
-
-</div><!-- ABOUT --><section class="section"><h2>About Akarachi</h2><p>
+<h2>Hon. Engr. Akarachi Etinosa Tosan Amadi</h2><p>Entrepreneur | Philanthropist | Legislator</p></div><!-- ABOUT --><section class="section"><h2>About Akarachi</h2><p>
 Engr. Akarachi Etinosa Amadi is a Nigerian entrepreneur,
 philanthropist, chemical engineer and public servant whose
 journey reflects a commitment to enterprise, youth development,
@@ -265,10 +417,41 @@ foundations of communities.
 </p></section><!-- CLOSING STATEMENT --><div class="quote"><h2>His Commitment</h2><p>
 "Building Opportunities, Empowering Communities
 and Advancing Representation."
-</p></div></main><!-- FOOTER --><footer class="footer"><p>
-© 2026 Engr. Akarachi Etinosa Amadi.
+</p></div></main><!-- FOOTER --><footer class="footer"><div class="footer-content"><div><h3>HON. AKARACHI AMADI</h3><p>
+Mbaitoli/Ikeduru Federal Constituency,
+Imo State, Nigeria.
+</p></div><div><h3>Quick Links</h3><a href="/Amadi2027/">Home</a>
+
+<a href="/Amadi2027/biography.html">Biography</a>
+
+<a href="/Amadi2027/constituency.html">Constituency</a>
+
+<a href="/Amadi2027/projects.html">Projects</a>
+
+</div><div><h3>Explore More</h3><a href="/Amadi2027/achievements.html">Achievements</a>
+
+<a href="/Amadi2027/legislative.html">Legislative Activities</a>
+
+<a href="/Amadi2027/vision.html">Vision & Mission</a>
+
+<a href="/Amadi2027/news.html">News & Updates</a>
+
+<a href="/Amadi2027/contact.html">Contact</a>
+
+</div></div><div class="copyright"><p>
+© 2026 Hon. Engr. Akarachi Etinosa Tosan Amadi.
 All Rights Reserved.
 </p><p>
 Official Website | Mbaitoli/Ikeduru Federal Constituency
-</p></footer></body>
+</p></div></footer><!-- MOBILE MENU JAVASCRIPT --><script>
+
+function toggleMenu() {
+
+    const menu = document.getElementById("navLinks");
+
+    menu.classList.toggle("show");
+
+}
+
+</script></body>
 </html>
