@@ -1,373 +1,274 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Biography of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.">
-  <title>Biography | Hon. Akarachi Amadi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Official biography of Engr. Akarachi Etinosa Amadi, entrepreneur, philanthropist and representative of Mbaitoli/Ikeduru Federal Constituency."><meta name="author" content="Engr. Akarachi Etinosa Amadi"><title>Biography | Engr. Akarachi Etinosa Amadi</title><style>
 
-  <style>
-    :root {
-      --green: #075b32;
-      --dark-green: #034323;
-      --gold: #d6a72c;
-      --red: #c90019;
-      --light: #f5f8f5;
-      --text: #26332b;
-      --white: #fff;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.8;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--light);
-      color: var(--text);
-      line-height: 1.7;
-    }
+/* HERO SECTION */
 
-    header {
-      background: var(--green);
-      color: white;
-      padding: 15px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+.hero {
+    background: linear-gradient(135deg, #071d3b, #123c68);
+    color: white;
+    padding: 75px 20px;
+    text-align: center;
+    border-bottom: 5px solid #d4a73c;
+}
 
-    .brand {
-      font-size: 19px;
-      font-weight: bold;
-    }
+.hero h1 {
+    font-size: 36px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
 
-    .brand span {
-      display: block;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: normal;
-    }
+.hero p {
+    color: #e4bd60;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+/* MAIN CONTAINER */
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
+.container {
+    max-width: 1050px;
+    margin: 45px auto;
+    padding: 0 22px;
+}
 
-    nav a:hover {
-      color: var(--gold);
-    }
+/* PROFILE IMAGE */
 
-    .welcome {
-      background: var(--red);
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 11px 0;
-      border-bottom: 3px solid var(--gold);
-      font-weight: bold;
-    }
+.profile-photo {
+    text-align: center;
+    margin: 35px auto 45px;
+}
 
-    .welcome span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 30s linear infinite;
-    }
+.profile-photo img {
+    width: 100%;
+    max-width: 380px;
+    height: 430px;
+    object-fit: cover;
+    object-position: center;
+    border: 5px solid #d4a73c;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
 
-    .welcome strong {
-      color: #ffe36a;
-    }
+.profile-photo h2 {
+    color: #0b2b50;
+    margin-top: 18px;
+    font-size: 25px;
+}
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
-    }
+.profile-photo p {
+    color: #b28a2e;
+    font-weight: bold;
+}
+
+/* BIOGRAPHY SECTIONS */
+
+.section {
+    background: white;
+    padding: 35px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+.section h2 {
+    color: #0b2b50;
+    font-size: 23px;
+    margin-bottom: 18px;
+    border-left: 5px solid #d4a73c;
+    padding-left: 14px;
+}
+
+.section p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.section ul {
+    padding-left: 25px;
+}
+
+.section li {
+    margin-bottom: 8px;
+}
+
+/* QUOTE SECTION */
+
+.quote {
+    background: #0b2b50;
+    color: white;
+    padding: 40px 25px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.quote h2 {
+    color: #e4bd60;
+    margin-bottom: 12px;
+}
+
+.quote p {
+    font-size: 19px;
+    font-style: italic;
+}
+
+/* FOOTER */
+
+.footer {
+    background: #071d3b;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    border-top: 4px solid #d4a73c;
+}
+
+.footer p {
+    font-size: 14px;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media(max-width: 600px) {
 
     .hero {
-      background: linear-gradient(rgba(3,67,35,.9), rgba(3,67,35,.9));
-      text-align: center;
-      color: white;
-      padding: 65px 20px;
+        padding: 55px 15px;
     }
 
     .hero h1 {
-      font-size: clamp(32px, 5vw, 45px);
-      margin-bottom: 10px;
+        font-size: 25px;
     }
 
     .hero p {
-      max-width: 750px;
-      margin: auto;
+        font-size: 11px;
+        line-height: 1.8;
     }
 
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 55px auto;
+    .section {
+        padding: 23px;
     }
 
-    .profile {
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 40px;
-      align-items: start;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,.07);
+    .section h2 {
+        font-size: 20px;
     }
 
-    .profile-image {
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      border-bottom: 5px solid var(--gold);
+    .profile-photo img {
+        max-width: 320px;
+        height: 380px;
     }
 
-    .profile-image img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
+}
 
-    .profile-content h2 {
-      color: var(--green);
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+</style></head><body><!-- HEADER --><header class="hero"><h1>ENGR. AKARACHI ETINOSA AMADI</h1>
 
-    .profile-content .position {
-      color: #9b7417;
-      font-weight: bold;
-      margin-bottom: 22px;
-    }
+<p>
+    ENTREPRENEUR | PHILANTHROPIST | LEGISLATOR | PUBLIC SERVANT
+</p>
 
-    .biography-text {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      color: #46534a;
-    }
+</header><main class="container"><!-- OFFICIAL PORTRAIT --><div class="profile-photo"><img
+src="https://i.ibb.co/dsFssSg6/file-00000000d42c81f4ac454b22218c4a9a.png"
+alt="Official portrait of Engr. Akarachi Etinosa Amadi">
 
-    .biography-text p {
-      margin-bottom: 16px;
-    }
+<h2>Engr. Akarachi Etinosa Amadi</h2>
 
-    .loading {
-      text-align: center;
-      padding: 20px;
-      color: #657168;
-    }
+<p>Entrepreneur | Philanthropist | Legislator</p>
 
-    footer {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-      margin-top: 60px;
-    }
-
-    footer p {
-      margin: 5px 0;
-      font-size: 14px;
-    }
-
-    @media(max-width: 800px) {
-      .profile {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-image {
-        max-width: 400px;
-        margin: auto;
-      }
-    }
-
-    @media(max-width: 600px) {
-      header {
-        justify-content: center;
-        text-align: center;
-      }
-
-      nav {
-        justify-content: center;
-      }
-
-      .profile {
-        padding: 20px;
-      }
-
-      .hero {
-        padding: 50px 18px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <div class="brand">
-    HON. AKARACHI AMADI
-    <span>Mbaitoli/Ikeduru Federal Constituency</span>
-  </div>
-
-  <nav>
-    <a href="login.html">LOGIN</a>
-    <a href="index.html">HOME</a>
-    <a href="biography.html">BIOGRAPHY</a>
-    <a href="constituency.html">CONSTITUENCY</a>
-    <a href="projects.html">PROJECTS</a>
-    <a href="vision.html">VISION & MISSION</a>
-    <a href="legislative.html">LEGISLATIVE</a>
-    <a href="achievements.html">ACHIEVEMENTS</a>
-    <a href="news.html">NEWS</a>
-    <a href="gallery.html">GALLERY</a>
-    <a href="press.html">PRESS</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html">CONTACT</a>
-  </nav>
-</header>
-
-<div class="welcome">
-  <span>
-    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
-  </span>
-</div>
-
-<section class="hero">
-  <h1>Biography</h1>
-  <p>
-    Learn about Hon. Akarachi Amadi and his role in representing
-    the people of Mbaitoli/Ikeduru Federal Constituency.
-  </p>
-</section>
-
-<main class="container">
-
-  <section class="profile">
-
-    <div class="profile-image">
-      <img
-        src="https://i.ibb.co/s9x9WN7z/file-00000000d42c81f4ac454b22218c4a9a.png"
-        alt="Portrait of Hon. Akarachi Amadi"
-        onerror="this.style.display='none';"
-      >
-    </div>
-
-    <div class="profile-content">
-      <h2>Hon. Akarachi Amadi</h2>
-
-      <div class="position">
-        Member, Federal House of Representatives<br>
-        Mbaitoli/Ikeduru Federal Constituency, Imo State
-      </div>
-
-      <div class="biography-text" id="biographyText">
-        <p class="loading">Loading biography...</p>
-      </div>
-    </div>
-
-  </section>
-
-</main>
-
-<footer>
-  <p><strong>HON. AKARACHI AMADI</strong></p>
-  <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
-  <p><a href="login.html" style="color:#f1d47c;">LOGIN</a></p>
-  <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
-
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  const defaultBiography = `Hon. Akarachi Amadi is a Nigerian politician and member of the Federal House of Representatives, representing the Mbaitoli/Ikeduru Federal Constituency of Imo State, Nigeria.
-
-He emerged as a member of the National Assembly following the 2023 general elections, where he secured the mandate to represent the people of Mbaitoli and Ikeduru Federal Constituency.
-
-As a federal lawmaker, Akarachi Amadi is involved in legislative activities, national policy discussions and the representation of his constituents. His responsibilities include participating in the formulation of laws, contributing to national development discussions and advocating for projects and programmes that can improve the lives of people in his constituency.
-
-His political role places him among the representatives responsible for bringing the concerns, interests and developmental needs of the people of Mbaitoli and Ikeduru to the federal government.
-
-Although he is publicly recognised for his political position, detailed information about his early childhood, parents, family background, educational qualifications and personal life has not been sufficiently verified in reliable public records.
-
-Hon. Akarachi Amadi continues to serve as a political representative of Mbaitoli/Ikeduru Federal Constituency in Imo State.`;
-
-  function displayBiography(text) {
-    const container = document.getElementById("biographyText");
-    container.replaceChildren();
-
-    const paragraphs = String(text || defaultBiography)
-      .split(/\n\s*\n/)
-      .map(part => part.trim())
-      .filter(Boolean);
-
-    paragraphs.forEach(paragraph => {
-      const p = document.createElement("p");
-      p.textContent = paragraph;
-      container.appendChild(p);
-    });
-  }
-
-  async function loadBiography() {
-    const { data, error } = await db
-      .from("site_content")
-      .select("value")
-      .eq("key", "biography")
-      .maybeSingle();
-
-    if (error) {
-      console.error("Biography loading error:", error);
-      displayBiography(defaultBiography);
-      return;
-    }
-
-    if (!data || !data.value) {
-      displayBiography(defaultBiography);
-      return;
-    }
-
-    let biography = data.value;
-
-    // The dashboard stores site content as JSON strings.
-    try {
-      const parsed = JSON.parse(biography);
-
-      if (typeof parsed === "string") {
-        biography = parsed;
-      } else if (parsed && typeof parsed.text === "string") {
-        biography = parsed.text;
-      } else if (parsed && typeof parsed.content === "string") {
-        biography = parsed.content;
-      }
-    } catch (error) {
-      // Use the original value if it is plain text.
-    }
-
-    displayBiography(biography || defaultBiography);
-  }
-
-  loadBiography();
-</script>
-
-</body>
+</div><!-- ABOUT --><section class="section"><h2>About Akarachi</h2><p>
+Engr. Akarachi Etinosa Amadi is a Nigerian entrepreneur,
+philanthropist, chemical engineer and public servant whose
+journey reflects a commitment to enterprise, youth development,
+community advancement and public service.
+</p><p>
+An indigene of Eziama, Ikeduru Local Government Area of Imo
+State, Nigeria, Akarachi Amadi represents the Mbaitoli/Ikeduru
+Federal Constituency in the Federal House of Representatives,
+Abuja. His emergence into national politics represents a
+significant chapter in his journey of community engagement,
+leadership and service.
+</p></section><!-- EDUCATION --><section class="section"><h2>Early Life and Educational Background</h2><p>
+Akarachi Etinosa Amadi was born in 1994 into the family of
+Prince Charles Chukwuemeka Amadi, popularly known as Charlvon.
+</p><p>
+He began his educational journey at Prime International School,
+Warri, Delta State, before proceeding to Straight Gate College,
+Remo, Ogun State, for his secondary education.
+</p><p>
+He subsequently gained admission into Covenant University,
+Ota, Ogun State, where he studied Chemical Engineering and
+obtained a Bachelor of Engineering (B.Eng.) degree.
+</p></section><!-- BUSINESS --><section class="section"><h2>Entrepreneurial and Professional Journey</h2><p>
+Beyond his academic qualifications, Engr. Akarachi Amadi has
+developed interests in entrepreneurship and business development,
+particularly within the downstream oil and gas sector.
+</p><p>
+His professional engagements have extended into areas including
+offshore engineering support, catering services and other
+business ventures.
+</p><p>
+His entrepreneurial journey reflects an interest in creating
+opportunities, developing businesses and exploring practical
+solutions to economic challenges.
+</p></section><!-- HUMANITARIAN --><section class="section"><h2>Humanitarian Services and Community Development</h2><p>
+A defining aspect of Akarachi Amadi's public engagement is his
+involvement in humanitarian and community development initiatives.
+</p><p>
+Through the Akarachi Foundation, he has supported programmes
+and initiatives focused on education, youth empowerment,
+social welfare and community advancement.
+</p><p>His humanitarian activities have included:</p><ul><li>Educational assistance and student support.</li><li>Support for indigent individuals and families.</li><li>Empowerment initiatives for market women.</li><li>Medical assistance for vulnerable people.</li><li>Community development interventions.</li><li>The Mbaike Unity Football Cup.</li></ul></section><!-- POLITICAL CAREER --><section class="section"><h2>Political Journey and Legislative Service</h2><p>
+Engr. Akarachi Etinosa Amadi's transition into politics
+reflects his interest in contributing to governance and
+representing the aspirations of his people.
+</p><p>
+In April 2023, following the supplementary election conducted
+by the Independent National Electoral Commission (INEC),
+he was declared the winner of the Mbaitoli/Ikeduru Federal
+Constituency election, securing 21,372 votes.
+</p><p>
+His victory brought him into the 10th House of Representatives
+of the Federal Republic of Nigeria, where he represents the
+interests of the people of Mbaitoli and Ikeduru.
+</p><p>
+His legislative responsibilities include representation,
+lawmaking and oversight, with the broader objective of
+contributing to national development and addressing issues
+affecting his constituency.
+</p></section><!-- VISION --><section class="section"><h2>Vision and Commitment</h2><p>
+Engr. Akarachi Amadi's public philosophy is rooted in the
+understanding that leadership should create opportunities,
+encourage participation and contribute to the improvement
+of people's lives.
+</p><p>
+His interests in entrepreneurship, humanitarian services,
+youth development and legislative representation reflect
+a broader commitment to community advancement.
+</p><p>
+He recognises the importance of investing in human capital,
+supporting small businesses, encouraging educational
+development and strengthening the social and economic
+foundations of communities.
+</p></section><!-- CLOSING STATEMENT --><div class="quote"><h2>His Commitment</h2><p>
+"Building Opportunities, Empowering Communities
+and Advancing Representation."
+</p></div></main><!-- FOOTER --><footer class="footer"><p>
+© 2026 Engr. Akarachi Etinosa Amadi.
+All Rights Reserved.
+</p><p>
+Official Website | Mbaitoli/Ikeduru Federal Constituency
+</p></footer></body>
 </html>
