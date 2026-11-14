@@ -13,8 +13,6 @@
   --dark:#034323;
   --gold:#d5aa45;
   --light:#f4f7f4;
-  --white:#fff;
-  --red:#d93025;
 }
 
 * {
@@ -40,9 +38,7 @@ header {
   gap:12px;
 }
 
-header h2 {
-  font-size:19px;
-}
+header h2 {font-size:19px;}
 
 header button {
   background:var(--gold);
@@ -136,9 +132,7 @@ input,textarea,select {
   font-size:14px;
 }
 
-textarea {
-  min-height:120px;
-}
+textarea {min-height:120px;}
 
 .action {
   background:var(--green);
@@ -151,7 +145,7 @@ textarea {
 }
 
 .delete {
-  background:var(--red);
+  background:#d93025;
   color:white;
   border:0;
   padding:8px 12px;
@@ -176,9 +170,7 @@ th {
   color:var(--green);
 }
 
-.table-wrap {
-  overflow-x:auto;
-}
+.table-wrap {overflow-x:auto;}
 
 #message {
   padding:12px;
@@ -188,9 +180,7 @@ th {
 }
 
 @media(max-width:700px) {
-  .layout {
-    display:block;
-  }
+  .layout {display:block;}
 
   .sidebar {
     width:100%;
@@ -204,9 +194,7 @@ th {
     margin:0;
   }
 
-  main {
-    padding:14px;
-  }
+  main {padding:14px;}
 }
 </style>
 </head>
@@ -214,49 +202,23 @@ th {
 <body>
 
 <header>
-  <h2>AKARACHI AMADI | ADMIN</h2>
-  <button onclick="logout()">LOG OUT</button>
+<h2>AKARACHI AMADI | ADMIN</h2>
+<button onclick="logout()">LOG OUT</button>
 </header>
 
 <div class="layout">
 
 <aside class="sidebar">
 
-<button class="active" onclick="showSection('dashboard',this)">
-Dashboard
-</button>
-
-<button onclick="showSection('projects',this)">
-Projects
-</button>
-
-<button onclick="showSection('news',this)">
-News Updates
-</button>
-
-<button onclick="showSection('gallery',this)">
-Photo Gallery
-</button>
-
-<button onclick="showSection('videos',this)">
-Videos
-</button>
-
-<button onclick="showSection('press_releases',this)">
-Press Releases
-</button>
-
-<button onclick="showSection('messages',this)">
-Messages
-</button>
-
-<button onclick="showSection('subscribers',this)">
-Subscribers
-</button>
-
-<button onclick="showSection('site_content',this)">
-Website Content
-</button>
+<button class="active" onclick="showSection('dashboard',this)">Dashboard</button>
+<button onclick="showSection('projects',this)">Projects</button>
+<button onclick="showSection('news',this)">News Updates</button>
+<button onclick="showSection('gallery',this)">Photo Gallery</button>
+<button onclick="showSection('videos',this)">Videos</button>
+<button onclick="showSection('press_releases',this)">Press Releases</button>
+<button onclick="showSection('messages',this)">Messages</button>
+<button onclick="showSection('subscribers',this)">Subscribers</button>
+<button onclick="showSection('site_content',this)">Website Content</button>
 
 </aside>
 
@@ -264,11 +226,10 @@ Website Content
 
 <div id="message"></div>
 
-<!-- DASHBOARD -->
-
 <section id="dashboard">
 
 <h2>Welcome, Administrator</h2>
+
 <p style="margin:10px 0 25px;color:#666">
 Hon. Akarachi Amadi Official Website Management
 </p>
@@ -305,22 +266,18 @@ Hon. Akarachi Amadi Official Website Management
 <div class="panel">
 <h3>Administration Centre</h3>
 <p>
-Manage official website information, political activities,
-projects, announcements, photographs and communications.
+Manage official website information, news, gallery,
+projects, announcements and communications.
 </p>
 </div>
 
 </section>
-
-<!-- CONTENT MANAGEMENT -->
 
 <section id="manager" style="display:none">
 
 <div class="panel">
 
 <h2 id="sectionTitle">Manage Content</h2>
-
-<label>Select Database Table</label>
 
 <select id="tableSelect" onchange="loadRecords()">
 <option value="projects">Projects</option>
@@ -333,9 +290,7 @@ projects, announcements, photographs and communications.
 <option value="site_content">Website Content</option>
 </select>
 
-<button class="action" onclick="loadRecords()">
-REFRESH RECORDS
-</button>
+<button class="action" onclick="loadRecords()">REFRESH RECORDS</button>
 
 </div>
 
@@ -343,15 +298,10 @@ REFRESH RECORDS
 
 <h3>Add New Record</h3>
 
-<p style="font-size:13px;color:#666">
-Enter the record as JSON using the columns available in your selected table.
-</p>
+<textarea id="recordJSON"
+placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
 
-<textarea id="recordJSON" placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
-
-<button class="action" onclick="insertRecord()">
-SAVE NEW RECORD
-</button>
+<button class="action" onclick="insertRecord()">SAVE NEW RECORD</button>
 
 </div>
 
@@ -368,11 +318,7 @@ SAVE NEW RECORD
 <th>Actions</th>
 </tr>
 </thead>
-<tbody id="recordsBody">
-<tr>
-<td colspan="3">Loading records...</td>
-</tr>
-</tbody>
+<tbody id="recordsBody"></tbody>
 </table>
 </div>
 
@@ -385,11 +331,11 @@ SAVE NEW RECORD
 
 <script>
 
-// ======================================
+// =================================
 // SUPABASE CONNECTIONS
-// ======================================
+// =================================
 
-// ELECTION DATABASE - AUTHENTICATION
+// AUTHENTICATION DATABASE
 
 const ELECTION_URL =
 "https://pxtgmpmhiktgknjksqeh.supabase.co";
@@ -397,13 +343,14 @@ const ELECTION_URL =
 const ELECTION_KEY =
 "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
-// WEBSITE DATABASE - CONTENT
+// WEBSITE DATABASE
+// REPLACE WITH YOUR ACTUAL WEBSITE PROJECT DETAILS
 
 const WEBSITE_URL =
-"https://znkeancluykkwduydory.supabase.co";
+"YOUR_WEBSITE_SUPABASE_URL";
 
 const WEBSITE_KEY =
-"sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+"YOUR_WEBSITE_PUBLISHABLE_KEY";
 
 const authDb = supabase.createClient(
 ELECTION_URL,
@@ -415,9 +362,9 @@ WEBSITE_URL,
 WEBSITE_KEY
 );
 
-// ======================================
+// =================================
 // ADMIN AUTHENTICATION
-// ======================================
+// =================================
 
 async function checkAdmin() {
 
@@ -435,9 +382,13 @@ const {data:isAdmin,error:adminError} =
 await authDb.rpc("is_admin");
 
 if(adminError || isAdmin !== true) {
+
 alert("Administrator access denied.");
+
 await authDb.auth.signOut();
+
 window.location.replace("login.html");
+
 return;
 }
 
@@ -455,9 +406,9 @@ window.location.replace("login.html");
 
 }
 
-// ======================================
+// =================================
 // LOGOUT
-// ======================================
+// =================================
 
 async function logout() {
 
@@ -467,9 +418,9 @@ window.location.replace("login.html");
 
 }
 
-// ======================================
+// =================================
 // NOTIFICATIONS
-// ======================================
+// =================================
 
 function notify(message,type="success") {
 
@@ -491,9 +442,9 @@ box.style.display="none";
 
 }
 
-// ======================================
+// =================================
 // DASHBOARD STATISTICS
-// ======================================
+// =================================
 
 async function getCount(table) {
 
@@ -530,9 +481,9 @@ await getCount(table);
 
 }
 
-// ======================================
+// =================================
 // NAVIGATION
-// ======================================
+// =================================
 
 function showSection(section,button) {
 
@@ -565,9 +516,9 @@ loadRecords();
 
 }
 
-// ======================================
-// ALLOWED DATABASE TABLES
-// ======================================
+// =================================
+// ALLOWED TABLES
+// =================================
 
 const allowedTables=[
 "projects",
@@ -592,9 +543,9 @@ return table;
 
 }
 
-// ======================================
+// =================================
 // LOAD RECORDS
-// ======================================
+// =================================
 
 async function loadRecords() {
 
@@ -650,13 +601,11 @@ const actionCell=document.createElement("td");
 const edit=document.createElement("button");
 edit.className="action";
 edit.textContent="EDIT";
-
 edit.onclick=()=>editRecord(row);
 
 const del=document.createElement("button");
 del.className="delete";
 del.textContent="DELETE";
-
 del.onclick=()=>deleteRecord(row);
 
 actionCell.append(edit,del);
@@ -669,9 +618,9 @@ body.appendChild(tr);
 
 }
 
-// ======================================
+// =================================
 // INSERT RECORD
-// ======================================
+// =================================
 
 async function insertRecord() {
 
@@ -711,9 +660,9 @@ notify(error.message,"error");
 
 }
 
-// ======================================
+// =================================
 // EDIT RECORD
-// ======================================
+// =================================
 
 async function editRecord(row) {
 
@@ -725,7 +674,7 @@ k==="id" || k==="key"
 
 if(!key) {
 
-notify("This record has no supported ID/key field.","error");
+notify("Record has no supported ID/key field.","error");
 return;
 
 }
@@ -770,9 +719,9 @@ notify(error.message,"error");
 
 }
 
-// ======================================
+// =================================
 // DELETE RECORD
-// ======================================
+// =================================
 
 async function deleteRecord(row) {
 
@@ -784,7 +733,7 @@ k==="id" || k==="key"
 
 if(!key) {
 
-notify("This record has no supported ID/key field.","error");
+notify("Record has no supported ID/key field.","error");
 return;
 
 }
@@ -814,9 +763,9 @@ await loadDashboard();
 
 }
 
-// ======================================
+// =================================
 // START APPLICATION
-// ======================================
+// =================================
 
 checkAdmin();
 
