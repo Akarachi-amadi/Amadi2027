@@ -1,460 +1,463 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Administrator login for the official website of Hon. Akarachi Amadi.">
-  <title>Admin Login | Hon. Akarachi Amadi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Secure login for the Akarachi Amadi Election Management Dashboard.">
+<title>Login | Hon. Akarachi Amadi</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+:root {
+  --green:#075b32;
+  --dark-green:#034323;
+  --gold:#d5a62e;
+  --red:#c90019;
+  --light:#f4f7f4;
+  --text:#26342b;
+}
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  <style>
-    :root {
-      --green: #075b32;
-      --dark-green: #034323;
-      --gold: #d5a62e;
-      --red: #c90019;
-      --white: #ffffff;
-      --light: #f4f7f4;
-      --text: #26342b;
-    }
+body {
+  font-family:Arial,sans-serif;
+  background:var(--light);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+header {
+  background:var(--green);
+  color:white;
+  border-bottom:4px solid var(--gold);
+  padding:17px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--light);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+.brand {
+  font-weight:bold;
+  font-size:17px;
+  line-height:1.5;
+}
 
-    header {
-      background: var(--green);
-      color: white;
-      border-bottom: 4px solid var(--gold);
-      padding: 17px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
+.brand span {
+  display:block;
+  color:#f4d77e;
+  font-size:12px;
+  font-weight:normal;
+}
 
-    .brand {
-      font-weight: bold;
-      font-size: 17px;
-      line-height: 1.5;
-    }
+header a {
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
 
-    .brand span {
-      display: block;
-      color: #f4d77e;
-      font-size: 12px;
-      font-weight: normal;
-    }
+.welcome {
+  background:var(--red);
+  color:white;
+  padding:11px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  border-bottom:3px solid var(--gold);
+}
 
-    header a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.welcome-track {
+  display:inline-block;
+  padding-left:100%;
+  animation:scroll 25s linear infinite;
+}
 
-    .welcome {
-      background: var(--red);
-      color: white;
-      padding: 11px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      border-bottom: 3px solid var(--gold);
-    }
+.welcome strong {
+  color:#ffdf68;
+}
 
-    .welcome-track {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 25s linear infinite;
-    }
+@keyframes scroll {
+  from {transform:translateX(0);}
+  to {transform:translateX(-100%);}
+}
 
-    .welcome strong {
-      color: #ffdf68;
-    }
+main {
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:45px 18px;
+}
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
-    }
+.login-card {
+  background:white;
+  width:100%;
+  max-width:440px;
+  padding:38px 32px;
+  border-radius:13px;
+  box-shadow:0 8px 30px rgba(0,0,0,.09);
+  border-top:5px solid var(--gold);
+}
 
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 45px 18px;
-    }
+.login-card h1 {
+  color:var(--green);
+  text-align:center;
+  font-size:27px;
+  margin-bottom:10px;
+}
 
-    .login-card {
-      background: white;
-      width: 100%;
-      max-width: 440px;
-      padding: 38px 32px;
-      border-radius: 13px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.09);
-      border-top: 5px solid var(--gold);
-    }
+.subtitle {
+  text-align:center;
+  color:#69756d;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:28px;
+}
 
-    .login-card h1 {
-      color: var(--green);
-      text-align: center;
-      font-size: 27px;
-      margin-bottom: 10px;
-    }
+label {
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:8px;
+}
 
-    .subtitle {
-      text-align: center;
-      color: #69756d;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
+input {
+  width:100%;
+  padding:13px;
+  border:1px solid #cbd5cd;
+  border-radius:6px;
+  margin-bottom:19px;
+  font-size:15px;
+  outline:none;
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
+input:focus {
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(7,91,50,.1);
+}
 
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #cbd5cd;
-      border-radius: 6px;
-      margin-bottom: 19px;
-      font-size: 15px;
-      outline: none;
-    }
+.password-wrap {
+  position:relative;
+}
 
-    input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(7,91,50,.1);
-    }
+.password-wrap input {
+  padding-right:70px;
+}
 
-    .password-wrap {
-      position: relative;
-    }
+.show-password {
+  position:absolute;
+  right:10px;
+  top:11px;
+  border:none;
+  background:transparent;
+  color:var(--green);
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    .password-wrap input {
-      padding-right: 70px;
-    }
+.login-btn {
+  width:100%;
+  padding:14px;
+  background:var(--green);
+  color:white;
+  border:none;
+  border-radius:6px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    .show-password {
-      position: absolute;
-      right: 10px;
-      top: 11px;
-      border: none;
-      background: transparent;
-      color: var(--green);
-      cursor: pointer;
-      font-weight: bold;
-    }
+.login-btn:hover {
+  background:var(--dark-green);
+}
 
-    .login-btn {
-      width: 100%;
-      padding: 14px;
-      background: var(--green);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: .2s;
-    }
+.login-btn:disabled {
+  opacity:.65;
+  cursor:not-allowed;
+}
 
-    .login-btn:hover {
-      background: var(--dark-green);
-    }
+.message {
+  display:none;
+  padding:12px;
+  border-radius:6px;
+  margin-bottom:17px;
+  font-size:14px;
+  line-height:1.5;
+}
 
-    .login-btn:disabled {
-      opacity: .65;
-      cursor: not-allowed;
-    }
+.message.error {
+  display:block;
+  background:#fff0f0;
+  color:#a00000;
+  border:1px solid #efb4b4;
+}
 
-    .message {
-      display: none;
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 17px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
+.message.success {
+  display:block;
+  background:#edf8ef;
+  color:#12612c;
+  border:1px solid #b8dfc1;
+}
 
-    .message.error {
-      display: block;
-      background: #fff0f0;
-      color: #a00000;
-      border: 1px solid #efb4b4;
-    }
+.back-link {
+  display:block;
+  text-align:center;
+  margin-top:22px;
+  color:var(--green);
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+}
 
-    .message.success {
-      display: block;
-      background: #edf8ef;
-      color: #12612c;
-      border: 1px solid #b8dfc1;
-    }
+footer {
+  background:var(--dark-green);
+  color:white;
+  text-align:center;
+  padding:19px;
+  font-size:13px;
+}
 
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 22px;
-      color: var(--green);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-    }
+@media(max-width:480px) {
+  header {
+    padding:15px 5%;
+  }
 
-    footer {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 19px;
-      font-size: 13px;
-    }
+  .login-card {
+    padding:30px 22px;
+  }
 
-    @media(max-width: 480px) {
-      header {
-        padding: 15px 5%;
-      }
-
-      .login-card {
-        padding: 30px 22px;
-      }
-
-      .login-card h1 {
-        font-size: 23px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="brand">
-      HON. AKARACHI AMADI
-      <span>Mbaitoli/Ikeduru Federal Constituency</span>
-    </div>
-
-    <a href="index.html">HOME</a>
-  </header>
-
-  <div class="welcome">
-    <div class="welcome-track">
-      <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
-    </div>
+  .login-card h1 {
+    font-size:23px;
+  }
+}
+</style></head><body><header>
+  <div class="brand">
+    HON. AKARACHI AMADI
+    <span>Mbaitoli/Ikeduru Federal Constituency</span>
   </div>
+  <a href="index.html">HOME</a>
+</header><div class="welcome">
+  <div class="welcome-track">
+    <strong>IKEDURU CORP MEMBERS (NYSC)</strong> —
+    Welcome to the official website of Hon. Akarachi Amadi,
+    Member representing Mbaitoli/Ikeduru Federal Constituency,
+    Imo State, Nigeria.
+  </div>
+</div><main><section class="login-card"><h1>Election Management Login</h1><p class="subtitle">
+Sign in with your authorised administrator or polling-unit agent account.
+</p><div id="message" class="message" role="alert"></div><form id="loginForm"><label for="email">Email Address</label>
 
-  <main>
-    <section class="login-card">
+<input
+type="email"
+id="email"
+placeholder="Enter your registered email"
+autocomplete="username"
+maxlength="254"
+required
 
-      <h1>Administrator Login</h1>
+«»
 
-      <p class="subtitle">
-        Sign in with your authorised administrator account
-        to manage website content and updates.
-      </p>
+<label for="password">Password</label>
 
-      <div id="message" class="message" role="alert"></div>
+<div class="password-wrap"><input
+type="password"
+id="password"
+placeholder="Enter your password"
+autocomplete="current-password"
+required
 
-      <form id="loginForm">
+«»
 
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter administrator email"
-          autocomplete="username"
-          required
-        >
+<button
+type="button"
+class="show-password"
+id="togglePassword"
 
-        <label for="password">Password</label>
+«Show</button>»
 
-        <div class="password-wrap">
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-            required
-          >
+</div><button type="submit" class="login-btn" id="loginButton">
+LOGIN TO DASHBOARD
+</button></form><a href="index.html" class="back-link">
+← Back to Official Website
+</a></section></main><footer>
+© <span id="year"></span> Hon. Akarachi Amadi.
+All Rights Reserved.
+</footer><script>
+/* ELECTION MANAGEMENT SUPABASE CONNECTION */
 
-          <button
-            type="button"
-            class="show-password"
-            id="togglePassword"
-          >Show</button>
-        </div>
+const SUPABASE_URL =
+"https://pxtgmpmhiktgknjksqeh.supabase.co";
 
-        <button type="submit" class="login-btn" id="loginButton">
-          LOGIN TO DASHBOARD
-        </button>
+const SUPABASE_KEY =
+"sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
-      </form>
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-      <a href="index.html" class="back-link">
-        ← Back to Official Website
-      </a>
+const loginForm = document.getElementById("loginForm");
+const loginButton = document.getElementById("loginButton");
+const messageBox = document.getElementById("message");
+const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
 
-    </section>
-  </main>
+document.getElementById("year").textContent =
+new Date().getFullYear();
 
-  <footer>
-    © <span id="year"></span> Hon. Akarachi Amadi.
-    All Rights Reserved.
-  </footer>
+function showMessage(message,type) {
+  messageBox.textContent = message;
+  messageBox.className = "message " + type;
+}
 
-  <script>
-    // Supabase public project configuration.
-    // Never place a service_role or secret key in frontend code.
+function clearMessage() {
+  messageBox.textContent = "";
+  messageBox.className = "message";
+}
 
-    const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
+togglePassword.addEventListener("click",function() {
+  const isPassword = passwordInput.type === "password";
 
-    const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+  passwordInput.type = isPassword ? "text" : "password";
+  togglePassword.textContent = isPassword ? "Hide" : "Show";
+});
 
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+/* VERIFY USER ROLE AND ACCOUNT STATUS */
+
+async function getUserRole(user) {
+
+  const {data:profile,error} = await supabaseClient
+    .from("profiles")
+    .select("role,is_active,full_name")
+    .eq("id",user.id)
+    .maybeSingle();
+
+  if(error) {
+    console.error(error);
+    throw new Error("Unable to verify your account. Please try again.");
+  }
+
+  if(!profile) {
+    throw new Error("Your account profile was not found. Contact the administrator.");
+  }
+
+  if(profile.is_active !== true) {
+    throw new Error("Your account is not active. Contact the administrator.");
+  }
+
+  if(profile.role === "admin") {
+    return "admin";
+  }
+
+  if(profile.role === "agent") {
+    return "agent";
+  }
+
+  throw new Error("Your account does not have an authorised dashboard role.");
+}
+
+/* ROUTE USER TO THE CORRECT DASHBOARD */
+
+async function redirectUser(user) {
+
+  const role = await getUserRole(user);
+
+  if(role === "admin") {
+    window.location.replace("admin.html");
+    return;
+  }
+
+  if(role === "agent") {
+    window.location.replace("agent.html");
+    return;
+  }
+
+}
+
+/* CHECK EXISTING SESSION */
+
+async function checkExistingSession() {
+
+  const {data,error} = await supabaseClient.auth.getSession();
+
+  if(error || !data.session) {
+    return;
+  }
+
+  try {
+    await redirectUser(data.session.user);
+  } catch(error) {
+    console.error(error);
+
+    await supabaseClient.auth.signOut();
+  }
+}
+
+/* LOGIN */
+
+loginForm.addEventListener("submit",async function(event) {
+
+  event.preventDefault();
+  clearMessage();
+
+  const email = document.getElementById("email")
+    .value.trim().toLowerCase();
+
+  const password = passwordInput.value;
+
+  if(!email || !password) {
+    showMessage("Please enter your email and password.","error");
+    return;
+  }
+
+  loginButton.disabled = true;
+  loginButton.textContent = "PLEASE WAIT...";
+
+  try {
+
+    const {data,error} = await supabaseClient.auth
+      .signInWithPassword({
+        email:email,
+        password:password
+      });
+
+    if(error) {
+      throw error;
+    }
+
+    showMessage(
+      "Login successful. Verifying your account...",
+      "success"
     );
 
-    const loginForm = document.getElementById("loginForm");
-    const loginButton = document.getElementById("loginButton");
-    const messageBox = document.getElementById("message");
-    const passwordInput = document.getElementById("password");
-    const togglePassword = document.getElementById("togglePassword");
+    await redirectUser(data.user);
 
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+  } catch(error) {
 
-    function showMessage(message, type) {
-      messageBox.textContent = message;
-      messageBox.className = "message " + type;
+    console.error("Login error:",error);
+
+    showMessage(
+      error.message || "Login failed. Please check your details.",
+      "error"
+    );
+
+    const {data} = await supabaseClient.auth.getSession();
+
+    if(data.session) {
+      await supabaseClient.auth.signOut();
     }
 
-    function clearMessage() {
-      messageBox.textContent = "";
-      messageBox.className = "message";
-    }
+  } finally {
 
-    togglePassword.addEventListener("click", function () {
-      const isPassword = passwordInput.type === "password";
+    loginButton.disabled = false;
+    loginButton.textContent = "LOGIN TO DASHBOARD";
 
-      passwordInput.type = isPassword ? "text" : "password";
-      togglePassword.textContent = isPassword ? "Hide" : "Show";
-    });
+  }
 
-    async function verifyAdministrator(user) {
-      const { data, error } = await supabaseClient.rpc("is_admin");
+});
 
-      if (error) {
-        console.error("Administrator verification error:", error);
-        throw new Error(
-          "Your account could not be verified. Please contact the website administrator."
-        );
-      }
-
-      return data === true;
-    }
-
-    // Check whether an existing session belongs to an administrator.
-    async function checkExistingSession() {
-      const { data, error } =
-        await supabaseClient.auth.getSession();
-
-      if (error || !data.session) {
-        return;
-      }
-
-      try {
-        const isAdmin = await verifyAdministrator(data.session.user);
-
-        if (isAdmin) {
-          window.location.replace("admin.html");
-        } else {
-          await supabaseClient.auth.signOut();
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    loginForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      clearMessage();
-
-      const email = document.getElementById("email").value.trim();
-      const password = passwordInput.value;
-
-      if (!email || !password) {
-        showMessage("Please enter your email and password.", "error");
-        return;
-      }
-
-      loginButton.disabled = true;
-      loginButton.textContent = "PLEASE WAIT...";
-
-      try {
-        // Authenticate the user through Supabase Auth.
-        const { data, error } =
-          await supabaseClient.auth.signInWithPassword({
-            email: email,
-            password: password
-          });
-
-        if (error) {
-          throw error;
-        }
-
-        // Confirm that the authenticated user is registered as an admin.
-        const isAdmin = await verifyAdministrator(data.user);
-
-        if (!isAdmin) {
-          await supabaseClient.auth.signOut();
-
-          showMessage(
-            "Access denied. This account is not registered as a website administrator.",
-            "error"
-          );
-
-          return;
-        }
-
-        showMessage(
-          "Login successful. Opening your dashboard...",
-          "success"
-        );
-
-        window.location.replace("admin.html");
-
-      } catch (error) {
-        console.error("Login error:", error);
-
-        showMessage(
-          error.message || "Login failed. Please check your details and try again.",
-          "error"
-        );
-
-      } finally {
-        loginButton.disabled = false;
-        loginButton.textContent = "LOGIN TO DASHBOARD";
-      }
-    });
-
-    checkExistingSession();
-  </script>
-
-</body>
+checkExistingSession();
+</script></body>
 </html>
