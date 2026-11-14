@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ward Reports | Election Monitoring 2027</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+  --green: #075b32;
+  --dark: #034323;
+  --gold: #d5a629;
+  --light: #f4f7f5;
+  --white: #ffffff;
+  --text: #26352c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+}
+
+header {
+  background: var(--green);
+  color: white;
+  padding: 25px 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+header p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+button, .back-button {
+  border: none;
+  background: var(--green);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+button:hover, .back-button:hover {
+  background: var(--dark);
+}
+
+.search-box {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ccd8cf;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.summary-card {
+  background: white;
+  padding: 18px;
+  border-radius: 8px;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.summary-card strong {
+  display: block;
+  font-size: 25px;
+  color: var(--green);
+  margin-top: 7px;
+}
+
+.report {
+  background: white;
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  overflow-wrap: anywhere;
+}
+
+.report h3 {
+  color: var(--green);
+  margin-top: 0;
+}
+
+.report-row {
+  padding: 8px 0;
+  border-bottom: 1px solid #edf0ed;
+  font-size: 14px;
+}
+
+.report-row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: bold;
+  color: #52645a;
+  text-transform: capitalize;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #fff3d5;
+  color: #805900;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.verified {
+  background: #d9f4e2;
+  color: #075b32;
+}
+
+.status.rejected {
+  background: #ffe0e0;
+  color: #a00000;
+}
+
+.empty, .message {
+  background: white;
+  padding: 22px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.error {
+  color: #a00000;
+  background: #ffe8e8;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 10px;
+  color: #68766d;
+  font-size: 13px;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13px;
+  background: #f5f7f5;
+  padding: 12px;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>WARD REPORTS</h1>
+  <p>Election Monitoring Portal 2027</p>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <a href="index.html" class="back-button">← Back to Dashboard</a>
+    <button onclick="loadReports()">Refresh Reports</button>
+  </div>
+
+  <div class="summary">
+    <div class="summary-card">
+      Total Submissions
+      <strong id="totalReports">0</strong>
+    </div>
+
+    <div class="summary-card">
+      Verified Reports
+      <strong id="verifiedReports">0</strong>
+    </div>
+
+    <div class="summary-card">
+      Pending Reports
+      <strong id="pendingReports">0</strong>
+    </div>
+  </div>
+
+  <input
+    type="search"
+    id="searchInput"
+    class="search-box"
+    placeholder="Search by ward, LGA, polling unit or any report detail..."
+    oninput="filterReports()"
+  >
+
+  <div id="message" class="message">Loading election reports...</div>
+
+  <div id="reports"></div>
+
+</div>
+
+<footer>
+  Election Monitoring 2027 | Ward Reports
+</footer>
+
+<script>
+const SUPABASE_URL = "https://pxtgmpmhiktgknjksqeh.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+let allReports = [];
+
+function formatLabel(key) {
+  return key
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, letter => letter.toUpperCase());
+}
+
+function formatValue(value) {
+  if (value === null || value === undefined || value === "") {
+    return "Not provided";
+  }
+
+  if (typeof value === "object") {
+    return JSON.stringify(value, null, 2);
+  }
+
+  return String(value);
+}
+
+function getStatusClass(value) {
+  const status = String(value || "").toLowerCase();
+
+  if (status.includes("verif")) return "verified";
+  if (status.includes("reject")) return "rejected";
+
+  return "";
+}
+
+function getStatusValue(report) {
+  const key = Object.keys(report).find(k =>
+    k.toLowerCase() === "status"
+  );
+
+  return key ? report[key] : "Not specified";
+}
+
+function getReportTitle(report, index) {
+  const possibleNames = [
+    "ward_name",
+    "ward",
+    "ward_number",
+    "polling_unit_name",
+    "polling_unit",
+    "lga",
+    "lga_name"
+  ];
+
+  for (const name of possibleNames) {
+    const key = Object.keys(report).find(
+      k => k.toLowerCase() === name
+    );
+
+    if (key && report[key]) {
+      return formatLabel(key) + ": " + report[key];
+    }
+  }
+
+  return "Election Report #" + (index + 1);
+}
+
+async function loadReports() {
+  const message = document.getElementById("message");
+  const reportsContainer = document.getElementById("reports");
+
+  message.className = "message";
+  message.textContent = "Loading election reports...";
+  reportsContainer.innerHTML = "";
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("result_submissions")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    allReports = data || [];
+
+    document.getElementById("totalReports").textContent =
+      allReports.length;
+
+    const verified = allReports.filter(report =>
+      String(getStatusValue(report)).toLowerCase().includes("verif")
+    ).length;
+
+    document.getElementById("verifiedReports").textContent = verified;
+
+    document.getElementById("pendingReports").textContent =
+      allReports.length - verified;
+
+    message.style.display = "none";
+
+    if (allReports.length === 0) {
+      message.style.display = "block";
+      message.textContent = "No election reports have been submitted yet.";
+      return;
+    }
+
+    displayReports(allReports);
+
+  } catch (error) {
+    message.style.display = "block";
+    message.className = "message error";
+
+    message.innerHTML =
+      "<strong>Unable to load reports.</strong><br><br>" +
+      formatValue(error.message) +
+      "<br><br>Check that the result_submissions table exists and that public users have permission to read reports.";
+  }
+}
+
+function displayReports(reports) {
+  const container = document.getElementById("reports");
+  container.innerHTML = "";
+
+  if (!reports.length) {
+    container.innerHTML =
+      '<div class="empty">No matching reports found.</div>';
+    return;
+  }
+
+  reports.forEach((report, index) => {
+    const card = document.createElement("div");
+    card.className = "report";
+
+    const title = document.createElement("h3");
+    title.textContent = getReportTitle(report, index);
+    card.appendChild(title);
+
+    const status = document.createElement("span");
+    status.className = "status " + getStatusClass(getStatusValue(report));
+    status.textContent = "Status: " + getStatusValue(report);
+    card.appendChild(status);
+
+    Object.entries(report).forEach(([key, value]) => {
+      const row = document.createElement("div");
+      row.className = "report-row";
+
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = formatLabel(key) + ": ";
+
+      const content = document.createElement("span");
+      content.textContent = formatValue(value);
+
+      row.appendChild(label);
+      row.appendChild(content);
+      card.appendChild(row);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+function filterReports() {
+  const search = document
+    .getElementById("searchInput")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const filtered = allReports.filter(report =>
+    JSON.stringify(report).toLowerCase().includes(search)
+  );
+
+  displayReports(filtered);
+}
+
+loadReports();
+</script>
+
+</body>
+</html>
