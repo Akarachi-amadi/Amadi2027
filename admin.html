@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Admin Dashboard | Hon. Akarachi Amadi</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -30,7 +31,7 @@ body {
 header {
   background:var(--green);
   color:white;
-  padding:20px;
+  padding:18px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -38,9 +39,13 @@ header {
   gap:12px;
 }
 
-header h2 {font-size:19px;}
+header h2 {font-size:18px;}
 
-header button {
+button {
+  cursor:pointer;
+}
+
+.logout {
   background:var(--gold);
   border:0;
   padding:11px 18px;
@@ -50,20 +55,21 @@ header button {
 
 .layout {
   display:flex;
-  min-height:calc(100vh - 70px);
+  min-height:calc(100vh - 65px);
 }
 
 .sidebar {
-  width:230px;
+  width:225px;
   background:var(--dark);
-  padding:20px 10px;
+  padding:15px 10px;
+  flex-shrink:0;
 }
 
 .sidebar button {
   display:block;
   width:100%;
   padding:14px;
-  margin-bottom:8px;
+  margin-bottom:7px;
   border:0;
   background:transparent;
   color:white;
@@ -80,42 +86,36 @@ header button {
 
 main {
   flex:1;
-  padding:25px;
+  padding:22px;
   min-width:0;
 }
 
+section {display:none;}
+section.active {display:block;}
+
 .cards {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
-  margin-bottom:25px;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:13px;
+  margin:20px 0;
+}
+
+.card,.panel {
+  background:white;
+  padding:20px;
+  border-radius:9px;
+  box-shadow:0 2px 8px #00000010;
+  margin-bottom:18px;
 }
 
 .card {
-  background:white;
-  padding:22px;
-  border-radius:9px;
   border-left:4px solid var(--green);
-  box-shadow:0 2px 8px #00000010;
 }
 
 .card h3 {
   color:var(--green);
   font-size:25px;
-  margin-bottom:8px;
-}
-
-.card p {
-  color:#666;
-  font-size:13px;
-}
-
-.panel {
-  background:white;
-  padding:20px;
-  border-radius:9px;
-  box-shadow:0 2px 8px #00000010;
-  margin-bottom:20px;
+  margin-bottom:7px;
 }
 
 .panel h3 {
@@ -132,17 +132,18 @@ input,textarea,select {
   font-size:14px;
 }
 
-textarea {min-height:120px;}
+textarea {min-height:100px;}
 
 .action {
   background:var(--green);
   color:white;
   border:0;
-  padding:12px 20px;
+  padding:12px 18px;
   border-radius:5px;
-  cursor:pointer;
   margin:4px;
 }
+
+.action:hover {background:var(--dark);}
 
 .delete {
   background:#d93025;
@@ -152,14 +153,81 @@ textarea {min-height:120px;}
   border-radius:4px;
 }
 
+#message {
+  display:none;
+  padding:13px;
+  margin-bottom:15px;
+  border-radius:5px;
+}
+
+.upload-box {
+  border:2px dashed #a9c7b2;
+  border-radius:9px;
+  padding:20px;
+  text-align:center;
+  background:#f9fcfa;
+  margin:12px 0;
+}
+
+.upload-box input {
+  border:0;
+  background:white;
+  margin-top:12px;
+}
+
+.preview-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  gap:12px;
+  margin:15px 0;
+}
+
+.preview-item {
+  background:#f2f5f2;
+  padding:7px;
+  border-radius:7px;
+  overflow:hidden;
+}
+
+.preview-item img {
+  width:100%;
+  height:110px;
+  object-fit:cover;
+  border-radius:5px;
+}
+
+.preview-item p {
+  font-size:11px;
+  overflow-wrap:anywhere;
+  margin-top:5px;
+}
+
+.progress {
+  height:8px;
+  background:#ddd;
+  border-radius:10px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.progress-bar {
+  height:100%;
+  width:0;
+  background:var(--green);
+}
+
+.table-wrap {
+  overflow-x:auto;
+}
+
 table {
   width:100%;
   border-collapse:collapse;
-  min-width:600px;
+  min-width:550px;
 }
 
 th,td {
-  padding:12px;
+  padding:11px;
   border-bottom:1px solid #eee;
   text-align:left;
   font-size:13px;
@@ -170,13 +238,10 @@ th {
   color:var(--green);
 }
 
-.table-wrap {overflow-x:auto;}
-
-#message {
-  padding:12px;
-  margin-bottom:15px;
-  border-radius:5px;
-  display:none;
+.small {
+  color:#666;
+  font-size:13px;
+  line-height:1.6;
 }
 
 @media(max-width:700px) {
@@ -192,9 +257,10 @@ th {
   .sidebar button {
     font-size:12px;
     margin:0;
+    padding:12px 7px;
   }
 
-  main {padding:14px;}
+  main {padding:12px;}
 }
 </style>
 </head>
@@ -202,8 +268,8 @@ th {
 <body>
 
 <header>
-<h2>AKARACHI AMADI | ADMIN</h2>
-<button onclick="logout()">LOG OUT</button>
+  <h2>AKARACHI AMADI | ADMIN</h2>
+  <button class="logout" onclick="logout()">LOG OUT</button>
 </header>
 
 <div class="layout">
@@ -211,14 +277,24 @@ th {
 <aside class="sidebar">
 
 <button class="active" onclick="showSection('dashboard',this)">Dashboard</button>
-<button onclick="showSection('projects',this)">Projects</button>
-<button onclick="showSection('news',this)">News Updates</button>
-<button onclick="showSection('gallery',this)">Photo Gallery</button>
-<button onclick="showSection('videos',this)">Videos</button>
-<button onclick="showSection('press_releases',this)">Press Releases</button>
-<button onclick="showSection('messages',this)">Messages</button>
-<button onclick="showSection('subscribers',this)">Subscribers</button>
-<button onclick="showSection('site_content',this)">Website Content</button>
+
+<button onclick="showSection('upload',this)">Upload Pictures</button>
+
+<button onclick="openManager('projects',this)">Projects</button>
+
+<button onclick="openManager('news',this)">News Updates</button>
+
+<button onclick="openManager('gallery',this)">Photo Gallery</button>
+
+<button onclick="openManager('videos',this)">Videos</button>
+
+<button onclick="openManager('press_releases',this)">Press Releases</button>
+
+<button onclick="openManager('messages',this)">Messages</button>
+
+<button onclick="openManager('subscribers',this)">Subscribers</button>
+
+<button onclick="openManager('site_content',this)">Website Content</button>
 
 </aside>
 
@@ -226,12 +302,14 @@ th {
 
 <div id="message"></div>
 
-<section id="dashboard">
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="active">
 
 <h2>Welcome, Administrator</h2>
 
-<p style="margin:10px 0 25px;color:#666">
-Hon. Akarachi Amadi Official Website Management
+<p class="small">
+Hon. Akarachi Amadi Official Website Management Centre.
 </p>
 
 <div class="cards">
@@ -265,21 +343,119 @@ Hon. Akarachi Amadi Official Website Management
 
 <div class="panel">
 <h3>Administration Centre</h3>
-<p>
-Manage official website information, news, gallery,
-projects, announcements and communications.
+
+<p class="small">
+Upload photographs directly from your phone, manage projects,
+publish news, update the photo gallery and manage website content.
 </p>
+
+<button class="action" onclick="showSection('upload')">
+UPLOAD NEW PICTURES
+</button>
+
 </div>
 
 </section>
 
-<section id="manager" style="display:none">
+
+<!-- UPLOAD SECTION -->
+
+<section id="upload">
+
+<div class="panel">
+
+<h2>Upload Pictures From Your Phone</h2>
+
+<p class="small">
+Choose a website section, select photographs from your phone,
+preview them and upload them to Supabase Storage.
+</p>
+
+<label>Choose Section</label>
+
+<select id="uploadCategory">
+<option value="gallery">Photo Gallery</option>
+<option value="projects">Projects</option>
+<option value="news">News Updates</option>
+<option value="videos">Video Thumbnails</option>
+<option value="press_releases">Press Releases</option>
+</select>
+
+<label>Title or Caption</label>
+
+<input
+id="uploadTitle"
+type="text"
+placeholder="Enter picture title or caption"
+>
+
+<label>Description</label>
+
+<textarea
+id="uploadDescription"
+placeholder="Write a description..."
+></textarea>
+
+<div class="upload-box">
+
+<h3>Select Pictures</h3>
+
+<p class="small">
+Tap the button below to open your phone's gallery.
+</p>
+
+<input
+type="file"
+id="pictureInput"
+accept="image/*"
+multiple
+onchange="previewPictures()"
+>
+
+</div>
+
+<div id="previewGrid" class="preview-grid"></div>
+
+<div class="progress">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+<p id="uploadStatus" class="small"></p>
+
+<button class="action" onclick="uploadPictures()">
+UPLOAD PICTURES NOW
+</button>
+
+</div>
+
+<div class="panel">
+
+<h3>Important Upload Information</h3>
+
+<p class="small">
+Pictures are stored in your Supabase Storage bucket.
+After uploading, the image URLs are shown below.
+The database record is then saved using the common
+title, description, image_url and image_path fields.
+</p>
+
+<div id="uploadedLinks"></div>
+
+</div>
+
+</section>
+
+
+<!-- CONTENT MANAGER -->
+
+<section id="manager">
 
 <div class="panel">
 
 <h2 id="sectionTitle">Manage Content</h2>
 
 <select id="tableSelect" onchange="loadRecords()">
+
 <option value="projects">Projects</option>
 <option value="news">News</option>
 <option value="gallery">Gallery</option>
@@ -288,6 +464,7 @@ projects, announcements and communications.
 <option value="messages">Messages</option>
 <option value="subscribers">Subscribers</option>
 <option value="site_content">Website Content</option>
+
 </select>
 
 <button class="action" onclick="loadRecords()">REFRESH RECORDS</button>
@@ -298,10 +475,14 @@ projects, announcements and communications.
 
 <h3>Add New Record</h3>
 
-<textarea id="recordJSON"
-placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
+<textarea
+id="recordJSON"
+placeholder='{"title":"Example","description":"Enter content here"}'
+></textarea>
 
-<button class="action" onclick="insertRecord()">SAVE NEW RECORD</button>
+<button class="action" onclick="insertRecord()">
+SAVE NEW RECORD
+</button>
 
 </div>
 
@@ -310,7 +491,9 @@ placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
 <h3>Database Records</h3>
 
 <div class="table-wrap">
+
 <table>
+
 <thead>
 <tr>
 <th>Record</th>
@@ -318,8 +501,11 @@ placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
 <th>Actions</th>
 </tr>
 </thead>
+
 <tbody id="recordsBody"></tbody>
+
 </table>
+
 </div>
 
 </div>
@@ -329,13 +515,14 @@ placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
 </main>
 </div>
 
+
 <script>
 
-// =================================
-// SUPABASE CONNECTIONS
-// =================================
+// =====================================
+// SUPABASE SETTINGS
+// =====================================
 
-// AUTHENTICATION DATABASE
+// ELECTION AUTHENTICATION PROJECT
 
 const ELECTION_URL =
 "https://pxtgmpmhiktgknjksqeh.supabase.co";
@@ -343,8 +530,9 @@ const ELECTION_URL =
 const ELECTION_KEY =
 "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
+
 // WEBSITE DATABASE
-// REPLACE WITH YOUR ACTUAL WEBSITE PROJECT DETAILS
+// INSERT YOUR ACTUAL WEBSITE PROJECT DETAILS
 
 const WEBSITE_URL =
 "YOUR_WEBSITE_SUPABASE_URL";
@@ -352,19 +540,37 @@ const WEBSITE_URL =
 const WEBSITE_KEY =
 "YOUR_WEBSITE_PUBLISHABLE_KEY";
 
+
+// SUPABASE STORAGE BUCKET
+
+const STORAGE_BUCKET = "website-media";
+
+
+// =====================================
+// CREATE CONNECTIONS
+// =====================================
+
 const authDb = supabase.createClient(
 ELECTION_URL,
 ELECTION_KEY
 );
 
-const websiteDb = supabase.createClient(
+let websiteDb = null;
+
+if (
+WEBSITE_URL.startsWith("https://") &&
+WEBSITE_KEY !== "YOUR_WEBSITE_PUBLISHABLE_KEY"
+) {
+websiteDb = supabase.createClient(
 WEBSITE_URL,
 WEBSITE_KEY
 );
+}
 
-// =================================
-// ADMIN AUTHENTICATION
-// =================================
+
+// =====================================
+// AUTHENTICATION
+// =====================================
 
 async function checkAdmin() {
 
@@ -374,8 +580,10 @@ const {data,error} =
 await authDb.auth.getSession();
 
 if(error || !data.session) {
+
 window.location.replace("login.html");
 return;
+
 }
 
 const {data:isAdmin,error:adminError} =
@@ -390,6 +598,18 @@ await authDb.auth.signOut();
 window.location.replace("login.html");
 
 return;
+
+}
+
+if(!websiteDb) {
+
+notify(
+"Authentication successful. Add your website Supabase URL and publishable key to enable website management.",
+"error"
+);
+
+return;
+
 }
 
 await loadDashboard();
@@ -398,17 +618,16 @@ await loadDashboard();
 
 console.error(error);
 
-alert("Authentication error.");
-
-window.location.replace("login.html");
+notify(error.message,"error");
 
 }
 
 }
 
-// =================================
+
+// =====================================
 // LOGOUT
-// =================================
+// =====================================
 
 async function logout() {
 
@@ -418,9 +637,10 @@ window.location.replace("login.html");
 
 }
 
-// =================================
+
+// =====================================
 // NOTIFICATIONS
-// =================================
+// =====================================
 
 function notify(message,type="success") {
 
@@ -428,25 +648,59 @@ const box=document.getElementById("message");
 
 box.style.display="block";
 
-box.style.background=
-type==="error"?"#ffe5e5":"#e4f5e8";
+box.style.background =
+type==="error" ? "#ffe5e5" : "#e4f5e8";
 
-box.style.color=
-type==="error"?"#a00000":"#075b32";
+box.style.color =
+type==="error" ? "#a00000" : "#075b32";
 
 box.textContent=message;
 
-setTimeout(()=>{
-box.style.display="none";
-},5000);
+}
+
+
+// =====================================
+// NAVIGATION
+// =====================================
+
+function showSection(section,button) {
+
+document.querySelectorAll("main section")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById(section).classList.add("active");
+
+document.querySelectorAll(".sidebar button")
+.forEach(b=>b.classList.remove("active"));
+
+if(button) button.classList.add("active");
+
+if(section==="dashboard") loadDashboard();
 
 }
 
-// =================================
+
+function openManager(table,button) {
+
+showSection("manager",button);
+
+document.getElementById("tableSelect").value=table;
+
+document.getElementById("sectionTitle").textContent =
+"Manage " + table.replace("_"," ").toUpperCase();
+
+loadRecords();
+
+}
+
+
+// =====================================
 // DASHBOARD STATISTICS
-// =================================
+// =====================================
 
 async function getCount(table) {
+
+if(!websiteDb) return "--";
 
 const {count,error} =
 await websiteDb
@@ -454,15 +708,21 @@ await websiteDb
 .select("*",{count:"exact",head:true});
 
 if(error) {
-console.error(table,error);
+
+console.error(error);
+
 return "--";
+
 }
 
 return count ?? 0;
 
 }
 
+
 async function loadDashboard() {
+
+if(!websiteDb) return;
 
 const tables=[
 ["projects","projectsCount"],
@@ -481,44 +741,235 @@ await getCount(table);
 
 }
 
-// =================================
-// NAVIGATION
-// =================================
 
-function showSection(section,button) {
+// =====================================
+// PICTURE PREVIEW
+// =====================================
 
-document.getElementById("dashboard").style.display="none";
-document.getElementById("manager").style.display="none";
+function previewPictures() {
 
-document.querySelectorAll(".sidebar button")
-.forEach(b=>b.classList.remove("active"));
+const input=document.getElementById("pictureInput");
 
-button.classList.add("active");
+const grid=document.getElementById("previewGrid");
 
-if(section==="dashboard") {
+grid.innerHTML="";
 
-document.getElementById("dashboard").style.display="block";
+const files=Array.from(input.files || []);
 
-loadDashboard();
+files.forEach(file=>{
 
+const reader=new FileReader();
+
+reader.onload=function(e) {
+
+const item=document.createElement("div");
+
+item.className="preview-item";
+
+const img=document.createElement("img");
+
+img.src=e.target.result;
+
+const name=document.createElement("p");
+
+name.textContent=file.name;
+
+item.append(img,name);
+
+grid.appendChild(item);
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+document.getElementById("uploadStatus").textContent =
+files.length + " picture(s) selected.";
+
+}
+
+
+// =====================================
+// UPLOAD PICTURES
+// =====================================
+
+async function uploadPictures() {
+
+if(!websiteDb) {
+
+notify("Website Supabase credentials are missing.","error");
 return;
 
 }
 
-document.getElementById("manager").style.display="block";
+const input=document.getElementById("pictureInput");
 
-document.getElementById("tableSelect").value=section;
+const files=Array.from(input.files || []);
 
-document.getElementById("sectionTitle").textContent=
-"Manage "+section.replace("_"," ").toUpperCase();
+if(files.length===0) {
 
-loadRecords();
+notify("Please select pictures from your phone first.","error");
+return;
 
 }
 
-// =================================
-// ALLOWED TABLES
-// =================================
+const category=document.getElementById("uploadCategory").value;
+
+const title=document.getElementById("uploadTitle").value.trim();
+
+const description=document.getElementById("uploadDescription").value.trim();
+
+const status=document.getElementById("uploadStatus");
+
+const progress=document.getElementById("progressBar");
+
+const links=document.getElementById("uploadedLinks");
+
+links.innerHTML="";
+
+let completed=0;
+
+status.textContent="Starting upload...";
+
+for(const file of files) {
+
+try {
+
+if(!file.type.startsWith("image/")) {
+
+throw new Error(file.name + " is not an image.");
+
+}
+
+if(file.size > 10 * 1024 * 1024) {
+
+throw new Error(file.name + " exceeds the 10MB limit.");
+
+}
+
+const extension =
+file.name.split(".").pop().toLowerCase();
+
+const safeName =
+Date.now() + "-" +
+Math.random().toString(36).substring(2,10) +
+"." + extension;
+
+const filePath =
+category + "/" + safeName;
+
+
+// Upload to Supabase Storage
+
+const {data:uploadData,error:uploadError} =
+await websiteDb.storage
+.from(STORAGE_BUCKET)
+.upload(filePath,file,{
+cacheControl:"3600",
+upsert:false,
+contentType:file.type
+});
+
+if(uploadError) throw uploadError;
+
+
+// Get public image URL
+
+const {data:urlData} =
+websiteDb.storage
+.from(STORAGE_BUCKET)
+.getPublicUrl(filePath);
+
+const imageUrl=urlData.publicUrl;
+
+
+// Save image details in selected table
+
+const record={
+title:title || file.name,
+description:description,
+image_url:imageUrl,
+image_path:filePath
+};
+
+const {error:insertError} =
+await websiteDb
+.from(category)
+.insert(record);
+
+if(insertError) {
+
+throw new Error(
+"Picture uploaded to Storage, but database saving failed: " +
+insertError.message +
+". Image URL: " + imageUrl
+);
+
+}
+
+
+// Display successful upload
+
+const link=document.createElement("p");
+
+link.className="small";
+
+const anchor=document.createElement("a");
+
+anchor.href=imageUrl;
+anchor.target="_blank";
+anchor.rel="noopener";
+anchor.textContent="View uploaded picture";
+
+link.appendChild(anchor);
+
+links.appendChild(link);
+
+completed++;
+
+status.textContent =
+completed + " of " + files.length + " picture(s) uploaded.";
+
+progress.style.width =
+(completed/files.length*100) + "%";
+
+} catch(error) {
+
+console.error(error);
+
+const failure=document.createElement("p");
+
+failure.style.color="red";
+failure.className="small";
+failure.textContent=error.message;
+
+links.appendChild(failure);
+
+}
+
+}
+
+if(completed>0) {
+
+notify(completed + " picture(s) uploaded and saved successfully.");
+
+await loadDashboard();
+
+await loadRecords();
+
+} else {
+
+notify("No pictures were successfully saved. Check the error messages.","error");
+
+}
+
+}
+
+
+// =====================================
+// ALLOWED DATABASE TABLES
+// =====================================
 
 const allowedTables=[
 "projects",
@@ -531,23 +982,31 @@ const allowedTables=[
 "site_content"
 ];
 
+
 function currentTable() {
 
 const table=document.getElementById("tableSelect").value;
 
 if(!allowedTables.includes(table)) {
+
 throw new Error("Invalid database table.");
+
 }
 
 return table;
 
 }
 
-// =================================
-// LOAD RECORDS
-// =================================
+
+// =====================================
+// LOAD DATABASE RECORDS
+// =====================================
 
 async function loadRecords() {
+
+if(!websiteDb) return;
+
+try {
 
 const table=currentTable();
 
@@ -561,14 +1020,7 @@ await websiteDb
 .select("*")
 .limit(100);
 
-if(error) {
-
-body.innerHTML=
-"<tr><td colspan='3'>"+error.message+"</td></tr>";
-
-return;
-
-}
+if(error) throw error;
 
 body.innerHTML="";
 
@@ -585,27 +1037,31 @@ data.forEach(row=>{
 
 const tr=document.createElement("tr");
 
-const name=
+const name =
 row.title || row.name || row.key || row.id || "Record";
 
-const details=JSON.stringify(row);
-
 const nameCell=document.createElement("td");
+
 nameCell.textContent=name;
 
 const detailsCell=document.createElement("td");
-detailsCell.textContent=details.substring(0,120);
+
+detailsCell.textContent=JSON.stringify(row).substring(0,150);
 
 const actionCell=document.createElement("td");
 
 const edit=document.createElement("button");
+
 edit.className="action";
 edit.textContent="EDIT";
+
 edit.onclick=()=>editRecord(row);
 
 const del=document.createElement("button");
+
 del.className="delete";
 del.textContent="DELETE";
+
 del.onclick=()=>deleteRecord(row);
 
 actionCell.append(edit,del);
@@ -616,11 +1072,18 @@ body.appendChild(tr);
 
 });
 
+} catch(error) {
+
+notify(error.message,"error");
+
 }
 
-// =================================
+}
+
+
+// =====================================
 // INSERT RECORD
-// =================================
+// =====================================
 
 async function insertRecord() {
 
@@ -631,8 +1094,10 @@ const table=currentTable();
 const raw=document.getElementById("recordJSON").value;
 
 if(!raw.trim()) {
+
 notify("Enter your record first.","error");
 return;
+
 }
 
 const record=JSON.parse(raw);
@@ -644,7 +1109,7 @@ await websiteDb
 
 if(error) throw error;
 
-notify("Record successfully saved.");
+notify("Record saved successfully.");
 
 document.getElementById("recordJSON").value="";
 
@@ -660,9 +1125,10 @@ notify(error.message,"error");
 
 }
 
-// =================================
+
+// =====================================
 // EDIT RECORD
-// =================================
+// =====================================
 
 async function editRecord(row) {
 
@@ -719,9 +1185,10 @@ notify(error.message,"error");
 
 }
 
-// =================================
+
+// =====================================
 // DELETE RECORD
-// =================================
+// =====================================
 
 async function deleteRecord(row) {
 
@@ -738,9 +1205,7 @@ return;
 
 }
 
-if(!confirm("Are you sure you want to delete this record?")) {
-return;
-}
+if(!confirm("Are you sure you want to delete this record?")) return;
 
 const {error} =
 await websiteDb
@@ -763,9 +1228,10 @@ await loadDashboard();
 
 }
 
-// =================================
+
+// =====================================
 // START APPLICATION
-// =================================
+// =====================================
 
 checkAdmin();
 
