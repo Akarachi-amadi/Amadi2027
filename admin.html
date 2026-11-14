@@ -1,9 +1,11 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard | Hon. Akarachi Amadi</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root {
   --green:#075b32;
@@ -99,13 +101,18 @@ textarea{min-height:125px;resize:vertical}
 @media(max-width:400px){.cards{grid-template-columns:1fr 1fr;gap:9px}.stat-card{padding:15px}.stat-card strong{font-size:24px}}
 </style>
 </head>
-<body><header class="topbar">
+
+<body>
+
+<header class="topbar">
   <div class="brand">HON. AKARACHI AMADI<small>ADMINISTRATOR DASHBOARD</small></div>
   <div class="top-actions">
     <a href="index.html" target="_blank">View Website</a>
     <button id="logoutButton" type="button">LOG OUT</button>
   </div>
-</header><div class="layout">
+</header>
+
+<div class="layout">
 <aside class="sidebar">
   <h3>WEBSITE MANAGEMENT</h3>
   <button class="nav-btn active" data-section="overview">Overview</button>
@@ -119,12 +126,17 @@ textarea{min-height:125px;resize:vertical}
   <button class="nav-btn" data-section="biography">Biography</button>
   <button class="nav-btn" data-section="vision">Vision & Mission</button>
   <button class="nav-btn" data-section="settings">Website Settings</button>
-</aside><main class="main">
-<div id="globalNotice" class="notice"></div><section class="section active" id="overview">
+</aside>
+
+<main class="main">
+<div id="globalNotice" class="notice"></div>
+
+<section class="section active" id="overview">
   <div class="page-heading">
     <h1>Dashboard Overview</h1>
     <p>Welcome to your website management dashboard.</p>
   </div>
+
   <div class="cards">
     <div class="stat-card"><span>Total Projects</span><strong id="projectCount">0</strong></div>
     <div class="stat-card"><span>News Articles</span><strong id="newsCount">0</strong></div>
@@ -133,6 +145,7 @@ textarea{min-height:125px;resize:vertical}
     <div class="stat-card"><span>Total Messages</span><strong id="messageCount">0</strong></div>
     <div class="stat-card"><span>Newsletter Subscribers</span><strong id="subscriberCount">0</strong></div>
   </div>
+
   <div class="panel">
     <h2>Website Management</h2>
     <p style="line-height:1.8;font-size:14px;color:#65736a">
@@ -141,11 +154,14 @@ textarea{min-height:125px;resize:vertical}
       Published content can appear on the corresponding public website pages.
     </p>
   </div>
+
   <div class="panel">
     <h2>Administrator Account</h2>
     <p id="adminEmail" style="font-size:14px;line-height:1.8">Checking administrator account...</p>
   </div>
-</section><section class="section" id="projects">
+</section>
+
+<section class="section" id="projects">
   <div class="page-heading"><h1>Manage Projects</h1><p>Add constituency projects, upload photographs and publish updates.</p></div>
   <div class="panel">
     <div class="toolbar"><h2>Projects</h2><button class="primary-btn" onclick="openForm('projects')">+ Add Project</button></div>
@@ -154,7 +170,9 @@ textarea{min-height:125px;resize:vertical}
       <tbody id="projectsTable"><tr><td colspan="6" class="loading">Loading projects...</td></tr></tbody>
     </table></div>
   </div>
-</section><section class="section" id="news">
+</section>
+
+<section class="section" id="news">
   <div class="page-heading"><h1>News & Updates</h1><p>Publish official news, announcements and constituency updates.</p></div>
   <div class="panel">
     <div class="toolbar"><h2>News Articles</h2><button class="primary-btn" onclick="openForm('news')">+ Add News</button></div>
@@ -163,7 +181,9 @@ textarea{min-height:125px;resize:vertical}
       <tbody id="newsTable"><tr><td colspan="4" class="loading">Loading news...</td></tr></tbody>
     </table></div>
   </div>
-</section><section class="section" id="gallery">
+</section>
+
+<section class="section" id="gallery">
   <div class="page-heading"><h1>Photo Gallery</h1><p>Upload and manage photographs for the public website.</p></div>
   <div class="panel">
     <div class="toolbar"><h2>Gallery Photos</h2><button class="primary-btn" onclick="openForm('gallery')">+ Add Photo</button></div>
@@ -172,7 +192,9 @@ textarea{min-height:125px;resize:vertical}
       <tbody id="galleryTable"><tr><td colspan="4" class="loading">Loading gallery...</td></tr></tbody>
     </table></div>
   </div>
-</section><section class="section" id="videos">
+</section>
+
+<section class="section" id="videos">
   <div class="page-heading">
     <h1>Video Management</h1>
     <p>Select videos directly from your phone and upload them to the website.</p>
@@ -189,7 +211,9 @@ textarea{min-height:125px;resize:vertical}
       </table>
     </div>
   </div>
-</section><section class="section" id="press">
+</section>
+
+<section class="section" id="press">
   <div class="page-heading"><h1>Press Releases</h1><p>Manage official statements, press releases and media documents.</p></div>
   <div class="panel">
     <div class="toolbar"><h2>Press Releases</h2><button class="primary-btn" onclick="openForm('press')">+ Add Press Release</button></div>
@@ -198,13 +222,17 @@ textarea{min-height:125px;resize:vertical}
       <tbody id="pressTable"><tr><td colspan="3" class="loading">Loading press releases...</td></tr></tbody>
     </table></div>
   </div>
-</section><section class="section" id="messages">
+</section>
+
+<section class="section" id="messages">
   <div class="page-heading"><h1>Website Messages</h1><p>Messages submitted by visitors through the contact page.</p></div>
   <div class="panel">
     <div class="toolbar"><h2>Inbox</h2><button class="secondary-btn" onclick="loadMessages()">Refresh Messages</button></div>
     <div id="messagesList"><p class="loading">Loading messages...</p></div>
   </div>
-</section><section class="section" id="subscribers">
+</section>
+
+<section class="section" id="subscribers">
   <div class="page-heading">
     <h1>Newsletter Subscribers</h1>
     <p>View and manage visitors who have subscribed to receive official website updates.</p>
@@ -225,7 +253,9 @@ textarea{min-height:125px;resize:vertical}
       </table>
     </div>
   </div>
-</section><section class="section" id="biography">
+</section>
+
+<section class="section" id="biography">
   <div class="page-heading"><h1>Biography</h1><p>Manage the biography displayed on your website.</p></div>
   <div class="panel content-editor">
     <h2>Biography Content</h2>
@@ -236,7 +266,9 @@ textarea{min-height:125px;resize:vertical}
       <button class="primary-btn" type="submit">Save Biography</button>
     </form>
   </div>
-</section><section class="section" id="vision">
+</section>
+
+<section class="section" id="vision">
   <div class="page-heading"><h1>Vision & Mission</h1><p>Manage your vision and mission statements.</p></div>
   <div class="panel content-editor">
     <form id="visionForm">
@@ -247,7 +279,9 @@ textarea{min-height:125px;resize:vertical}
       <button class="primary-btn" type="submit">Save Vision & Mission</button>
     </form>
   </div>
-</section><section class="section" id="settings">
+</section>
+
+<section class="section" id="settings">
   <div class="page-heading"><h1>Website Settings</h1><p>Manage general website information.</p></div>
   <div class="panel content-editor">
     <form id="settingsForm">
@@ -257,8 +291,11 @@ textarea{min-height:125px;resize:vertical}
       <button class="primary-btn" type="submit">Save Settings</button>
     </form>
   </div>
-</section></main>
-</div><dialog id="contentDialog" style="width:min(650px,94%);border:none;border-radius:10px;padding:0;margin:auto;box-shadow:0 15px 50px rgba(0,0,0,.25);max-height:90vh;overflow:auto">
+</section>
+</main>
+</div>
+
+<dialog id="contentDialog" style="width:min(650px,94%);border:none;border-radius:10px;padding:0;margin:auto;box-shadow:0 15px 50px rgba(0,0,0,.25);max-height:90vh;overflow:auto">
 <div style="padding:24px">
   <div class="toolbar"><h2 id="formHeading" style="color:#075b32">Add Content</h2><button class="danger-btn" type="button" onclick="closeForm()">Close</button></div>
   <div id="formNotice" class="notice"></div>
@@ -268,65 +305,93 @@ textarea{min-height:125px;resize:vertical}
     <div class="form-group">
       <label for="itemTitle">Title / Headline *</label>
       <input id="itemTitle" required maxlength="200">
-    </div><div id="projectFields" style="display:none">
-  <div class="form-grid">
-    <div class="form-group"><label for="itemLocation">Location</label><select id="itemLocation"><option value="Mbaitoli">Mbaitoli</option><option value="Ikeduru">Ikeduru</option><option value="Mbaitoli/Ikeduru">Both</option></select></div>
-    <div class="form-group"><label for="itemCategory">Category</label><select id="itemCategory"><option value="Infrastructure">Infrastructure</option><option value="Education">Education</option><option value="Healthcare">Healthcare</option><option value="Youth Development">Youth Development</option><option value="Community Development">Community Development</option><option value="Other">Other</option></select></div>
-    <div class="form-group full"><label for="itemStatus">Project Status</label><select id="itemStatus"><option value="Proposed">Proposed</option><option value="Ongoing">Ongoing</option><option value="Completed">Completed</option></select></div>
-  </div>
-</div>
+    </div>
 
-<div id="newsFields" style="display:none">
-  <div class="form-group"><label for="itemSummary">Short Summary</label><textarea id="itemSummary" rows="3"></textarea></div>
-</div>
+    <div id="projectFields" style="display:none">
+      <div class="form-grid">
+        <div class="form-group"><label for="itemLocation">Location</label><select id="itemLocation"><option value="Mbaitoli">Mbaitoli</option><option value="Ikeduru">Ikeduru</option><option value="Mbaitoli/Ikeduru">Both</option></select></div>
+        <div class="form-group"><label for="itemCategory">Category</label><select id="itemCategory"><option value="Infrastructure">Infrastructure</option><option value="Education">Education</option><option value="Healthcare">Healthcare</option><option value="Youth Development">Youth Development</option><option value="Community Development">Community Development</option><option value="Other">Other</option></select></div>
+        <div class="form-group full"><label for="itemStatus">Project Status</label><select id="itemStatus"><option value="Proposed">Proposed</option><option value="Ongoing">Ongoing</option><option value="Completed">Completed</option></select></div>
+      </div>
+    </div>
 
-<div id="descriptionField" class="form-group">
-  <label for="itemDescription">Description / Content *</label>
-  <textarea id="itemDescription" required></textarea>
-</div>
+    <div id="newsFields" style="display:none">
+      <div class="form-group"><label for="itemSummary">Short Summary</label><textarea id="itemSummary" rows="3"></textarea></div>
+    </div>
 
-<div id="videoFields" style="display:none">
-  <div class="form-group">
-    <label for="itemVideoFile">Select Video From Your Phone *</label>
-    <input id="itemVideoFile" type="file" accept="video/mp4,video/webm,video/quicktime,video/ogg,.mp4,.webm,.mov,.ogg">
-    <p class="form-note">Choose a video from your phone gallery or files. Supported formats: MP4, WebM, MOV and OGG. Maximum upload size: 100 MB.</p>
-    <video id="videoPreview" class="video-preview" controls playsinline></video>
-    <p id="existingVideoNote" class="form-note"></p>
-  </div>
-</div>
+    <div id="descriptionField" class="form-group">
+      <label for="itemDescription">Description / Content *</label>
+      <textarea id="itemDescription" required></textarea>
+    </div>
 
-<div id="imageField" class="form-group">
-  <label for="itemImage">Upload Photograph</label>
-  <input type="file" id="itemImage" accept="image/*">
-  <p class="form-note">Accepted image formats depend on your browser. Keep images reasonably sized.</p>
-  <img id="imagePreview" class="preview" alt="Image preview">
-</div>
+    <div id="videoFields" style="display:none">
+      <div class="form-group">
+        <label for="itemVideoFile">Select Video From Your Phone *</label>
+        <input id="itemVideoFile" type="file" accept="video/mp4,video/webm,video/quicktime,video/ogg,.mp4,.webm,.mov,.ogg">
+        <p class="form-note">Choose a video from your phone gallery or files. Supported formats: MP4, WebM, MOV and OGG. Maximum upload size: 100 MB.</p>
+        <video id="videoPreview" class="video-preview" controls playsinline></video>
+        <p id="existingVideoNote" class="form-note"></p>
+      </div>
+    </div>
 
-<div id="pressFileField" class="form-group" style="display:none">
-  <label for="pressFile">Upload Press Document (optional)</label>
-  <input type="file" id="pressFile" accept=".pdf,.doc,.docx">
-  <p class="form-note">Upload public press documents only. Files in this bucket are publicly accessible.</p>
-</div>
+    <div id="imageField" class="form-group">
+      <label for="itemImage">Upload Photograph</label>
+      <input type="file" id="itemImage" accept="image/*">
+      <p class="form-note">Accepted image formats depend on your browser. Keep images reasonably sized.</p>
+      <img id="imagePreview" class="preview" alt="Image preview">
+    </div>
 
-<div class="form-group">
-  <label for="publishedStatus">Publication Status</label>
-  <select id="publishedStatus"><option value="false">Save as Unpublished</option><option value="true">Publish on Website</option></select>
-</div>
+    <div id="pressFileField" class="form-group" style="display:none">
+      <label for="pressFile">Upload Press Document (optional)</label>
+      <input type="file" id="pressFile" accept=".pdf,.doc,.docx">
+      <p class="form-note">Upload public press documents only. Files in this bucket are publicly accessible.</p>
+    </div>
 
-<div class="form-actions">
-  <button type="submit" class="primary-btn" id="saveContentButton">Save Content</button>
-  <button type="button" class="secondary-btn" onclick="closeForm()">Cancel</button>
-</div>
+    <div class="form-group">
+      <label for="publishedStatus">Publication Status</label>
+      <select id="publishedStatus"><option value="false">Save as Unpublished</option><option value="true">Publish on Website</option></select>
+    </div>
 
+    <div class="form-actions">
+      <button type="submit" class="primary-btn" id="saveContentButton">Save Content</button>
+      <button type="button" class="secondary-btn" onclick="closeForm()">Cancel</button>
+    </div>
   </form>
 </div>
-</dialog><script>
-const SUPABASE_URL="https://znkeancluykkwduydory.supabase.co";
-const SUPABASE_KEY="sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
-const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+</dialog>
+
+<script>
+/* =========================================
+   TWO SEPARATE SUPABASE CONNECTIONS
+========================================= */
+
+// EXISTING WEBSITE CONTENT SUPABASE
+const WEBSITE_SUPABASE_URL="https://znkeancluykkwduydory.supabase.co";
+const WEBSITE_SUPABASE_KEY="sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+
+const db=window.supabase.createClient(
+  WEBSITE_SUPABASE_URL,
+  WEBSITE_SUPABASE_KEY
+);
+
+// NEW ELECTION MANAGEMENT SUPABASE
+const ELECTION_SUPABASE_URL="https://pxtgmpmhiktgknjksqeh.supabase.co";
+const ELECTION_SUPABASE_KEY="sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
+
+const authDb=window.supabase.createClient(
+  ELECTION_SUPABASE_URL,
+  ELECTION_SUPABASE_KEY
+);
 
 let currentUser=null;
-let currentRecords={projects:[],news:[],gallery:[],videos:[],press:[]};
+
+let currentRecords={
+  projects:[],
+  news:[],
+  gallery:[],
+  videos:[],
+  press:[]
+};
 
 const BUCKETS={
   projects:"project-images",
@@ -336,38 +401,58 @@ const BUCKETS={
   videos:"videos"
 };
 
+/* =========================================
+   ADMINISTRATOR AUTHENTICATION
+========================================= */
+
 async function requireAdministrator(){
-  const {data,error}=await db.auth.getSession();
+
+  const {data,error}=await authDb.auth.getSession();
+
   if(error||!data.session){
     window.location.replace("login.html");
     return false;
   }
 
   currentUser=data.session.user;
-  const {data:adminResult,error:adminError}=await db.rpc("is_admin");
+
+  const {data:adminResult,error:adminError}=await authDb.rpc("is_admin");
 
   if(adminError||adminResult!==true){
-    await db.auth.signOut();
+
+    await authDb.auth.signOut();
+
     alert("Access denied. Administrator permission is required.");
+
     window.location.replace("login.html");
     return false;
   }
 
-  document.getElementById("adminEmail").textContent="Signed in as: "+currentUser.email;
+  document.getElementById("adminEmail").textContent=
+    "Signed in as: "+currentUser.email;
+
   return true;
 }
 
+/* LOG OUT */
+
 document.getElementById("logoutButton").addEventListener("click",async()=>{
   if(!confirm("Are you sure you want to log out?"))return;
-  await db.auth.signOut();
+
+  await authDb.auth.signOut();
+
   window.location.replace("login.html");
 });
+
+/* NAVIGATION */
 
 document.querySelectorAll(".nav-btn").forEach(button=>{
   button.addEventListener("click",()=>{
     const section=button.dataset.section;
+
     document.querySelectorAll(".nav-btn").forEach(item=>item.classList.remove("active"));
     document.querySelectorAll(".section").forEach(item=>item.classList.remove("active"));
+
     button.classList.add("active");
     document.getElementById(section).classList.add("active");
 
@@ -378,11 +463,16 @@ document.querySelectorAll(".nav-btn").forEach(button=>{
   });
 });
 
+/* NOTIFICATIONS */
+
 function notify(message,type="success"){
   const box=document.getElementById("globalNotice");
+
   box.textContent=message;
   box.className="notice "+type;
+
   window.scrollTo({top:0,behavior:"smooth"});
+
   setTimeout(()=>{
     box.className="notice";
     box.textContent="";
@@ -391,9 +481,12 @@ function notify(message,type="success"){
 
 function formNotify(message,type="error"){
   const box=document.getElementById("formNotice");
+
   box.textContent=message;
   box.className="notice "+type;
 }
+
+/* TABLE HELPERS */
 
 function makeCell(text){
   const cell=document.createElement("td");
@@ -403,57 +496,77 @@ function makeCell(text){
 
 function makeButton(label,className,action){
   const button=document.createElement("button");
+
   button.type="button";
   button.textContent=label;
   button.className=className;
   button.addEventListener("click",action);
+
   return button;
 }
 
 function makeImageCell(url){
   const cell=document.createElement("td");
+
   if(url){
     const img=document.createElement("img");
+
     img.src=url;
     img.alt="Uploaded content image";
     img.loading="lazy";
+
     cell.appendChild(img);
   }else{
     cell.textContent="No image";
   }
+
   return cell;
 }
 
 function makePublicationBadge(isPublished){
   const cell=document.createElement("td");
   const badge=document.createElement("span");
+
   badge.className="badge "+(isPublished?"published":"unpublished");
   badge.textContent=isPublished?"Published":"Unpublished";
+
   cell.appendChild(badge);
+
   return cell;
 }
 
 function showEmptyRow(tbody,columns,message){
   tbody.replaceChildren();
+
   const row=document.createElement("tr");
   const cell=document.createElement("td");
+
   cell.colSpan=columns;
   cell.className="empty";
   cell.textContent=message;
+
   row.appendChild(cell);
   tbody.appendChild(row);
 }
 
+/* LOAD RECORDS */
+
 async function getRecords(table){
   const {data,error}=await db.from(table).select("*").order("created_at",{ascending:false});
+
   if(error)throw error;
+
   return data||[];
 }
 
+/* PROJECTS */
+
 async function loadProjects(){
   const tbody=document.getElementById("projectsTable");
+
   try{
     const rows=await getRecords("projects");
+
     currentRecords.projects=rows;
     tbody.replaceChildren();
 
@@ -465,6 +578,7 @@ async function loadProjects(){
 
     rows.forEach(record=>{
       const row=document.createElement("tr");
+
       row.appendChild(makeImageCell(record.image_url));
       row.appendChild(makeCell(record.title));
       row.appendChild(makeCell(record.location));
@@ -473,25 +587,40 @@ async function loadProjects(){
 
       const actions=document.createElement("td");
       const wrap=document.createElement("div");
+
       wrap.className="action-buttons";
+
       wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("projects",record.id)));
-      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("projects",record)));
+
+      wrap.appendChild(makeButton(
+        record.published?"Unpublish":"Publish",
+        "publish-btn",
+        ()=>togglePublication("projects",record)
+      ));
+
       wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("projects",record)));
+
       actions.appendChild(wrap);
       row.appendChild(actions);
       tbody.appendChild(row);
     });
+
   }catch(error){
     console.error(error);
     showEmptyRow(tbody,6,"Could not load projects: "+error.message);
   }
+
   updateCounts();
 }
 
+/* NEWS */
+
 async function loadNews(){
   const tbody=document.getElementById("newsTable");
+
   try{
     const rows=await getRecords("news");
+
     currentRecords.news=rows;
     tbody.replaceChildren();
 
@@ -503,31 +632,47 @@ async function loadNews(){
 
     rows.forEach(record=>{
       const row=document.createElement("tr");
+
       row.appendChild(makeImageCell(record.image_url));
       row.appendChild(makeCell(record.title));
       row.appendChild(makePublicationBadge(record.published));
 
       const actions=document.createElement("td");
       const wrap=document.createElement("div");
+
       wrap.className="action-buttons";
+
       wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("news",record.id)));
-      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("news",record)));
+
+      wrap.appendChild(makeButton(
+        record.published?"Unpublish":"Publish",
+        "publish-btn",
+        ()=>togglePublication("news",record)
+      ));
+
       wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("news",record)));
+
       actions.appendChild(wrap);
       row.appendChild(actions);
       tbody.appendChild(row);
     });
+
   }catch(error){
     console.error(error);
     showEmptyRow(tbody,4,"Could not load news: "+error.message);
   }
+
   updateCounts();
 }
 
+/* GALLERY */
+
 async function loadGallery(){
   const tbody=document.getElementById("galleryTable");
+
   try{
     const rows=await getRecords("gallery");
+
     currentRecords.gallery=rows;
     tbody.replaceChildren();
 
@@ -539,31 +684,47 @@ async function loadGallery(){
 
     rows.forEach(record=>{
       const row=document.createElement("tr");
+
       row.appendChild(makeImageCell(record.image_url));
       row.appendChild(makeCell(record.title));
       row.appendChild(makePublicationBadge(record.published));
 
       const actions=document.createElement("td");
       const wrap=document.createElement("div");
+
       wrap.className="action-buttons";
+
       wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("gallery",record.id)));
-      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("gallery",record)));
+
+      wrap.appendChild(makeButton(
+        record.published?"Unpublish":"Publish",
+        "publish-btn",
+        ()=>togglePublication("gallery",record)
+      ));
+
       wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("gallery",record)));
+
       actions.appendChild(wrap);
       row.appendChild(actions);
       tbody.appendChild(row);
     });
+
   }catch(error){
     console.error(error);
     showEmptyRow(tbody,4,"Could not load gallery: "+error.message);
   }
+
   updateCounts();
 }
 
+/* PRESS RELEASES */
+
 async function loadPress(){
   const tbody=document.getElementById("pressTable");
+
   try{
     const rows=await getRecords("press_releases");
+
     currentRecords.press=rows;
     tbody.replaceChildren();
 
@@ -575,23 +736,35 @@ async function loadPress(){
 
     rows.forEach(record=>{
       const row=document.createElement("tr");
+
       row.appendChild(makeCell(record.title));
       row.appendChild(makePublicationBadge(record.published));
 
       const actions=document.createElement("td");
       const wrap=document.createElement("div");
+
       wrap.className="action-buttons";
+
       wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("press",record.id)));
-      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("press",record)));
+
+      wrap.appendChild(makeButton(
+        record.published?"Unpublish":"Publish",
+        "publish-btn",
+        ()=>togglePublication("press",record)
+      ));
+
       wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("press",record)));
+
       actions.appendChild(wrap);
       row.appendChild(actions);
       tbody.appendChild(row);
     });
+
   }catch(error){
     console.error(error);
     showEmptyRow(tbody,3,"Could not load press releases: "+error.message);
   }
+
   updateCounts();
 }
 
@@ -602,6 +775,7 @@ async function loadVideos(){
 
   try{
     const rows=await getRecords("videos");
+
     currentRecords.videos=rows;
     tbody.replaceChildren();
 
@@ -613,18 +787,21 @@ async function loadVideos(){
 
     rows.forEach(record=>{
       const row=document.createElement("tr");
+
       row.appendChild(makeCell(record.title));
 
       const videoCell=document.createElement("td");
 
       if(record.video_url){
         const link=document.createElement("a");
+
         link.href=record.video_url;
         link.target="_blank";
         link.rel="noopener noreferrer";
         link.textContent="Play / Open Video";
         link.style.color="#075b32";
         link.style.fontWeight="bold";
+
         videoCell.appendChild(link);
       }else{
         videoCell.textContent="No video file";
@@ -635,10 +812,19 @@ async function loadVideos(){
 
       const actions=document.createElement("td");
       const wrap=document.createElement("div");
+
       wrap.className="action-buttons";
+
       wrap.appendChild(makeButton("Edit","edit-btn",()=>editRecord("videos",record.id)));
-      wrap.appendChild(makeButton(record.published?"Unpublish":"Publish","publish-btn",()=>togglePublication("videos",record)));
+
+      wrap.appendChild(makeButton(
+        record.published?"Unpublish":"Publish",
+        "publish-btn",
+        ()=>togglePublication("videos",record)
+      ));
+
       wrap.appendChild(makeButton("Delete","delete-btn",()=>deleteRecord("videos",record)));
+
       actions.appendChild(wrap);
       row.appendChild(actions);
       tbody.appendChild(row);
@@ -665,6 +851,7 @@ async function loadMessages(){
 
   try{
     const {data,error}=await db.from("messages").select("*").order("created_at",{ascending:false});
+
     if(error)throw error;
 
     const messages=data||[];
@@ -681,6 +868,7 @@ async function loadMessages(){
 
     messages.forEach(message=>{
       const card=document.createElement("article");
+
       card.className="message-card";
 
       const heading=document.createElement("h3");
@@ -706,7 +894,12 @@ async function loadMessages(){
 
       const actions=document.createElement("div");
       actions.className="action-buttons";
-      actions.appendChild(makeButton("Delete Message","delete-btn",()=>deleteMessage(message.id)));
+
+      actions.appendChild(makeButton(
+        "Delete Message",
+        "delete-btn",
+        ()=>deleteMessage(message.id)
+      ));
 
       card.appendChild(actions);
       container.appendChild(card);
@@ -714,7 +907,9 @@ async function loadMessages(){
 
   }catch(error){
     console.error("Message loading error:",error);
+
     if(countElement)countElement.textContent="!";
+
     container.className="notice error";
     container.textContent="Could not load messages: "+error.message;
   }
@@ -763,13 +958,16 @@ async function loadSubscribers(){
 
       const statusCell=document.createElement("td");
       const badge=document.createElement("span");
+
       badge.className="badge "+(subscriber.active?"published":"unpublished");
       badge.textContent=subscriber.active?"Active":"Inactive";
+
       statusCell.appendChild(badge);
       row.appendChild(statusCell);
 
       const actions=document.createElement("td");
       const wrap=document.createElement("div");
+
       wrap.className="action-buttons";
 
       wrap.appendChild(makeButton(
@@ -788,11 +986,7 @@ async function loadSubscribers(){
 
     if(countElement)countElement.textContent="!";
 
-    showEmptyRow(
-      tbody,
-      5,
-      "Could not load subscribers: "+error.message
-    );
+    showEmptyRow(tbody,5,"Could not load subscribers: "+error.message);
   }
 }
 
@@ -808,6 +1002,7 @@ async function deleteSubscriber(subscriber){
     if(error)throw error;
 
     notify("Subscriber deleted successfully.");
+
     await loadSubscribers();
 
   }catch(error){
@@ -816,11 +1011,15 @@ async function deleteSubscriber(subscriber){
   }
 }
 
+/* UPDATE DASHBOARD COUNTS */
+
 function updateCounts(){
   document.getElementById("projectCount").textContent=currentRecords.projects.length;
   document.getElementById("newsCount").textContent=currentRecords.news.length;
   document.getElementById("galleryCount").textContent=currentRecords.gallery.length;
-  document.getElementById("videoCount").textContent=currentRecords.videos.filter(item=>item.published).length;
+
+  document.getElementById("videoCount").textContent=
+    currentRecords.videos.filter(item=>item.published).length;
 }
 
 /* CONTENT FORMS */
@@ -829,31 +1028,42 @@ const dialog=document.getElementById("contentDialog");
 
 function openForm(type){
   document.getElementById("contentForm").reset();
+
   document.getElementById("recordId").value="";
   document.getElementById("recordType").value=type;
-  document.getElementById("formHeading").textContent=(type==="videos"?"Upload Video":"Add "+type.charAt(0).toUpperCase()+type.slice(1));
+
+  document.getElementById("formHeading").textContent=
+    (type==="videos"?"Upload Video":"Add "+type.charAt(0).toUpperCase()+type.slice(1));
+
   document.getElementById("imagePreview").style.display="none";
   document.getElementById("formNotice").className="notice";
 
   const videoPreview=document.getElementById("videoPreview");
+
   videoPreview.pause();
   videoPreview.removeAttribute("src");
   videoPreview.load();
   videoPreview.style.display="none";
+
   document.getElementById("existingVideoNote").textContent="";
 
   document.getElementById("projectFields").style.display=type==="projects"?"block":"none";
   document.getElementById("newsFields").style.display=type==="news"?"block":"none";
   document.getElementById("videoFields").style.display=type==="videos"?"block":"none";
-  document.getElementById("itemVideoFile").required=type==="videos";
-  document.getElementById("imageField").style.display=["press","videos"].includes(type)?"none":"block";
-  document.getElementById("pressFileField").style.display=type==="press"?"block":"none";
-  document.getElementById("descriptionField").style.display=type==="gallery"?"none":"block";
-  document.getElementById("itemDescription").required=!["gallery","videos"].includes(type);
 
-  if(type==="videos"){
-    document.getElementById("itemDescription").required=false;
-  }
+  document.getElementById("itemVideoFile").required=type==="videos";
+
+  document.getElementById("imageField").style.display=
+    ["press","videos"].includes(type)?"none":"block";
+
+  document.getElementById("pressFileField").style.display=
+    type==="press"?"block":"none";
+
+  document.getElementById("descriptionField").style.display=
+    type==="gallery"?"none":"block";
+
+  document.getElementById("itemDescription").required=
+    !["gallery","videos"].includes(type);
 
   dialog.showModal();
 }
@@ -868,14 +1078,20 @@ function findRecord(type,id){
 
 function editRecord(type,id){
   const record=findRecord(type,id);
+
   if(!record)return;
 
   openForm(type);
 
-  document.getElementById("formHeading").textContent="Edit "+(type==="videos"?"Video":type.slice(0,-1));
+  document.getElementById("formHeading").textContent=
+    "Edit "+(type==="videos"?"Video":type.slice(0,-1));
+
   document.getElementById("recordId").value=record.id;
   document.getElementById("itemTitle").value=record.title||"";
-  document.getElementById("itemDescription").value=record.description||record.content||"";
+
+  document.getElementById("itemDescription").value=
+    record.description||record.content||"";
+
   document.getElementById("publishedStatus").value=String(!!record.published);
 
   if(type==="projects"){
@@ -890,13 +1106,16 @@ function editRecord(type,id){
 
   if(type==="videos"){
     document.getElementById("itemVideoFile").required=false;
-    document.getElementById("existingVideoNote").textContent=record.video_url
+
+    document.getElementById("existingVideoNote").textContent=
+      record.video_url
       ?"A video is already uploaded. Choose another file only if you want to replace it."
       :"No video file is currently attached.";
   }
 
   if(record.image_url){
     const preview=document.getElementById("imagePreview");
+
     preview.src=record.image_url;
     preview.style.display="block";
   }
@@ -918,6 +1137,7 @@ async function uploadFile(file,bucket){
   }
 
   const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+
   const path=Date.now()+"-"+crypto.randomUUID()+"-"+safeName;
 
   const {data,error}=await db.storage.from(bucket).upload(path,file,{
@@ -928,6 +1148,7 @@ async function uploadFile(file,bucket){
   if(error)throw error;
 
   const {data:publicData}=db.storage.from(bucket).getPublicUrl(data.path);
+
   return publicData.publicUrl;
 }
 
@@ -942,6 +1163,7 @@ async function uploadVideoFile(file){
   ];
 
   const extension=file.name.split(".").pop().toLowerCase();
+
   const allowedExtensions=["mp4","webm","mov","ogg"];
 
   if(!allowedTypes.includes(file.type)&&!allowedExtensions.includes(extension)){
@@ -955,6 +1177,7 @@ async function uploadVideoFile(file){
   }
 
   const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+
   const path=Date.now()+"-"+crypto.randomUUID()+"-"+safeName;
 
   const {data,error}=await db.storage.from("videos").upload(path,file,{
@@ -966,10 +1189,11 @@ async function uploadVideoFile(file){
   if(error)throw error;
 
   const {data:publicData}=db.storage.from("videos").getPublicUrl(data.path);
+
   return publicData.publicUrl;
 }
 
-/* Preview selected image */
+/* IMAGE PREVIEW */
 
 document.getElementById("itemImage").addEventListener("change",function(){
   const file=this.files[0];
@@ -984,7 +1208,7 @@ document.getElementById("itemImage").addEventListener("change",function(){
   preview.style.display="block";
 });
 
-/* Preview selected video */
+/* VIDEO PREVIEW */
 
 document.getElementById("itemVideoFile").addEventListener("change",function(){
   const file=this.files[0];
@@ -1005,12 +1229,15 @@ document.getElementById("itemVideoFile").addEventListener("change",function(){
   }
 
   const oldUrl=preview.dataset.objectUrl;
+
   if(oldUrl)URL.revokeObjectURL(oldUrl);
 
   const objectUrl=URL.createObjectURL(file);
+
   preview.dataset.objectUrl=objectUrl;
   preview.src=objectUrl;
   preview.style.display="block";
+
   preview.load();
 });
 
@@ -1020,6 +1247,7 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
   event.preventDefault();
 
   const button=document.getElementById("saveContentButton");
+
   button.disabled=true;
   button.textContent="UPLOADING / SAVING...";
 
@@ -1031,6 +1259,7 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
     if(!title)throw new Error("Please enter a title.");
 
     const published=document.getElementById("publishedStatus").value==="true";
+
     const existing=id?findRecord(type,id):null;
 
     let imageUrl=existing?.image_url||null;
@@ -1082,6 +1311,7 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
     if(type==="videos"){
       if(videoFile){
         formNotify("Uploading your video. Please keep this page open until the upload finishes.","success");
+
         videoUrl=await uploadVideoFile(videoFile);
       }
 
@@ -1103,33 +1333,40 @@ document.getElementById("contentForm").addEventListener("submit",async event=>{
 
     closeForm();
 
-    notify(type==="videos"
-      ?(id?"Video updated successfully.":"Video uploaded successfully.")
-      :(type.charAt(0).toUpperCase()+type.slice(1)+(id?" updated successfully.":" saved successfully.")));
+    notify(
+      type==="videos"
+        ?(id?"Video updated successfully.":"Video uploaded successfully.")
+        :(type.charAt(0).toUpperCase()+type.slice(1)+(id?" updated successfully.":" saved successfully."))
+    );
 
     await reloadType(type);
 
   }catch(error){
     console.error(error);
+
     formNotify(error.message||"Could not save this content.");
+
   }finally{
     button.disabled=false;
     button.textContent="Save Content";
   }
 });
 
-/* Extract a video storage path from its public URL */
+/* VIDEO STORAGE PATH */
 
 function getVideoStoragePath(publicUrl){
   if(!publicUrl)return null;
 
   const marker="/storage/v1/object/public/videos/";
+
   const index=publicUrl.indexOf(marker);
 
   if(index===-1)return null;
 
   return decodeURIComponent(publicUrl.substring(index+marker.length));
 }
+
+/* PUBLISH / UNPUBLISH */
 
 async function togglePublication(type,record){
   const newValue=!record.published;
@@ -1140,24 +1377,34 @@ async function togglePublication(type,record){
 
   try{
     const {error}=await db.from(table).update({published:newValue}).eq("id",record.id);
+
     if(error)throw error;
 
     notify(newValue?"Content published.":"Content unpublished.");
+
     await reloadType(type);
 
   }catch(error){
     console.error(error);
+
     notify("Could not update publication status: "+error.message,"error");
   }
 }
 
+/* DELETE CONTENT */
+
 async function deleteRecord(type,record){
-  if(!confirm(type==="videos"?"Permanently delete this video and its uploaded file?":"Permanently delete this content?"))return;
+  if(!confirm(
+    type==="videos"
+      ?"Permanently delete this video and its uploaded file?"
+      :"Permanently delete this content?"
+  ))return;
 
   const table=type==="press"?"press_releases":type;
 
   try{
     const {error}=await db.from(table).delete().eq("id",record.id);
+
     if(error)throw error;
 
     if(type==="videos"&&record.video_url){
@@ -1168,37 +1415,49 @@ async function deleteRecord(type,record){
 
         if(storageError){
           console.error("Video record deleted, but storage file removal failed:",storageError);
+
           notify("Video record deleted, but its storage file could not be removed: "+storageError.message,"error");
+
           await reloadType(type);
+
           return;
         }
       }
     }
 
     notify("Content deleted successfully.");
+
     await reloadType(type);
 
   }catch(error){
     console.error(error);
+
     notify("Could not delete content: "+error.message,"error");
   }
 }
+
+/* DELETE MESSAGE */
 
 async function deleteMessage(id){
   if(!confirm("Permanently delete this message?"))return;
 
   try{
     const {error}=await db.from("messages").delete().eq("id",id);
+
     if(error)throw error;
 
     notify("Message deleted.");
+
     await loadMessages();
 
   }catch(error){
     console.error(error);
+
     notify("Could not delete message: "+error.message,"error");
   }
 }
+
+/* RELOAD CONTENT */
 
 async function reloadType(type){
   if(type==="projects")await loadProjects();
@@ -1212,17 +1471,24 @@ async function reloadType(type){
 
 async function getSiteValue(key){
   const {data,error}=await db.from("site_content").select("value").eq("key",key).maybeSingle();
+
   if(error)throw error;
+
   return data?data.value:null;
 }
 
 async function saveSiteValue(key,value){
-  const {error}=await db.from("site_content").upsert({key,value},{onConflict:"key"});
+  const {error}=await db.from("site_content").upsert(
+    {key,value},
+    {onConflict:"key"}
+  );
+
   if(error)throw error;
 }
 
 function parseStoredValue(raw){
   if(!raw)return null;
+
   if(typeof raw!=="string")return raw;
 
   try{
@@ -1277,6 +1543,8 @@ async function loadSiteContent(){
   }
 }
 
+/* SAVE BIOGRAPHY */
+
 document.getElementById("biographyForm").addEventListener("submit",async event=>{
   event.preventDefault();
 
@@ -1288,12 +1556,15 @@ document.getElementById("biographyForm").addEventListener("submit",async event=>
     };
 
     await saveSiteValue("biography",JSON.stringify(value));
+
     notify("Biography saved successfully.");
 
   }catch(error){
     notify("Could not save biography: "+error.message,"error");
   }
 });
+
+/* SAVE VISION AND MISSION */
 
 document.getElementById("visionForm").addEventListener("submit",async event=>{
   event.preventDefault();
@@ -1319,6 +1590,8 @@ document.getElementById("visionForm").addEventListener("submit",async event=>{
   }
 });
 
+/* SAVE WEBSITE SETTINGS */
+
 document.getElementById("settingsForm").addEventListener("submit",async event=>{
   event.preventDefault();
 
@@ -1330,6 +1603,7 @@ document.getElementById("settingsForm").addEventListener("submit",async event=>{
     };
 
     await saveSiteValue("settings",JSON.stringify(settings));
+
     notify("Website settings saved successfully.");
 
   }catch(error){
@@ -1340,7 +1614,9 @@ document.getElementById("settingsForm").addEventListener("submit",async event=>{
 /* START DASHBOARD */
 
 async function initialiseDashboard(){
+
   const authorised=await requireAdministrator();
+
   if(!authorised)return;
 
   await Promise.all([
@@ -1357,10 +1633,19 @@ async function initialiseDashboard(){
 
 initialiseDashboard();
 
-db.auth.onAuthStateChange((event,session)=>{
+/* AUTHENTICATION STATE LISTENER
+   This listener belongs to the NEW election Supabase.
+*/
+
+authDb.auth.onAuthStateChange((event,session)=>{
+
   if(event==="SIGNED_OUT"||!session){
     window.location.replace("login.html");
   }
+
 });
-</script></body>
+
+</script>
+
+</body>
 </html>
