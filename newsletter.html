@@ -181,8 +181,7 @@ footer {
 }
 </style></head><body><header>
     <a href="index.html">
-        <img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png"
-        alt="Website Logo">
+        <img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png" alt="Website Logo">
     </a><div>
     <h2>HON. AKARACHI AMADI</h2>
     <p>Mbaitoli/Ikeduru Federal Constituency</p>
@@ -239,10 +238,7 @@ footer {
 </div>
 
 </div><footer>
-    <p>
-        &copy; 2026 Hon. Akarachi Amadi.
-        All Rights Reserved.
-    </p>
+    <p>&copy; 2026 Hon. Akarachi Amadi. All Rights Reserved.</p>
     <p>Mbaitoli/Ikeduru Federal Constituency, Imo State.</p>
 </footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
@@ -278,7 +274,7 @@ form.addEventListener("submit", async function(event) {
     try {
 
         const { error } = await db
-            .from("subscribers")
+            .from("newsletter_subscribers")
             .insert([
                 {
                     name: name,
@@ -305,15 +301,17 @@ form.addEventListener("submit", async function(event) {
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Newsletter error:", error);
 
         message.style.color = "red";
-        message.textContent = "Subscription failed. Please try again later.";
+        message.textContent = "Subscription failed: " + error.message;
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent = "Subscribe Now";
 
     }
-
-    button.disabled = false;
-    button.textContent = "Subscribe Now";
 
 });
 </script></body>
