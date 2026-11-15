@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Official photo gallery of Hon. Akarachi Amadi, representing Mbaitoli/Ikeduru Federal Constituency.">
-  <title>Photo Gallery | Hon. Akarachi Amadi</title>
-
-  <style>
+  <title>Photo Gallery | Hon. Akarachi Amadi</title>  <style>
     :root {
       --green: #075b32;
       --dark-green: #034323;
@@ -96,8 +93,9 @@
     }
 
     .hero {
-      background: linear-gradient(rgba(3,67,35,.88), rgba(3,67,35,.88)),
-                  url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
+      background:
+        linear-gradient(rgba(3,67,35,.88), rgba(3,67,35,.88)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
       background-position: center;
       background-size: cover;
       text-align: center;
@@ -156,6 +154,7 @@
       border: 0;
       background: transparent;
       cursor: zoom-in;
+      overflow: hidden;
     }
 
     .gallery-card img {
@@ -269,18 +268,11 @@
         height: 220px;
       }
     }
-  </style>
-</head>
-
-<body>
-
-<header>
+  </style></head><body><header>
   <div class="brand">
     HON. AKARACHI AMADI
     <span>Mbaitoli/Ikeduru Federal Constituency</span>
-  </div>
-
-  <nav>
+  </div>  <nav>
     <a href="login.html">LOGIN</a>
     <a href="index.html">HOME</a>
     <a href="biography.html">BIOGRAPHY</a>
@@ -295,70 +287,69 @@
     <a href="faq.html">FAQ</a>
     <a href="contact.html">CONTACT</a>
   </nav>
-</header>
-
-<div class="welcome">
+</header><div class="welcome">
   <span>
     <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
   </span>
-</div>
-
-<section class="hero">
+</div><section class="hero">
   <h1>Photo Gallery</h1>
   <p>
     A collection of photographs documenting constituency engagements,
     community activities, projects and official events.
   </p>
-</section>
-
-<main class="container">
+</section><main class="container">
   <div class="section-heading">
     <h2>Our Gallery</h2>
     <p>Photographs published by the office of Hon. Akarachi Amadi.</p>
-  </div>
-
-  <div class="gallery-grid" id="galleryGrid">
+  </div>  <div class="gallery-grid" id="galleryGrid">
     <div class="status-message">Loading photographs...</div>
   </div>
-</main>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer">
+</main><div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer">
   <button class="close-lightbox" id="closeLightbox" aria-label="Close photograph">&times;</button>
   <img id="lightboxImage" src="" alt="">
   <div class="lightbox-caption" id="lightboxCaption"></div>
-</div>
-
-<footer>
+</div><footer>
   <p><strong>HON. AKARACHI AMADI</strong></p>
   <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
   <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
-</footer>
+</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+  // CONNECT TO THE SAME SUPABASE PROJECT USED BY THE ADMIN DASHBOARD
+  const SUPABASE_URL = "https://pxtgmpmhiktgknjksqeh.supabase.co";
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  const SUPABASE_KEY = "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
-<script>
-  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
-
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
   const galleryGrid = document.getElementById("galleryGrid");
   const lightbox = document.getElementById("lightbox");
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 
   function makeElement(tag, className, text) {
     const element = document.createElement(tag);
 
-    if (className) element.className = className;
-    if (text !== undefined) element.textContent = text;
+    if (className) {
+      element.className = className;
+    }
+
+    if (text !== undefined) {
+      element.textContent = text;
+    }
 
     return element;
   }
 
   function openLightbox(photo) {
-    document.getElementById("lightboxImage").src = photo.image_url;
-    document.getElementById("lightboxImage").alt = photo.title || "Gallery photograph";
+    document.getElementById("lightboxImage").src =
+      photo.image_url;
+
+    document.getElementById("lightboxImage").alt =
+      photo.title || "Gallery photograph";
+
     document.getElementById("lightboxCaption").textContent =
       photo.title || photo.description || "";
 
@@ -369,45 +360,60 @@
   function closeLightbox() {
     lightbox.classList.remove("show");
     document.body.style.overflow = "";
+
     document.getElementById("lightboxImage").src = "";
   }
 
-  document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
+  document.getElementById("closeLightbox")
+    .addEventListener("click", closeLightbox);
 
   lightbox.addEventListener("click", function(event) {
-    if (event.target === lightbox) closeLightbox();
+    if (event.target === lightbox) {
+      closeLightbox();
+    }
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") closeLightbox();
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
   });
 
   function renderGallery(photos) {
     galleryGrid.replaceChildren();
 
-    if (!photos.length) {
+    if (!photos || photos.length === 0) {
       galleryGrid.appendChild(
         makeElement(
           "div",
           "status-message",
-          "There are currently no published photographs. Please check back for updates."
+          "There are currently no photographs in the gallery. Please check back for updates."
         )
       );
+
       return;
     }
 
+    let displayedPhotos = 0;
+
     photos.forEach(photo => {
-      if (!photo.image_url) return;
+      if (!photo.image_url) {
+        return;
+      }
 
       const card = makeElement("article", "gallery-card");
+
       const imageButton = document.createElement("button");
+
       imageButton.type = "button";
+
       imageButton.setAttribute(
         "aria-label",
         "View " + (photo.title || "gallery photograph")
       );
 
       const image = document.createElement("img");
+
       image.src = photo.image_url;
       image.alt = photo.title || "Gallery photograph";
       image.loading = "lazy";
@@ -417,12 +423,19 @@
       };
 
       imageButton.appendChild(image);
-      imageButton.addEventListener("click", () => openLightbox(photo));
+
+      imageButton.addEventListener("click", function() {
+        openLightbox(photo);
+      });
 
       const caption = makeElement("div", "gallery-caption");
 
       caption.appendChild(
-        makeElement("h3", "", photo.title || "Gallery Photograph")
+        makeElement(
+          "h3",
+          "",
+          photo.title || "Gallery Photograph"
+        )
       );
 
       if (photo.description) {
@@ -433,15 +446,18 @@
 
       card.appendChild(imageButton);
       card.appendChild(caption);
+
       galleryGrid.appendChild(card);
+
+      displayedPhotos++;
     });
 
-    if (!galleryGrid.children.length) {
+    if (displayedPhotos === 0) {
       galleryGrid.appendChild(
         makeElement(
           "div",
           "status-message",
-          "There are currently no photographs available."
+          "No photographs with valid image links are available."
         )
       );
     }
@@ -449,34 +465,48 @@
 
   async function loadGallery() {
     galleryGrid.replaceChildren(
-      makeElement("div", "status-message", "Loading photographs...")
+      makeElement(
+        "div",
+        "status-message",
+        "Loading photographs..."
+      )
     );
 
-    const { data, error } = await db
-      .from("gallery")
-      .select("id,title,description,image_url,created_at")
-      .eq("published", true)
-      .order("created_at", { ascending: false });
+    try {
+      const { data, error } = await db
+        .from("gallery")
+        .select("id,title,description,image_url,created_at")
+        .order("created_at", { ascending: false });
 
-    if (error) {
-      console.error("Supabase gallery error:", error);
+      if (error) {
+        console.error("Supabase gallery error:", error);
+
+        galleryGrid.replaceChildren(
+          makeElement(
+            "div",
+            "status-message error",
+            "Gallery loading failed: " + error.message
+          )
+        );
+
+        return;
+      }
+
+      renderGallery(data || []);
+
+    } catch (error) {
+      console.error("Gallery error:", error);
 
       galleryGrid.replaceChildren(
         makeElement(
           "div",
           "status-message error",
-          "We could not load the gallery at this time. Please refresh the page or try again later."
+          "Unable to connect to the gallery. Please refresh the page."
         )
       );
-
-      return;
     }
-
-    renderGallery(data || []);
   }
 
   loadGallery();
-</script>
-
-</body>
+</script></body>
 </html>
