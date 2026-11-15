@@ -1,623 +1,872 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Admin Dashboard | Hon. Akarachi Amadi</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 :root {
-  --green:#075b32;
-  --dark:#034323;
-  --gold:#d5aa45;
-  --light:#f4f7f4;
+    --green:#075b32;
+    --dark:#034323;
+    --gold:#d5a52b;
+    --light:#f4f7f5;
+    --white:#ffffff;
+    --red:#c62828;
 }
-* {box-sizing:border-box;margin:0;padding:0;}
-body {font-family:Arial,sans-serif;background:var(--light);color:#222;}
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:var(--light);
+    color:#222;
+}
+
 header {
-  background:var(--green);color:white;padding:18px;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:12px;
+    background:var(--green);
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
 }
-header h2 {font-size:18px;}
-button {cursor:pointer;}
+
+header h2 {
+    margin:0;
+    font-size:20px;
+}
+
+button {
+    cursor:pointer;
+    border:none;
+    padding:12px 16px;
+    border-radius:6px;
+    font-weight:bold;
+}
+
 .logout {
-  background:var(--gold);border:0;padding:11px 18px;
-  border-radius:6px;font-weight:bold;
+    background:white;
+    color:var(--green);
 }
-.layout {display:flex;min-height:calc(100vh - 65px);}
-.sidebar {
-  width:225px;background:var(--dark);padding:15px 10px;flex-shrink:0;
+
+.container {
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
 }
-.sidebar button {
-  display:block;width:100%;padding:14px;margin-bottom:7px;
-  border:0;background:transparent;color:white;text-align:left;
-  border-radius:5px;font-size:14px;
+
+.welcome {
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px #00000010;
 }
-.sidebar button.active,.sidebar button:hover {
-  background:var(--gold);color:#111;
+
+.tabs {
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
-main {flex:1;padding:22px;min-width:0;}
-section {display:none;}
-section.active {display:block;}
+
+.tab {
+    background:#e3ebe5;
+    color:var(--dark);
+}
+
+.tab.active {
+    background:var(--green);
+    color:white;
+}
+
+.panel {
+    display:none;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px #00000010;
+}
+
+.panel.active {
+    display:block;
+}
+
+input, textarea, select {
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+textarea {
+    min-height:110px;
+    resize:vertical;
+}
+
+.primary {
+    background:var(--green);
+    color:white;
+}
+
+.danger {
+    background:var(--red);
+    color:white;
+}
+
+.preview {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:10px 0;
+}
+
+.preview img {
+    width:110px;
+    height:100px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.message {
+    padding:12px;
+    margin:12px 0;
+    border-radius:6px;
+    display:none;
+    overflow-wrap:anywhere;
+}
+
+.success {
+    background:#e1f5e7;
+    color:#12612d;
+}
+
+.error {
+    background:#ffebee;
+    color:#b71c1c;
+}
+
 .cards {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:13px;margin:20px 0;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
 }
-.card,.panel {
-  background:white;padding:20px;border-radius:9px;
-  box-shadow:0 2px 8px #00000010;margin-bottom:18px;
-}
-.card {border-left:4px solid var(--green);}
-.card h3 {color:var(--green);font-size:25px;margin-bottom:7px;}
-.panel h3 {color:var(--green);margin-bottom:15px;}
-input,textarea,select {
-  width:100%;padding:12px;margin:8px 0 14px;
-  border:1px solid #ddd;border-radius:5px;font-size:14px;
-}
-textarea {min-height:100px;}
-.action {
-  background:var(--green);color:white;border:0;
-  padding:12px 18px;border-radius:5px;margin:4px;
-}
-.action:hover {background:var(--dark);}
-.delete {
-  background:#d93025;color:white;border:0;
-  padding:8px 12px;border-radius:4px;
-}
-#message {
-  display:none;padding:13px;margin-bottom:15px;border-radius:5px;
-}
-.upload-box {
-  border:2px dashed #a9c7b2;border-radius:9px;
-  padding:20px;text-align:center;background:#f9fcfa;margin:12px 0;
-}
-.upload-box input {border:0;background:white;margin-top:12px;}
-.preview-grid {
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
-  gap:12px;margin:15px 0;
-}
-.preview-item {
-  background:#f2f5f2;padding:7px;border-radius:7px;overflow:hidden;
-}
-.preview-item img {
-  width:100%;height:110px;object-fit:cover;border-radius:5px;
-}
-.preview-item p {font-size:11px;overflow-wrap:anywhere;margin-top:5px;}
-.progress {
-  height:8px;background:#ddd;border-radius:10px;overflow:hidden;margin:12px 0;
-}
-.progress-bar {height:100%;width:0;background:var(--green);}
-.table-wrap {overflow-x:auto;}
-table {width:100%;border-collapse:collapse;min-width:550px;}
-th,td {padding:11px;border-bottom:1px solid #eee;text-align:left;font-size:13px;}
-th {background:#edf5ef;color:var(--green);}
-.small {color:#666;font-size:13px;line-height:1.6;}
-@media(max-width:700px) {
-  .layout {display:block;}
-  .sidebar {
-    width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:5px;
-  }
-  .sidebar button {font-size:12px;margin:0;padding:12px 7px;}
-  main {padding:12px;}
-}
-</style></head><body><header>
-  <h2>AKARACHI AMADI | ADMIN</h2>
-  <button class="logout" onclick="logout()">LOG OUT</button>
-</header><div class="layout"><aside class="sidebar">
-  <button class="active" onclick="showSection('dashboard',this)">Dashboard</button>
-  <button onclick="showSection('upload',this)">Upload Pictures</button>
-  <button onclick="openManager('projects',this)">Projects</button>
-  <button onclick="openManager('news',this)">News Updates</button>
-  <button onclick="openManager('gallery',this)">Photo Gallery</button>
-  <button onclick="openManager('videos',this)">Videos</button>
-  <button onclick="openManager('press_releases',this)">Press Releases</button>
-  <button onclick="openManager('messages',this)">Messages</button>
-  <button onclick="openManager('subscribers',this)">Subscribers</button>
-  <button onclick="openManager('site_content',this)">Website Content</button>
-</aside><main>
-<div id="message"></div><section id="dashboard" class="active">
-  <h2>Welcome, Administrator</h2>
-  <p class="small">Hon. Akarachi Amadi Official Website Management Centre.</p>  <div class="cards">
-    <div class="card"><h3 id="projectsCount">0</h3><p>Projects</p></div>
-    <div class="card"><h3 id="newsCount">0</h3><p>News Updates</p></div>
-    <div class="card"><h3 id="galleryCount">0</h3><p>Gallery Images</p></div>
-    <div class="card"><h3 id="messagesCount">0</h3><p>Messages</p></div>
-    <div class="card"><h3 id="subscribersCount">0</h3><p>Subscribers</p></div>
-  </div>  <div class="panel">
-    <h3>Administration Centre</h3>
-    <p class="small">
-      Upload photographs directly from your phone, manage projects,
-      publish news, update the photo gallery and manage website content.
-    </p>
-    <button class="action" onclick="showSection('upload')">UPLOAD NEW PICTURES</button>
-  </div>
-</section><section id="upload">
-  <div class="panel">
-    <h2>Upload Pictures From Your Phone</h2>
-    <p class="small">Choose a section, select pictures from your phone and upload them.</p><label>Choose Section</label>
-<select id="uploadCategory">
-  <option value="gallery">Photo Gallery</option>
-  <option value="projects">Projects</option>
-  <option value="news">News Updates</option>
-  <option value="videos">Video Thumbnails</option>
-  <option value="press_releases">Press Releases</option>
-</select>
 
-<label>Title or Caption</label>
-<input id="uploadTitle" type="text" placeholder="Enter picture title or caption">
+.card {
+    border:1px solid #ddd;
+    border-radius:8px;
+    overflow:hidden;
+    background:white;
+}
 
-<label>Description</label>
-<textarea id="uploadDescription" placeholder="Write a description..."></textarea>
+.card img {
+    width:100%;
+    height:160px;
+    object-fit:cover;
+    background:#eee;
+}
 
-<div class="upload-box">
-  <h3>Select Pictures</h3>
-  <p class="small">Tap below to open your phone's gallery.</p>
-  <input type="file" id="pictureInput" accept="image/*" multiple onchange="previewPictures()">
+.card-content {
+    padding:12px;
+}
+
+.card h4 {
+    margin:5px 0;
+    color:var(--green);
+}
+
+.card p {
+    font-size:14px;
+    overflow-wrap:anywhere;
+}
+
+.small {
+    font-size:12px;
+    color:#666;
+}
+
+hr {
+    border:0;
+    border-top:1px solid #eee;
+    margin:20px 0;
+}
+
+@media(max-width:600px) {
+    .container {
+        padding:12px;
+    }
+
+    .panel {
+        padding:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Hon. Akarachi Amadi | Admin Dashboard</h2>
+    <button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h3 id="welcomeText">Checking administrator access...</h3>
+        <p>Manage website pictures, projects, news and publications.</p>
+    </div>
+
+    <div id="statusMessage" class="message"></div>
+
+    <div class="tabs">
+        <button class="tab active" onclick="showPanel('dashboard',this)">Dashboard</button>
+        <button class="tab" onclick="showPanel('upload',this)">Upload Pictures</button>
+        <button class="tab" onclick="showPanel('projects',this)">Projects</button>
+        <button class="tab" onclick="showPanel('news',this)">News</button>
+        <button class="tab" onclick="showPanel('gallery',this)">Gallery</button>
+        <button class="tab" onclick="showPanel('videos',this)">Videos</button>
+        <button class="tab" onclick="showPanel('press_releases',this)">Press Releases</button>
+    </div>
+
+    <section id="dashboard" class="panel active">
+        <h3>Dashboard Overview</h3>
+        <p>Welcome to the website management dashboard.</p>
+
+        <div class="cards">
+            <div class="card-content">
+                <h2 id="projectsCount">0</h2>
+                <p>Projects</p>
+            </div>
+
+            <div class="card-content">
+                <h2 id="newsCount">0</h2>
+                <p>News Articles</p>
+            </div>
+
+            <div class="card-content">
+                <h2 id="galleryCount">0</h2>
+                <p>Gallery Pictures</p>
+            </div>
+
+            <div class="card-content">
+                <h2 id="videosCount">0</h2>
+                <p>Videos</p>
+            </div>
+
+            <div class="card-content">
+                <h2 id="pressCount">0</h2>
+                <p>Press Releases</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <button class="primary" onclick="showPanel('upload')">
+            Upload New Picture
+        </button>
+    </section>
+
+    <section id="upload" class="panel">
+        <h3>Upload Website Pictures</h3>
+
+        <form id="uploadForm">
+
+            <label>Choose Category</label>
+
+            <select id="category" required>
+                <option value="gallery">Gallery</option>
+                <option value="projects">Projects</option>
+                <option value="news">News</option>
+                <option value="videos">Videos</option>
+                <option value="press_releases">Press Releases</option>
+            </select>
+
+            <label>Picture Title</label>
+
+            <input type="text" id="title"
+                placeholder="Enter picture title" required>
+
+            <label>Description</label>
+
+            <textarea id="description"
+                placeholder="Write a description"></textarea>
+
+            <label>Select Pictures From Your Phone</label>
+
+            <input type="file" id="pictures"
+                accept="image/*" multiple required>
+
+            <div id="preview" class="preview"></div>
+
+            <button type="submit" class="primary" id="uploadButton">
+                Upload Pictures
+            </button>
+
+        </form>
+
+        <p class="small">
+            Select one or more pictures from your phone.
+        </p>
+    </section>
+
+    <section id="projects" class="panel">
+        <h3>Projects</h3>
+        <div id="projectsList" class="cards">Loading...</div>
+    </section>
+
+    <section id="news" class="panel">
+        <h3>News</h3>
+        <div id="newsList" class="cards">Loading...</div>
+    </section>
+
+    <section id="gallery" class="panel">
+        <h3>Gallery</h3>
+        <div id="galleryList" class="cards">Loading...</div>
+    </section>
+
+    <section id="videos" class="panel">
+        <h3>Videos</h3>
+        <div id="videosList" class="cards">Loading...</div>
+    </section>
+
+    <section id="press_releases" class="panel">
+        <h3>Press Releases</h3>
+        <div id="press_releasesList" class="cards">Loading...</div>
+    </section>
+
 </div>
 
-<div id="previewGrid" class="preview-grid"></div>
-<div class="progress"><div id="progressBar" class="progress-bar"></div></div>
-<p id="uploadStatus" class="small"></p>
+<script>
 
-<button class="action" id="uploadButton" onclick="uploadPictures()">UPLOAD PICTURES NOW</button>
-
-  </div>  <div class="panel">
-    <h3>Uploaded Pictures</h3>
-    <div id="uploadedLinks"></div>
-  </div>
-</section><section id="manager">
-  <div class="panel">
-    <h2 id="sectionTitle">Manage Content</h2>
-    <select id="tableSelect" onchange="loadRecords()">
-      <option value="projects">Projects</option>
-      <option value="news">News</option>
-      <option value="gallery">Gallery</option>
-      <option value="videos">Videos</option>
-      <option value="press_releases">Press Releases</option>
-      <option value="messages">Messages</option>
-      <option value="subscribers">Subscribers</option>
-      <option value="site_content">Website Content</option>
-    </select>
-    <button class="action" onclick="loadRecords()">REFRESH RECORDS</button>
-  </div>  <div class="panel">
-    <h3>Add New Record</h3>
-    <textarea id="recordJSON" placeholder='{"title":"Example","description":"Enter content here"}'></textarea>
-    <button class="action" onclick="insertRecord()">SAVE NEW RECORD</button>
-  </div>  <div class="panel">
-    <h3>Database Records</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Record</th><th>Details</th><th>Actions</th></tr></thead>
-        <tbody id="recordsBody"></tbody>
-      </table>
-    </div>
-  </div>
-</section></main>
-</div><script>
 // =====================================
-// EXISTING SUPABASE PROJECT
+// SUPABASE CONFIGURATION
 // =====================================
 
-const SUPABASE_URL = "https://pxtgmpmhiktgknjksqeh.supabase.co";
-const SUPABASE_KEY = "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
+const SUPABASE_URL =
+"https://pxtgmpmhiktgknjksqeh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
 const STORAGE_BUCKET = "website-media";
 
-// ONE CONNECTION FOR AUTHENTICATION AND WEBSITE MANAGEMENT
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
 
 // =====================================
-// AUTHENTICATION
-// =====================================
-
-async function checkAdmin() {
-  try {
-    const {data,error} = await db.auth.getSession();
-
-    if(error || !data.session) {
-      window.location.replace("login.html");
-      return;
-    }
-
-    const {data:isAdmin,error:adminError} = await db.rpc("is_admin");
-
-    if(adminError || isAdmin !== true) {
-      alert("Administrator access denied.");
-      await db.auth.signOut();
-      window.location.replace("login.html");
-      return;
-    }
-
-    notify("Administrator authentication successful.");
-    await loadDashboard();
-
-  } catch(error) {
-    console.error(error);
-    notify(error.message,"error");
-  }
-}
-
-async function logout() {
-  await db.auth.signOut();
-  window.location.replace("login.html");
-}
-
-// =====================================
-// NOTIFICATIONS
+// DISPLAY MESSAGES
 // =====================================
 
 function notify(message,type="success") {
-  const box=document.getElementById("message");
-  box.style.display="block";
-  box.style.background=type==="error" ? "#ffe5e5" : "#e4f5e8";
-  box.style.color=type==="error" ? "#a00000" : "#075b32";
-  box.textContent=message;
-  window.scrollTo({top:0,behavior:"smooth"});
+
+    const box = document.getElementById("statusMessage");
+
+    box.textContent = message;
+    box.className = "message " + type;
+    box.style.display = "block";
+
+    window.scrollTo({top:0,behavior:"smooth"});
 }
+
+
+// =====================================
+// ADMIN VERIFICATION
+// DIAGNOSTIC VERSION
+// =====================================
+
+async function checkAdmin() {
+
+    const welcome = document.getElementById("welcomeText");
+
+    try {
+
+        welcome.textContent = "Checking administrator session...";
+
+        const {data,error} = await db.auth.getSession();
+
+        if(error) {
+            welcome.textContent =
+                "Session error: " + error.message;
+            return;
+        }
+
+        if(!data.session) {
+            welcome.textContent =
+                "No active session found. Please sign in again.";
+            return;
+        }
+
+        const user = data.session.user;
+
+        const {data:profile,error:profileError} = await db
+            .from("profiles")
+            .select("role,is_active,full_name")
+            .eq("id",user.id)
+            .maybeSingle();
+
+        if(profileError) {
+            welcome.textContent =
+                "Profile error: " + profileError.message;
+            return;
+        }
+
+        if(!profile) {
+            welcome.textContent =
+                "No administrator profile found.";
+            return;
+        }
+
+        if(profile.role !== "admin" || profile.is_active !== true) {
+
+            welcome.textContent =
+                "Access denied. Role: " + profile.role +
+                ". Active: " + profile.is_active;
+
+            return;
+        }
+
+        welcome.textContent =
+            "Welcome, " + (profile.full_name || "Administrator");
+
+        notify("Administrator verification successful.");
+
+        await loadDashboard();
+
+    } catch(error) {
+
+        console.error("Admin verification error:",error);
+
+        welcome.textContent =
+            "Verification error: " + error.message;
+
+    }
+
+}
+
+
+// =====================================
+// LOGOUT
+// =====================================
+
+async function logout() {
+
+    await db.auth.signOut();
+
+    window.location.replace("login.html");
+
+}
+
 
 // =====================================
 // NAVIGATION
 // =====================================
 
-function showSection(section,button) {
-  document.querySelectorAll("main section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(section).classList.add("active");
+function showPanel(id,button=null) {
 
-  document.querySelectorAll(".sidebar button").forEach(b=>b.classList.remove("active"));
-  if(button) button.classList.add("active");
+    document.querySelectorAll(".panel").forEach(panel => {
+        panel.classList.remove("active");
+    });
 
-  if(section==="dashboard") loadDashboard();
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    if(button) {
+        button.classList.add("active");
+    }
+
+    if(id === "dashboard") {
+        loadDashboard();
+    }
+
+    if([
+        "projects",
+        "news",
+        "gallery",
+        "videos",
+        "press_releases"
+    ].includes(id)) {
+        loadCategory(id);
+    }
+
 }
 
-function openManager(table,button) {
-  showSection("manager",button);
-  document.getElementById("tableSelect").value=table;
-  document.getElementById("sectionTitle").textContent=
-    "Manage " + table.replace("_"," ").toUpperCase();
-  loadRecords();
-}
 
 // =====================================
-// DASHBOARD
+// IMAGE PREVIEW
 // =====================================
 
-async function getCount(table) {
-  const {count,error}=await db.from(table).select("*",{count:"exact",head:true});
-  if(error) {
-    console.error(table,error);
-    return "--";
-  }
-  return count ?? 0;
-}
+document.getElementById("pictures").addEventListener(
+    "change",
+    function() {
 
-async function loadDashboard() {
-  const tables=[
-    ["projects","projectsCount"],
-    ["news","newsCount"],
-    ["gallery","galleryCount"],
-    ["messages","messagesCount"],
-    ["subscribers","subscribersCount"]
-  ];
+        const preview = document.getElementById("preview");
 
-  for(const [table,id] of tables) {
-    document.getElementById(id).textContent=await getCount(table);
-  }
-}
+        preview.innerHTML = "";
 
-// =====================================
-// PREVIEW PICTURES
-// =====================================
+        Array.from(this.files).forEach(file => {
 
-function previewPictures() {
-  const input=document.getElementById("pictureInput");
-  const grid=document.getElementById("previewGrid");
-  grid.innerHTML="";
+            if(!file.type.startsWith("image/")) return;
 
-  const files=Array.from(input.files || []);
+            const image = document.createElement("img");
 
-  files.forEach(file=>{
-    const item=document.createElement("div");
-    item.className="preview-item";
+            image.src = URL.createObjectURL(file);
 
-    const img=document.createElement("img");
-    img.src=URL.createObjectURL(file);
+            preview.appendChild(image);
 
-    const name=document.createElement("p");
-    name.textContent=file.name;
+        });
 
-    item.append(img,name);
-    grid.appendChild(item);
-  });
+    }
+);
 
-  document.getElementById("uploadStatus").textContent=
-    files.length+" picture(s) selected.";
-}
 
 // =====================================
 // UPLOAD PICTURES
 // =====================================
 
-async function uploadPictures() {
-  const input=document.getElementById("pictureInput");
-  const files=Array.from(input.files || []);
+document.getElementById("uploadForm").addEventListener(
+    "submit",
+    async function(event) {
 
-  if(files.length===0) {
-    notify("Please select pictures from your phone first.","error");
-    return;
-  }
+        event.preventDefault();
 
-  const category=document.getElementById("uploadCategory").value;
-  const title=document.getElementById("uploadTitle").value.trim();
-  const description=document.getElementById("uploadDescription").value.trim();
-  const status=document.getElementById("uploadStatus");
-  const progress=document.getElementById("progressBar");
-  const links=document.getElementById("uploadedLinks");
-  const button=document.getElementById("uploadButton");
+        const button = document.getElementById("uploadButton");
 
-  links.innerHTML="";
-  button.disabled=true;
-  button.textContent="UPLOADING...";
+        const category = document.getElementById("category").value;
 
-  let completed=0;
-  let failed=0;
+        const title = document.getElementById("title").value.trim();
 
-  status.textContent="Starting upload...";
-  progress.style.width="0%";
+        const description =
+            document.getElementById("description").value.trim();
 
-  for(const file of files) {
+        const files = document.getElementById("pictures").files;
+
+        if(!files.length) {
+            notify("Please select a picture.","error");
+            return;
+        }
+
+        button.disabled = true;
+        button.textContent = "Uploading...";
+
+        let successful = 0;
+        let failed = 0;
+
+        try {
+
+            for(const file of files) {
+
+                if(!file.type.startsWith("image/")) {
+                    failed++;
+                    continue;
+                }
+
+                const safeName = file.name.replace(
+                    /[^a-zA-Z0-9._-]/g,"_"
+                );
+
+                const filePath =
+                    category + "/" +
+                    Date.now() + "_" +
+                    Math.random().toString(36).substring(2,9) +
+                    "_" + safeName;
+
+                const {error:uploadError} = await db.storage
+                    .from(STORAGE_BUCKET)
+                    .upload(filePath,file,{
+                        cacheControl:"3600",
+                        upsert:false,
+                        contentType:file.type
+                    });
+
+                if(uploadError) {
+                    console.error(uploadError);
+                    failed++;
+                    continue;
+                }
+
+                const {data:urlData} = db.storage
+                    .from(STORAGE_BUCKET)
+                    .getPublicUrl(filePath);
+
+                const imageUrl = urlData.publicUrl;
+
+                const {error:insertError} = await db
+                    .from(category)
+                    .insert([{
+                        title:title,
+                        description:description,
+                        image_url:imageUrl,
+                        image_path:filePath
+                    }]);
+
+                if(insertError) {
+
+                    console.error(insertError);
+
+                    await db.storage
+                        .from(STORAGE_BUCKET)
+                        .remove([filePath]);
+
+                    failed++;
+                    continue;
+                }
+
+                successful++;
+
+            }
+
+            if(successful > 0) {
+
+                notify(
+                    successful + " picture(s) uploaded successfully." +
+                    (failed ? " " + failed + " failed." : "")
+                );
+
+                document.getElementById("uploadForm").reset();
+
+                document.getElementById("preview").innerHTML = "";
+
+                await loadDashboard();
+
+            } else {
+
+                notify(
+                    "Upload failed. Check the error in the dashboard.",
+                    "error"
+                );
+
+            }
+
+        } catch(error) {
+
+            console.error(error);
+
+            notify(error.message,"error");
+
+        } finally {
+
+            button.disabled = false;
+            button.textContent = "Upload Pictures";
+
+        }
+
+    }
+);
+
+
+// =====================================
+// LOAD CATEGORY RECORDS
+// =====================================
+
+async function loadCategory(category) {
+
+    const container =
+        document.getElementById(category + "List");
+
+    container.textContent = "Loading...";
+
     try {
-      if(!file.type.startsWith("image/")) {
-        throw new Error(file.name+" is not an image.");
-      }
 
-      if(file.size>10*1024*1024) {
-        throw new Error(file.name+" exceeds the 10MB limit.");
-      }
+        const {data,error} = await db
+            .from(category)
+            .select("*")
+            .order("created_at",{ascending:false});
 
-      const extension=file.name.split(".").pop().toLowerCase();
-      const safeName=Date.now()+"-"+Math.random().toString(36).substring(2,10)+"."+extension;
-      const filePath=category+"/"+safeName;
+        if(error) throw error;
 
-      const {error:uploadError}=await db.storage
-        .from(STORAGE_BUCKET)
-        .upload(filePath,file,{
-          cacheControl:"3600",
-          upsert:false,
-          contentType:file.type
+        container.innerHTML = "";
+
+        if(!data || data.length === 0) {
+
+            container.textContent = "No records uploaded yet.";
+
+            return;
+        }
+
+        data.forEach(item => {
+
+            const card = document.createElement("div");
+
+            card.className = "card";
+
+            const image = document.createElement("img");
+
+            image.src = item.image_url || "";
+            image.alt = item.title || "Uploaded picture";
+
+            image.onerror = function() {
+                this.style.display = "none";
+            };
+
+            const content = document.createElement("div");
+
+            content.className = "card-content";
+
+            const heading = document.createElement("h4");
+
+            heading.textContent = item.title || "Untitled";
+
+            const description = document.createElement("p");
+
+            description.textContent = item.description || "";
+
+            const date = document.createElement("p");
+
+            date.className = "small";
+
+            date.textContent = item.created_at
+                ? new Date(item.created_at).toLocaleString()
+                : "";
+
+            const remove = document.createElement("button");
+
+            remove.className = "danger";
+            remove.textContent = "Delete";
+
+            remove.onclick = function() {
+                deleteRecord(category,item.id,item.image_path);
+            };
+
+            content.appendChild(heading);
+            content.appendChild(description);
+            content.appendChild(date);
+            content.appendChild(remove);
+
+            card.appendChild(image);
+            card.appendChild(content);
+
+            container.appendChild(card);
+
         });
 
-      if(uploadError) throw uploadError;
-
-      const {data:urlData}=db.storage
-        .from(STORAGE_BUCKET)
-        .getPublicUrl(filePath);
-
-      const imageUrl=urlData.publicUrl;
-
-      const record={
-        title:title || file.name,
-        description:description,
-        image_url:imageUrl,
-        image_path:filePath
-      };
-
-      const {error:insertError}=await db
-        .from(category)
-        .insert(record);
-
-      if(insertError) {
-        throw new Error(
-          "Image uploaded, but saving its database record failed: "+
-          insertError.message+
-          ". Image URL: "+imageUrl
-        );
-      }
-
-      const link=document.createElement("p");
-      link.className="small";
-
-      const anchor=document.createElement("a");
-      anchor.href=imageUrl;
-      anchor.target="_blank";
-      anchor.rel="noopener";
-      anchor.textContent="View uploaded picture";
-
-      link.appendChild(anchor);
-      links.appendChild(link);
-
-      completed++;
-
     } catch(error) {
-      console.error(error);
-      failed++;
 
-      const failure=document.createElement("p");
-      failure.className="small";
-      failure.style.color="red";
-      failure.textContent=error.message;
-      links.appendChild(failure);
+        console.error(error);
+
+        container.textContent =
+            "Unable to load records: " + error.message;
+
     }
 
-    progress.style.width=((completed+failed)/files.length*100)+"%";
-    status.textContent=(completed+failed)+" of "+files.length+" processed.";
-  }
-
-  button.disabled=false;
-  button.textContent="UPLOAD PICTURES NOW";
-
-  if(completed>0) {
-    notify(completed+" picture(s) uploaded and saved successfully.");
-    await loadDashboard();
-  }
-
-  if(failed>0) {
-    notify(completed+" uploaded; "+failed+" failed. Read the error messages below.","error");
-  }
-
-  if(completed===0 && failed===0) {
-    notify("No pictures were uploaded.","error");
-  }
 }
 
-// =====================================
-// DATABASE MANAGEMENT
-// =====================================
-
-const allowedTables=[
-  "projects","news","gallery","videos",
-  "press_releases","messages","subscribers","site_content"
-];
-
-function currentTable() {
-  const table=document.getElementById("tableSelect").value;
-  if(!allowedTables.includes(table)) throw new Error("Invalid database table.");
-  return table;
-}
-
-async function loadRecords() {
-  try {
-    const table=currentTable();
-    const body=document.getElementById("recordsBody");
-    body.innerHTML="<tr><td colspan='3'>Loading...</td></tr>";
-
-    const {data,error}=await db.from(table).select("*").limit(100);
-    if(error) throw error;
-
-    body.innerHTML="";
-
-    if(!data || data.length===0) {
-      body.innerHTML="<tr><td colspan='3'>No records found.</td></tr>";
-      return;
-    }
-
-    data.forEach(row=>{
-      const tr=document.createElement("tr");
-      const name=row.title || row.name || row.key || row.id || "Record";
-
-      const nameCell=document.createElement("td");
-      nameCell.textContent=name;
-
-      const detailsCell=document.createElement("td");
-      detailsCell.textContent=JSON.stringify(row).substring(0,150);
-
-      const actionCell=document.createElement("td");
-
-      const edit=document.createElement("button");
-      edit.className="action";
-      edit.textContent="EDIT";
-      edit.onclick=()=>editRecord(row);
-
-      const del=document.createElement("button");
-      del.className="delete";
-      del.textContent="DELETE";
-      del.onclick=()=>deleteRecord(row);
-
-      actionCell.append(edit,del);
-      tr.append(nameCell,detailsCell,actionCell);
-      body.appendChild(tr);
-    });
-
-  } catch(error) {
-    notify(error.message,"error");
-  }
-}
-
-// =====================================
-// INSERT RECORD
-// =====================================
-
-async function insertRecord() {
-  try {
-    const table=currentTable();
-    const raw=document.getElementById("recordJSON").value;
-
-    if(!raw.trim()) {
-      notify("Enter your record first.","error");
-      return;
-    }
-
-    const record=JSON.parse(raw);
-    const {error}=await db.from(table).insert(record);
-
-    if(error) throw error;
-
-    notify("Record saved successfully.");
-    document.getElementById("recordJSON").value="";
-    await loadRecords();
-    await loadDashboard();
-
-  } catch(error) {
-    notify(error.message,"error");
-  }
-}
-
-// =====================================
-// EDIT RECORD
-// =====================================
-
-async function editRecord(row) {
-  const table=currentTable();
-  const key=Object.keys(row).find(k=>k==="id" || k==="key");
-
-  if(!key) {
-    notify("Record has no supported ID/key field.","error");
-    return;
-  }
-
-  const value=row[key];
-  const updated=prompt("Edit record as JSON:",JSON.stringify(row,null,2));
-  if(!updated) return;
-
-  try {
-    const newRecord=JSON.parse(updated);
-
-    if(newRecord[key]!==value) {
-      notify("Do not change the record ID or key.","error");
-      return;
-    }
-
-    const {error}=await db.from(table).update(newRecord).eq(key,value);
-    if(error) throw error;
-
-    notify("Record updated successfully.");
-    await loadRecords();
-
-  } catch(error) {
-    notify(error.message,"error");
-  }
-}
 
 // =====================================
 // DELETE RECORD
 // =====================================
 
-async function deleteRecord(row) {
-  const table=currentTable();
-  const key=Object.keys(row).find(k=>k==="id" || k==="key");
+async function deleteRecord(category,id,imagePath) {
 
-  if(!key) {
-    notify("Record has no supported ID/key field.","error");
-    return;
-  }
+    if(!confirm("Are you sure you want to delete this item?")) {
+        return;
+    }
 
-  if(!confirm("Are you sure you want to delete this record?")) return;
+    try {
 
-  const {error}=await db.from(table).delete().eq(key,row[key]);
+        const {error:deleteError} = await db
+            .from(category)
+            .delete()
+            .eq("id",id);
 
-  if(error) {
-    notify(error.message,"error");
-    return;
-  }
+        if(deleteError) throw deleteError;
 
-  notify("Record deleted successfully.");
-  await loadRecords();
-  await loadDashboard();
+        if(imagePath) {
+
+            const {error:storageError} = await db.storage
+                .from(STORAGE_BUCKET)
+                .remove([imagePath]);
+
+            if(storageError) {
+                console.error(storageError);
+            }
+
+        }
+
+        notify("Record deleted successfully.");
+
+        await loadCategory(category);
+
+        await loadDashboard();
+
+    } catch(error) {
+
+        notify("Delete failed: " + error.message,"error");
+
+    }
+
 }
 
+
 // =====================================
-// START APPLICATION
+// DASHBOARD COUNTS
+// =====================================
+
+async function loadDashboard() {
+
+    const categories = [
+        "projects",
+        "news",
+        "gallery",
+        "videos",
+        "press_releases"
+    ];
+
+    const countElements = {
+        projects:"projectsCount",
+        news:"newsCount",
+        gallery:"galleryCount",
+        videos:"videosCount",
+        press_releases:"pressCount"
+    };
+
+    for(const category of categories) {
+
+        const {count,error} = await db
+            .from(category)
+            .select("*",{count:"exact",head:true});
+
+        if(!error) {
+
+            document.getElementById(
+                countElements[category]
+            ).textContent = count || 0;
+
+        } else {
+
+            console.error(category,error);
+
+        }
+
+    }
+
+}
+
+
+// =====================================
+// START DASHBOARD
 // =====================================
 
 checkAdmin();
 
-</script></body>
+</script>
+
+</body>
 </html>
