@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Video Gallery | Hon. Akarachi Amadi</title>
-<meta name="description" content="Watch videos, speeches, interviews and constituency activities of Hon. Akarachi Amadi.">
-
-<style>
+<meta name="description" content="Watch videos, speeches, interviews and constituency activities of Hon. Akarachi Amadi."><style>
 :root {
   --green: #075b32;
   --dark-green: #034323;
@@ -237,6 +234,10 @@ nav a.active {
   margin-bottom: 30px;
 }
 
+.status.error {
+  color: #a00016;
+}
+
 footer {
   background: #022f1a;
   color: white;
@@ -280,80 +281,63 @@ footer p {
     padding: 65px 18px;
   }
 }
-</style>
-</head>
-
-<body>
-
-<header>
+</style></head><body><header>
   <div class="header-inner">
     <a href="index.html" class="brand">
       HON. AKARACHI AMADI
       <span>Mbaitoli/Ikeduru Federal Constituency</span>
-    </a>
+    </a><nav>
+  <a href="login.html" class="login-link">LOGIN</a>
+  <a href="index.html">HOME</a>
+  <a href="biography.html">BIOGRAPHY</a>
+  <a href="constituency.html">CONSTITUENCY</a>
+  <a href="legislative.html">LEGISLATIVE</a>
+  <a href="projects.html">PROJECTS</a>
+  <a href="achievements.html">ACHIEVEMENTS</a>
+  <a href="vision.html">VISION</a>
+  <a href="news.html">NEWS</a>
+  <a href="press.html">PRESS</a>
+  <a href="gallery.html">GALLERY</a>
+  <a href="videos.html" class="active">VIDEOS</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">CONTACT</a>
+</nav>
 
-    <nav>
-      <a href="login.html" class="login-link">LOGIN</a>
-      <a href="index.html">HOME</a>
-      <a href="biography.html">BIOGRAPHY</a>
-      <a href="constituency.html">CONSTITUENCY</a>
-      <a href="legislative.html">LEGISLATIVE</a>
-      <a href="projects.html">PROJECTS</a>
-      <a href="achievements.html">ACHIEVEMENTS</a>
-      <a href="vision.html">VISION</a>
-      <a href="news.html">NEWS</a>
-      <a href="press.html">PRESS</a>
-      <a href="gallery.html">GALLERY</a>
-      <a href="videos.html" class="active">VIDEOS</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">CONTACT</a>
-    </nav>
   </div>
-</header>
-
-<div class="welcome-bar">
+</header><div class="welcome-bar">
   <div class="welcome-track">
     <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
   </div>
-</div>
-
-<section class="hero">
+</div><section class="hero">
   <h1>Video Gallery</h1>
   <div class="gold-line"></div>
   <p>
     Watch speeches, interviews, public engagements and video updates
     relating to Mbaitoli/Ikeduru Federal Constituency.
   </p>
-</section>
-
-<section class="container intro">
+</section><section class="container intro">
   <h2>Videos & Media Updates</h2>
   <p>
     This page provides a collection of video materials and public updates.
     New videos will appear here when they are published by the website administrator.
   </p>
-</section>
-
-<section class="container video-section">
+</section><section class="container video-section">
   <div id="videoStatus" class="status">
     Loading videos...
-  </div>
-
-  <div class="video-grid" id="videoGrid"></div>
-</section>
-
-<footer>
+  </div>  <div class="video-grid" id="videoGrid"></div>
+</section><footer>
   <p><strong>Hon. Akarachi Amadi</strong></p>
   <p>Member, House of Representatives</p>
   <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria</p>
   <p>© <span id="year"></span> All Rights Reserved.</p>
-</footer>
+</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+// USE THE SAME SUPABASE PROJECT AS THE ADMIN DASHBOARD
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+const SUPABASE_URL =
+  "https://pxtgmpmhiktgknjksqeh.supabase.co";
 
-<script>
-const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
-const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+const SUPABASE_KEY =
+  "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
 const db = window.supabase.createClient(
   SUPABASE_URL,
@@ -373,35 +357,48 @@ function safeText(value) {
 function getVideoEmbed(url) {
   try {
     const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase();
+    let id = null;
+
+    if (host === "youtu.be") {
+      id = parsed.pathname.split("/").filter(Boolean)[0];
+    }
 
     if (
-      parsed.hostname === "www.youtube.com" ||
-      parsed.hostname === "youtube.com"
+      host === "youtube.com" ||
+      host === "www.youtube.com" ||
+      host === "m.youtube.com"
     ) {
-      const id = parsed.searchParams.get("v");
-      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+      if (parsed.pathname === "/watch") {
+        id = parsed.searchParams.get("v");
+      } else if (
+        parsed.pathname.startsWith("/shorts/") ||
+        parsed.pathname.startsWith("/live/") ||
+        parsed.pathname.startsWith("/embed/")
+      ) {
+        id = parsed.pathname.split("/").filter(Boolean)[1];
+      }
     }
 
-    if (parsed.hostname === "youtu.be") {
-      const id = parsed.pathname.split("/").filter(Boolean)[0];
-      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+    if (id) {
+      return "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(id);
     }
 
-    if (parsed.hostname.endsWith("youtube.com") && parsed.pathname.startsWith("/embed/")) {
-      return url;
-    }
+    if (
+      host === "vimeo.com" ||
+      host === "www.vimeo.com"
+    ) {
+      id = parsed.pathname.split("/").filter(Boolean)[0];
 
-    if (parsed.hostname === "www.youtube.com" && parsed.pathname.startsWith("/shorts/")) {
-      const id = parsed.pathname.split("/")[2];
-      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
-    }
-
-    if (parsed.hostname === "www.youtube.com" && parsed.pathname.startsWith("/live/")) {
-      const id = parsed.pathname.split("/")[2];
-      if (id) return "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id);
+      if (id && /^\d+$/.test(id)) {
+        return "https://player.vimeo.com/video/" +
+          encodeURIComponent(id);
+      }
     }
 
     return null;
+
   } catch (error) {
     return null;
   }
@@ -414,26 +411,32 @@ function createVideoCard(item) {
   const frame = document.createElement("div");
   frame.className = "video-frame";
 
-  const embedUrl = getVideoEmbed(item.video_url);
+  const videoUrl = safeText(item.video_url);
+  const embedUrl = getVideoEmbed(videoUrl);
 
   if (embedUrl) {
     const iframe = document.createElement("iframe");
+
     iframe.src = embedUrl;
     iframe.title = safeText(item.title) || "Constituency video";
     iframe.loading = "lazy";
     iframe.allow =
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
-    referrerPolicy = "strict-origin-when-cross-origin";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
     frame.appendChild(iframe);
-  } else if (item.video_url) {
+
+  } else if (videoUrl) {
     const video = document.createElement("video");
+
     video.controls = true;
     video.preload = "metadata";
     video.playsInline = true;
-    video.src = item.video_url;
+    video.src = videoUrl;
+
     frame.appendChild(video);
+
   } else {
     frame.textContent = "Video link unavailable";
     frame.style.color = "white";
@@ -446,16 +449,27 @@ function createVideoCard(item) {
 
   if (item.created_at) {
     const date = document.createElement("span");
+
     date.className = "video-date";
-    date.textContent = new Date(item.created_at).toLocaleDateString();
+
+    const parsedDate = new Date(item.created_at);
+
+    date.textContent = isNaN(parsedDate.getTime())
+      ? ""
+      : parsedDate.toLocaleDateString();
+
     info.appendChild(date);
   }
 
   const title = document.createElement("h3");
-  title.textContent = safeText(item.title) || "Untitled video";
+
+  title.textContent =
+    safeText(item.title) || "Untitled video";
 
   const description = document.createElement("p");
-  description.textContent = safeText(item.description);
+
+  description.textContent =
+    safeText(item.description);
 
   info.appendChild(title);
   info.appendChild(description);
@@ -468,22 +482,25 @@ function createVideoCard(item) {
 
 async function loadVideos() {
   videoStatus.style.display = "block";
+  videoStatus.className = "status";
   videoStatus.textContent = "Loading videos...";
+
+  videoGrid.replaceChildren();
 
   try {
     const { data, error } = await db
       .from("videos")
       .select("id,title,description,video_url,created_at")
-      .eq("published", true)
       .order("created_at", { ascending: false });
 
-    if (error) throw error;
-
-    videoGrid.replaceChildren();
+    if (error) {
+      throw error;
+    }
 
     if (!data || data.length === 0) {
       videoStatus.textContent =
-        "No videos have been published yet. Please check back for updates.";
+        "No videos have been uploaded yet. Please check back for updates.";
+
       return;
     }
 
@@ -496,13 +513,14 @@ async function loadVideos() {
   } catch (error) {
     console.error("Video loading error:", error);
 
+    videoStatus.style.display = "block";
+    videoStatus.className = "status error";
+
     videoStatus.textContent =
-      "Videos could not be loaded. Please check the database setup and try again.";
+      "Video loading failed: " + error.message;
   }
 }
 
 loadVideos();
-</script>
-
-</body>
+</script></body>
 </html>
