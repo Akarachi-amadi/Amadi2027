@@ -1,307 +1,298 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Official press releases, statements and media updates from the office of Hon. Akarachi Amadi.">
-  <title>Press & Media | Hon. Akarachi Amadi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Official press releases, statements and media updates from the office of Hon. Akarachi Amadi.">
+<title>Press & Media | Hon. Akarachi Amadi</title><style>
+:root {
+  --green: #075b32;
+  --dark-green: #034323;
+  --gold: #d6a72c;
+  --red: #c90019;
+  --light: #f5f8f5;
+  --text: #26332b;
+  --white: #fff;
+}
 
-  <style>
-    :root {
-      --green: #075b32;
-      --dark-green: #034323;
-      --gold: #d6a72c;
-      --red: #c90019;
-      --light: #f5f8f5;
-      --text: #26332b;
-      --white: #fff;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--light);
+  line-height: 1.6;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background: var(--light);
-      line-height: 1.6;
-    }
+header {
+  background: var(--green);
+  color: white;
+  padding: 15px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
-    header {
-      background: var(--green);
-      color: white;
-      padding: 15px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+.brand {
+  font-size: 19px;
+  font-weight: bold;
+}
 
-    .brand {
-      font-size: 19px;
-      font-weight: bold;
-    }
+.brand span {
+  display: block;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: normal;
+}
 
-    .brand span {
-      display: block;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: normal;
-    }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: bold;
-    }
+nav a:hover {
+  color: var(--gold);
+}
 
-    nav a:hover {
-      color: var(--gold);
-    }
+.welcome {
+  background: var(--red);
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 11px 0;
+  border-bottom: 3px solid var(--gold);
+  font-weight: bold;
+}
 
-    .welcome {
-      background: var(--red);
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 11px 0;
-      border-bottom: 3px solid var(--gold);
-      font-weight: bold;
-    }
+.welcome span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll 30s linear infinite;
+}
 
-    .welcome span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 30s linear infinite;
-    }
+.welcome strong {
+  color: #ffe36a;
+}
 
-    .welcome strong {
-      color: #ffe36a;
-    }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
 
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
-    }
+.hero {
+  background:
+    linear-gradient(rgba(3,67,35,.9), rgba(3,67,35,.9)),
+    url("https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+  padding: 85px 20px;
+}
 
-    .hero {
-      background: linear-gradient(rgba(3,67,35,.9), rgba(3,67,35,.9)),
-                  url("https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
-      text-align: center;
-      color: white;
-      padding: 85px 20px;
-    }
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 12px;
+}
 
-    .hero h1 {
-      font-size: clamp(32px, 5vw, 48px);
-      margin-bottom: 12px;
-    }
+.hero p {
+  max-width: 750px;
+  margin: auto;
+}
 
-    .hero p {
-      max-width: 750px;
-      margin: auto;
-    }
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 55px auto;
+}
 
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 55px auto;
-    }
+.section-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
 
-    .section-heading {
-      text-align: center;
-      margin-bottom: 35px;
-    }
+.section-heading h2 {
+  color: var(--green);
+  font-size: 30px;
+}
 
-    .section-heading h2 {
-      color: var(--green);
-      font-size: 30px;
-    }
+.section-heading p {
+  color: #657168;
+  margin-top: 8px;
+}
 
-    .section-heading p {
-      color: #657168;
-      margin-top: 8px;
-    }
+.press-list {
+  display: grid;
+  gap: 22px;
+}
 
-    .press-list {
-      display: grid;
-      gap: 22px;
-    }
+.press-card {
+  background: white;
+  padding: 25px;
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
 
-    .press-card {
-      background: white;
-      padding: 25px;
-      border-left: 5px solid var(--gold);
-      border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.06);
-    }
+.press-date {
+  color: #777;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
 
-    .press-date {
-      color: #777;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
+.press-card h3 {
+  color: var(--green);
+  font-size: 21px;
+  margin-bottom: 12px;
+}
 
-    .press-card h3 {
-      color: var(--green);
-      font-size: 21px;
-      margin-bottom: 12px;
-    }
+.press-card p {
+  color: #59635c;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 15px;
+}
 
-    .press-card p {
-      color: #59635c;
-      font-size: 14px;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      margin-bottom: 15px;
-    }
+.press-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-    .press-actions {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+.read-button,
+.file-button {
+  display: inline-block;
+  border: none;
+  background: var(--green);
+  color: white;
+  padding: 10px 17px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-    .read-button,
-    .file-button {
-      display: inline-block;
-      border: none;
-      background: var(--green);
-      color: white;
-      padding: 10px 17px;
-      border-radius: 5px;
-      font-weight: bold;
-      font-size: 13px;
-      text-decoration: none;
-      cursor: pointer;
-    }
+.read-button:hover,
+.file-button:hover {
+  background: var(--dark-green);
+}
 
-    .read-button:hover,
-    .file-button:hover {
-      background: var(--dark-green);
-    }
+.file-button {
+  background: #a77b14;
+}
 
-    .file-button {
-      background: #a77b14;
-    }
+.status-message {
+  text-align: center;
+  background: white;
+  padding: 35px 20px;
+  border-radius: 8px;
+  color: #59635c;
+}
 
-    .status-message {
-      text-align: center;
-      background: white;
-      padding: 35px 20px;
-      border-radius: 8px;
-      color: #59635c;
-    }
+.status-message.error {
+  color: #a00016;
+}
 
-    .status-message.error {
-      color: #a00016;
-    }
+.article-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,.75);
+  padding: 25px;
+  overflow-y: auto;
+}
 
-    .article-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,.75);
-      padding: 25px;
-      overflow-y: auto;
-    }
+.article-modal.show {
+  display: block;
+}
 
-    .article-modal.show {
-      display: block;
-    }
+.modal-content {
+  background: white;
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+}
 
-    .modal-content {
-      background: white;
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 30px;
-      border-radius: 10px;
-      position: relative;
-    }
+.modal-content h2 {
+  color: var(--green);
+  margin-bottom: 10px;
+}
 
-    .modal-content h2 {
-      color: var(--green);
-      margin-bottom: 10px;
-    }
+.modal-content p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 
-    .modal-content p {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
+.close-modal {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
 
-    .close-modal {
-      position: absolute;
-      right: 18px;
-      top: 12px;
-      border: none;
-      background: transparent;
-      font-size: 28px;
-      cursor: pointer;
-      color: #333;
-    }
+footer {
+  background: var(--dark-green);
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
+  margin-top: 60px;
+}
 
-    footer {
-      background: var(--dark-green);
-      color: white;
-      text-align: center;
-      padding: 30px 15px;
-      margin-top: 60px;
-    }
+footer p {
+  margin: 5px 0;
+  font-size: 14px;
+}
 
-    footer p {
-      margin: 5px 0;
-      font-size: 14px;
-    }
+@media(max-width: 600px) {
+  header {
+    justify-content: center;
+    text-align: center;
+  }
 
-    @media(max-width: 600px) {
-      header {
-        justify-content: center;
-        text-align: center;
-      }
+  nav {
+    justify-content: center;
+  }
 
-      nav {
-        justify-content: center;
-      }
+  .hero {
+    padding: 65px 18px;
+  }
 
-      .hero {
-        padding: 65px 18px;
-      }
+  .press-card {
+    padding: 20px;
+  }
 
-      .press-card {
-        padding: 20px;
-      }
-
-      .modal-content {
-        padding: 25px 17px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
+  .modal-content {
+    padding: 25px 17px;
+  }
+}
+</style></head><body><header>
   <div class="brand">
     HON. AKARACHI AMADI
     <span>Mbaitoli/Ikeduru Federal Constituency</span>
-  </div>
-
-  <nav>
+  </div>  <nav>
     <a href="login.html">LOGIN</a>
     <a href="index.html">HOME</a>
     <a href="biography.html">BIOGRAPHY</a>
@@ -316,209 +307,290 @@
     <a href="faq.html">FAQ</a>
     <a href="contact.html">CONTACT</a>
   </nav>
-</header>
-
-<div class="welcome">
+</header><div class="welcome">
   <span>
     <strong>IKEDURU CORP MEMBERS (NYSC)</strong> — Welcome to the official website of Hon. Akarachi Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
   </span>
-</div>
-
-<section class="hero">
+</div><section class="hero">
   <h1>Press & Media</h1>
   <p>
     Official statements, press releases and media information from
     the office of Hon. Akarachi Amadi.
   </p>
-</section>
-
-<main class="container">
-  <div class="section-heading">
+</section><main class="container">  <div class="section-heading">
     <h2>Official Press Releases</h2>
     <p>Read published statements and official media updates.</p>
-  </div>
-
-  <div class="press-list" id="pressList">
+  </div>  <div class="press-list" id="pressList">
     <div class="status-message">Loading press releases...</div>
-  </div>
-</main>
+  </div></main><div class="article-modal" id="articleModal"
+     role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle">  <div class="modal-content"><button class="close-modal" id="closeModal"
+        aria-label="Close">&times;</button>
 
-<div class="article-modal" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-content">
-    <button class="close-modal" id="closeModal" aria-label="Close">&times;</button>
-    <div class="press-date" id="modalDate"></div>
-    <h2 id="modalTitle"></h2>
-    <p id="modalContent"></p>
-    <div id="modalFileArea" style="margin-top:20px;"></div>
-  </div>
-</div>
+<div class="press-date" id="modalDate"></div>
 
-<footer>
+<h2 id="modalTitle"></h2>
+
+<p id="modalContent"></p>
+
+<div id="modalFileArea" style="margin-top:20px;"></div>
+
+  </div>
+</div><footer>
   <p><strong>HON. AKARACHI AMADI</strong></p>
   <p>Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria.</p>
   <p><a href="login.html" style="color:#f1d47c;">LOGIN</a></p>
   <p>&copy; <span id="year"></span> Official Website. All Rights Reserved.</p>
-</footer>
+</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+// SAME SUPABASE PROJECT USED BY THE ADMIN DASHBOARD
 
-<script>
-  const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+const SUPABASE_URL =
+  "https://pxtgmpmhiktgknjksqeh.supabase.co";
 
-  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_KEY =
+  "sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
-  const pressList = document.getElementById("pressList");
-  const modal = document.getElementById("articleModal");
+const db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+const pressList = document.getElementById("pressList");
 
-  function makeElement(tag, className, text) {
-    const element = document.createElement(tag);
+const modal = document.getElementById("articleModal");
 
-    if (className) element.className = className;
-    if (text !== undefined) element.textContent = text;
+document.getElementById("year").textContent =
+  new Date().getFullYear();
 
-    return element;
+function makeElement(tag, className, text) {
+
+  const element = document.createElement(tag);
+
+  if (className) {
+    element.className = className;
   }
 
-  function formatDate(value) {
-    if (!value) return "Date not specified";
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) return "Date not specified";
-
-    return date.toLocaleDateString("en-NG", {
-      day: "numeric",
-      month: "long",
-      year: "numeric"
-    });
+  if (text !== undefined) {
+    element.textContent = text;
   }
 
-  function openArticle(item) {
-    document.getElementById("modalTitle").textContent =
-      item.title || "Official Statement";
+  return element;
+}
 
-    document.getElementById("modalDate").textContent =
-      formatDate(item.created_at);
+function formatDate(value) {
 
-    document.getElementById("modalContent").textContent =
-      item.content || "No additional information available.";
-
-    const fileArea = document.getElementById("modalFileArea");
-    fileArea.replaceChildren();
-
-    if (item.file_url) {
-      const link = makeElement("a", "file-button", "View / Download Attachment");
-      link.href = item.file_url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      fileArea.appendChild(link);
-    }
-
-    modal.classList.add("show");
-    document.body.style.overflow = "hidden";
+  if (!value) {
+    return "Date not specified";
   }
 
-  function closeArticle() {
-    modal.classList.remove("show");
-    document.body.style.overflow = "";
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Date not specified";
   }
 
-  document.getElementById("closeModal").addEventListener("click", closeArticle);
-
-  modal.addEventListener("click", function(event) {
-    if (event.target === modal) closeArticle();
+  return date.toLocaleDateString("en-NG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
   });
+}
 
-  document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") closeArticle();
-  });
+function openArticle(item) {
 
-  function renderPress(items) {
-    pressList.replaceChildren();
+  document.getElementById("modalTitle").textContent =
+    item.title || "Official Statement";
 
-    if (!items.length) {
-      pressList.appendChild(
-        makeElement(
-          "div",
-          "status-message",
-          "There are currently no published press releases. Please check back for official updates."
-        )
-      );
-      return;
-    }
+  document.getElementById("modalDate").textContent =
+    formatDate(item.created_at);
 
-    items.forEach(item => {
-      const card = makeElement("article", "press-card");
+  document.getElementById("modalContent").textContent =
+    item.content || "No additional information available.";
 
-      card.appendChild(
-        makeElement("div", "press-date", formatDate(item.created_at))
-      );
+  const fileArea =
+    document.getElementById("modalFileArea");
 
-      card.appendChild(
-        makeElement("h3", "", item.title || "Official Statement")
-      );
+  fileArea.replaceChildren();
 
-      const content = item.content || "";
-      const excerpt = content.length > 260
-        ? content.slice(0, 260).trim() + "..."
-        : content;
+  // Use document_url from the press_releases table
 
-      card.appendChild(makeElement("p", "", excerpt));
+  if (item.document_url) {
 
-      const actions = makeElement("div", "press-actions");
-
-      const readButton = makeElement("button", "read-button", "Read Full Statement");
-      readButton.type = "button";
-      readButton.addEventListener("click", () => openArticle(item));
-
-      actions.appendChild(readButton);
-
-      if (item.file_url) {
-        const fileLink = makeElement("a", "file-button", "View Attachment");
-        fileLink.href = item.file_url;
-        fileLink.target = "_blank";
-        fileLink.rel = "noopener noreferrer";
-        actions.appendChild(fileLink);
-      }
-
-      card.appendChild(actions);
-      pressList.appendChild(card);
-    });
-  }
-
-  async function loadPressReleases() {
-    pressList.replaceChildren(
-      makeElement("div", "status-message", "Loading press releases...")
+    const link = makeElement(
+      "a",
+      "file-button",
+      "View / Download Attachment"
     );
+
+    link.href = item.document_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    fileArea.appendChild(link);
+  }
+
+  modal.classList.add("show");
+
+  document.body.style.overflow = "hidden";
+}
+
+function closeArticle() {
+
+  modal.classList.remove("show");
+
+  document.body.style.overflow = "";
+}
+
+document.getElementById("closeModal")
+  .addEventListener("click", closeArticle);
+
+modal.addEventListener("click", function(event) {
+
+  if (event.target === modal) {
+    closeArticle();
+  }
+
+});
+
+document.addEventListener("keydown", function(event) {
+
+  if (event.key === "Escape") {
+    closeArticle();
+  }
+
+});
+
+function renderPress(items) {
+
+  pressList.replaceChildren();
+
+  if (!items.length) {
+
+    pressList.appendChild(
+      makeElement(
+        "div",
+        "status-message",
+        "There are currently no press releases. Please check back for official updates."
+      )
+    );
+
+    return;
+  }
+
+  items.forEach(item => {
+
+    const card = makeElement("article", "press-card");
+
+    card.appendChild(
+      makeElement(
+        "div",
+        "press-date",
+        formatDate(item.created_at)
+      )
+    );
+
+    card.appendChild(
+      makeElement(
+        "h3",
+        "",
+        item.title || "Official Statement"
+      )
+    );
+
+    const content = item.content || "";
+
+    const excerpt = content.length > 260
+      ? content.slice(0, 260).trim() + "..."
+      : content;
+
+    card.appendChild(
+      makeElement("p", "", excerpt)
+    );
+
+    const actions = makeElement(
+      "div",
+      "press-actions"
+    );
+
+    const readButton = makeElement(
+      "button",
+      "read-button",
+      "Read Full Statement"
+    );
+
+    readButton.type = "button";
+
+    readButton.addEventListener("click", function() {
+      openArticle(item);
+    });
+
+    actions.appendChild(readButton);
+
+    if (item.document_url) {
+
+      const fileLink = makeElement(
+        "a",
+        "file-button",
+        "View Attachment"
+      );
+
+      fileLink.href = item.document_url;
+      fileLink.target = "_blank";
+      fileLink.rel = "noopener noreferrer";
+
+      actions.appendChild(fileLink);
+    }
+
+    card.appendChild(actions);
+
+    pressList.appendChild(card);
+
+  });
+}
+
+async function loadPressReleases() {
+
+  pressList.replaceChildren(
+    makeElement(
+      "div",
+      "status-message",
+      "Loading press releases..."
+    )
+  );
+
+  try {
 
     const { data, error } = await db
       .from("press_releases")
-      .select("id,title,content,file_url,created_at")
-      .eq("published", true)
+      .select("id,title,content,document_url,document_path,created_at")
       .order("created_at", { ascending: false });
 
     if (error) {
-      console.error("Supabase press releases error:", error);
-
-      pressList.replaceChildren(
-        makeElement(
-          "div",
-          "status-message error",
-          "We could not load press releases at this time. Please refresh the page or try again later."
-        )
-      );
-
-      return;
+      throw error;
     }
 
     renderPress(data || []);
+
+  } catch (error) {
+
+    console.error(
+      "Supabase press releases error:",
+      error
+    );
+
+    pressList.replaceChildren(
+      makeElement(
+        "div",
+        "status-message error",
+        "Press releases could not be loaded: " + error.message
+      )
+    );
+
   }
+}
 
-  loadPressReleases();
-</script>
+loadPressReleases();
 
-</body>
+</script></body>
 </html>
