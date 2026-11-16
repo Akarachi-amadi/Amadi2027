@@ -416,6 +416,119 @@ color: #e4eee7;
 font-size: 16px;
 }
 
+/* VISITOR REGISTRATION */
+
+.visitor-section {
+background: #ffffff;
+padding: 75px 20px;
+}
+
+.visitor-container {
+max-width: 800px;
+margin: auto;
+}
+
+.visitor-section h2 {
+color: var(--dark-green);
+font-size: 32px;
+text-align: center;
+margin-bottom: 12px;
+}
+
+.visitor-description {
+text-align: center;
+color: #68746c;
+margin-bottom: 30px;
+}
+
+.visitor-form {
+background: #f5f8f5;
+padding: 30px;
+border-radius: 10px;
+border-top: 5px solid var(--gold);
+box-shadow: 0 4px 18px rgba(0,0,0,.07);
+}
+
+.visitor-form label {
+display: block;
+font-weight: bold;
+color: var(--dark-green);
+margin-bottom: 6px;
+font-size: 14px;
+}
+
+.visitor-form input {
+width: 100%;
+padding: 14px;
+border: 1px solid #ccd7ce;
+border-radius: 6px;
+font-size: 15px;
+outline: none;
+margin-bottom: 18px;
+background: white;
+}
+
+.visitor-form input:focus {
+border-color: var(--green);
+box-shadow: 0 0 0 2px rgba(8,116,59,.12);
+}
+
+.visitor-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0 18px;
+}
+
+.visitor-consent {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+margin: 5px 0 20px;
+color: #59665d;
+font-size: 13px;
+}
+
+.visitor-consent input {
+width: 18px;
+height: 18px;
+margin: 3px 0 0;
+flex-shrink: 0;
+}
+
+.visitor-consent label {
+font-weight: normal;
+color: #59665d;
+}
+
+.visitor-form button {
+width: 100%;
+padding: 15px;
+border: none;
+border-radius: 6px;
+background: var(--green);
+color: white;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+transition: .3s;
+}
+
+.visitor-form button:hover {
+background: var(--dark-green);
+}
+
+.visitor-form button:disabled {
+opacity: .65;
+cursor: not-allowed;
+}
+
+#visitorMessage {
+text-align: center;
+margin-top: 17px;
+font-weight: bold;
+min-height: 25px;
+}
+
 /* NEWSLETTER */
 
 .newsletter-section {
@@ -647,26 +760,43 @@ font-size: 12px;
 height: 220px;
 }
 
+.visitor-grid {
+grid-template-columns: 1fr;
 }
 
-</style></head><body><!-- WELCOME BAR --><div class="welcome"><div class="welcome-inner"><img src="https://i.ibb.co/C3ghZBBX/file-0000000030e081f4b359b866470d77f1.png"
+.visitor-form {
+padding: 20px;
+}
+
+.visitor-section h2 {
+font-size: 26px;
+}
+
+}
+
+</style></head><body><!-- WELCOME BAR --><div class="welcome">
+<div class="welcome-inner"><img src="https://i.ibb.co/C3ghZBBX/file-0000000030e081f4b359b866470d77f1.png"
 alt="NYSC Logo" class="welcome-logo">
 
-<div class="welcome-track"><div class="welcome-text"><strong>IKEDURU CORP MEMBERS (NYSC)</strong> —
+<div class="welcome-track">
+<div class="welcome-text">
+<strong>IKEDURU CORP MEMBERS (NYSC)</strong> —
 Welcome to the official website of Hon. Engr. Akarachi Etinosa Tosan Amadi, Member representing Mbaitoli/Ikeduru Federal Constituency, Imo State, Nigeria. This platform provides updates on our activities, projects, achievements, vision and commitment to the development of our constituency.
-
-</div></div><img src="https://i.ibb.co/C3ghZBBX/file-0000000030e081f4b359b866470d77f1.png"
+</div>
+</div><img src="https://i.ibb.co/C3ghZBBX/file-0000000030e081f4b359b866470d77f1.png"
 alt="NYSC Logo" class="welcome-logo">
 
-</div></div><!-- HEADER --><header><div class="nav-container"><a href="index.html" class="brand"><img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png"
+</div>
+</div><!-- HEADER --><header>
+<div class="nav-container"><a href="index.html" class="brand"><img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png"
 alt="Hon. Akarachi Amadi Website Logo"
 class="brand-logo">
 
-<div>HON. AKARACHI AMADI
-
+<div>
+HON. AKARACHI AMADI
 <span>Mbaitoli/Ikeduru Federal Constituency</span>
-
-</div></a><nav><a href="login.html" class="login-menu">LOGIN</a>
+</div></a><nav>
+<a href="login.html" class="login-menu">LOGIN</a>
 <a href="index.html">Home</a>
 <a href="biography.html">Biography</a>
 <a href="constituency.html">Constituency</a>
@@ -681,8 +811,9 @@ class="brand-logo">
 <a href="press.html">Press</a>
 <a href="faq.html">FAQ</a>
 <a href="contact.html">Contact</a>
-
-</nav></div></header><!-- HERO SECTION --><section class="hero"><div class="hero-content"><span class="hero-label">
+<a href="#visitor-registration">Visitor Registration</a>
+</nav></div>
+</header><!-- HERO SECTION --><section class="hero"><div class="hero-content"><span class="hero-label">
 IKEDURU/MBAITOLI FEDERAL CONSTITUENCY
 </span><h1>
 HON. ENGR.
@@ -693,7 +824,9 @@ Welcome to the official website of Hon. Engr. Akarachi Etinosa Tosan Amadi, repr
 Read Biography
 </a><a href="projects.html" class="btn btn-outline">
 View Projects
-</a></div></div></section><!-- ABOUT SECTION --><section class="section"><div class="container"><div class="about-grid"><div class="about-image"><img
+</a></div>
+</div>
+</section><!-- ABOUT SECTION --><section class="section"><div class="container"><div class="about-grid"><div class="about-image"><img
 src="https://i.ibb.co/XkXMNyD1/file-00000000341c820889f8b8c6808feac5.png"
 alt="HON. ENGR. AKARACHI ETINOSA TOSAN AMADI">
 
@@ -705,7 +838,10 @@ His legislative responsibilities include participating in lawmaking, national po
 This website provides information about his biography, constituency, projects, legislative activities and public updates.
 </p><a href="biography.html" class="text-link">
 Read Full Biography →
-</a></div></div></div></section><!-- PROJECTS --><section class="section" style="background:#ffffff;"><div class="container"><div class="section-heading"><h2>Projects and Development</h2><p>
+</a></div>
+</div>
+</div>
+</section><!-- PROJECTS --><section class="section" style="background:#ffffff;"><div class="container"><div class="section-heading"><h2>Projects and Development</h2><p>
 Explore project updates and development information relating to Mbaitoli and Ikeduru.
 </p></div><div class="cards"><div class="card"><div class="card-icon">🏗️</div><h3>Infrastructure</h3><p>
 Follow published updates on infrastructure and development projects across the constituency.
@@ -719,11 +855,14 @@ Learn More →
 Find information about community development interests and constituency engagement.
 </p><a href="constituency.html" class="text-link">
 Explore Constituency →
-</a></div></div></div></section><!-- VISION --><section class="section vision-section"><div class="container"><h2>Vision and Mission</h2><p>
+</a></div></div>
+</div>
+</section><!-- VISION --><section class="section vision-section"><div class="container"><h2>Vision and Mission</h2><p>
 A commitment to responsible representation, effective legislative participation and development initiatives that address the needs and aspirations of the people of Mbaitoli and Ikeduru.
 </p><br><a href="vision.html" class="btn btn-gold">
 Read Vision and Mission
-</a></div></section><!-- NEWS AND UPDATES --><section class="section"><div class="container"><div class="section-heading"><h2>News and Updates</h2><p>
+</a></div>
+</section><!-- NEWS AND UPDATES --><section class="section"><div class="container"><div class="section-heading"><h2>News and Updates</h2><p>
 Stay informed about published announcements, activities and updates relating to the constituency.
 </p></div><div class="cards"><div class="card"><div class="card-icon">📰</div><h3>Latest News</h3><p>
 Read news and updates published on the official website.
@@ -737,13 +876,87 @@ View Gallery →
 Find official statements, media releases and published coverage.
 </p><a href="press.html" class="text-link">
 Visit Press Page →
-</a></div></div></div></section><!-- LIVE SUPABASE PHOTO GALLERY --><section class="section" style="background:#ffffff;" id="home-gallery"><div class="container"><div class="section-heading"><h2>Latest Photo Gallery</h2><p>
+</a></div></div>
+</div>
+</section><!-- LIVE SUPABASE PHOTO GALLERY --><section class="section" style="background:#ffffff;" id="home-gallery"><div class="container"><div class="section-heading"><h2>Latest Photo Gallery</h2><p>
 Explore photographs and activities from Hon. Akarachi Amadi.
 </p></div><div id="homeGalleryGrid" class="cards"><p class="gallery-status">
 Loading gallery photographs...
 </p></div><div style="text-align:center;margin-top:30px;"><a href="gallery.html" class="btn btn-gold">
 View All Gallery Photos
-</a></div></div></section><!-- NEWSLETTER --><section class="newsletter-section" id="newsletter"><div class="newsletter-container"><h2>Stay Connected With Hon. Akarachi Amadi</h2><p class="newsletter-description">
+</a></div>
+</div>
+</section><!-- VISITOR REGISTRATION --><section class="visitor-section" id="visitor-registration"><div class="visitor-container"><h2>Visitor Registration</h2><p class="visitor-description">
+Welcome! You may voluntarily provide your details below to help us understand our website audience and respond to enquiries. Providing your details is optional.
+</p><form id="visitorForm" class="visitor-form"><div><label for="visitorName">Full Name *</label>
+
+<input
+type="text"
+id="visitorName"
+name="full_name"
+placeholder="Enter your full name"
+autocomplete="name"
+maxlength="150"
+required>
+
+</div><div class="visitor-grid"><div><label for="visitorEmail">Email Address</label>
+
+<input
+type="email"
+id="visitorEmail"
+name="email"
+placeholder="Enter your email address"
+autocomplete="email"
+maxlength="254">
+
+</div><div><label for="visitorPhone">Phone Number</label>
+
+<input
+type="tel"
+id="visitorPhone"
+name="phone"
+placeholder="Enter your phone number"
+autocomplete="tel"
+maxlength="30">
+
+</div><div><label for="visitorLga">Local Government Area</label>
+
+<input
+type="text"
+id="visitorLga"
+name="lga"
+placeholder="Enter your LGA"
+maxlength="100">
+
+</div><div><label for="visitorWard">Ward</label>
+
+<input
+type="text"
+id="visitorWard"
+name="ward"
+placeholder="Enter your ward"
+maxlength="100">
+
+</div></div><div><label for="visitorCommunity">Community</label>
+
+<input
+type="text"
+id="visitorCommunity"
+name="community"
+placeholder="Enter your community"
+maxlength="150">
+
+</div><div class="visitor-consent"><input
+type="checkbox"
+id="visitorConsent"
+required>
+
+<label for="visitorConsent">
+I consent to the submission and storage of the details I have provided for website enquiries and audience administration. I understand that my details will not be displayed publicly.
+</label></div><button type="submit" id="visitorSubmitButton">
+SUBMIT REGISTRATION
+</button><p id="visitorMessage" role="status" aria-live="polite"></p></form></div>
+</section><!-- NEWSLETTER --><section class="newsletter-section" id="newsletter"><div class="newsletter-container"><h2>Stay Connected With Hon. Akarachi Amadi</h2><p class="newsletter-description">
 Subscribe to receive official news, constituency updates, project information and important announcements.
 </p><form id="newsletterForm" class="newsletter-form"><input
 type="text"
@@ -767,11 +980,14 @@ required>
 SUBSCRIBE NOW
 </button></form><p id="newsletterMessage" role="status" aria-live="polite"></p><p class="newsletter-note">
 Your email address will be used to send you website updates.
-</p></div></section><!-- CONTACT --><section class="section contact-section"><div class="container"><div class="contact-content"><h2>Get in Touch</h2><p>
+</p></div>
+</section><!-- CONTACT --><section class="section contact-section"><div class="container"><div class="contact-content"><h2>Get in Touch</h2><p>
 For enquiries, feedback and constituency-related communication, visit the Contact page for the available contact options.
 </p><a href="contact.html" class="btn btn-gold">
 Contact Us
-</a></div></div></section><!-- FOOTER --><footer><strong>HON. ENGR. AKARACHI ETINOSA TOSAN AMADI</strong>
+</a></div>
+</div>
+</section><!-- FOOTER --><footer><strong>HON. ENGR. AKARACHI ETINOSA TOSAN AMADI</strong>
 
 <p>
 Mbaitoli/Ikeduru Federal Constituency,
@@ -912,6 +1128,148 @@ async function loadHomeGallery() {
 /* START GALLERY */
 
 loadHomeGallery();
+
+
+/* VISITOR REGISTRATION SUBMISSION */
+
+const visitorForm =
+document.getElementById("visitorForm");
+
+const visitorSubmitButton =
+document.getElementById("visitorSubmitButton");
+
+const visitorMessage =
+document.getElementById("visitorMessage");
+
+
+visitorForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const fullName =
+    document.getElementById("visitorName").value.trim();
+
+    const email =
+    document.getElementById("visitorEmail").value.trim().toLowerCase();
+
+    const phone =
+    document.getElementById("visitorPhone").value.trim();
+
+    const lga =
+    document.getElementById("visitorLga").value.trim();
+
+    const ward =
+    document.getElementById("visitorWard").value.trim();
+
+    const community =
+    document.getElementById("visitorCommunity").value.trim();
+
+    const consent =
+    document.getElementById("visitorConsent").checked;
+
+
+    if (!fullName) {
+
+        visitorMessage.textContent =
+        "Please enter your full name.";
+
+        visitorMessage.style.color = "#c90019";
+
+        return;
+
+    }
+
+
+    if (!email && !phone) {
+
+        visitorMessage.textContent =
+        "Please provide either your email address or phone number.";
+
+        visitorMessage.style.color = "#c90019";
+
+        return;
+
+    }
+
+
+    if (!consent) {
+
+        visitorMessage.textContent =
+        "Please confirm your consent before submitting.";
+
+        visitorMessage.style.color = "#c90019";
+
+        return;
+
+    }
+
+
+    visitorSubmitButton.disabled = true;
+
+    visitorSubmitButton.textContent = "SUBMITTING...";
+
+    visitorMessage.textContent = "";
+
+
+    try {
+
+        const { error } = await websiteSupabase
+        .from("website_visitors")
+        .insert([{
+
+            full_name: fullName,
+
+            email: email || null,
+
+            phone: phone || null,
+
+            lga: lga || null,
+
+            ward: ward || null,
+
+            community: community || null,
+
+            consent: true
+
+        }]);
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        visitorMessage.textContent =
+        "Thank you! Your registration has been submitted successfully.";
+
+        visitorMessage.style.color = "#08743b";
+
+        visitorForm.reset();
+
+
+    } catch (error) {
+
+        console.error(
+        "Visitor registration error:",
+        error
+        );
+
+        visitorMessage.textContent =
+        "Registration failed. Please check your details and try again.";
+
+        visitorMessage.style.color = "#c90019";
+
+
+    } finally {
+
+        visitorSubmitButton.disabled = false;
+
+        visitorSubmitButton.textContent =
+        "SUBMIT REGISTRATION";
+
+    }
+
+});
 
 
 /* NEWSLETTER CONNECTION
