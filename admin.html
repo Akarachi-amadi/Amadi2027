@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Admin Dashboard | Hon. Akarachi Amadi</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Dashboard | Hon. Akarachi Amadi</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
 :root {
     --green:#075b32;
     --dark:#034323;
@@ -17,9 +10,7 @@
     --red:#c62828;
 }
 
-* {
-    box-sizing:border-box;
-}
+* { box-sizing:border-box; }
 
 body {
     margin:0;
@@ -230,255 +221,251 @@ a {
 }
 
 @media(max-width:600px) {
-    .container {
-        padding:12px;
-    }
-
-    .panel {
-        padding:15px;
-    }
-
-    header h2 {
-        font-size:16px;
-    }
+    .container { padding:12px; }
+    .panel { padding:15px; }
+    header h2 { font-size:16px; }
 }
-</style>
-</head>
-
-<body>
-
-<header>
+</style></head><body><header>
     <h2>Hon. Akarachi Amadi | Admin</h2>
     <button class="logout" onclick="logout()">Logout</button>
-</header>
-
-<div class="container">
-
-    <div class="welcome">
-        <h3 id="welcomeText">Administrator Dashboard</h3>
-        <p>Manage your website content, pictures, news and publications.</p>
-    </div>
-
-    <div id="message" class="message"></div>
-
-    <div class="tabs">
-        <button class="tab active" onclick="showPanel('dashboard',this)">Dashboard</button>
-        <button class="tab" onclick="showPanel('projects',this)">Projects</button>
-        <button class="tab" onclick="showPanel('news',this)">News</button>
-        <button class="tab" onclick="showPanel('gallery',this)">Gallery</button>
-        <button class="tab" onclick="showPanel('videos',this)">Videos</button>
-        <button class="tab" onclick="showPanel('press_releases',this)">Press Releases</button>
-    </div>
-
-    <!-- DASHBOARD -->
-
-    <section id="dashboard" class="panel active">
-
-        <h3>Website Overview</h3>
-
-        <div class="cards">
-
-            <div class="count">
-                <h2 id="projectsCount">0</h2>
-                Projects
-            </div>
-
-            <div class="count">
-                <h2 id="newsCount">0</h2>
-                News Articles
-            </div>
-
-            <div class="count">
-                <h2 id="galleryCount">0</h2>
-                Gallery Pictures
-            </div>
-
-            <div class="count">
-                <h2 id="videosCount">0</h2>
-                Videos
-            </div>
-
-            <div class="count">
-                <h2 id="pressCount">0</h2>
-                Press Releases
-            </div>
-
-        </div>
-
-        <hr>
-
-        <p>Select a section above to upload or manage your website content.</p>
-
-    </section>
-
-
-    <!-- PROJECTS -->
-
-    <section id="projects" class="panel">
-
-        <h3>Manage Projects</h3>
-
-        <form id="projectsForm">
-
-            <label>Project Title</label>
-            <input id="projectTitle" required placeholder="Enter project title">
-
-            <label>Project Description</label>
-            <textarea id="projectDescription" required placeholder="Describe the project"></textarea>
-
-            <label>Upload Project Pictures</label>
-            <input type="file" id="projectImages" accept="image/*" multiple required>
-
-            <div id="projectPreview" class="preview"></div>
-
-            <button class="primary" type="submit">Publish Project</button>
-
-        </form>
-
-        <hr>
-
-        <h3>Published Projects</h3>
-        <div id="projectsList" class="cards">Loading...</div>
-
-    </section>
-
-
-    <!-- NEWS -->
-
-    <section id="news" class="panel">
-
-        <h3>Publish News Article</h3>
-
-        <form id="newsForm">
-
-            <label>News Headline</label>
-            <input id="newsTitle" required placeholder="Enter news headline">
-
-            <label>Full News Article</label>
-            <textarea id="newsContent" required placeholder="Write the complete news article"></textarea>
-
-            <label>News Picture (Optional)</label>
-            <input type="file" id="newsImage" accept="image/*">
-
-            <div id="newsPreview" class="preview"></div>
-
-            <button class="primary" type="submit">Publish News</button>
-
-        </form>
-
-        <hr>
-
-        <h3>Published News</h3>
-        <div id="newsList" class="cards">Loading...</div>
-
-    </section>
-
-
-    <!-- GALLERY -->
-
-    <section id="gallery" class="panel">
-
-        <h3>Upload Gallery Pictures</h3>
-
-        <form id="galleryForm">
-
-            <label>Picture Title</label>
-            <input id="galleryTitle" required placeholder="Enter gallery title">
-
-            <label>Description</label>
-            <textarea id="galleryDescription" placeholder="Describe these pictures"></textarea>
-
-            <label>Select Pictures From Your Phone</label>
-            <input type="file" id="galleryImages" accept="image/*" multiple required>
-
-            <div id="galleryPreview" class="preview"></div>
-
-            <button class="primary" type="submit">Upload Gallery Pictures</button>
-
-        </form>
-
-        <hr>
-
-        <h3>Gallery Pictures</h3>
-        <div id="galleryList" class="cards">Loading...</div>
-
-    </section>
-
-
-    <!-- VIDEOS -->
-
-    <section id="videos" class="panel">
-
-        <h3>Add Video</h3>
-
-        <form id="videosForm">
-
-            <label>Video Title</label>
-            <input id="videoTitle" required placeholder="Enter video title">
-
-            <label>Video Description</label>
-            <textarea id="videoDescription" placeholder="Describe the video"></textarea>
-
-            <label>YouTube Video Link</label>
-            <input type="url" id="videoUrl" required placeholder="https://www.youtube.com/watch?v=...">
-
-            <label>Video Thumbnail Picture (Optional)</label>
-            <input type="file" id="videoImage" accept="image/*">
-
-            <div id="videoPreview" class="preview"></div>
-
-            <button class="primary" type="submit">Publish Video</button>
-
-        </form>
-
-        <hr>
-
-        <h3>Published Videos</h3>
-        <div id="videosList" class="cards">Loading...</div>
-
-    </section>
-
-
-    <!-- PRESS RELEASES -->
-
-    <section id="press_releases" class="panel">
-
-        <h3>Publish Press Release</h3>
-
-        <form id="pressForm">
-
-            <label>Press Release Title</label>
-            <input id="pressTitle" required placeholder="Enter press release title">
-
-            <label>Full Press Release Statement</label>
-            <textarea id="pressContent" required placeholder="Write the full statement"></textarea>
-
-            <label>Attach PDF Document (Optional)</label>
-            <input type="file" id="pressDocument" accept=".pdf,application/pdf">
-
-            <label>Press Release Picture (Optional)</label>
-            <input type="file" id="pressImage" accept="image/*">
-
-            <div id="pressPreview" class="preview"></div>
-
-            <button class="primary" type="submit">Publish Press Release</button>
-
-        </form>
-
-        <hr>
-
-        <h3>Published Press Releases</h3>
-        <div id="press_releasesList" class="cards">Loading...</div>
-
-    </section>
-
+</header><div class="container"><div class="welcome">
+    <h3 id="welcomeText">Administrator Dashboard</h3>
+    <p>Manage your website content, pictures, news and publications.</p>
 </div>
 
+<div id="message" class="message"></div>
 
-<script>
+<div class="tabs">
+    <button class="tab active" onclick="showPanel('dashboard',this)">Dashboard</button>
+    <button class="tab" onclick="showPanel('projects',this)">Projects</button>
+    <button class="tab" onclick="showPanel('news',this)">News</button>
+    <button class="tab" onclick="showPanel('gallery',this)">Gallery</button>
+    <button class="tab" onclick="showPanel('videos',this)">Videos</button>
+    <button class="tab" onclick="showPanel('press_releases',this)">Press Releases</button>
+    <button class="tab" onclick="showPanel('newsletter',this)">Newsletter Subscribers</button>
+</div>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="panel active">
+
+    <h3>Website Overview</h3>
+
+    <div class="cards">
+
+        <div class="count">
+            <h2 id="projectsCount">0</h2>
+            Projects
+        </div>
+
+        <div class="count">
+            <h2 id="newsCount">0</h2>
+            News Articles
+        </div>
+
+        <div class="count">
+            <h2 id="galleryCount">0</h2>
+            Gallery Pictures
+        </div>
+
+        <div class="count">
+            <h2 id="videosCount">0</h2>
+            Videos
+        </div>
+
+        <div class="count">
+            <h2 id="pressCount">0</h2>
+            Press Releases
+        </div>
+
+    </div>
+
+    <hr>
+
+    <p>Select a section above to upload or manage your website content.</p>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects" class="panel">
+
+    <h3>Manage Projects</h3>
+
+    <form id="projectsForm">
+
+        <label>Project Title</label>
+        <input id="projectTitle" required placeholder="Enter project title">
+
+        <label>Project Description</label>
+        <textarea id="projectDescription" required placeholder="Describe the project"></textarea>
+
+        <label>Upload Project Pictures</label>
+        <input type="file" id="projectImages" accept="image/*" multiple required>
+
+        <div id="projectPreview" class="preview"></div>
+
+        <button class="primary" type="submit">Publish Project</button>
+
+    </form>
+
+    <hr>
+
+    <h3>Published Projects</h3>
+    <div id="projectsList" class="cards">Loading...</div>
+
+</section>
+
+<!-- NEWS -->
+
+<section id="news" class="panel">
+
+    <h3>Publish News Article</h3>
+
+    <form id="newsForm">
+
+        <label>News Headline</label>
+        <input id="newsTitle" required placeholder="Enter news headline">
+
+        <label>Full News Article</label>
+        <textarea id="newsContent" required placeholder="Write the complete news article"></textarea>
+
+        <label>News Picture (Optional)</label>
+        <input type="file" id="newsImage" accept="image/*">
+
+        <div id="newsPreview" class="preview"></div>
+
+        <button class="primary" type="submit">Publish News</button>
+
+    </form>
+
+    <hr>
+
+    <h3>Published News</h3>
+    <div id="newsList" class="cards">Loading...</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery" class="panel">
+
+    <h3>Upload Gallery Pictures</h3>
+
+    <form id="galleryForm">
+
+        <label>Picture Title</label>
+        <input id="galleryTitle" required placeholder="Enter gallery title">
+
+        <label>Description</label>
+        <textarea id="galleryDescription" placeholder="Describe these pictures"></textarea>
+
+        <label>Select Pictures From Your Phone</label>
+        <input type="file" id="galleryImages" accept="image/*" multiple required>
+
+        <div id="galleryPreview" class="preview"></div>
+
+        <button class="primary" type="submit">Upload Gallery Pictures</button>
+
+    </form>
+
+    <hr>
+
+    <h3>Gallery Pictures</h3>
+    <div id="galleryList" class="cards">Loading...</div>
+
+</section>
+
+<!-- VIDEOS -->
+
+<section id="videos" class="panel">
+
+    <h3>Add Video</h3>
+
+    <form id="videosForm">
+
+        <label>Video Title</label>
+        <input id="videoTitle" required placeholder="Enter video title">
+
+        <label>Video Description</label>
+        <textarea id="videoDescription" placeholder="Describe the video"></textarea>
+
+        <label>YouTube Video Link</label>
+        <input type="url" id="videoUrl" required placeholder="https://www.youtube.com/watch?v=...">
+
+        <label>Video Thumbnail Picture (Optional)</label>
+        <input type="file" id="videoImage" accept="image/*">
+
+        <div id="videoPreview" class="preview"></div>
+
+        <button class="primary" type="submit">Publish Video</button>
+
+    </form>
+
+    <hr>
+
+    <h3>Published Videos</h3>
+    <div id="videosList" class="cards">Loading...</div>
+
+</section>
+
+<!-- PRESS RELEASES -->
+
+<section id="press_releases" class="panel">
+
+    <h3>Publish Press Release</h3>
+
+    <form id="pressForm">
+
+        <label>Press Release Title</label>
+        <input id="pressTitle" required placeholder="Enter press release title">
+
+        <label>Full Press Release Statement</label>
+        <textarea id="pressContent" required placeholder="Write the full statement"></textarea>
+
+        <label>Attach PDF Document (Optional)</label>
+        <input type="file" id="pressDocument" accept=".pdf,application/pdf">
+
+        <label>Press Release Picture (Optional)</label>
+        <input type="file" id="pressImage" accept="image/*">
+
+        <div id="pressPreview" class="preview"></div>
+
+        <button class="primary" type="submit">Publish Press Release</button>
+
+    </form>
+
+    <hr>
+
+    <h3>Published Press Releases</h3>
+    <div id="press_releasesList" class="cards">Loading...</div>
+
+</section>
+
+<!-- NEWSLETTER SUBSCRIBERS -->
+
+<section id="newsletter" class="panel">
+
+    <h3>Newsletter Subscribers</h3>
+
+    <p>View people who have subscribed to your newsletter.</p>
+
+    <button class="primary" onclick="loadNewsletter()">
+        Refresh Subscribers
+    </button>
+
+    <h3>Total Subscribers: <span id="newsletterCount">0</span></h3>
+
+    <div id="newsletterList" class="cards">
+        Select Newsletter Subscribers to load the list.
+    </div>
+
+</section>
+
+</div><script>
 
 // =====================================
-// SUPABASE CONNECTION
+// MAIN SUPABASE CONNECTION
 // =====================================
 
 const SUPABASE_URL =
@@ -502,7 +489,6 @@ const categories = [
     "press_releases"
 ];
 
-
 // =====================================
 // NOTIFICATIONS
 // =====================================
@@ -517,7 +503,6 @@ function notify(text,type="success") {
 
     window.scrollTo(0,0);
 }
-
 
 // =====================================
 // AUTHENTICATION
@@ -572,7 +557,6 @@ async function checkAdmin() {
     }
 }
 
-
 // =====================================
 // LOGOUT
 // =====================================
@@ -583,7 +567,6 @@ async function logout() {
 
     window.location.replace("login.html");
 }
-
 
 // =====================================
 // NAVIGATION
@@ -606,8 +589,9 @@ function showPanel(id,button) {
     if(id === "dashboard") loadDashboard();
 
     if(categories.includes(id)) loadCategory(id);
-}
 
+    if(id === "newsletter") loadNewsletter();
+}
 
 // =====================================
 // FILE UPLOAD
@@ -643,7 +627,6 @@ async function uploadFile(file,folder) {
     };
 }
 
-
 // =====================================
 // IMAGE PREVIEWS
 // =====================================
@@ -676,7 +659,6 @@ setupPreview("galleryImages","galleryPreview");
 setupPreview("videoImage","videoPreview");
 setupPreview("pressImage","pressPreview");
 
-
 // =====================================
 // SAVE DATABASE RECORD
 // =====================================
@@ -689,7 +671,6 @@ async function saveRecord(category,record) {
 
     if(error) throw error;
 }
-
 
 // =====================================
 // PROJECT UPLOAD
@@ -744,7 +725,6 @@ document.getElementById("projectsForm").addEventListener(
         button.textContent = "Publish Project";
     }
 });
-
 
 // =====================================
 // NEWS UPLOAD
@@ -801,7 +781,6 @@ document.getElementById("newsForm").addEventListener(
         button.textContent = "Publish News";
     }
 });
-
 
 // =====================================
 // GALLERY UPLOAD
@@ -861,7 +840,6 @@ document.getElementById("galleryForm").addEventListener(
     }
 });
 
-
 // =====================================
 // VIDEO UPLOAD
 // =====================================
@@ -919,7 +897,6 @@ document.getElementById("videosForm").addEventListener(
         button.textContent = "Publish Video";
     }
 });
-
 
 // =====================================
 // PRESS RELEASE UPLOAD
@@ -990,7 +967,6 @@ document.getElementById("pressForm").addEventListener(
         button.textContent = "Publish Press Release";
     }
 });
-
 
 // =====================================
 // LOAD CONTENT
@@ -1116,7 +1092,6 @@ async function loadCategory(category) {
     }
 }
 
-
 // =====================================
 // DELETE CONTENT
 // =====================================
@@ -1164,7 +1139,6 @@ async function deleteRecord(category,item) {
     }
 }
 
-
 // =====================================
 // DASHBOARD COUNTS
 // =====================================
@@ -1197,6 +1171,81 @@ async function loadDashboard() {
     }
 }
 
+// =====================================
+// LOAD NEWSLETTER SUBSCRIBERS
+// =====================================
+
+async function loadNewsletter() {
+
+    const container = document.getElementById("newsletterList");
+
+    container.textContent = "Loading subscribers...";
+
+    try {
+
+        const {data,error} = await db
+            .from("newsletter_subscribers")
+            .select("id,name,email,created_at")
+            .order("created_at",{ascending:false});
+
+        if(error) throw error;
+
+        document.getElementById("newsletterCount").textContent =
+            data.length;
+
+        container.innerHTML = "";
+
+        if(!data || data.length === 0) {
+
+            container.textContent = "No newsletter subscribers yet.";
+
+            return;
+        }
+
+        data.forEach(subscriber => {
+
+            const card = document.createElement("div");
+
+            card.className = "card";
+
+            const content = document.createElement("div");
+
+            content.className = "card-content";
+
+            const heading = document.createElement("h4");
+
+            heading.textContent = subscriber.name || "No name";
+
+            const email = document.createElement("p");
+
+            email.textContent = subscriber.email || "No email";
+
+            const date = document.createElement("p");
+
+            date.className = "small";
+
+            date.textContent = subscriber.created_at
+                ? new Date(subscriber.created_at).toLocaleString()
+                : "Date unavailable";
+
+            content.appendChild(heading);
+            content.appendChild(email);
+            content.appendChild(date);
+
+            card.appendChild(content);
+
+            container.appendChild(card);
+
+        });
+
+    } catch(error) {
+
+        console.error("Newsletter error:",error);
+
+        container.textContent =
+            "Unable to load subscribers: " + error.message;
+    }
+}
 
 // =====================================
 // START DASHBOARD
@@ -1204,7 +1253,5 @@ async function loadDashboard() {
 
 checkAdmin();
 
-</script>
-
-</body>
+</script></body>
 </html>
