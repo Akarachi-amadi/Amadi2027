@@ -11,9 +11,7 @@
     --light: #f5f8f5;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -162,18 +160,9 @@ footer {
 }
 
 @media(max-width: 500px) {
-    header h2 {
-        font-size: 15px;
-    }
-
-    .hero h1 {
-        font-size: 27px;
-    }
-
-    .form-box {
-        padding: 25px 18px;
-    }
-
+    header h2 { font-size: 15px; }
+    .hero h1 { font-size: 27px; }
+    .form-box { padding: 25px 18px; }
     nav a {
         display: inline-block;
         margin: 6px;
@@ -181,7 +170,8 @@ footer {
 }
 </style></head><body><header>
     <a href="index.html">
-        <img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png" alt="Website Logo">
+        <img src="https://i.ibb.co/wNVK2tJj/file-0000000030e081f4b359b866470d77f1.png"
+        alt="Website Logo">
     </a><div>
     <h2>HON. AKARACHI AMADI</h2>
     <p>Mbaitoli/Ikeduru Federal Constituency</p>
@@ -201,8 +191,9 @@ footer {
         updates, development projects, news and important information
         from Hon. Akarachi Amadi.
     </p>
-</section><div class="container">
-    <div class="form-box">    <h2>Subscribe to Our Newsletter</h2>
+</section><div class="container"><div class="form-box">
+
+    <h2>Subscribe to Our Newsletter</h2>
 
     <p>
         Join our mailing list and stay informed about activities
@@ -238,12 +229,20 @@ footer {
 </div>
 
 </div><footer>
-    <p>&copy; 2026 Hon. Akarachi Amadi. All Rights Reserved.</p>
+    <p>
+        &copy; 2026 Hon. Akarachi Amadi.
+        All Rights Reserved.
+    </p>
     <p>Mbaitoli/Ikeduru Federal Constituency, Imo State.</p>
 </footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL = "https://znkeancluykkwduydory.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_ime7FcIuQNwClSOOrtjX3A_R4c4si1i";
+// CONNECT TO THE MAIN WEBSITE SUPABASE PROJECT
+
+const SUPABASE_URL =
+"https://pxtgmpmhiktgknjksqeh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_da-QaN9XAEED_RQaHHHx2A_AkRwoQ3D";
 
 const db = window.supabase.createClient(
     SUPABASE_URL,
@@ -259,11 +258,14 @@ form.addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const name = document.getElementById("name").value.trim();
+
     const email = document.getElementById("email").value.trim().toLowerCase();
 
     if (!name || !email) {
+
         message.style.color = "red";
         message.textContent = "Please enter your name and email address.";
+
         return;
     }
 
@@ -285,18 +287,27 @@ form.addEventListener("submit", async function(event) {
         if (error) {
 
             if (error.code === "23505") {
+
                 message.style.color = "#b45309";
-                message.textContent = "This email address is already subscribed.";
+
+                message.textContent =
+                    "This email address is already subscribed.";
+
             } else {
+
                 throw error;
+
             }
 
         } else {
 
             message.style.color = "green";
-            message.textContent = "Thank you for subscribing! You are now on our mailing list.";
+
+            message.textContent =
+                "Thank you for subscribing! You are now on our mailing list.";
 
             form.reset();
+
         }
 
     } catch (error) {
@@ -304,7 +315,9 @@ form.addEventListener("submit", async function(event) {
         console.error("Newsletter error:", error);
 
         message.style.color = "red";
-        message.textContent = "Subscription failed: " + error.message;
+
+        message.textContent =
+            "Subscription failed: " + error.message;
 
     } finally {
 
@@ -314,5 +327,6 @@ form.addEventListener("submit", async function(event) {
     }
 
 });
+
 </script></body>
 </html>
